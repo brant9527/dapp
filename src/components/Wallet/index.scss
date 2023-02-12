@@ -1,0 +1,16 @@
+@import "/src/style/handle.scss";
+.app-content{
+  position: absolute;
+  
+}
+
+.change-btn{
+  @include font_color("fontColor");
+
+}
+.nav-btn {
+  @include font_color("fontColor");
+}
+.nav-bg {
+  @include background_color("bgColor");
+}

@@ -1,12 +1,15 @@
-import "./App.css";
 import logo from "../../assets/logo.png";
 import connectedLogo from "../../assets/logo_connected.png";
 import { useCallback, useEffect, useState } from "react";
 import { useWeb3 } from "../../hooks/useWeb3/useWeb3";
-import { Disconnected } from "../Disconnected/Disconnected";
-import { Connected } from "../Connected/Connected";
+import { Disconnected } from "../../components/Disconnected/Disconnected";
+import { Connected } from "../../components/Connected/Connected";
 import type { ProviderStringType } from "../../utils/types";
-
+import "./index.scss";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import i18in from "../../../react-i18next-config";
+import { useTranslation } from "react-i18next";
+import "../../style/handle.scss";
 function App() {
   const { connectProvider, changeProvider, providerString, account, web3 } =
     useWeb3();
@@ -25,7 +28,6 @@ function App() {
   useEffect(() => {
     if (connected && loading) setLoading(false);
   }, [connected, loading]);
-
   const handleConnectProvider = useCallback(
     async (provider: ProviderStringType) => {
       // Set the UI state to loading to prevent further interaction
@@ -50,15 +52,35 @@ function App() {
     // show disconnected UI state on failure
     setLoading(false);
   }, [changeProvider]);
+  const [language, setLanguage] = useState("en-us");
 
+  const OnChageLg = useCallback(() => {
+    if (language === "zh-HK") {
+      setLanguage("en-us");
+    } else {
+      setLanguage("zh-HK");
+    }
+    console.log(language);
+    i18in.changeLanguage(language);
+  }, [language]);
+  const [themes, setThemes] = useState("light");
+
+  const onChangeTheme = useCallback(() => {
+    if (themes === "light") {
+      setThemes("dark");
+    } else {
+      setThemes("light");
+    }
+    window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
+  }, [themes]);
+  const { t } = useTranslation();
   return (
     <div className="App">
-      <h1>Example Dapp</h1>
-      <img
-        src={connected ? connectedLogo : logo}
-        className="App-logo"
-        alt="logo"
-      />
+      <h1 onClick={OnChageLg}>测试</h1>
+      <div>中文</div>
+      <div className="title">{t("home.title")}</div>
+      <div className="change-btn" onClick={onChangeTheme}>主题更改</div>
+      <img src={connected ? connectedLogo : logo} className="App-logo" />
       {loading ? (
         <p>loading...</p>
       ) : (
@@ -74,6 +96,12 @@ function App() {
           )}
         </div>
       )}
+      <Link to="/404" className="">
+        404页面路由
+      </Link>
+      <Link to="/newCoin" className="">
+        新币
+      </Link>
     </div>
   );
 }

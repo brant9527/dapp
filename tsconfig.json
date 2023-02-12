@@ -15,7 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "paths": {  "@/*": ["./src/*"] }
+
   },
-  "include": ["src"],
+  "include": ["src", "react-i18next-config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }

@@ -1,0 +1,68 @@
+@import "/src/style/handle.scss";
+
+.home-wrap {
+  padding: 44px 44px 0 44px;
+  .home-top {
+    display: flex;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      img {
+        width: 93px;
+        height: 93px;
+        margin-right: 39px;
+      }
+      .input-bg {
+        width: 481px;
+        height: 101px;
+        border-radius: 10px;
+        background-color: $inputBg;
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        img {
+          width: 47px;
+          height: 47px;
+          margin-right: 24px;
+        }
+        .text {
+          font-size: 40px;
+          @include font_color(fontColor2);
+        }
+      }
+    }
+    .right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .msg {
+        position: relative;
+        width: 52px;
+        height: 52px;
+        img{
+          width: 100%;
+          vertical-align: top;
+        }
+        .tip-num{
+          position: absolute;
+          top: -30px;
+          left: 30px;
+          font-size: 10px;
+          background-color: $yellow;
+          border-radius: 20px;
+          padding:0 10px;
+        }
+      }
+      .theme {
+        width: 49px;
+        height: 52px;
+        margin:0 50px;
+      }
+      .chat {
+        width: 51px;
+        height: 54px;
+      }
+    }
+  }
+}

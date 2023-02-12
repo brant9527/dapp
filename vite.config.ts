@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import NodeGlobalsPolyfillPlugin from "@esbuild-plugins/node-globals-polyfill";
 const path = require("path");
+const postCssPxToRem = require("postcss-pxtorem")
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,10 @@ export default defineConfig({
         __dirname,
         "./node_modules/@walletconnect/web3-provider/dist/umd/index.min.js"
       ),
+      '@': path.resolve(__dirname, './src'),
+
     },
+  
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -32,4 +36,14 @@ export default defineConfig({
       ],
     },
   },
+  css: {
+    postcss: {
+      plugins: [
+        postCssPxToRem({
+          rootValue: 112.5, // 1rem的大小
+          propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
+        })
+      ]
+    },
+  }
 });

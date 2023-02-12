@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "home": "首页",
+    "contract": "合約",
+    "quotation": "行情",
+    "stock": "現貨",
+    "assets": "資產"
+  },
+  "about": {
+    "title": "关于我们",
+    "content": "我是关于我们"
+  }
+}
