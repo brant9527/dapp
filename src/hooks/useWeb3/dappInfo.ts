@@ -1,7 +1,7 @@
 // Get your infura api key by creating a free account at https://infura.io/
 export const INFURA_PROJECT_ID = "YOUR_INFURA_PROJECT_ID";
 // Your Dapp's name
-export const APP_NAME = "Example Dapp";
+export const APP_NAME = "Trade Dapp";
 // An image, hosted by you, that represents your dapp
 export const APP_LOGO_URL =
   "https://gareys-cb.github.io/example-dapp/assets/logo.png";

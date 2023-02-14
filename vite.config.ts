@@ -16,7 +16,7 @@ export default defineConfig({
         __dirname,
         "./node_modules/@walletconnect/web3-provider/dist/umd/index.min.js"
       ),
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, 'src'),
 
     },
   

@@ -1,6 +1,7 @@
 import { connectCoinbaseWallet } from "./connectors/coinbaseWallet";
 import { connectMetaMask } from "./connectors/metaMask";
 import { connectWalletConnect } from "./connectors/walletConnect";
+import { connectTrust } from "./connectors/trustWallet";
 import type {
   ConnectedReturnType,
   ProviderStringType,
@@ -25,4 +26,5 @@ const connectors: Record<
   coinbase: connectCoinbaseWallet,
   metamask: connectMetaMask,
   walletconnect: connectWalletConnect,
+  trust: connectTrust,
 };

@@ -2,14 +2,14 @@ import logo from "../../assets/logo.png";
 import connectedLogo from "../../assets/logo_connected.png";
 import { useCallback, useEffect, useState } from "react";
 import { useWeb3 } from "../../hooks/useWeb3/useWeb3";
-import { Disconnected } from "../../components/Disconnected/Disconnected";
-import { Connected } from "../../components/Connected/Connected";
+import { Disconnected } from "../Disconnected/Disconnected";
+import { Connected } from "../Connected/Connected";
 import type { ProviderStringType } from "../../utils/types";
 import "./index.scss";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import i18in from "../../../react-i18next-config";
 import { useTranslation } from "react-i18next";
-import "../../style/handle.scss";
+import "@/style/handle.scss";
 function App() {
   const { connectProvider, changeProvider, providerString, account, web3 } =
     useWeb3();

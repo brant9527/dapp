@@ -1,11 +1,10 @@
-import "./App.scss";
-import logo from "@/assets/logo.png";
-import connectedLogo from "@/assets/logo_connected.png";
+import "./index.scss";
+
 import { useCallback, useEffect, useState } from "react";
-import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
+import { useWeb3 } from "../../hooks/useWeb3/useWeb3";
 import { Disconnected } from "../Disconnected/Disconnected";
 import { Connected } from "../Connected/Connected";
-import type { ProviderStringType } from "@/utils/types";
+import type { ProviderStringType } from "../../utils/types";
 
 function App() {
   const { connectProvider, changeProvider, providerString, account, web3 } =
@@ -52,28 +51,32 @@ function App() {
   }, [changeProvider]);
 
   return (
-    <div className="App">
-
-      <img
+    <div>
+      <div className="shadow"></div>
+      <div className="wallet">
+        {/* <img
         src={connected ? connectedLogo : logo}
         className="App-logo"
         alt="logo"
-      />
-      {loading ? (
-        <p>loading...</p>
-      ) : (
-        <div>
-          {!connected && <Disconnected handleConnect={handleConnectProvider} />}
-          {connected && (
-            <Connected
-              web3={web3}
-              account={account}
-              providerString={providerString}
-              handleChangeProvider={handleChangeProvider}
-            />
-          )}
-        </div>
-      )}
+      /> */}
+        {loading ? (
+          <p>loading...</p>
+        ) : (
+          <div>
+            {!connected && (
+              <Disconnected handleConnect={handleConnectProvider} />
+            )}
+            {connected && (
+              <Connected
+                web3={web3}
+                account={account}
+                providerString={providerString}
+                handleChangeProvider={handleChangeProvider}
+              />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

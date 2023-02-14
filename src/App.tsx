@@ -18,7 +18,7 @@ import Assets from "./views/assets";
 import Contract from "./views/contract";
 import Quotation from "./views/quotation";
 import Stock from "./views/stock";
-import Wallet from "@/components/Wallet";
+import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
 
 import "./app.scss";
@@ -30,6 +30,7 @@ function App() {
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
 
   const [language, setLanguage] = useState("en-us");
+  console.log(language)
   // 語言初始化
   const OnChageLg = useCallback(() => {
     if (language === "zh-HK") {
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <div className="app-bg">
-      {/* <Wallet /> */}
+      <Wallet></Wallet>
       <Routes>
         <Route path="/" element={<Index />}>
           <Route index path="home" element={<Home />}></Route>

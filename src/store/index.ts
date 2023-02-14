@@ -1,5 +1,17 @@
-import create from "zustand";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
+interface themeInt {
+  themes: number;
+  change: () => void;
+}
+interface languageInt {
+  language: number;
+  change: () => void;
+}
+interface loginInt {
+  loginState: boolean;
+  change: () => void;
+}
 const useStore = create((set, get) => ({
   loginState: false,
   themes: "light",
