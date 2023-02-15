@@ -1,7 +1,7 @@
 import React, { Component, useCallback, useState, Fragment } from "react";
 import * as ReactDOMClient from "react-dom/client";
 
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+
 import "./index.scss";
 import backImg from "@/assets/back.png";
 import user from "@/assets/user.png";
