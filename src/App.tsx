@@ -21,16 +21,20 @@ import Stock from "./views/stock";
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
 
+import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
+
 import "./app.scss";
 import "./style/handle.scss";
+
 function App() {
   const loginState = useSelector((state: any) => state.loginSlice.value);
-  const themes = useSelector((state: any) => state.themeSlice.value);
-  console.log("themes=>", themes, loginState);
+  const themes = window.localStorage.getItem("themes") || "light";
+  const { connectProvider, changeProvider, providerString, account, web3 } =
+    useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
 
   const [language, setLanguage] = useState("en-us");
-  console.log(language)
+  console.log(language);
   // 語言初始化
   const OnChageLg = useCallback(() => {
     if (language === "zh-HK") {
@@ -41,27 +45,17 @@ function App() {
     console.log(language);
     i18in.changeLanguage(language);
   }, [language]);
+   // 語言初始化
+  //  const OnConnect = useCallback(() => {
+    
 
-  // const GetRoutes = () => {
-  //   const routes = useRoutes([
-  //     { path: '/', element: <App /> },
-  //     {
-  //       path: '/postList',
-  //       element: <PostsList />,
-  //       children: [
-  //         { path: '/postList/:id', element: <div>我是子路由元素</div> },
-  //         { path: '*', element: <div>404</div>}
-  //       ],
-  //     },
-  //     { path: '/singlePostPage/:postId', element: <SinglePostPage /> },
-  //     { path: '*', element: <div>404</div>}
-  //   ])
-  //   return routes;
-  // }
+  // }, []);
+ 
 
   return (
     <div className="app-bg">
-      <Wallet></Wallet>
+
+      <Wallet />
       <Routes>
         <Route path="/" element={<Index />}>
           <Route index path="home" element={<Home />}></Route>

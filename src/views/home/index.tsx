@@ -7,22 +7,29 @@ import theme from "@/assets/yueliang.png";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { changeState as themeHandle } from "@/store/reducer/theme";
-
+// import MenuList from "@/components/MenuLeft";
 function App() {
-  const themes = useSelector((state: any) => state.themeSlice.value);
+  const [themes, setThemes] = useState(
+    window.localStorage.getItem("themes") || "light"
+  );
 
-  const dispatch = useDispatch();
   const onChangeTheme = useCallback(() => {
-    dispatch({ type: themeHandle });
-
+    if (themes === "light") {
+      setThemes("dark");
+    } else {
+      setThemes("light");
+    }
+    window.localStorage.setItem("themes", themes);
     window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
-  }, [dispatch]);
-
+  }, [themes, setThemes]);
+  const openMenu = () => {
+    // MenuList.open();
+  };
   return (
     <div className="home-wrap">
       <div className="home-top">
         <div className="left">
-          <img src={user} />
+          <img src={user} onClick={openMenu} />
           <div className="input-bg">
             <img src={search} />
             <span className="text">搜索</span>

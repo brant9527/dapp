@@ -947,10 +947,25 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.4.tgz"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
+"@types/react-addons-css-transition-group@^15.0.7":
+  version "15.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-css-transition-group/-/react-addons-css-transition-group-15.0.7.tgz#9e717ef8e6f0124f8cfab9842a744572cd40da0c"
+  integrity sha512-0TmKgemUTDThscS3apUNyvPvubBW2LC3PztTktXpcPxonxjpzQgS29xcTx/HC3cZYCno4C/pIb1A9Lct9vw7gA==
+  dependencies:
+    "@types/react" "^15"
+    "@types/react-addons-transition-group" "*"
+
+"@types/react-addons-transition-group@*":
+  version "15.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-transition-group/-/react-addons-transition-group-15.0.7.tgz#10c5c2cc1918b40f13e09a1403fc07c4dc31ab10"
+  integrity sha512-Hep6Cwn46A3fGlUoM5PBr6ceynmhsV9xslMns6PQGt3c6mqYaAFvRxueCTjadcRSc0+ulz6QB2toUieVZ1thsg==
+  dependencies:
+    "@types/react" "^15"
+
 "@types/react-dom@^18.2.0":
-  version "18.0.10"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.10.tgz#3b66dec56aa0f16a6cc26da9e9ca96c35c0b4352"
-  integrity sha512-E42GW/JA4Qv15wQdqJq8DL4JhNpB3prJgjgapN3qJT9K2zO5IIAQh4VXvCEDupoqAwnz0cY4RlXeC/ajX5SFHg==
+  version "18.0.11"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.11.tgz#321351c1459bc9ca3d216aefc8a167beec334e33"
+  integrity sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==
   dependencies:
     "@types/react" "*"
 
@@ -962,6 +977,11 @@
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
+
+"@types/react@^15":
+  version "15.7.12"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.7.12.tgz#1107e173c779e214378083f9ee0faca75dd335ce"
+  integrity sha512-FbIDKxGEzmf0jM+1ArXAJwJzg7GkUq5nLVBIz/PSBwVUzATuAjbPrN+UUEAW6zpt/A2WF8XMfSKsNfGX95xCsQ==
 
 "@types/react@^18.2.0":
   version "18.0.28"

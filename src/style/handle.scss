@@ -1,7 +1,7 @@
 // handle.scss
 @import './themes.scss';
 @import './var.scss';
- 
+@import './common.scss';
 @mixin themeify {
   @each $theme-name, $theme-map in $themes {
     $theme-map: $theme-map !global;             // $theme-map为全局变量
