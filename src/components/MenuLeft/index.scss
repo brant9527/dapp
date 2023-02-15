@@ -1,0 +1,25 @@
+@import "/src/style/handle.scss";
+
+.change-btn {
+  @include font_color("fontColor");
+}
+.menu-wrap {
+  width: 100vw;
+  height: 100vh;
+  .menu-list {
+    position: absolute;
+    width: 800px;
+    left: 0;
+    z-index: 11;
+    padding: 40px;
+    @include font_color("fontColor1");
+    @include background_color("bgColor1");
+  }
+  .menu-back {
+    padding: 42px;
+    img {
+      width: 70px;
+      height: 59px;
+    }
+  }
+}

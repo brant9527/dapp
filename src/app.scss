@@ -2,5 +2,6 @@
 .app-bg {
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
     @include background_color("bgColor1");
 }

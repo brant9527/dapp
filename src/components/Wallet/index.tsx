@@ -52,31 +52,37 @@ function App() {
 
   return (
     <div>
-      <div className="shadow"></div>
-      <div className="wallet">
-        {/* <img
+      {account ? (
+        <div></div>
+      ) : (
+        <div>
+          <div className="mask"></div>
+          <div className="wallet">
+            {/* <img
         src={connected ? connectedLogo : logo}
         className="App-logo"
         alt="logo"
       /> */}
-        {loading ? (
-          <p>loading...</p>
-        ) : (
-          <div>
-            {!connected && (
-              <Disconnected handleConnect={handleConnectProvider} />
-            )}
-            {connected && (
-              <Connected
-                web3={web3}
-                account={account}
-                providerString={providerString}
-                handleChangeProvider={handleChangeProvider}
-              />
+            {loading ? (
+              <p>loading...</p>
+            ) : (
+              <div>
+                {!connected && (
+                  <Disconnected handleConnect={handleConnectProvider} />
+                )}
+                {connected && (
+                  <Connected
+                    web3={web3}
+                    account={account}
+                    providerString={providerString}
+                    handleChangeProvider={handleChangeProvider}
+                  />
+                )}
+              </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

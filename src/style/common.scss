@@ -1,0 +1,7 @@
+.mask {
+    position: absolute;
+    z-index: 10;
+    background: rgba($color: #000000, $alpha: 0.5);
+    width: 100vw;
+    height: 100vh;
+}
