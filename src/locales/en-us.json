@@ -1,10 +1,24 @@
 {
-    "home":{
-      "title":"title",
-      "content":"我是首页"
-    },
-    "about":{
-      "title":"关于我们",
-      "content":"我是关于我们"
-    }
+  "nav": {
+    "home": "home",
+    "contract": "contract",
+    "quotation": "quotation",
+    "stock": "stock",
+    "assets": "assets"
+  },
+  "home": {
+    "search": "search",
+    "menu_core": "user core",
+    "menu-wdzh": "my accout",
+    "menu-jyjl": "trade record",
+    "menu-smrz": "實名認證",
+    "menu-yxbd": "郵箱綁定",
+    "menu-xyf": "信用分評定",
+    "menu-bdhb": "本地火幣",
+    "menu-yy": "語言"
+  },
+  "lg": {
+    "en": "english",
+    "hk": "chinese"
   }
+}

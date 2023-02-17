@@ -6,8 +6,19 @@
     "stock": "現貨",
     "assets": "資產"
   },
-  "about": {
-    "title": "关于我们",
-    "content": "我是关于我们"
+  "home": {
+    "search": "搜索",
+    "menu_core": "信用積分",
+    "menu-wdzh": "我的賬戶",
+    "menu-jyjl": "交易記錄",
+    "menu-smrz": "實名認證",
+    "menu-yxbd": "郵箱綁定",
+    "menu-xyf": "信用分評定",
+    "menu-bdhb": "本地火幣",
+    "menu-yy": "語言"
+  },
+  "lg": {
+    "en": "英文",
+    "hk": "繁體"
   }
 }

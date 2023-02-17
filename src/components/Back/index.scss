@@ -1,0 +1,15 @@
+@import "/src/style/handle.scss";
+
+.change-btn {
+  @include font_color("fontColor1");
+}
+.back-wrap {
+  display: flex;
+  padding: 0 42px;
+  height: 80px;
+  align-items: center;
+  img {
+    width: 56px;
+    height: 46px;
+  }
+}

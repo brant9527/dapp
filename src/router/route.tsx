@@ -7,6 +7,7 @@ import { Outlet, Navigate, useRoutes, Route } from "react-router-dom";
 const NewCoin = lazy(() => import("../views/newCoin"));
 const Index = lazy(() => import("../views/index/index"));
 const Not = lazy(() => import("../views/not"));
+const Language = lazy(() => import("../views/language"));
 
 export interface Router {
   name?: string;
@@ -21,4 +22,5 @@ export const routers: Array<Router> = [
   { path: "/newCoin", element: NewCoin, auth: true },
 
   { path: "*", element: Not, auth: true },
+  { path: "/language", element: Language, auth: true },
 ];

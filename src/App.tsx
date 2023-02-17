@@ -18,6 +18,8 @@ import Assets from "./views/assets";
 import Contract from "./views/contract";
 import Quotation from "./views/quotation";
 import Stock from "./views/stock";
+import Language from "./views/language";
+
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
 
@@ -45,16 +47,13 @@ function App() {
     console.log(language);
     i18in.changeLanguage(language);
   }, [language]);
-   // 語言初始化
+  // 語言初始化
   //  const OnConnect = useCallback(() => {
-    
 
   // }, []);
- 
 
   return (
     <div className="app-bg">
-
       <Wallet />
       <Routes>
         <Route path="/" element={<Index />}>
@@ -64,7 +63,7 @@ function App() {
           <Route path="quotation" element={<Quotation />}></Route>
           <Route path="contract" element={<Contract />}></Route>
         </Route>
-
+        <Route path="/language" element={<Language />}></Route>
         <Route path="/newCoin" element={<NewCoin />} />
         <Route path="*" element={<Not />} />
       </Routes>
