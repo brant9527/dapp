@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-
+const window = window
 const http = axios.create({
     baseURL: 'http://18.204.56.84:8060/', // 从.env变量中读取的后台url地址
     timeout: 30000, // 超时时长5分钟,
@@ -56,7 +56,7 @@ http.interceptors.request.use(
         if (tempConfig.headers.showLoading !== false) {
             hideLoading();
         }
-        message.error('请求超时!');
+        // console.log('timeout')
         return Promise.resolve(err);
     }
 );
