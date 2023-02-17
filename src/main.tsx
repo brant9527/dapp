@@ -9,17 +9,17 @@ import { persistor } from "./store/store";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { store } from "./store/store";
-import Index from "./components/Wallet/test";
-import { routers } from "./router/route";
+
 import i18n from "../react-i18next-config";
 import "amfe-flexible";
+const PGate = PersistGate as any;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </PersistGate>
+    </PGate>
   </Provider>
 );

@@ -17,14 +17,11 @@ function App() {
   );
 
   const onChangeTheme = useCallback(async () => {
-
-
     if (themes === "light") {
       setThemes("dark");
     } else {
       setThemes("light");
     }
-
   }, [themes, setThemes]);
   useEffect(() => {
     window.localStorage.setItem("themes", themes);
