@@ -2,7 +2,7 @@ import React, { Component, useCallback, useState, Fragment } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import "./index.scss";
+import style from "./index.module.scss";
 import backImg from "@/assets/left.png";
 
 import { useTranslation } from "react-i18next";
@@ -17,11 +17,13 @@ function Back(props: any) {
     nav(-1);
   }, [useNavigate]);
   return (
-    <div className="back-wrap">
-      <div className="nav">
-        <img src={backImg} onClick={() => back()} />
+    <div className={style.root}>
+      <div className="back-wrap">
+        <div className="nav">
+          <img src={backImg} onClick={() => back()} />
+        </div>
+        <div className="">{props.content}</div>
       </div>
-      <div className="">{props.content}</div>
     </div>
   );
 }

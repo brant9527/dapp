@@ -1,0 +1,28 @@
+.root {
+  :global {
+    .priceBot {
+      margin: 0 0 28px 0;
+      // padding: 48px 22px 11px;
+      display: flex;
+      justify-content: flex-start;
+      @include background_color("bgColor1");
+
+      .item {
+        margin-right: 68px;
+        font-size: 42px;
+        height: 91px;
+        line-height: 91px;
+        padding: 0 20px;
+        text-align: center;
+        @include font_color("fontColor2");
+
+        &.active {
+          height: 91px;
+          background-color: #ebf4ff;
+          border-radius: 10px;
+          @include font_color("fontColor1");
+        }
+      }
+    }
+  }
+}

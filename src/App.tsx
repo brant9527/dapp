@@ -26,7 +26,7 @@ import i18in from ".././react-i18next-config";
 import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
 import "./app.scss";
-import "./style/handle.scss";
+
 
 function App() {
   const loginState = useSelector((state: any) => state.loginSlice.value);
@@ -53,6 +53,7 @@ function App() {
   // }, []);
 
   return (
+
     <div className="app-bg">
       <Wallet />
       <Routes>

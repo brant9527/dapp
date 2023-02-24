@@ -1,0 +1,25 @@
+.root {
+  :global {
+    .wallet-item {
+      width: 600px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 30px;
+      img {
+        margin-right: 40px;
+        height: 88px;
+        width: 88px;
+        border-radius: 20px;
+      }
+      .text {
+        font-size: 50px;
+      }
+    }
+    .tip {
+      font-size: 60px;
+      padding: 40px;
+      text-align: center;
+    }
+  }
+}

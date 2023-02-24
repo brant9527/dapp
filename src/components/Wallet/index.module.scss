@@ -1,0 +1,24 @@
+.root {
+  :global {
+    .wallet {
+      position: absolute;
+
+      width: 800px;
+      @include font_color("fontColor1");
+      @include background_color("bgColor2");
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      z-index: 11;
+      padding: 40px;
+    }
+
+    .change-btn {
+      @include font_color("fontColor");
+    }
+  }
+}

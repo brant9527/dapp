@@ -1,17 +1,34 @@
-
-
-body,dl,dd,ul,ol,p,h1,h2,h3,h4,h5,h6,form,input,textarea,button{
-  margin:0;
-  padding:0;
+body,
+dl,
+dd,
+ul,
+ol,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+input,
+textarea,
+button {
+  margin: 0;
+  padding: 0;
 }
-ul,ol{
-  list-style:none;  
+ul,
+ol {
+  list-style: none;
 }
-a{
-  text-decoration:none;
-  color:inherit;    
+a {
+  text-decoration: none;
+  color: inherit;
 }
-img{
-  border:none;
-  vertical-align:middle;    
+img {
+  border: none;
+  vertical-align: middle;
+}
+::-webkit-scrollbar {
+  width: 0;
 }

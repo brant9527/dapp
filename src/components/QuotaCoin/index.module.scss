@@ -1,0 +1,36 @@
+.root {
+  :global {
+    .change-btn {
+      @include font_color("fontColor1");
+    }
+    .bar-wrap {
+      display: flex;
+      padding: 0 42px;
+      height: 80px;
+      align-items: center;
+      img {
+        width: 56px;
+        height: 46px;
+      }
+    }
+    .tableCoinsPst {
+      display: flex;
+      .coinTypePst {
+        flex: 2;
+      }
+      .coinPricePst {
+        flex: 1;
+        text-align: right;
+        padding-right: 30px;
+      }
+      .coinStatePst {
+        flex: 1;
+        text-align: right;
+      }
+    }
+    .title {
+      font-size: 38px;
+      @include font_color("fontColor2");
+    }
+  }
+}

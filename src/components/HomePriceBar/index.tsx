@@ -2,7 +2,7 @@ import React, { Component, useCallback, useState, Fragment } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import "./index.scss";
+import style from "./index.module.scss";
 import backImg from "@/assets/left.png";
 
 import { useTranslation } from "react-i18next";

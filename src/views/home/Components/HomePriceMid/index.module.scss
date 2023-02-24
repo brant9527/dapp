@@ -1,0 +1,34 @@
+.root {
+  :global {
+    .priceMid {
+      margin: 28px 0;
+      padding: 35px 22px 11px;
+      display: flex;
+      justify-content: space-between;
+      @include background_color("bgColor1");
+
+      .item-wrap {
+        margin: 10px;
+        .top {
+          display: flex;
+          font-size: 34px;
+
+          .coin {
+            @include font_color("fontColor1");
+          }
+          .baseCoin {
+            font-size: 30px;
+            @include font_color("fontColor2");
+          }
+
+          .raise {
+            margin-left: 10px;
+          }
+        }
+        .center {
+          font-size: 48px;
+        }
+      }
+    }
+  }
+}

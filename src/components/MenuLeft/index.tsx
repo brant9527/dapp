@@ -1,7 +1,7 @@
 import React, { Component, useCallback, useState, Fragment } from "react";
 import * as ReactDOMClient from "react-dom/client";
 
-import "./index.scss";
+import style from "./index.module.scss";
 import back from "@/assets/left.png";
 
 import user from "@/assets/user.png";
@@ -43,43 +43,45 @@ function Menulist() {
     return stateProps.navigate(path);
   };
   return (
-    <div className="menu-wrap">
-      <div className="mask"></div>
-      <div className="menu-content">
-        <div className="menu-back">
-          <img src={back} onClick={() => close()} />
-        </div>
-        <div className="user-info">
-          <img src={user} className="user" />
-          <div className="user-detail">
-            <div className="user-core">
-              信用積分: <span>1000</span>
-            </div>
-            <div className="user-uid">
-              UID:12312321 <img src={copy} />
-            </div>
-            <img src={userBg} className="user-bg" />
+    <div className={style.root}>
+      <div className="menu-wrap">
+        <div className="mask"></div>
+        <div className="menu-content">
+          <div className="menu-back">
+            <img src={back} onClick={() => close()} />
           </div>
-        </div>
-        <div className="menu-list">
-          {list.map((item, index) => {
-            return (
-              <div
-                className="list-item"
-                key={index}
-                onClick={() => {
-                  close();
-                  navTo(item.path);
-                }}
-              >
-                <div className="left">
-                  <img src={item.imgSrc} className="icon" />
-                  <div className="label">{item.label}</div>
-                </div>
-                <img src={right} className="right" />
+          <div className="user-info">
+            <img src={user} className="user" />
+            <div className="user-detail">
+              <div className="user-core">
+                信用積分: <span>1000</span>
               </div>
-            );
-          })}
+              <div className="user-uid">
+                UID:12312321 <img src={copy} />
+              </div>
+              <img src={userBg} className="user-bg" />
+            </div>
+          </div>
+          <div className="menu-list">
+            {list.map((item, index) => {
+              return (
+                <div
+                  className="list-item"
+                  key={index}
+                  onClick={() => {
+                    close();
+                    navTo(item.path);
+                  }}
+                >
+                  <div className="left">
+                    <img src={item.imgSrc} className="icon" />
+                    <div className="label">{item.label}</div>
+                  </div>
+                  <img src={right} className="right" />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

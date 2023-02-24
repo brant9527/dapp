@@ -1,0 +1,93 @@
+.root {
+  :global {
+    .change-btn {
+      @include font_color("fontColor1");
+    }
+
+    .tableCoinsPst {
+      display: flex;
+      align-items: center;
+      margin: 30px 0;
+      .coinTypePst {
+        flex: 2;
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 89px;
+          height: 89px;
+          border-radius: 50%;
+        }
+        .right {
+          display: flex;
+          flex-direction: column;
+          margin-left: 26px;
+          .top {
+            display: flex;
+            .coin {
+              font-size: 44px;
+              @include font_color("fontColor1");
+            }
+            .usdt {
+              font-size: 38px;
+              @include font_color("fontColor2");
+            }
+          }
+          .account {
+            font-size: 36px;
+            @include font_color("fontColor2");
+          }
+        }
+      }
+      .coinPricePst {
+        flex: 1;
+        text-align: right;
+        padding-right: 30px;
+        .priceTop {
+          font-size: 44px;
+          @include font_color("fontColor1");
+        }
+        .priceBot {
+          font-size: 36px;
+          @include font_color("fontColor2");
+        }
+      }
+      .coinStatePst {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        .raisePart {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 231px;
+          height: 107px;
+          border-radius: 10px;
+          img {
+            width: 26px;
+            height: 15px;
+          }
+          &.up {
+            color: $up;
+            border: $up;
+            background-color: $priceUpBg;
+          }
+          &.down {
+            color: $down;
+            border: $down;
+            background-color: $priceDownBg;
+          }
+        }
+
+        .raise {
+          font-size: 42px;
+          margin-left: 29px;
+        }
+      }
+    }
+    .title {
+      font-size: 38px;
+      @include font_color("fontColor2");
+    }
+  }
+}

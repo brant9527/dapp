@@ -5,7 +5,7 @@ import coinbase from "@/assets/coinbase.svg";
 import metamask from "@/assets/metamask.svg";
 import wallet from "@/assets/wallet.svg";
 import trust from "@/assets/trust.svg";
-import "./index.scss";
+import style from "./index.module.scss";
 type DisconnectedProps = {
   handleConnect: (selectedProvider: ProviderStringType) => Promise<void>;
 };

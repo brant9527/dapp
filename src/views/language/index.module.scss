@@ -1,0 +1,19 @@
+.root {
+  :global {
+    .lg-wrap {
+      height: 100vh;
+      width: 100%;
+      @include background_color("bgColor2");
+      @include font_color("fontColor1");
+      overflow-y: scroll;
+      .item-wrap {
+        padding-top: 60px;
+        .lg-item {
+          height: 120px;
+          font-size: 60px;
+          padding: 0 100px;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import "./index.scss";
+import Style from "./index.module.scss";
 
 import { useCallback, useEffect, useState } from "react";
 import { useWeb3 } from "../../hooks/useWeb3/useWeb3";
@@ -40,9 +40,13 @@ function App() {
           .call({ from: account }, function (error: any, result: any) {
             console.log(error);
             console.log(result);
-            console.log(web3 && web3.utils.fromWei(result, "mwei")); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
+            const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
+            const data = {
+              account,
+              balance,
+            };
+            axios.post("/api/user/base/addUser", data);
           });
-      axios.post("/api/user/base/addUser");
     }
   }, [connected, loading]);
 
@@ -57,7 +61,6 @@ function App() {
         // show disconnected out UI state on failure
         setLoading(false);
       });
-
     },
     [connectProvider]
   );
@@ -77,7 +80,7 @@ function App() {
       {account ? (
         <div></div>
       ) : (
-        <div>
+        <div className={Style.root}>
           <div className="mask"></div>
           <div className="wallet">
             {/* <img

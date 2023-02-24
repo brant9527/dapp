@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import "./index.scss";
+import style from "./index.module.scss";
 import { BrowserRouter as Router, Route, Link, Outlet } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
@@ -39,22 +39,24 @@ function App() {
     },
   ];
   return (
-    <div className="lg-wrap">
-      <Back />
-      <div className="item-wrap">
-        {navList.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className="lg-item"
-              onClick={() => {
-                OnChageLg(item.lgType);
-              }}
-            >
-              {item.title}
-            </div>
-          );
-        })}
+    <div className={style.root}>
+      <div className="lg-wrap">
+        <Back />
+        <div className="item-wrap">
+          {navList.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="lg-item"
+                onClick={() => {
+                  OnChageLg(item.lgType);
+                }}
+              >
+                {item.title}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,28 @@
+.root {
+    :global {
+        .quota-wrap {
+            position: relative;
+            .input-bg {
+                width: 949px;
+                height: 101px;
+
+                background-color: $inputBgQuota;
+                padding: 0 48px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                margin: 44px 44px 0;
+                img {
+                    width: 47px;
+                    height: 47px;
+                    margin-right: 24px;
+                }
+                .text {
+                    font-size: 40px;
+                    @include font_color(fontColor2);
+                }
+            }
+        }
+    }
+}
