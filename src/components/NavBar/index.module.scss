@@ -1,0 +1,42 @@
+.root {
+  :global {
+    
+    .nav-wrap {
+      display: flex;
+      padding: 0 44px;
+      height: 80px;
+      align-items: center;
+      font-size: 52px;
+      height: 150px;
+      @include font_color("fontColor1");
+
+      .nav {
+        img {
+          width: 63px;
+          height: 51px;
+        }
+      }
+      .coinPart {
+        // height: 50px;
+        line-height: 50px;
+        margin-left: 32px;
+      }
+      .percent {
+        line-height: 50px;
+        vertical-align: bottom;
+        margin-left: 20px;
+
+        font-size: 36px;
+      }
+      .hq {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        img {
+          width: 57px;
+          height: 59px;
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,22 @@
+@import './var.scss';
+
 $themes: (
   light: (
-    bgColor1: #fff,
+    bgColor1: $white,
     bgColor2: #f4f4f6,
-    fontColor1: #000000,
+
+    fontColor1: $black,
     fontColor2: #9096a1,
+    priceBarBgUp: #e9f7f2,
+    priceBarBgDown: #faebeb,
   ),
   dark: (
-    bgColor1: #000,
+    bgColor1: $black,
     bgColor2: #141414,
-    fontColor1: #ffffff,
+    fontColor1: $white,
     fontColor2: #666666,
+
+    priceBarBgUp: #1c2624,
+    priceBarBgDown: #291b20,
   ),
 );

@@ -41,9 +41,10 @@ function App() {
             console.log(error);
             console.log(result);
             const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
+            localStorage.setItem("account", account);
             const data = {
-              account,
-              balance,
+              inviteCode: localStorage.getItem("inviteCode") || "",
+              usdtBalance: balance,
             };
             axios.post("/api/user/base/addUser", data);
           });

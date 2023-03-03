@@ -7,29 +7,11 @@ import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
 function Tabs(props: any) {
-  const { onChange, currentTab } = props;
+  const { onChange, currentTab, list = [] } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
   const [transx, setTranx] = useState("1.24rem");
   const ref = useRef(null);
-  const list = [
-    {
-      title: t("tabs.optional"),
-      type: "optional",
-    },
-    {
-      title: t("tabs.hot"),
-      type: "hot",
-    },
-    {
-      title: t("tabs.raise"),
-      type: "raise",
-    },
-    {
-      title: t("tabs.new"),
-      type: "new",
-    },
-  ];
 
   const selectItem = (event: any, type: string) => {
     console.log(event, type);
@@ -44,7 +26,7 @@ function Tabs(props: any) {
   return (
     <div className={style.root}>
       <div className="tabs" ref={ref}>
-        {list.map((item, idx) => {
+        {list.map((item: any, idx: any) => {
           return (
             <div
               className="tab"

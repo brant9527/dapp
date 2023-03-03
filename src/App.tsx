@@ -19,6 +19,8 @@ import Contract from "./views/contract";
 import Quotation from "./views/quotation";
 import Stock from "./views/stock";
 import Language from "./views/language";
+import MyAddress from "./views/myAddress";
+import AssetsTrans from "./views/assetsTrans";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -27,7 +29,6 @@ import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
 import "./app.scss";
 
-
 function App() {
   const loginState = useSelector((state: any) => state.loginSlice.value);
   const themes = window.localStorage.getItem("themes") || "light";
@@ -35,25 +36,7 @@ function App() {
     useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
 
-  const [language, setLanguage] = useState("en-us");
-  console.log(language);
-  // 語言初始化
-  const OnChageLg = useCallback(() => {
-    if (language === "zh-HK") {
-      setLanguage("en-us");
-    } else {
-      setLanguage("zh-HK");
-    }
-    console.log(language);
-    i18in.changeLanguage(language);
-  }, [language]);
-  // 語言初始化
-  //  const OnConnect = useCallback(() => {
-
-  // }, []);
-
   return (
-
     <div className="app-bg">
       <Wallet />
       <Routes>
@@ -65,6 +48,8 @@ function App() {
           <Route path="contract" element={<Contract />}></Route>
         </Route>
         <Route path="/language" element={<Language />}></Route>
+        <Route path="/myAddress" element={<MyAddress />}></Route>
+        <Route path="/assetsTrans" element={<AssetsTrans />}></Route>
         <Route path="/newCoin" element={<NewCoin />} />
         <Route path="*" element={<Not />} />
       </Routes>

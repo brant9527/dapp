@@ -1,4 +1,137 @@
 .root {
   :global {
+    .stock-wrap {
+      position: relative;
+      overflow: hidden;
+      .input-bg {
+        width: 949px;
+        height: 100px;
+
+        background-color: $inputBgQuota;
+        padding: 0 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        margin: 44px 44px 0;
+        img {
+          width: 47px;
+          height: 47px;
+          margin-right: 24px;
+        }
+        .text {
+          font-size: 40px;
+          @include font_color("fontColor2");
+        }
+      }
+    }
+    .option-wrap {
+      @include background_color("bgColor1");
+
+      padding: 50px 40px;
+      border-radius: 50px 50px 0 0;
+      height: calc(100vh - 410px);
+      overflow: auto;
+      // 价格顶部
+      .option-top {
+        display: flex;
+        justify-content: space-between;
+        .left {
+          // margin-bottom: 32px;
+          width: 432px;
+          .title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 34px;
+            @include font_color("fontColor2");
+
+            .price {
+            }
+            .account {
+              text-align: right;
+            }
+          }
+          .price-sell {
+            margin: 40px 0;
+          }
+          .price-part {
+            text-align: center;
+            .price-top {
+              margin-bottom: 16px;
+              font-size: 48px;
+              height: 44px;
+            }
+            .price-usdt {
+              font-size: 34px;
+              height: 35px;
+
+              @include font_color("fontColor2");
+            }
+          }
+          .price-buy {
+            margin-top: 46px;
+          }
+        }
+        .right {
+          width: 570px;
+          .useable-usdt {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            line-height: 110px;
+            .label-left {
+              font-size: 34px;
+              @include font_color("fontColor2");
+            }
+            .balance-usdt {
+              font-size: 36px;
+              @include font_color("fontColor1");
+            }
+          }
+          .input-price {
+            margin-top: 24px;
+          }
+          .input-account {
+            margin-top: 24px;
+          }
+          .slide-part {
+            margin: 40px 0;
+          }
+          .input-usdt {
+          }
+          .trade-type-part {
+            margin-top: 40px;
+          }
+          .btn-option {
+            width: 570px;
+            height: 110px;
+            line-height: 110px;
+            color: $fontWhite;
+            font-size: 50px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            margin-top: 10px;
+            &__buy {
+              background-color: $up;
+            }
+            &__sell {
+              background-color: $down;
+            }
+          }
+        }
+      }
+    }
+    .option-bottom {
+      display: flex;
+      align-items: center;
+      .hold-tabs {
+        flex: 1;
+      }
+      .record {
+        width: 40px;
+        height: 48px;
+      }
+    }
   }
 }

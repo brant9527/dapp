@@ -7,7 +7,7 @@ import backImg from "@/assets/left.png";
 import CoinPriceItem from "../CoinPriceItem";
 import { useTranslation } from "react-i18next";
 import btc from "@/assets/wallet.svg";
-function Quotation(props) {
+function Quotation() {
   const { t } = useTranslation();
   const nav = useNavigate();
   const list = [

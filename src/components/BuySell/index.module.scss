@@ -1,0 +1,59 @@
+.root {
+  :global {
+    .btns-wrap {
+      display: flex;
+      position: relative;
+      height: 90px;
+      line-height: 90px;
+      width: 570px;
+      align-items: center;
+      @include font_color("fontColor2");
+      @include background_color("bgColor2");
+      font-size: 42px;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      .btn-left {
+        width: 241px;
+        height: 90px;
+        &.btn-active {
+          color: $fontWhite;
+          background-color: $up;
+        }
+      }
+      .btn-right {
+        width: 241px;
+        height: 90px;
+        &.btn-active {
+          color: $fontWhite;
+          background-color: $down;
+        }
+      }
+
+      .btn-arrow {
+        position: absolute;
+
+        width: 0;
+        height: 0;
+        border-style: solid;
+        top: 0;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        &.btn-arrow_buy {
+          left: 241px;
+          border-width: 90px 0 90px 90px;
+
+          border-color: transparent transparent transparent $up;
+        }
+        &.btn-arrow_sell {
+          right: 196px;
+
+          border-width: 90px 90px 90px 0;
+          border-color: transparent $down transparent transparent;
+        }
+      }
+    }
+  }
+}

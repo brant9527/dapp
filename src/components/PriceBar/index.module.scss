@@ -1,0 +1,50 @@
+.root {
+  font-size: 34px;
+  @include font_color("fontColor1");
+
+  :global {
+    .price-bar_item {
+      position: relative;
+      line-height: 70px;
+      height: 70px;
+      width: 100%;
+      .bar-price-count {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        line-height: 70px;
+        height: 70px;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
+      .price-bar {
+        position: absolute;
+        right: 0;
+
+        transition: width 0.2s;
+        height: 70px;
+        &.price-bg_sell {
+          @include background_color("priceBarBgDown");
+        }
+        &.price-bg_buy {
+          @include background_color("priceBarBgUp");
+        }
+        &.left {
+          left: 0;
+        }
+        &.right {
+          right: 0;
+        }
+      }
+
+      .price-bar_left {
+      }
+      .price-bar_right {
+        padding-right: 20px;
+      }
+    }
+  }
+}

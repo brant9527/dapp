@@ -40,6 +40,30 @@
     },
     "search": "搜索幣種/幣對/合約"
   },
+  "assets": {
+    "all": "總資產",
+    "trade": "交易資產",
+    "funds": "資金賬戶",
+    "allAssessment": "總資產評估（USDT）",
+    "myAddress": "我的地址",
+    "assetsTrans": "資產劃轉",
+    "transfer": "電匯",
+    "invest": "投資組合",
+    "assets-stock": "現貨賬戶",
+    "assets-funds": "資金賬戶",
+    "assets-contract": "合約賬戶",
+    "assets-lever": "槓桿賬戶",
+    "useable": "可用",
+    "frozen": "凍結",
+    "assets": "資產"
+  },
+  "address": {
+    "recharge": "充值",
+    "tip1": "僅支持該地址充值{{coin}}",
+    "tip2": "不支持充值其他幣種，請核對",
+    "address": "ETH 充值地址",
+    "chain": "主网"
+  },
   "lg": {
     "en": "英文",
     "hk": "繁體"
@@ -48,6 +72,25 @@
     "optional": "自選",
     "hot": "熱門幣",
     "raise": "漲跌榜",
-    "new": "新幣動態"
+    "new": "新幣動態",
+
+    "entrust": "當前委託",
+    "hold": "持有倉位",
+    "assets": "資產"
+  },
+  "common": {
+    "price": "價格",
+    "account": "數量",
+    "buy": "買入",
+    "sell": "賣出",
+    "use": "可用",
+    "input-tip": "請輸入",
+    "input-price": "請輸入價格",
+    "sure": "確定",
+    "trade": {
+      "limit": "限價單",
+      "market": "市價單",
+      "owe": "止盈止損"
+    }
   }
 }

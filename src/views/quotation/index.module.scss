@@ -2,9 +2,10 @@
     :global {
         .quota-wrap {
             position: relative;
+            overflow: hidden;
             .input-bg {
                 width: 949px;
-                height: 101px;
+                height: 100px;
 
                 background-color: $inputBgQuota;
                 padding: 0 48px;
@@ -20,9 +21,17 @@
                 }
                 .text {
                     font-size: 40px;
-                    @include font_color(fontColor2);
+                    @include font_color('fontColor2');
                 }
             }
+        }
+        .coinList {
+            @include background_color("bgColor1");
+
+            padding: 50px 46px;
+            border-radius: 50px 50px 0 0;
+            height: calc(100vh - 554px);
+            overflow: auto;
         }
     }
 }

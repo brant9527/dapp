@@ -1,0 +1,170 @@
+.root {
+    :global {
+        .assets-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+        .content-center {
+            @include background_color("bgColor1");
+
+            padding: 50px 46px;
+            border-radius: 50px 50px 0 0;
+            // height: 730px;
+            overflow: auto;
+            margin-bottom: 20px;
+            .assets-all {
+                font-size: 36px;
+                @include font_color("fontColor2");
+            }
+            .assets-all-usdt {
+                margin-top: 58px;
+
+                font-size: 80px;
+                @include font_color("fontColor1");
+                font-weight: bold;
+            }
+            .assets-all-about {
+                font-size: 36px;
+                @include font_color("fontColor2");
+            }
+            .assets-tabs {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 85px;
+                .assets-tab-item {
+                    font-size: 42px;
+                    width: 320px;
+                    height: 100px;
+                    line-height: 100px;
+                    text-align: center;
+                    border-radius: 20px;
+                    @include font_color("fontColor2");
+
+                    @include background_color("bgColor2");
+                    &.blue {
+                        color: $fontWhite;
+                        background-color: $blue;
+                    }
+                }
+            }
+        }
+        .content-bottom {
+            padding: 65px 42px;
+            @include background_color("bgColor1");
+
+            height: calc(100vh - 1030px);
+            overflow: auto;
+            .invest-title {
+                font-size: 52px;
+                @include font_color("fontColor1");
+                font-weight: bold;
+            }
+            .assets-list {
+                .assets-item {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 48px;
+                    margin: 80px 0;
+                    .assets-left {
+                        @include font_color("fontColor2");
+                    }
+                    .assets-right {
+                        @include font_color("fontColor1");
+                    }
+                }
+                .coin-item {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 48px;
+                    margin: 80px 0;
+                    .coin-left {
+                        display: flex;
+                        .coin-logo {
+                            width: 70px;
+                            height: 70px;
+                            margin-right: 20px;
+                            transform: translateY(-15%);
+                        }
+                        .coin-name {
+                            &_top {
+                                font-size: 48px;
+                                height: 36px;
+                                margin-bottom: 34px;
+                                font-weight: bold;
+                            }
+                            &_bottom {
+                                font-size: 38px;
+                                @include font_color("fontColor2");
+                            }
+                        }
+                    }
+                    .coin-right {
+                        .coin-count {
+                            font-size: 48px;
+                            margin-bottom: 25px;
+                            font-weight: bold;
+                            height: 44px;
+                        }
+                        .coin-usdt {
+                            font-size: 38px;
+                            @include font_color("fontColor2");
+                        }
+                    }
+                }
+                .coin-cnc-item {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 48px;
+                    margin: 80px 0;
+                    .coin-cnc-left {
+                        display: flex;
+                        .coin-cnc-logo {
+                            width: 70px;
+                            height: 70px;
+                            margin-right: 20px;
+                            transform: translateY(-15%);
+                        }
+                        .coin-cnc-name {
+                            &_top {
+                                font-size: 48px;
+                                height: 36px;
+                                margin-bottom: 34px;
+                                font-weight: bold;
+                            }
+                            &_bottom {
+                                font-size: 38px;
+                                @include font_color("fontColor2");
+                            }
+                        }
+                        .coin-cnc-use {
+                            &_top {
+                                font-size: 38px;
+                                margin: 40px 0 14px;
+
+                                @include font_color("fontColor2");
+                            }
+                            &_bottom {
+                                font-size: 38px;
+                            }
+                        }
+                    }
+                    .coin-cnc-right {
+                        .coin-cnc-count {
+                            font-size: 48px;
+                            font-weight: bold;
+                            height: 44px;
+                        }
+                        .coin-cnc-frozen {
+                            @include font_color("fontColor2");
+                            font-size: 38px;
+                            margin: 120px 0 18px 0;
+                        }
+                        .coin-cnc-usdt {
+                            font-size: 38px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

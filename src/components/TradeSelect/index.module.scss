@@ -1,0 +1,53 @@
+.root {
+  position: relative;
+  :global {
+    .trade-type_wrap {
+      display: flex;
+      position: relative;
+      height: 90px;
+      line-height: 90px;
+      width: 490px;
+      padding: 0 40px;
+      @include font_color("fontColor1");
+      @include background_color("bgColor2");
+      border-radius: 20px;
+      align-items: center;
+      .trade-name {
+        font-size: 34px;
+        flex: 1;
+        text-align: left;
+      }
+      .trade-img {
+        width: 26px;
+        height: 15px;
+        transition: all 0.3s;
+        transform-origin: center;
+
+        &.arrow-active {
+          // transform-origin: 75% 75%;
+          /* transform-origin: center; */
+          transform: rotate(180deg);
+        }
+      }
+    }
+    .fixed-wrap {
+      position: absolute;
+      border-radius: 20px;
+      z-index: 100;
+      width: 570px;
+      height: auto;
+      font-size: 34px;
+      top: 96px;
+      @include font_color("fontColor1");
+
+      @include background_color("bgColor2");
+
+      box-shadow: 0 2px 12px 0 rgb(0 0 0/ 10%);
+      .select-item {
+        height: 90px;
+        line-height: 90px;
+        padding: 0 40px;
+      }
+    }
+  }
+}

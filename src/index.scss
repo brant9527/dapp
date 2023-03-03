@@ -29,6 +29,13 @@ img {
   border: none;
   vertical-align: middle;
 }
+input {
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  background-color: inherit;
+}
 ::-webkit-scrollbar {
   width: 0;
 }

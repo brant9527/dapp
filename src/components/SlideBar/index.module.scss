@@ -1,0 +1,39 @@
+.root {
+  position: relative;
+  :global {
+    .slide-wrap {
+      display: flex;
+
+      width: 570px;
+      height: 80px;
+      line-height: 80px;
+
+      font-size: 44px;
+      justify-content: space-around;
+      .slide-item {
+        width: 130px;
+        text-align: center;
+        font-size: 30px;
+        @include font_color("fontColor2");
+
+        .slide-bar {
+          width: 100%;
+          height: 20px;
+
+          @include background_color("bgColor2");
+          &.slide-acitive {
+            &__buy {
+              background-color: $up;
+            }
+            &__sell {
+              background-color: $down;
+            }
+          }
+        }
+      }
+      .disable {
+        @include font_color("fontColor2");
+      }
+    }
+  }
+}

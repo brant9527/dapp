@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 
 import search from "@/assets/search.png";
 import Tabs from "@/components/Tabs";
+import QuotaCoin from "@/components/QuotaCoin";
+
 function Quotation() {
   const { t } = useTranslation();
   const [type, setType] = useState("optional");
@@ -50,6 +52,9 @@ function Quotation() {
           <span className="text">{t("quota.search")}</span>
         </div>
         <Tabs onChange={onChange}></Tabs>
+        <div className="coinList">
+          <QuotaCoin></QuotaCoin>
+        </div>
       </div>
     </div>
   );

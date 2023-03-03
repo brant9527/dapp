@@ -8,8 +8,7 @@ const http = axios.create({
   timeout: 30000, // 超时时长5分钟,
 });
 
-http.defaults.headers.post["Content-Type"] =
-  "multipart/form-data;application/json;charset=UTF-8;";
+http.defaults.headers.post["Content-Type"] = "application/json";
 
 // 当前正在请求的数量
 let needLoadingRequestCount = 0;
@@ -41,9 +40,13 @@ http.interceptors.request.use(
     if (config.headers.showLoading !== false) {
       showLoading();
     }
-    const token = window.localStorage.getItem("token");
-    if (token) {
-      config.headers.common.Authorization = `Bearer ${token}`;
+
+    const account = window.localStorage.getItem("account");
+
+    if (account) {
+      config.headers.account = account;
+      config.headers.language = "en";
+      config.headers.mock = 0;
     }
     return config;
   },
@@ -52,7 +55,7 @@ http.interceptors.request.use(
     if (tempConfig.headers.showLoading !== false) {
       hideLoading();
     }
-    // console.log('timeout')
+    console.log("timeout");
     return Promise.resolve(err);
   }
 );
