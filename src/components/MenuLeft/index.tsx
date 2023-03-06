@@ -31,8 +31,8 @@ function Menulist() {
   const { t } = useTranslation();
 
   const list = [
-    { imgSrc: wdzh, label: t("home.menu-wdzh"), path: "/" },
-    { imgSrc: jyjl, label: t("home.menu-jyjl"), path: "/" },
+    { imgSrc: wdzh, label: t("home.menu-wdzh"), path: "/assets" },
+    // { imgSrc: jyjl, label: t("home.menu-jyjl"), path: "/transRecord" },
     { imgSrc: smrz, label: t("home.menu-smrz"), path: "/" },
     { imgSrc: yxbd, label: t("home.menu-yxbd"), path: "/" },
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/" },

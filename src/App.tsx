@@ -21,6 +21,7 @@ import Stock from "./views/stock";
 import Language from "./views/language";
 import MyAddress from "./views/myAddress";
 import AssetsTrans from "./views/assetsTrans";
+import TransRecord from "./views/transRecord";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -51,6 +52,8 @@ function App() {
         <Route path="/myAddress" element={<MyAddress />}></Route>
         <Route path="/assetsTrans" element={<AssetsTrans />}></Route>
         <Route path="/newCoin" element={<NewCoin />} />
+        <Route path="/transRecord" element={<TransRecord />} />
+        
         <Route path="*" element={<Not />} />
       </Routes>
     </div>

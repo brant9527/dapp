@@ -1,0 +1,19 @@
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  :global {
+    .scroll-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .load-tip {
+      line-height: 60px;
+      font-size: 40px;
+      text-align: center;
+      @include font_color("font_color1");
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 
 import style from "./index.module.scss";
-import { BrowserRouter as Router, Route, Link, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Outlet,useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ function Stock() {
 
   const [percent, setPercent] = useState<any>();
   const [useUsdt, setUseUsdt] = useState<any>("");
-
+  const nav = useNavigate()
   const onChangeType = (type: string) => {
     setType(type);
   };
@@ -201,7 +201,9 @@ function Stock() {
             <div className="hold-tabs">
               <HoldAssetsTab list={list} onChange={onChangeTab} />
             </div>
-            <img src={record} className="record" />
+            <img src={record} className="record" onClick={()=>{
+              nav('/transRecord')
+            }}/>
           </div>
         </div>
       </div>

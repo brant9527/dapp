@@ -107,6 +107,7 @@ function Assets() {
                   className={["assets-tab-item", idx === 0 ? "blue" : ""].join(
                     " "
                   )}
+                  key={idx}
                   onClick={() => navTo(item.path)}
                 >
                   {item.title}

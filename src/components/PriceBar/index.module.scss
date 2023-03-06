@@ -24,7 +24,7 @@
         position: absolute;
         right: 0;
 
-        transition: width 0.2s;
+        transition: all 0.2s !important;
         height: 70px;
         &.price-bg_sell {
           @include background_color("priceBarBgDown");

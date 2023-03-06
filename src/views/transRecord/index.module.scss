@@ -1,0 +1,25 @@
+.root {
+    :global {
+        .record-wrap {
+            position: relative;
+            overflow: hidden;
+            @include background_color("bgColor1");
+            // padding: 50px 46px;
+
+            .record-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor1");
+            }
+            .record-nav_border {
+                position: relative;
+                @include border("bottom");
+            }
+            .record-content {
+                height: calc(100vh - 250px);
+                overflow: auto;
+                width: 100%;
+            }
+        }
+    }
+}

@@ -12,7 +12,7 @@
 
       .tab {
         height: 150px;
-        line-height:150px;
+        line-height: 150px;
 
         padding: 0 50px;
         text-align: center;
@@ -21,7 +21,7 @@
         flex-grow: 0;
         flex-shrink: 0;
 
-        .active {
+        &.active {
           font-size: 44px;
           font-weight: bold;
           @include font_color("fontColor1");

@@ -8,9 +8,16 @@
       padding: 0 42px;
       height: 100px;
       align-items: center;
-      img {
-        width: 56px;
-        height: 46px;
+      .nav {
+        img {
+          width: 56px;
+          height: 46px;
+        }
+      }
+
+      .title-bar {
+        flex: 1;
+        
       }
     }
   }

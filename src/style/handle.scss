@@ -21,7 +21,7 @@
 //获取背景颜色
 @mixin background_color($color) {
   @include themeify {
-    transition: background-color 0.5s;
+    transition: all 0.5s;
     background-color: themed($color);
   }
 }
@@ -29,7 +29,7 @@
 //获取字体颜色
 @mixin font_color($color) {
   @include themeify {
-    transition: color 0.5s;
+    transition: all 0.5s;
 
     color: themed($color);
   }
@@ -64,7 +64,7 @@
     &::after {
       position: absolute;
       content: " ";
-      width: 1px;
+      width: 2px;
       height: 100%;
       bottom: 0;
       right: 0;
@@ -76,7 +76,7 @@
     &::after {
       position: absolute;
       content: " ";
-      width: 1px;
+      width: 2px;
       height: 100%;
       bottom: 0;
       left: 0;

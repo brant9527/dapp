@@ -14,7 +14,7 @@
     "menu-smrz": "實名認證",
     "menu-yxbd": "郵箱綁定",
     "menu-xyf": "信用分評定",
-    "menu-bdhb": "本地火幣",
+    "menu-bdhb": "本地貨幣",
     "menu-yy": "語言",
     "btns": {
       "jy": "交易",
@@ -57,6 +57,25 @@
     "frozen": "凍結",
     "assets": "資產"
   },
+  "trans": {
+    "from": "從",
+    "to": "到",
+    "tip": "劃轉",
+    "funds": "資金賬戶",
+    "trade": "交易賬戶",
+    "spot": "現貨賬戶",
+    "count": "數量",
+    "max": "最大",
+    "useable": "可用資產",
+    "frozen": "凍結資產",
+    "sure": "確認劃轉"
+  },
+  "record": {
+    "record": "充值記錄",
+    "recordIn": "轉入記錄",
+    "recordOut": "轉出記錄",
+    "recordChange": "賬變記錄"
+  },
   "address": {
     "recharge": "充值",
     "tip1": "僅支持該地址充值{{coin}}",
@@ -91,6 +110,10 @@
       "limit": "限價單",
       "market": "市價單",
       "owe": "止盈止損"
-    }
+    },
+    "success": "成功",
+    "faild": "失敗",
+    "loading": "加载中……",
+    "noMore": "没有更多了"
   }
 }

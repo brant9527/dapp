@@ -1,75 +1,132 @@
 .root {
   :global {
-    .address-wrap {
+    .trans-wrap {
       height: 100vh;
       width: 100%;
       @include background_color("bgColor1");
       @include font_color("fontColor1");
       overflow-y: scroll;
 
-      .address-content {
+      .trans-content {
         padding: 0 40px;
         .tip {
           margin-top: 60px;
           font-size: 80px;
         }
 
-        .qrcode {
-          display: block;
-          margin: 160px auto 0;
-          width: 490px;
-          height: 490px;
-          padding: 10px;
-          background-color: $white;
-        }
-        .qrtip {
-          padding: 30px 0 60px;
-          font-size: 38px;
-          text-align: center;
-          position: relative;
-          margin-bottom: 60px;
-          .tip1 {
-            margin-top: 30px;
-          }
-          .tip2s {
-            margin: 30px 0 0;
-          }
-          // ::after {
-          //   position: absolute;
-          //   content: " ";
-          //   width: 790px;
-          //   height: 1px;
-          //   bottom: 0;
-          //   left: 0;
-          //   background-color: $boder;
-          //   transform: scale(1, 0.5);
-          // }
-        }
-        .address-text {
-          font-size: 40px;
-          @include font_color("fontColor2");
-        }
-        .address-part {
-          width: 960px;
-          height: 170px;
-          margin: 30px auto 65px;
-          padding: 40px;
-          text-align: left;
-          border-radius: 20px;
-          @include background_color("bgColor2");
-          @include font_color("fontColor1");
-          font-size: 44px;
-        }
-        .address-chain {
+        .trans-part {
           width: 960px;
 
           margin: 30px auto 65px;
-          padding: 40px;
-          text-align: left;
+          padding: 0 40px;
+
           border-radius: 20px;
           @include background_color("bgColor2");
           @include font_color("fontColor1");
           font-size: 44px;
+          display: flex;
+          align-items: center;
+          line-height: 180px;
+
+          .trans-left {
+            flex: 1;
+            display: flex;
+            .trans-box {
+              flex: 1;
+
+              .trans-item_wrap {
+                display: flex;
+                flex: 1;
+                .trans-direction {
+                  margin-right: 48px;
+                }
+                .trans-item_center {
+                  display: flex;
+                  flex: 1;
+                  align-items: center;
+                  position: relative;
+                  &.border {
+                    @include border("bottom");
+                  }
+                  div {
+                    width: 300px;
+                  }
+                  img {
+                    width: 21px;
+                    height: 32px;
+                  }
+                }
+              }
+            }
+          }
+          .trans-right {
+            width: 70px;
+            height: 83px;
+          }
+          .trans-coin {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            .coin-logo {
+              width: 89px;
+              height: 89px;
+              margin-right: 20px;
+            }
+            .coin-name {
+              flex: 1;
+            }
+            .right {
+              width: 21px;
+              height: 32px;
+            }
+          }
+          .trans-input_wrap {
+            padding: 50px 0;
+            line-height: 80px;
+            height: 80px;
+            display: flex;
+            width: 100%;
+            .input {
+              position: relative;
+              flex: 1;
+
+              padding-right: 40px;
+              @include border("right");
+              input {
+                width: 100%;
+                font-size: 44px;
+              }
+            }
+            .btn-max {
+              padding-left: 40px;
+              color: $blue;
+            }
+          }
+        }
+        .count-tip {
+          padding: 0 0 16px;
+          font-size: 44px;
+
+          font-weight: 500;
+          @include font_color("fontColor2");
+        }
+        .coin-state {
+          display: flex;
+          height: 34px;
+          font-size: 36px;
+
+          align-items: center;
+          justify-content: space-between;
+          margin: 43px 0;
+          .left {
+            font-weight: 400;
+            @include font_color("fontColor2");
+          }
+          .right {
+            @include font_color("fontColor1");
+
+            font-weight: 400;
+          }
         }
         .btn {
           margin: 30px auto 0;

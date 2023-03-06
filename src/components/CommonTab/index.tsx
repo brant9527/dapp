@@ -12,7 +12,7 @@ function Tabs(props: any) {
   const nav = useNavigate();
   const [transx, setTranx] = useState("1.24rem");
   const ref = useRef(null);
-
+  const [index, setIndex] = useState(0);
   const selectItem = (event: any, type: string) => {
     console.log(event, type);
     const target = event.target;
@@ -29,9 +29,10 @@ function Tabs(props: any) {
         {list.map((item: any, idx: any) => {
           return (
             <div
-              className="tab"
+              className={["tab", index === idx ? "active" : ""].join(" ")}
               key={idx}
               onClick={(event) => {
+                setIndex(idx);
                 selectItem(event, item.type);
               }}
             >
