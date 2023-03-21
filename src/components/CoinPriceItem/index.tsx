@@ -9,30 +9,34 @@ import { useTranslation } from "react-i18next";
 import up from "@/assets/up.png";
 import down from "@/assets/down.png";
 function Quotation(props: any) {
-  const { imgSrc, price, coin, tradeAccount, raise } = props;
+  const { logo, close, rate, symbol, turnover, volume } = props;
   const nav = useNavigate();
 
   return (
     <div className={style.root}>
       <div className="tableCoinsPst">
         <div className="coinTypePst ">
-          <img src={imgSrc} />
+          {logo && <img src={logo} />}
           <div className="right">
             <div className="top">
-              <div className="coin">{coin}</div>
+              <div className="coin">{symbol.replace("USDT", "")}</div>
               <div className="usdt">/usdt</div>
             </div>
-            <div className="account">{tradeAccount}K</div>
+            <div className="account">{turnover}K</div>
           </div>
         </div>
         <div className="coinPricePst ">
-          <div className="priceTop">{price}</div>
-          <div className="priceBot">≈${price}</div>
+          <div className="priceTop">{close}</div>
+          <div className="priceBot">≈${close}</div>
         </div>
         <div className="coinStatePst ">
-          <div className={["raisePart", raise > 0 ? "up" : "down"].join(" ")}>
-            <img src={raise > 0 ? up : down} />
-            <div className="raise">{raise}%</div>
+          <div
+            className={["raisePart", Number(rate) > 0 ? "up" : "down"].join(
+              " "
+            )}
+          >
+            <img src={Number(rate) > 0 ? up : down} />
+            <div className="raise">{Number(rate)}%</div>
           </div>
         </div>
       </div>

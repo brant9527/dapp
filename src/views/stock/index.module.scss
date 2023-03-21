@@ -125,6 +125,9 @@
     .option-bottom {
       display: flex;
       align-items: center;
+      position: relative;
+      @include border("bottom");
+
       .hold-tabs {
         flex: 1;
       }

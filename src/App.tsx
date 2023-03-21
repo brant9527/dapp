@@ -22,6 +22,13 @@ import Language from "./views/language";
 import MyAddress from "./views/myAddress";
 import AssetsTrans from "./views/assetsTrans";
 import TransRecord from "./views/transRecord";
+import TradeRecord from "./views/tradeRecord";
+import Message from "./views/message";
+import BindEmail from "./views/bindEmail";
+import Loan from "./views/loan";
+import Ai from "./views/ai";
+import User from "./views/user";
+import Auth from "./views/auth";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -53,7 +60,16 @@ function App() {
         <Route path="/assetsTrans" element={<AssetsTrans />}></Route>
         <Route path="/newCoin" element={<NewCoin />} />
         <Route path="/transRecord" element={<TransRecord />} />
-        
+        <Route path="/tradeRecord" element={<TradeRecord />} />
+
+        <Route path="/message" element={<Message />} />
+
+        <Route path="/bindEmail" element={<BindEmail />} />
+        <Route path="/loan" element={<Loan />} />
+        <Route path="/ai" element={<Ai />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/auth" element={<Auth />} />
+
         <Route path="*" element={<Not />} />
       </Routes>
     </div>

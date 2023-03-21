@@ -1,0 +1,153 @@
+.root {
+    :global {
+        .ai-wrap {
+            position: relative;
+            overflow: hidden;
+            background-color: $ai_blue;
+            // padding: 50px 46px;
+
+            .ai-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor2");
+            }
+
+            .ai-content {
+                @include background_color("bgColor1");
+                height: calc(100vh - 150px);
+                overflow: auto;
+                padding: 0 44px 0;
+                border-radius: 50px 50px 0 0;
+                .ai-order-nav {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 60px 0;
+
+                    .order {
+                        font-size: 44px;
+                        @include font_color("fontColor1");
+                    }
+                    img {
+                        width: 23px;
+                        height: 39px;
+                    }
+                }
+                .money {
+                    position: relative;
+
+                    @include font_color("fontColor2");
+                    font-size: 44px;
+                    padding-bottom: 70px;
+                    @include border("bottom");
+                    span {
+                        font-size: 59px;
+                        @include font_color("fontColor1");
+                    }
+                }
+                .suggest {
+                    @include font_color("fontColor1");
+                    font-size: 44px;
+                    font-weight: 600;
+                    padding: 65px 0 40px;
+                }
+                .suggest-product {
+                    display: flex;
+                    justify-content: space-between;
+                    .product {
+                        width: 398px;
+                        height: 580px;
+                        border-radius: 20px;
+                        padding: 36px;
+                        border: 1px solid $boder;
+                        &_left {
+                            background-color: #e8fcef;
+                        }
+                        &_right {
+                            background-color: #f5f8ff;
+                        }
+                        .product-top {
+                            display: flex;
+                            .logo {
+                                width: 66px;
+                                height: 66px;
+                                margin-right: 26px;
+                            }
+                            .coin {
+                                font-size: 43px;
+                                font-weight: 600;
+
+                                color: $fontBlack;
+                            }
+                            .new-user {
+                                color: #707070;
+                            }
+                        }
+                        .product-title {
+                            font-size: 36px;
+                            color: #666;
+                            margin-top: 85px;
+                        }
+                        .product-info {
+                            font-size: 50px;
+                            color: $fontBlack;
+                            font-weight: 600;
+                        }
+                    }
+                }
+                .high-apy_info {
+                    font-size: 44px;
+                    font-weight: 600;
+                    margin-top: 80px;
+                    @include font_color("fontColor1");
+                }
+                .high-apy {
+                    padding: 62px 54px;
+                    border: 1px solid $boder;
+                    margin-top: 44px;
+                    border-radius: 20px;
+                    .apy-top {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    .apy-bottom {
+                        margin-left: 90px;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    .left {
+                        display: flex;
+                        align-items: center;
+                        img {
+                            width: 66px;
+                            height: 66px;
+                            margin-right: 20px;
+                        }
+                    }
+
+                    .right {
+                        display: flex;
+                        align-items: center;
+                    }
+                    .right-margin{
+                        margin-right: 20px;
+                    }
+                    .bold {
+                        font-size: 44px;
+                        font-weight: 600;
+                        @include font_color("fontColor1");
+                    }
+                    .normol {
+                        font-size: 36px;
+                        @include font_color("fontColor2");
+                    }
+                    .limit-coin {
+                        font-size: 44px;
+                        margin-left: 36px;
+                        color: $up;
+                    }
+                }
+            }
+        }
+    }
+}

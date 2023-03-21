@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 
 import style from "./index.module.scss";
-import { BrowserRouter as Router, Route, Link, Outlet,useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Outlet,
+  useNavigate,
+} from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -12,7 +18,17 @@ import TradeSelect from "@/components/TradeSelect";
 import CusInput from "@/components/CusInput";
 import SlideBar from "@/components/SlideBar";
 import HoldAssetsTab from "@/components/CommonTab";
-import { accAdd, accSub, accMul, accDiv, toFixed } from "@/utils/public";
+import Entrust from "@/components/Entrust";
+import { getDelegationPage, onTradeCancel, onTradeBuySell } from "@/api/trade";
+
+import {
+  accAdd,
+  accSub,
+  accMul,
+  accDiv,
+  toFixed,
+  formatTime,
+} from "@/utils/public";
 import record from "@/assets/record.png";
 function Stock() {
   const { t } = useTranslation();
@@ -26,7 +42,8 @@ function Stock() {
 
   const [percent, setPercent] = useState<any>();
   const [useUsdt, setUseUsdt] = useState<any>("");
-  const nav = useNavigate()
+  const [entrustList, setEntrustList] = useState<any>([]);
+  const nav = useNavigate();
   const onChangeType = (type: string) => {
     setType(type);
   };
@@ -47,7 +64,19 @@ function Stock() {
     }, 3000);
     return () => clearInterval(timer);
   });
-
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    const { data } = await getDelegationPage({
+      pageNo: 1,
+      pageSize: 100,
+      status: 1,
+      tradeType: "swap",
+    });
+    console.log(data);
+    setEntrustList(data.list);
+  };
   const configList = [
     {
       label: t("common.trade.market"),
@@ -123,6 +152,17 @@ function Stock() {
       type: "assets",
     },
   ];
+  const onCancel = useCallback(async (params: any) => {
+    console.log("取消參數", params);
+
+    let ids = [];
+    if (params.type === "all") {
+      ids = entrustList.map((item: any) => item.id);
+    } else {
+      ids = [params.id];
+    }
+    await onTradeCancel({ ids });
+  }, []);
   return (
     <div className={style.root}>
       <div className="stock-wrap">
@@ -136,7 +176,7 @@ function Stock() {
                   <div>(USDT)</div>
                 </div>
                 <div className="account">
-                  <div>{t("common.account")}</div>
+                  <div>{t("common.count")}</div>
                   <div>({coin})</div>
                 </div>
               </div>
@@ -173,7 +213,7 @@ function Stock() {
               </div>
               <div className="input-account">
                 <CusInput
-                  placeholder={`${t("common.account")}(${coin})`}
+                  placeholder={`${t("common.count")}(${coin})`}
                   onInput={onInputAccount}
                   defaultVal={coinAccount}
                 ></CusInput>
@@ -201,9 +241,20 @@ function Stock() {
             <div className="hold-tabs">
               <HoldAssetsTab list={list} onChange={onChangeTab} />
             </div>
-            <img src={record} className="record" onClick={()=>{
-              nav('/transRecord')
-            }}/>
+            <img
+              src={record}
+              className="record"
+              onClick={() => {
+                nav("/tradeRecord");
+              }}
+            />
+          </div>
+          <div className="record-list">
+            <Entrust
+              list={entrustList}
+              tradeType={tradeType}
+              onCancel={onCancel}
+            ></Entrust>
           </div>
         </div>
       </div>

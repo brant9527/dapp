@@ -1,6 +1,6 @@
 import Decimal from "decimal.js";
 import numeral from "numeral";
-// import moment from 'moment';
+import dayjs from "dayjs";
 
 // 返回小数位后几位 截取
 // number 数值
@@ -221,4 +221,10 @@ export function numeralFormat(num: number, p: number) {
     return numeral(value).format("0,0");
   }
   return numeral(value).format(`0,${xstr}`);
+}
+/**
+ * 優化時間
+ */
+export function formatTime(time: any, format?: string) {
+  return dayjs(time || new Date()).format(format || "YYYY-MM-DD hh-mm-ss");
 }

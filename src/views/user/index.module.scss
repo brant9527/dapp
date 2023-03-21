@@ -1,0 +1,62 @@
+.root {
+    :global {
+        .user-wrap {
+            position: relative;
+            overflow: hidden;
+            @include background_color("bgColor1");
+
+            .user-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor1");
+            }
+
+            .head {
+                width: 238px;
+                height: 238px;
+                display: block;
+                margin: 130px auto 10px;
+            }
+            .userName {
+                font-size: 48px;
+                font-weight: 600;
+                @include font_color("fontColor1");
+                text-align: center;
+                margin-bottom: 100px;
+            }
+            .info-part {
+                font-size: 38px;
+                padding: 0 94px;
+
+                .info-item {
+                    display: flex;
+
+                    @include font_color("fontColor1");
+                    font-size: 38px;
+                    margin-bottom: 77px;
+
+                    .left {
+                        @include font_color("fontColor2");
+                        width: 200px;
+                        flex-shrink: 0;
+                    }
+                    .right {
+                        flex: 1;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+
+                        overflow: hidden;
+                        flex-wrap: nowrap;
+                        word-break: break-word;
+                        img {
+                            margin-left: 20px;
+                            width: 41px;
+                            height: 41px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

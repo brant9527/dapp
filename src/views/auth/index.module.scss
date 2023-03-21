@@ -1,0 +1,48 @@
+.root {
+    :global {
+        .auth-wrap {
+            position: relative;
+            overflow: hidden;
+            @include background_color("bgColor1");
+
+            .auth-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor1");
+            }
+            .auth-item {
+                padding: 86px 0;
+                margin:0 60px;
+                position: relative;
+                .item-top {
+                    display: flex;
+                    justify-content: space-between;
+                    .auth-left {
+                        font-size: 46px;
+                        @include font_color("fontColor1");
+                    }
+                    .auth-right {
+                        font-size: 42px;
+                        &.passed {
+                            color: $up;
+                        }
+                        &.reject {
+                            color: $up;
+                        }
+                        &.wait {
+                            color: $blue;
+                        }
+                    }
+                }
+                .item-bottom {
+                    font-size: 40px;
+                    padding: 50px 200px 25px 0;
+                    @include font_color("fontColor2");
+                }
+                &.border {
+                    @include border("bottom");
+                }
+            }
+        }
+    }
+}

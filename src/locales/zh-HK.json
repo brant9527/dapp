@@ -30,7 +30,12 @@
       "hot": "熱門",
       "raise": "漲幅榜",
       "down": "跌幅榜"
-    }
+    },
+    "certified": "已認證",
+    "not-certified": "未認證",
+    "current-rate": "當前費率",
+    "current-target": "升級還需交易現貨",
+    "user-info": "賬戶信息"
   },
   "quota": {
     "coins": {
@@ -94,12 +99,14 @@
     "new": "新幣動態",
 
     "entrust": "當前委託",
+    "entrust-his": "歷史委託",
+    "trade-his": "成交歷史",
     "hold": "持有倉位",
     "assets": "資產"
   },
   "common": {
     "price": "價格",
-    "account": "數量",
+    "count": "數量",
     "buy": "買入",
     "sell": "賣出",
     "use": "可用",
@@ -114,6 +121,40 @@
     "success": "成功",
     "faild": "失敗",
     "loading": "加载中……",
-    "noMore": "没有更多了"
+    "noMore": "没有更多了",
+    "stock": "現貨",
+    "cancel": "取消",
+    "email.bind": "綁定郵箱",
+    "email.address": "郵箱地址",
+    "btn.next": "下一步",
+    "copy": "已複製",
+    "resign-info": "註冊信息"
+  },
+  "auth": {
+    "primary-auth": "初級認證",
+    "advanced-auth": "高級認證",
+    "primary-tip": "認證后可以提現，24小時限額200BTC,C2C交易單幣限額1000USDT",
+    "advanced-tip": "認證后可以提現，24小時限額400BTC,C2C交易單幣限額10000USDT"
+  },
+  "ai": {
+    "orders": "進行中的訂單",
+    "suggest": "推薦",
+    "high.income": "高收益",
+    "new.user": "新手專享好禮",
+    "term": "期限",
+    "limit": "限購"
+  },
+  "loan": {
+    "loan": "貸幣"
+  },
+  "entrust": {
+    "cancel-all": "撤銷全部",
+    "cancel": "撤銷"
+  },
+  "status": {
+
+    "wait": "待審核",
+    "passed": "已通過",
+    "reject": "駁回"
   }
 }

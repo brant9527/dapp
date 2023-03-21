@@ -145,6 +145,7 @@ class CFClient {
       id: requestId,
       method: route,
       params: params,
+      account: localStorage.getItem("account"),
     };
     this.ws.send(JSON.stringify(request));
   }

@@ -2,7 +2,7 @@ import axios, { CreateAxiosDefaults } from "axios";
 
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-
+import Toast from "@/components/Toast";
 const http = axios.create({
   baseURL: "http://18.204.56.84:8060/", // 从.env变量中读取的后台url地址
   timeout: 30000, // 超时时长5分钟,
@@ -67,7 +67,7 @@ http.interceptors.response.use(
     if (response.config.headers.showLoading !== false) {
       hideLoading();
     }
-    return response;
+    return response.data;
   },
   (error) => {
     hideLoading();
@@ -77,11 +77,12 @@ http.interceptors.response.use(
           // 如有刷新token的需求,可放开以下代码
           // var config=error.config;
           // refreshTokenFuc(isRefreshToken, config, retryRequests);
-
           break;
         default:
           break;
       }
+      Toast.notice(error.response.msg, {});
+
       return Promise.reject(error.response);
     }
     return Promise.reject(error.response);

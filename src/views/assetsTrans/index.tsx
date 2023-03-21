@@ -11,7 +11,6 @@ import Back from "@/components/Back";
 import right from "@/assets/right.png";
 import change from "@/assets/change.png";
 import copy from "copy-to-clipboard";
-
 function Trans() {
   const { t } = useTranslation();
   const accountsList = [
@@ -85,7 +84,7 @@ function Trans() {
           <div className="coin-state">
             <div className="left">{t("trans.useable")}</div>
             <div className="right">
-              {coinUseCount} 
+              {coinUseCount}
               {coin}
             </div>
           </div>

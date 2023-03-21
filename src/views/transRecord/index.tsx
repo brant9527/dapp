@@ -158,7 +158,7 @@ function TransRecord() {
   ];
   const onLoadMore = () => {
     console.log("加载更多", Toast);
-    Toast.addToast("1");
+    Toast.notice(t('common.noMore'), { duration: 3000 });
   };
   const onRefresh = () => {
     console.log("刷新");
@@ -168,7 +168,6 @@ function TransRecord() {
   }
   return (
     <div className={style.root}>
-
       <div className="record-wrap">
         <Back content={title()}></Back>
         <div className="record-nav_border">

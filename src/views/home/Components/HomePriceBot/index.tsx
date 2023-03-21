@@ -7,18 +7,22 @@ const HomePriceMid = (props: any) => {
   const { handleSelect } = props;
   const { t } = useTranslation();
   const [idx, setIdex] = useState(0);
+   //     2.热门：getHotList 无参数
+//     3.新币：getNewSymbolList   无参数
+//     4.涨幅榜：getRiseSymbolList  无参数
+//     5.跌幅榜：getFallSymbolList   无参数
   const Tabs = [
     {
       title: t("home.coins.hot"),
-      type: "hot",
+      type: "getHotList",
     },
     {
       title: t("home.coins.raise"),
-      type: "raise",
+      type: "getRiseSymbolList",
     },
     {
       title: t("home.coins.down"),
-      type: "down",
+      type: "getFallSymbolList",
     },
   ];
   return (

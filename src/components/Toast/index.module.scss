@@ -1,0 +1,78 @@
+$gap: 50%;
+$center: 50%;
+
+.toastFix {
+    position: fixed;
+    font-size: 40px;
+    z-index: 1000;
+    .tMessage {
+        padding: 20px 20px;
+        @include background_color("bgColor2");
+        @include font_color("fontColor1");
+        box-shadow: 0 10px 22px 0 rgb(0 0 0/ 10%);
+        text-align: center;
+        border-radius: 20px;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        z-index: 999;
+
+        // span::before {
+        //     content: " ";
+        //     display: inline-block;
+        //     width: 24px;
+        //     height: 24px;
+        //     // background-color: #999;
+        // }
+    }
+}
+
+.L_T {
+    left: $gap;
+    top: $gap;
+}
+
+.L_C {
+    left: $gap;
+    top: $center;
+    transform: translateY(-50%);
+}
+
+.L_B {
+    left: $gap;
+    bottom: $gap;
+}
+
+.C_T {
+    left: $center;
+    top: $gap;
+    transform: translateX(-50%);
+}
+
+.C_C {
+    left: $center;
+    top: $center;
+    transform: translate(-50%, -50%);
+}
+
+.C_B {
+    left: $center;
+    bottom: $gap;
+    transform: translateX(-50%);
+}
+
+.R_T {
+    right: $gap;
+    top: $gap;
+}
+
+.R_C {
+    right: $gap;
+    top: $center;
+    transform: translateY(-50%);
+}
+
+.R_B {
+    right: $gap;
+    bottom: $gap;
+}

@@ -1,0 +1,34 @@
+.root {
+    :global {
+        .email-wrap {
+            position: relative;
+            overflow: hidden;
+            @include background_color("bgColor1");
+            // padding: 50px 46px;
+
+            .email-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor1");
+            }
+            .email-content {
+                padding: 50px 46px;
+            }
+            .email-address {
+                font-size: 42px;
+                margin: 45px 0;
+                @include font_color("fontColor2");
+            }
+            .btn-next {
+                height: 130px;
+                line-height: 130px;
+                font-size: 50px;
+                color: $fontWhite;
+                background-color: $blue;
+                text-align: center;
+                border-radius: 20px;
+                margin:120px 60px;
+            }
+        }
+    }
+}

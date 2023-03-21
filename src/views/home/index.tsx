@@ -23,67 +23,90 @@ import MenuList from "@/components/MenuLeft";
 import HomePriceMid from "./Components/HomePriceMid";
 import HomePriceBot from "./Components/HomePriceBot";
 import QuotaCoin from "@/components/QuotaCoin";
-
+import Banner from "@/components/Banner";
+import socket from "@/utils/socket";
 import banner from "@/assets/banner.png";
+import axios from "@/utils/axios";
+import { commonData } from "@/utils/socket";
 function App() {
-  const [themes, setThemes] = useState(
-    window.localStorage.getItem("themes") || "light"
-  );
+  let themes = window.localStorage.getItem("themes") || "light";
 
+  const [bannerList, setBannerList] = useState([banner, banner, banner]);
+
+  const [coinType, setCoinType] = useState("getHotList");
+
+  const { t } = useTranslation();
+  console.log("home页刷新");
   const onChangeTheme = useCallback(async () => {
     if (themes === "light") {
-      setThemes("dark");
+      themes = "dark";
     } else {
-      setThemes("light");
+      themes = "light";
     }
-  }, [themes, setThemes]);
-  useEffect(() => {
     window.localStorage.setItem("themes", themes);
     window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
-  }, [themes]);
+  }, []);
+  useEffect(() => {
+    // getBanner();
+  }, []);
+  const getBanner = useCallback(async () => {
+    const { data } = await axios.post("/api/common/banner/getBannerList");
+    // setBannerList(data);
+  }, []);
   const navigate = useNavigate();
   const openMenu = () => {
     MenuList.open(navigate);
   };
-  const { t } = useTranslation();
+  const nav = (path: string) => {
+    navigate(path);
+  };
   const btnList = [
     {
       label: t("home.btns.jy"),
       src: jy,
+      path: "/ai",
     },
     {
       label: t("home.btns.ai"),
       src: ai,
+      path: "/ai",
     },
     {
       label: t("home.btns.xh"),
       src: xh,
+      path: "/ai",
     },
     {
       label: t("home.btns.xb"),
       src: xinbi,
+      path: "/ai",
     },
     {
       label: t("home.btns.mnjy"),
       src: mnjy,
+      path: "/ai",
     },
     {
       label: t("home.btns.hb"),
       src: hb,
+      path: "/ai",
     },
     {
       label: t("home.btns.yq"),
       src: yq,
+      path: "/ai",
     },
-    {
-      label: t("home.btns.c2c"),
-      src: c2c,
-    },
+
+    // {
+    //   label: t("home.btns.c2c"),
+    //   src: c2c,
+    //   path: "/ai",
+    // },
   ];
-  const [coinType, setCoinType] = useState("hot");
   const handleSelect = (type: string) => {
     setCoinType(type);
   };
+
   return (
     <div className={style.root}>
       <div className="home-wrap">
@@ -96,7 +119,9 @@ function App() {
             </div>
           </div>
           <div className="right">
-            <div className="msg">
+            <div className="msg" onClick={()=>{
+              navigate('/message')
+            }}>
               <img src={msg} />
               <div className="tip-num">19</div>
             </div>
@@ -105,7 +130,7 @@ function App() {
           </div>
         </div>
         <div className="home-banner">
-          <img src={banner} />
+          <Banner bannerList={bannerList}></Banner>
         </div>
         <div className="home-msg">
           <div className="msg">
@@ -116,7 +141,7 @@ function App() {
         <div className="home-btns">
           {btnList.map((item, i) => {
             return (
-              <div className="btn-item" key={i}>
+              <div className="btn-item" key={i} onClick={() => nav(item.path)}>
                 <img src={item.src} />
                 <div className="btn-label">{item.label}</div>
               </div>
@@ -128,7 +153,7 @@ function App() {
       <div className="quota">
         <HomePriceBot handleSelect={handleSelect} />
 
-        <QuotaCoin></QuotaCoin>
+        <QuotaCoin coinType={coinType}></QuotaCoin>
       </div>
     </div>
   );

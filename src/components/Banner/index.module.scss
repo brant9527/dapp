@@ -1,0 +1,24 @@
+.root {
+  :global {
+    .change-btn {
+      @include font_color("fontColor1");
+    }
+    .banner-wrap {
+      width: 1037px;
+      height: 417px;
+
+      .nav {
+        
+        img {
+          display: inline-block;
+          width: 1037px;
+          height: 417px;
+        }
+
+        .title-bar {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
