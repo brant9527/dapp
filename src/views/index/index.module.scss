@@ -35,10 +35,11 @@
           font-size: 30px;
           @include font_color("fontColor2");
         }
-        .active {
-          font-size: 30px;
-
-          @include font_color("fontColor1");
+        &.active {
+          .nav-text {
+            font-size: 30px;
+            @include font_color("fontColor1");
+          }
         }
       }
     }

@@ -67,6 +67,11 @@ http.interceptors.response.use(
     if (response.config.headers.showLoading !== false) {
       hideLoading();
     }
+    const { code, msg } = response.data;
+    console.log(response.data);
+    if (code != 0) {
+      Toast.notice(msg, {});
+    }
     return response.data;
   },
   (error) => {

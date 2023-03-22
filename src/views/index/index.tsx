@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import style from "./index.module.scss";
-import { BrowserRouter as Router, Route, Link, Outlet } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Outlet,
+} from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -64,17 +69,23 @@ function App() {
         <div className="flex-nav nav-bg">
           {navList.map((item, i) => {
             return (
-              <div
-                onClick={() => setIndex(i)}
-                key={i}
-                className="nav-item-wrap"
-              >
-                <Link to={item.path} className="nav-item">
+              <div key={i} className="nav-item-wrap">
+                <NavLink
+                  to={item.path}
+                  className={({ isActive, isPending }) => {
+                    if (isActive) {
+                      setIndex(i);
+                    }
+                    return isPending
+                      ? "pending"
+                      : isActive
+                      ? "nav-item active"
+                      : "nav-item ";
+                  }}
+                >
                   <img src={index === i ? item.src1 : item.src2} alt="" />
-                  <div className={index === i ? "active" : "title"}>
-                    {item.title}
-                  </div>
-                </Link>
+                  <div className="nav-text">{item.title}</div>
+                </NavLink>
               </div>
             );
           })}

@@ -22,9 +22,9 @@
       "xh": "現貨",
       "xb": "新幣",
       "mnjy": "模擬交易",
-      "hb": "貨幣",
+      "jd": "借貸",
       "yq": "好友邀請",
-      "c2c": "C2C買幣"
+      "us": "關於我們"
     },
     "coins": {
       "hot": "熱門",
@@ -126,15 +126,25 @@
     "cancel": "取消",
     "email.bind": "綁定郵箱",
     "email.address": "郵箱地址",
+    "mobile.bind": "綁定手機",
+    "mobile.number": "手機號碼",
     "btn.next": "下一步",
     "copy": "已複製",
-    "resign-info": "註冊信息"
+    "resign-info": "註冊信息",
+    "upload-tip": "已上傳"
   },
   "auth": {
     "primary-auth": "初級認證",
     "advanced-auth": "高級認證",
     "primary-tip": "認證后可以提現，24小時限額200BTC,C2C交易單幣限額1000USDT",
-    "advanced-tip": "認證后可以提現，24小時限額400BTC,C2C交易單幣限額10000USDT"
+    "advanced-tip": "認證后可以提現，24小時限額400BTC,C2C交易單幣限額10000USDT",
+    "name": "姓名",
+    "id": "身份證號",
+    "id-front": "證件正面",
+    "id-back": "證件反面",
+    "country": "國家",
+    "id-auth": "身份認證",
+    "need-auth": "去認證"
   },
   "ai": {
     "orders": "進行中的訂單",
@@ -152,7 +162,6 @@
     "cancel": "撤銷"
   },
   "status": {
-
     "wait": "待審核",
     "passed": "已通過",
     "reject": "駁回"

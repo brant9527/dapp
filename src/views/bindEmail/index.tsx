@@ -13,40 +13,44 @@ import { useTranslation } from "react-i18next";
 import CusInput from "@/components/CusInput";
 
 import Back from "@/components/Back";
+import { getJuniorCertified } from "@/api/userInfo";
 
-import {
-  getDelegationPage,
-  onTradeCancel,
-  getDealRecordPage,
-} from "@/api/trade";
-import Entrust from "@/components/Entrust";
+import Toast from "@/components/Toast";
 
 function BindEmail() {
   const { t } = useTranslation();
 
   const nav = useNavigate();
 
-  const [entrustList, setEntrustList] = useState<any>([]);
+  const [email, setEmail] = useState<any>("");
+  const [mobile, setMobile] = useState<any>("");
 
   useEffect(() => {
     getData();
   }, []);
-  const onCancel = useCallback(async (params: any) => {
-    console.log("取消參數", params);
-
-    let ids = [];
-    if (params.type === "all") {
-      ids = entrustList.map((item: any) => item.id);
-    } else {
-      ids = [params.id];
-    }
-    await onTradeCancel({ ids });
-  }, []);
+  
   const getData = async () => {
     console.log("請求");
   };
-  const onInput = async (val: any) => {
+  const onInputMobile = async (val: any) => {
     console.log("输入", val);
+    setMobile(val);
+  };
+  const onInputEmail = async (val: any) => {
+    console.log("输入", val);
+    setEmail(val);
+  };
+  const onSubmit = async () => {
+    const params = {
+      mobile,
+      email,
+    };
+
+    const data: any = await getJuniorCertified(params);
+    if (data.code == 0) {
+      Toast.notice(t("common.upload-tip"), { duration: 3000 });
+      nav("/auth");
+    }
   };
 
   function title() {
@@ -58,9 +62,28 @@ function BindEmail() {
       <div className="email-wrap">
         <Back content={title()}></Back>
         <div className="email-content">
-          <div className="email-address">{t("common.email.address")}</div>
-          <CusInput isBtn={false} onInput={onInput}></CusInput>
-          <div className="btn-next">{t("common.btn.next")}</div>
+          <div className="email-label">{t("common.mobile.number")}</div>
+          <CusInput
+            alignLeft
+            isBtn={false}
+            defaultVal={mobile}
+            onInput={onInputMobile}
+          ></CusInput>
+          <div className="email-label">{t("common.email.address")}</div>
+          <CusInput
+            alignLeft
+            isBtn={false}
+            defaultVal={email}
+            onInput={onInputEmail}
+          ></CusInput>
+          <div
+            className="btn-next"
+            onClick={() => {
+              onSubmit();
+            }}
+          >
+            {t("common.sure")}
+          </div>
         </div>
       </div>
     </div>

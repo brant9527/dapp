@@ -8,7 +8,7 @@ import ai from "@/assets/ai.png";
 import xh from "@/assets/xh.png";
 import xinbi from "@/assets/xinbi.png";
 import mnjy from "@/assets/mnjy.png";
-import hb from "@/assets/hb.png";
+import jd from "@/assets/hb.png";
 import yq from "@/assets/yq.png";
 import c2c from "@/assets/c2c.png";
 import msgNotify from "@/assets/msg-notify.png";
@@ -28,10 +28,13 @@ import socket from "@/utils/socket";
 import banner from "@/assets/banner.png";
 import axios from "@/utils/axios";
 import { commonData } from "@/utils/socket";
+import { getUnReadMessageCnt, getBannerList } from "@/api/home";
+
 function App() {
   let themes = window.localStorage.getItem("themes") || "light";
 
-  const [bannerList, setBannerList] = useState([banner, banner, banner]);
+  const [bannerList, setBannerList] = useState([]);
+  const [unReadMsg, setUnReadMsg] = useState(0);
 
   const [coinType, setCoinType] = useState("getHotList");
 
@@ -47,12 +50,18 @@ function App() {
     window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   }, []);
   useEffect(() => {
-    // getBanner();
+    getBanner();
+    getMsgUnRead();
   }, []);
   const getBanner = useCallback(async () => {
-    const { data } = await axios.post("/api/common/banner/getBannerList");
-    // setBannerList(data);
+    const { data } = await getBannerList();
+    setBannerList(data.map((item: any) => item.imageUrl));
   }, []);
+  const getMsgUnRead = useCallback(async () => {
+    const { data } = await getUnReadMessageCnt();
+    setUnReadMsg(data);
+  }, []);
+
   const navigate = useNavigate();
   const openMenu = () => {
     MenuList.open(navigate);
@@ -64,6 +73,17 @@ function App() {
     {
       label: t("home.btns.jy"),
       src: jy,
+      path: "/stock",
+    },
+    
+    // {
+    //   label: t("home.btns.xh"),
+    //   src: xh,
+    //   path: "/stock",
+    // },
+    {
+      label: t("home.btns.xb"),
+      src: xinbi,
       path: "/ai",
     },
     {
@@ -72,36 +92,27 @@ function App() {
       path: "/ai",
     },
     {
-      label: t("home.btns.xh"),
-      src: xh,
-      path: "/ai",
-    },
-    {
-      label: t("home.btns.xb"),
-      src: xinbi,
-      path: "/ai",
+      label: t("home.btns.jd"),
+      src: jd,
+      path: "/lend",
     },
     {
       label: t("home.btns.mnjy"),
       src: mnjy,
       path: "/ai",
     },
-    {
-      label: t("home.btns.hb"),
-      src: hb,
-      path: "/ai",
-    },
+  
     {
       label: t("home.btns.yq"),
       src: yq,
       path: "/ai",
     },
 
-    // {
-    //   label: t("home.btns.c2c"),
-    //   src: c2c,
-    //   path: "/ai",
-    // },
+    {
+      label: t("home.btns.us"),
+      src: c2c,
+      path: "/us",
+    },
   ];
   const handleSelect = (type: string) => {
     setCoinType(type);
@@ -119,11 +130,14 @@ function App() {
             </div>
           </div>
           <div className="right">
-            <div className="msg" onClick={()=>{
-              navigate('/message')
-            }}>
+            <div
+              className="msg"
+              onClick={() => {
+                navigate("/message");
+              }}
+            >
               <img src={msg} />
-              <div className="tip-num">19</div>
+              {unReadMsg ? <div className="tip-num">{unReadMsg}</div> : ""}
             </div>
             <img src={theme} className="theme" onClick={onChangeTheme} />
             <img src={chat} className="chat" />

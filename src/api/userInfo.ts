@@ -2,12 +2,16 @@ import axios from "@/utils/axios";
 export const getUserInfo = () => {
   return axios.post("/api/user/base/getUserInfo");
 };
-export const onTradeBuySell = (data: any) => {
-  return axios.post("/api/spot/trade/buy-sell", data);
+export const onUpload = (data: any) => {
+  return axios.post("/api/file/upload", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
-export const onTradeCancel = (data: any) => {
-  return axios.post("/api/spot/trade/cancel", data);
+export const getHighGradeCertified = (data: any) => {
+  return axios.post("/api/user/base/highGradeCertified", data);
 };
-export const getDealRecordPage = (data: any) => {
-  return axios.post("/api/user/dealRecord/getDealRecordPage", data);
+export const getJuniorCertified = (data: any) => {
+  return axios.post("/api/user/base/juniorCertified", data);
 };

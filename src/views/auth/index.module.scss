@@ -12,7 +12,7 @@
             }
             .auth-item {
                 padding: 86px 0;
-                margin:0 60px;
+                margin: 0 60px;
                 position: relative;
                 .item-top {
                     display: flex;
@@ -23,13 +23,16 @@
                     }
                     .auth-right {
                         font-size: 42px;
-                        &.passed {
+                        .passed {
                             color: $up;
                         }
-                        &.reject {
-                            color: $up;
+                        .reject {
+                            color: $down;
                         }
-                        &.wait {
+                        .wait {
+                            @include font_color("fontColor1");
+                        }
+                        .need-auth {
                             color: $blue;
                         }
                     }

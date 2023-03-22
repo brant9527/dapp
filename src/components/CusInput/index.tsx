@@ -22,6 +22,7 @@ function CusInput(props: any) {
     isBtn = true,
     defaultVal,
     disable = false,
+    alignLeft = false,
   } = props;
   const [val, setVal] = useState<any>(defaultVal);
 
@@ -53,7 +54,7 @@ function CusInput(props: any) {
             -
           </div>
         )}
-        <div className="input">
+        <div className={`input ${alignLeft ? " align-left" : ""}`}>
           <input
             type="text"
             disabled={disable}

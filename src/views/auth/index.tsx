@@ -53,9 +53,26 @@ function auth() {
           <div className="item-top">
             <div className="auth-left">LV.1 {t("auth.primary-auth")}</div>
             <div className="auth-right">
-              {userInfo.juniorStatus == 1 && <span>{t("status.passed")}</span>}
-              {userInfo.juniorStatus == 0 && <span>{t("status.wait")}</span>}
-              {userInfo.juniorStatus == 2 && <span>{t("status.reject")}</span>}
+              {userInfo.ethAddress &&
+                typeof userInfo.juniorStatus !== "number" && (
+                  <span
+                    className="need-auth"
+                    onClick={() => {
+                      nav("/bindEmail");
+                    }}
+                  >
+                    {t("auth.need-auth")}
+                  </span>
+                )}
+              {userInfo.juniorStatus == 1 && (
+                <span className="passed">{t("status.passed")}</span>
+              )}
+              {userInfo.juniorStatus == 0 && (
+                <span className="wait">{t("status.wait")}</span>
+              )}
+              {userInfo.juniorStatus == 2 && (
+                <span className="reject">{t("status.reject")}</span>
+              )}
             </div>
           </div>
           <div className="item-bottom">{t("auth.primary-tip")}</div>
@@ -64,12 +81,27 @@ function auth() {
           <div className="item-top">
             <div className="auth-left">LV.2 {t("auth.advanced-auth")}</div>
             <div className="auth-right">
-              {(userInfo.highStatus != 1 && userInfo.highStatus != 2) && (
-                <span>{t("status.wait")}</span>
+              {userInfo.ethAddress &&
+                typeof userInfo.highStatus !== "number" && (
+                  <span
+                    className="need-auth"
+                    onClick={() => {
+                      nav("/identity");
+                    }}
+                  >
+                    {t("auth.need-auth")}
+                  </span>
+                )}
+              {userInfo.highStatus == 0 && (
+                <span className="wait">{t("status.wait")} </span>
               )}
-              {userInfo.highStatus == 1 && <span>{t("status.passed")}</span>}
+              {userInfo.highStatus == 1 && (
+                <span className="passed">{t("status.passed")}</span>
+              )}
 
-              {userInfo.highStatus == 2 && <span>{t("status.reject")}</span>}
+              {userInfo.highStatus == 2 && (
+                <span className="reject">{t("status.reject")}</span>
+              )}
             </div>
           </div>
           <div className="item-bottom">{t("auth.advanced-tip")}</div>

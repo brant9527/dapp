@@ -1,0 +1,51 @@
+.root {
+  position: relative;
+  :global {
+    .upload-wrap {
+      width: 500px;
+      height: 300px;
+      border-radius: 40px;
+      border: 1px solid $boder;
+      position: relative;
+      .upload-plus {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 10;
+        &::after {
+          position: absolute;
+          content: " ";
+          transform: translate(-50%, -50%);
+
+          width: 60px;
+          height: 6px;
+          background: $boder;
+        }
+        &::before {
+          position: absolute;
+          content: " ";
+          transform: rotate(90deg);
+          margin: -4px 0 0 -30px;
+          width: 60px;
+          height: 6px;
+          background: $boder;
+        }
+      }
+      input {
+        position: absolute;
+        width: 500px;
+        height: 300px;
+        opacity: 0;
+        z-index: 100;
+      }
+      img {
+        position: absolute;
+        width: 500px;
+        height: 300px;
+        left: 0;
+        top: 0;
+        object-fit: contain;
+      }
+    }
+  }
+}

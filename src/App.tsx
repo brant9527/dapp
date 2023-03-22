@@ -29,6 +29,8 @@ import Loan from "./views/loan";
 import Ai from "./views/ai";
 import User from "./views/user";
 import Auth from "./views/auth";
+import Identity from "./views/identity";
+import Lend from "./views/lend";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -69,6 +71,8 @@ function App() {
         <Route path="/ai" element={<Ai />} />
         <Route path="/user" element={<User />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/identity" element={<Identity />} />
+        <Route path="/lend" element={<Lend />} />
 
         <Route path="*" element={<Not />} />
       </Routes>

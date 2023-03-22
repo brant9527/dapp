@@ -38,9 +38,8 @@ const addMsg = (args: Base, msg: string) => {
 const removeMsg = (args: Base, id: number) => {
   list.splice(id, 1);
   clearTimeout(timerList[id]);
-  console.log(timerList);
+
   timerList.splice(id, 1);
-  console.log(timerList);
 
   renderMsgList(args);
 };
