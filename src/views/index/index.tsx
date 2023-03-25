@@ -74,7 +74,9 @@ function App() {
                   to={item.path}
                   className={({ isActive, isPending }) => {
                     if (isActive) {
-                      setIndex(i);
+                      setTimeout(() => {
+                        setIndex(i);
+                      }, 0);
                     }
                     return isPending
                       ? "pending"

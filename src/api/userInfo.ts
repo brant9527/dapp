@@ -15,3 +15,7 @@ export const getHighGradeCertified = (data: any) => {
 export const getJuniorCertified = (data: any) => {
   return axios.post("/api/user/base/juniorCertified", data);
 };
+export const getRechargeAddress = () => {
+  return axios.post("/api/user/base/getRechargeAddress");
+};
+

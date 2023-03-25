@@ -17,6 +17,9 @@ import Back from "@/components/Back";
 import usdtPng from "@/assets/usdt.svg";
 import change from "@/assets/change.png";
 import copy from "copy-to-clipboard";
+import { getUserCurrProductAmount, applyBuy } from "@/api/ai";
+import { getTradeAssetBalance } from "@/api/trans";
+import Toast from "@/components/Toast";
 function aiApply() {
   const { t } = useTranslation();
 
@@ -41,10 +44,38 @@ function aiApply() {
       type: "spot",
     },
   ];
- 
+
   const [coin, setCoin] = useState("USDT");
-  const [coinUseCount, setCoinUseCount] = useState(100);
-  const [coinFrozenCount, setCoinFrozenCount] = useState(1000);
+  const [coinUseCount, setCoinUseCount] = useState(0);
+  const [coinFrozenCount, setCoinFrozenCount] = useState(0); // 可投
+  const [amount, setAmount] = useState(0); // 可投
+
+  const getData = async () => {
+    const { code, data } = await getUserCurrProductAmount();
+    if (code == 0) {
+      // data.
+    }
+    const { code: codeTrade, data: dataTrade } = await getTradeAssetBalance();
+    if (codeTrade == 0) {
+      console.log(dataTrade);
+    }
+  };
+  const onApply = async () => {
+    const params = {
+      amount,
+      productId: id,
+    };
+    const { code, data } = await applyBuy(params);
+    if (code == 0) {
+      Toast.notice(t("common.success"), {});
+    }
+  };
+  const onChange = (val: any) => {
+    setAmount(val);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className={style.root}>
       <div className="ai-wrap">
@@ -65,7 +96,7 @@ function aiApply() {
             <div className="right">{minDayIncome + "~" + maxDayIncome}%</div>
           </div>
           <div className="coin-state">
-            <div className="left">{t('ai.limit')+ " "}(USDT)</div>
+            <div className="left">{t("ai.limit") + " "}(USDT)</div>
             <div className="right">{limitBuy}</div>
           </div>
           <div className="border"></div>
@@ -73,7 +104,11 @@ function aiApply() {
           <div className="ai-part">
             <div className="ai-input_wrap ">
               <div className="input">
-                <input type="digit" />
+                <input
+                  type="digit"
+                  value={amount}
+                  onChange={(e) => onChange(e.target.value)}
+                />
               </div>
               <div className="btn-max">{t("trans.max")}</div>
             </div>

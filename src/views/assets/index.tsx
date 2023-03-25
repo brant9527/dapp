@@ -104,10 +104,8 @@ function Assets() {
     },
   ];
   const [assetsList, setAssetsList] = useState(assetsAllInit);
-  const [assetsCoinList, setAssetsCoinList] = useState(assetsCoinListInit);
-  const [assetsContractCoinList, setAssetsContractCoinList] = useState(
-    assetsContractCoinListInit
-  );
+  const [assetsCoinList, setAssetsCoinList] = useState([]);
+  const [assetsContractCoinList, setAssetsContractCoinList] = useState([]);
   const [totalBtcBalance, setTotalBtcBalance] = useState(0);
   const [totalUsdtBalance, setTotalUsdtBalance] = useState(0);
 
@@ -121,6 +119,7 @@ function Assets() {
       method = getFundsAssetBalance;
     }
     const { data } = await method();
+
     setTotalBtcBalance(data.totalBtcBalance);
     setTotalUsdtBalance(data.totalUsdtBalance);
     if (type === "all") {
@@ -185,7 +184,7 @@ function Assets() {
             <>
               <div className="invest-title">{t("assets.assets")}</div>
               <div className="assets-list">
-                {assetsCoinList.map((item, idx) => {
+                {assetsCoinList.map((item:any, idx) => {
                   return (
                     <div className="coin-item" key={idx}>
                       <div className="coin-left">
@@ -210,32 +209,34 @@ function Assets() {
             <>
               <div className="invest-title">{t("assets.assets")}</div>
               <div className="assets-list">
-                {assetsContractCoinList.map((item, idx) => {
+                {assetsContractCoinList.map((item:any, idx) => {
                   return (
                     <div className="coin-cnc-item" key={idx}>
                       <div className="coin-cnc-left">
                         <img className="coin-cnc-logo" src={item.logo} />
                         <div className="">
-                          <div className="coin-cnc-name_top">{item.asset||' '}</div>
+                          <div className="coin-cnc-name_top">
+                            {item.asset || " "}
+                          </div>
                           <div className="coin-cnc-name_bottom">
-                            {item.fullName||'null'}
+                            {item.fullName || "null"}
                           </div>
                           <div className="coin-cnc-use_top">
                             {t("assets.useable")}
                           </div>
                           <div className="coin-cnc-use_bottom">
-                            {item.availableBalance||0}
+                            {item.availableBalance || 0}
                           </div>
                         </div>
                       </div>
                       <div className="coin-cnc-right">
-                        <div className="coin-cnc-count">{item.count||0}</div>
+                        <div className="coin-cnc-count">{item.count || 0}</div>
 
                         <div className="coin-cnc-frozen">
                           {t("assets.frozen")}
                         </div>
                         <div className="coin-cnc-usdt">
-                          {item.freezeBalance||0}
+                          {item.freezeBalance || 0}
                         </div>
                       </div>
                     </div>

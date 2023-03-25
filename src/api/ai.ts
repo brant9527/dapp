@@ -8,6 +8,6 @@ export const getProgressList = () => {
 export const getProductList = () => {
   return axios.post("/api/user/quant/getProductList");
 };
-export const applyBuy = () => {
-  return axios.post("/api/user/quant/applyBuy");
+export const applyBuy = (data: any) => {
+  return axios.post("/api/user/quant/applyBuy", data);
 };

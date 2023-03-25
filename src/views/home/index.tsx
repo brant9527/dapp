@@ -94,7 +94,7 @@ function App() {
     {
       label: t("home.btns.jd"),
       src: jd,
-      path: "/lend",
+      path: "/lendList",
     },
     {
       label: t("home.btns.mnjy"),

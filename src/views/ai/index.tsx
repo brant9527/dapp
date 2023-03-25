@@ -120,7 +120,7 @@ function Ai() {
                 >
                   <div className="apy-top">
                     <div className="left">
-                      <img src={eth} />
+                      <img src={item.coinUrl} />
                       <div className="bold">{item.coin}</div>
                     </div>
                     <div className="right">

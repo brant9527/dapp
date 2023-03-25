@@ -12,6 +12,14 @@ http.defaults.headers.post["Content-Type"] = "application/json";
 
 // 当前正在请求的数量
 let needLoadingRequestCount = 0;
+declare module "axios" {
+  interface AxiosResponse<T = any> {
+    code: number;
+    msg: string;
+    // 这里追加你的参数
+  }
+  export function create(config?: AxiosRequestConfig): AxiosInstance;
+}
 
 // 显示loading
 function showLoading() {

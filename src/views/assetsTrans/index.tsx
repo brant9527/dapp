@@ -95,15 +95,16 @@ function Trans() {
   }, [from, to]);
   const transAsstes = async () => {
     const params = {
-      amount: 0,
+      amount,
       asset: coin,
       from: from.type,
       to: to.type,
     };
-    const { data } = await assetShift(params);
-    if (data.code == 0) {
+    const result: any = await assetShift(params);
+
+    if (result.code == 0) {
       Toast.notice(t("common.success"), {});
-      getData();
+      await getData();
     }
   };
   return (
@@ -163,7 +164,13 @@ function Trans() {
             <div className="trans-part">
               <div className="trans-input_wrap ">
                 <div className="input">
-                  <input type="digit" value={amount} />
+                  <input
+                    type="digit"
+                    value={amount}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                    }}
+                  />
                 </div>
                 <div
                   className="btn-max"
