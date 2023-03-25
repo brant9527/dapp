@@ -23,6 +23,9 @@ function CusInput(props: any) {
     defaultVal,
     disable = false,
     alignLeft = false,
+    append,
+    prepend,
+    inputType = "text",
   } = props;
   const [val, setVal] = useState<any>(defaultVal);
 
@@ -49,25 +52,27 @@ function CusInput(props: any) {
   return (
     <div className={style.root}>
       <div className="cus-input">
-        {isBtn && (
-          <div className="reduce" onClick={() => reduceVal()}>
-            -
-          </div>
-        )}
+        {prepend ||
+          (isBtn && (
+            <div className="reduce" onClick={() => reduceVal()}>
+              -
+            </div>
+          ))}
         <div className={`input ${alignLeft ? " align-left" : ""}`}>
           <input
-            type="text"
+            type={inputType}
             disabled={disable}
             placeholder={placeholder || t("common.input-tip")}
             value={val || defaultVal}
             onChange={(e) => inputChange(e)}
           />
         </div>
-        {isBtn && (
-          <div className="add" onClick={() => addVal()}>
-            +
-          </div>
-        )}
+        {append ||
+          (isBtn && (
+            <div className="add" onClick={() => addVal()}>
+              +
+            </div>
+          ))}
       </div>
     </div>
   );

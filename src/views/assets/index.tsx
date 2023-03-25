@@ -13,6 +13,12 @@ import { useTranslation } from "react-i18next";
 
 import CommonTab from "@/components/CommonTab";
 import eth from "@/assets/eth.png";
+import {
+  getTotalAssetBalance,
+  getFundsAssetBalance,
+  getSpotAssetBalance,
+  getTradeAssetBalance,
+} from "@/api/trans";
 
 function Assets() {
   const { t } = useTranslation();
@@ -53,35 +59,40 @@ function Assets() {
   const navTo = (path: any) => {
     nav(path);
   };
-  const assetsList = [
+  const assetsAllInit = [
     {
       title: t("assets.assets-stock"),
-      num: 1212,
+
+      btcBalance: 0,
+      usdtBalance: 0,
     },
     {
       title: t("assets.assets-funds"),
-      num: 1212,
+      btcBalance: 0,
+      usdtBalance: 0,
     },
     {
       title: t("assets.assets-contract"),
-      num: 1212,
+      btcBalance: 0,
+      usdtBalance: 0,
     },
     {
       title: t("assets.assets-lever"),
-      num: 1212,
+      btcBalance: 0,
+      usdtBalance: 0,
     },
   ];
-  const assetsCoinList = [
+  const assetsCoinListInit = [
     {
       logo: eth,
       asset: "BTC",
-      count: 1,
-      fullName: "Btccoin",
-      usdtBalance: 12,
+      count: 0.4,
+      fullName: null,
+      usdtBalance: 0,
     },
   ];
 
-  const assetsContractCoinList = [
+  const assetsContractCoinListInit = [
     {
       logo: eth,
 
@@ -92,14 +103,51 @@ function Assets() {
       fullName: "Btccoiin",
     },
   ];
+  const [assetsList, setAssetsList] = useState(assetsAllInit);
+  const [assetsCoinList, setAssetsCoinList] = useState(assetsCoinListInit);
+  const [assetsContractCoinList, setAssetsContractCoinList] = useState(
+    assetsContractCoinListInit
+  );
+  const [totalBtcBalance, setTotalBtcBalance] = useState(0);
+  const [totalUsdtBalance, setTotalUsdtBalance] = useState(0);
+
+  const getData = async () => {
+    let method;
+    if (type == "all") {
+      method = getTotalAssetBalance;
+    } else if (type == "trade") {
+      method = getTradeAssetBalance;
+    } else {
+      method = getFundsAssetBalance;
+    }
+    const { data } = await method();
+    setTotalBtcBalance(data.totalBtcBalance);
+    setTotalUsdtBalance(data.totalUsdtBalance);
+    if (type === "all") {
+      setAssetsList(
+        data.detailList.map((item: any, idx: number) => {
+          assetsList[idx].btcBalance = item.btcBalance;
+          assetsList[idx].usdtBalance = item.usdtBalance;
+          return assetsList[idx];
+        })
+      );
+    } else if (type === "trade") {
+      setAssetsCoinList(data.detailList);
+    } else {
+      setAssetsContractCoinList(data.detailList);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, [type]);
   return (
     <div className={style.root}>
       <div className="assets-wrap">
         <CommonTab onChange={onChange} list={navList} />
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
-          <div className="assets-all-usdt">123112321.12</div>
-          <div className="assets-all-about">≈123112321.12</div>
+          <div className="assets-all-usdt">{totalBtcBalance} BTC</div>
+          <div className="assets-all-about">≈{totalUsdtBalance}</div>
           <div className="assets-tabs">
             {tabsList.map((item, idx) => {
               return (
@@ -125,7 +173,9 @@ function Assets() {
                   return (
                     <div className="assets-item" key={idx}>
                       <div className="assets-left">{item.title}</div>
-                      <div className="assets-right">{item.num} USDT</div>
+                      <div className="assets-right">
+                        {item.usdtBalance} USDT
+                      </div>
                     </div>
                   );
                 })}
@@ -166,26 +216,26 @@ function Assets() {
                       <div className="coin-cnc-left">
                         <img className="coin-cnc-logo" src={item.logo} />
                         <div className="">
-                          <div className="coin-cnc-name_top">{item.asset}</div>
+                          <div className="coin-cnc-name_top">{item.asset||' '}</div>
                           <div className="coin-cnc-name_bottom">
-                            {item.fullName}
+                            {item.fullName||'null'}
                           </div>
                           <div className="coin-cnc-use_top">
                             {t("assets.useable")}
                           </div>
                           <div className="coin-cnc-use_bottom">
-                            {item.availableBalance}
+                            {item.availableBalance||0}
                           </div>
                         </div>
                       </div>
                       <div className="coin-cnc-right">
-                        <div className="coin-cnc-count">{item.count}</div>
+                        <div className="coin-cnc-count">{item.count||0}</div>
 
                         <div className="coin-cnc-frozen">
                           {t("assets.frozen")}
                         </div>
                         <div className="coin-cnc-usdt">
-                          ≈{item.freezeBalance}
+                          {item.freezeBalance||0}
                         </div>
                       </div>
                     </div>

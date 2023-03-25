@@ -107,6 +107,7 @@
                         }
                         .coin-usdt {
                             font-size: 38px;
+                            text-align: right;
                             @include font_color("fontColor2");
                         }
                     }
@@ -149,6 +150,7 @@
                         }
                     }
                     .coin-cnc-right {
+                        text-align: right;
                         .coin-cnc-count {
                             font-size: 48px;
                             font-weight: bold;

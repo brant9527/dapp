@@ -57,6 +57,8 @@
           padding: 40px;
           text-align: left;
           border-radius: 20px;
+          word-break: break-all;
+
           @include background_color("bgColor2");
           @include font_color("fontColor1");
           font-size: 44px;

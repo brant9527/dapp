@@ -152,10 +152,29 @@
     "high.income": "高收益",
     "new.user": "新手專享好禮",
     "term": "期限",
-    "limit": "限購"
+    "limit": "限購",
+    "fee": "手續費",
+    "amount": "總量",
+    "apply": "申购",
+    "rest": "剩餘可投"
   },
   "loan": {
     "loan": "貸幣"
+  },
+  "lend": {
+    "lend": "借貸",
+    "amount": "貨幣金額",
+    "lend-term": "借幣期限",
+    "interest": "利息",
+    "interest-day": "日利息",
+    "repayment": "還款方式",
+    "proof-house": "房產證明",
+    "proof-income": "收入證明",
+    "bank-detail": "銀行明細",
+    "documents": "證件",
+    "resk-level": "風險等級",
+    "resk-tip": "当TVL到达80%，或BTC/USDT价格到达0，您的抵押物将被 出售用于还债",
+    "protocol": "我已阅读并同意coin服务协议"
   },
   "entrust": {
     "cancel-all": "撤銷全部",
@@ -165,5 +184,18 @@
     "wait": "待審核",
     "passed": "已通過",
     "reject": "駁回"
+  },
+  "config": {
+    "days.7": "7天",
+    "days.30": "一個月",
+    "days.60": "三個月",
+    "days.180": "半年",
+    "days.365": "一年"
+  },
+  "symbol": {
+    "day": "天",
+    "week": "周",
+    "month": "月",
+    "year": "年"
   }
 }

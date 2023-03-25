@@ -16,6 +16,8 @@ import Back from "@/components/Back";
 import Upload from "@/components/Upload/index";
 import Toast from "@/components/Toast";
 import { getHighGradeCertified, getUserInfo } from "@/api/userInfo";
+import right from "@/assets/right.png";
+// import { term } from "@/utils/config";
 
 function lend() {
   const { t } = useTranslation();
@@ -28,7 +30,7 @@ function lend() {
 
   const [imgSrcFront, setImgSrcFront] = useState<string>();
   const [imgSrcBack, setImgSrcBack] = useState<string>();
-
+  const [selectTerm, setSelectTerm] = useState({label:""});
   useEffect(() => {
     getData();
   }, []);
@@ -80,34 +82,51 @@ function lend() {
     setImgSrcBack(val);
   };
   function title() {
-    return <div className="identity-title">{t("auth.id-auth")}</div>;
+    return <div className="lend-title">{t("lend.lend")}</div>;
   }
-
+  function USDT() {
+    return <div className="lend-USDT">USDT</div>;
+  }
+  /**
+   *  "lend": "借貸",
+    "amount":"貨幣金額",
+    "lend-term":"借幣期限",
+    "interest":"利息",
+    "interest-day":"日利息",
+    "repayment":"還款方式",
+    "proof-house":"房產證明",
+    "proof-income":"收入證明",
+    "bank-detail":"銀行明細",
+    "documents":"證件",
+    "resk-level":"風險等級",
+    "resk-tip":"当TVL到达80%，或BTC/USDT价格到达0，您的抵押物将被 出售用于还债",
+    "protocol":"我已阅读并同意coin服务协议"
+   */
   return (
     <div className={style.root}>
-      <div className="identity-wrap">
+      <div className="lend-wrap">
         <Back content={title()}></Back>
-        <div className="identity-content">
-          <div className="identity-label">{t("auth.name")}</div>
+        <div className="lend-content">
+          <div className="lend-label">{t("lend.amount")}</div>
           <CusInput
             alignLeft
             isBtn={false}
             defaultVal={realName}
             onInput={onInputName}
+            inputType="number"
+            append={<USDT></USDT>}
           ></CusInput>
-          <div className="identity-label">{t("auth.id")}</div>
-          <CusInput
-            alignLeft
-            isBtn={false}
-            defaultVal={idNumber}
-            onInput={onInputIdNumber}
-          ></CusInput>
+          <div className="lend-label">{t("lend.lend-term")}</div>
+          <div className="select-input">
+            <div className="left">{selectTerm?.label}</div>
+            <img src={right} />
+          </div>
 
           <div className="upload-part">
             <Upload src={imgSrcFront} onUpload={onUploadFront}></Upload>
             <Upload src={imgSrcBack} onUpload={onUploadBack}></Upload>
           </div>
-          <div className="identity-label">{t("auth.country")}</div>
+          <div className="lend-label">{t("lend.country")}</div>
           <CusInput
             defaultVal={region}
             alignLeft

@@ -2,18 +2,37 @@
   position: absolute;
   :global {
     .select-wrap {
-      @include font_color("fontColor1");
       position: fixed;
       bottom: 0;
-      border-radius: 40px 40px 0 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 999;
-      .select-item {
-        height: 140px;
-        padding: 0 40px;
+
+      .select-list_content {
+        border-radius: 40px 40px 0 0;
+        @include font_color("fontColor1");
+        @include background_color("bgColor1");
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        z-index: 20;
+        .select-item {
+          height: 140px;
+          padding: 0 40px;
+          font-size: 40px;
+          line-height: 150px;
+          text-align: center;
+        }
+        .select-list{
+          position: relative;
+          @include border("bottom");
+
+        }
+       
       }
-      .select-list {
-        @include border("bottom");
-      }
+     
     }
   }
 }

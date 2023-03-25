@@ -12,8 +12,8 @@ type DisconnectedProps = {
 
 export const Disconnected = memo(({ handleConnect }: DisconnectedProps) => {
   return (
-    <div className="content">
-      <p className="tip">Connect your wallet</p>
+    <div className={style.root}>
+      <p className="connect-wallet_tip">Connect your wallet</p>
       <ConnectWalletButton
         providerString="trust"
         handleConnect={handleConnect}
