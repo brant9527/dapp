@@ -54,7 +54,7 @@ function Ai() {
   const navTo = (item: any) => {
     nav(
       "/aiApply" +
-        `?id=${item.id}&period=${item.period}&maxDayIncome=${item.maxDayIncome}&minDayIncome=${item.minDayIncome}&limitMinAmount=${item.limitMinAmount}&limitBuy=${item.limitBuy}`
+        `?id=${item.id}&period=${item.period}&maxDayIncome=${item.maxDayIncome}&minDayIncome=${item.minDayIncome}&limitMinAmount=${item.limitMinAmount}&limitMaxAmount=${item.limitMaxAmount}&limitBuy=${item.limitBuy}`
     );
   };
   function title() {
@@ -140,7 +140,7 @@ function Ai() {
                       <div className="normol">
                         {t("ai.limit")}
                         <span className="limit-coin">
-                          {item.limitMaxAmount} USDT
+                          {item.limitMinAmount + "-" + item.limitMaxAmount} USDT
                         </span>
                       </div>
                     </div>

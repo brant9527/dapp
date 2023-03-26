@@ -25,7 +25,7 @@ import TransRecord from "./views/transRecord";
 import TradeRecord from "./views/tradeRecord";
 import Message from "./views/message";
 import BindEmail from "./views/bindEmail";
-import Loan from "./views/loan";
+
 import Ai from "./views/ai";
 import User from "./views/user";
 import Auth from "./views/auth";
@@ -33,6 +33,8 @@ import Identity from "./views/identity";
 import Lend from "./views/lend";
 import LendList from "./views/lendList";
 import AiApply from "./views/aiApply";
+import LendAuth from "./views/lendAuth";
+import Withdrawal from "./views/withdrawal";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -69,7 +71,7 @@ function App() {
         <Route path="/message" element={<Message />} />
 
         <Route path="/bindEmail" element={<BindEmail />} />
-        <Route path="/loan" element={<Loan />} />
+
         <Route path="/ai" element={<Ai />} />
         <Route path="/user" element={<User />} />
         <Route path="/auth" element={<Auth />} />
@@ -77,7 +79,9 @@ function App() {
         <Route path="/lend" element={<Lend />} />
         <Route path="/lendList" element={<LendList />} />
         <Route path="/aiApply" element={<AiApply />} />
-
+        <Route path="/lendAuth" element={<LendAuth />} />
+        <Route path="/withdrawal" element={<Withdrawal />} />
+        
         <Route path="*" element={<Not />} />
       </Routes>
     </div>

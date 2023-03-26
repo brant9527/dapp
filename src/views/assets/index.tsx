@@ -44,7 +44,7 @@ function Assets() {
   ];
   const tabsList = [
     {
-      title: t("assets.myAddress"),
+      title: t("assets.deposit"),
       path: "/myAddress",
     },
     {

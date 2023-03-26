@@ -1,3 +1,6 @@
+/**
+ * 借贷申请详情
+ */
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import style from "./index.module.scss";
@@ -6,6 +9,7 @@ import {
   Route,
   Link,
   Outlet,
+  useSearchParams,
   useNavigate,
 } from "react-router-dom";
 
@@ -15,7 +19,7 @@ import CusInput from "@/components/CusInput";
 import Back from "@/components/Back";
 import Upload from "@/components/Upload/index";
 import Toast from "@/components/Toast";
-import { getHighGradeCertified, getUserInfo } from "@/api/userInfo";
+import { applyLoan } from "@/api/lend";
 import right from "@/assets/right.png";
 // import { term } from "@/utils/config";
 
@@ -24,63 +28,52 @@ function lend() {
 
   const nav = useNavigate();
 
-  const [realName, setRealName] = useState<string>("");
-  const [idNumber, setIdnumber] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
+  const [amount, setAmount] = useState<string>("");
 
-  const [imgSrcFront, setImgSrcFront] = useState<string>();
-  const [imgSrcBack, setImgSrcBack] = useState<string>();
-  const [selectTerm, setSelectTerm] = useState({label:""});
+  const [search, setsearch] = useSearchParams();
+  const id = search.get("id");
+  const period = search.get("period");
+  const rate = search.get("rate");
+
   useEffect(() => {
     getData();
+  }, []);
+  useEffect(() => {
+    const num = localStorage.getItem("lend-amount") || "";
+    setAmount(num);
   }, []);
   const getData = async () => {
     // account,tradeType   json格式
     //   tradeType包含：delivery-交割，swap-永续，spot-现货
     console.log("請求數據");
-    const data: any = await getUserInfo();
-    console.log(data);
-    if (data) {
-      // setUserInfo(data?.data);
-    }
+    // const data: any = await getUserInfo();
+    // console.log(data);
+    // if (data) {
+    //   // setUserInfo(data?.data);
+    // }
   };
   const onSubmit = async () => {
     const params = {
-      realName,
-      idNumber,
-      region,
-      backUrl: imgSrcBack,
-      frontUrl: imgSrcFront,
+      amount,
+      productId: id,
     };
-
-    const data: any = await getHighGradeCertified(params);
-    if (data.code == 0) {
+    const { data, code } = await applyLoan(params);
+    if (code == 0) {
       Toast.notice(t("common.upload-tip"), { duration: 3000 });
-      nav("/auth");
+      localStorage.setItem("lend-amount", "");
+
+      nav("/lendList");
+    } else {
+      localStorage.setItem("lend-amount", amount);
+      nav("/lendAuth");
     }
   };
 
-  const onInputName = async (val: any) => {
+  const onInputAmount = async (val: any) => {
     console.log("输入", val);
-    setRealName(val);
+    setAmount(val);
   };
-  const onInputIdNumber = async (val: any) => {
-    console.log("输入", val);
-    setIdnumber(val);
-  };
-  const onInputCountry = async (val: any) => {
-    console.log("输入", val);
-    setRegion(val);
-  };
-  const onUploadFront = async (val: any) => {
-    console.log("圖片url", val);
-    setImgSrcFront(val);
-  };
-  const onUploadBack = async (val: any) => {
-    console.log("圖片url", val);
 
-    setImgSrcBack(val);
-  };
   function title() {
     return <div className="lend-title">{t("lend.lend")}</div>;
   }
@@ -111,28 +104,34 @@ function lend() {
           <CusInput
             alignLeft
             isBtn={false}
-            defaultVal={realName}
-            onInput={onInputName}
-            inputType="number"
+            defaultVal={amount}
+            onInput={onInputAmount}
+            inputType="digit"
             append={<USDT></USDT>}
           ></CusInput>
           <div className="lend-label">{t("lend.lend-term")}</div>
           <div className="select-input">
-            <div className="left">{selectTerm?.label}</div>
+            <div className="left">{period + " " + t("symbol.day")}</div>
             <img src={right} />
           </div>
 
-          <div className="upload-part">
-            <Upload src={imgSrcFront} onUpload={onUploadFront}></Upload>
-            <Upload src={imgSrcBack} onUpload={onUploadBack}></Upload>
+          <div className="lend-label">{t("lend.interest")}</div>
+          <div className="lend-interest_info">
+            <div className="info-item">
+              <div className="left">{t("lend.interest-day")}</div>
+              <div className="right">{rate}%</div>
+            </div>
+            <div className="info-item">
+              <div className="left">{t("lend.interest")}</div>
+              <div className="right">{Number(rate) * Number(period)}%</div>
+            </div>
+            <div className="info-item">
+              <div className="left">{t("lend.repayment")}</div>
+              <div className="right">{t("lend.repayment-type")}</div>
+            </div>
           </div>
-          <div className="lend-label">{t("lend.country")}</div>
-          <CusInput
-            defaultVal={region}
-            alignLeft
-            isBtn={false}
-            onInput={onInputCountry}
-          ></CusInput>
+          <div className="lend-label">{t("lend.risk-level")}</div>
+          <div className="lend-risk_tip">{t("lend.risk-tip")}</div>
           <div
             className="btn-next"
             onClick={() => {

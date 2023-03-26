@@ -1,6 +1,6 @@
 import axios from "@/utils/axios";
-export const getUserCurrProductAmount = () => {
-  return axios.post("/api/user/quant/getUserCurrProductAmount");
+export const getUserCurrProductAmount = (data: any) => {
+  return axios.post("/api/user/quant/getUserCurrProductAmount", data);
 };
 export const getProgressList = () => {
   return axios.post("/api/user/quant/getProgressList");

@@ -19,10 +19,17 @@
                 margin: 45px 0;
                 @include font_color("fontColor2");
             }
-            .upload-part {
-                margin: 40px 0;
-                display: flex;
-                justify-content: space-between;
+            .lend-interest_info {
+                @include font_color("fontColor1");
+                @include background_color("bgColor2");
+                border-radius: 40px;
+                padding: 20px 60px;
+                .info-item {
+                    padding: 40px 0;
+                    font-size: 38px;
+                    display: flex;
+                    justify-content: space-between;
+                }
             }
             .btn-next {
                 height: 130px;
@@ -56,6 +63,11 @@
                     width: 21px;
                     height: 33px;
                 }
+            }
+            .lend-risk_tip{
+                font-size: 38px;
+                @include font_color("fontColor1");
+
             }
         }
     }

@@ -20,6 +20,8 @@ import copy from "copy-to-clipboard";
 import { getUserCurrProductAmount, applyBuy } from "@/api/ai";
 import { getTradeAssetBalance } from "@/api/trans";
 import Toast from "@/components/Toast";
+import { toFixed } from "@/utils/public";
+
 function aiApply() {
   const { t } = useTranslation();
 
@@ -29,6 +31,7 @@ function aiApply() {
   const maxDayIncome = search.get("maxDayIncome");
   const minDayIncome = search.get("minDayIncome");
   const limitMinAmount = search.get("limitMinAmount");
+  const limitMaxAmount = search.get("limitMaxAmount");
   const limitBuy = search.get("limitBuy");
   const accountsList = [
     {
@@ -46,18 +49,19 @@ function aiApply() {
   ];
 
   const [coin, setCoin] = useState("USDT");
-  const [coinUseCount, setCoinUseCount] = useState(0);
-  const [coinFrozenCount, setCoinFrozenCount] = useState(0); // 可投
-  const [amount, setAmount] = useState(0); // 可投
+  const [coinRestUseCount, setCoinRestUseCount] = useState<any>(0);
+  const [availableUsdtBalance, setAvailableUsdtBalance] = useState<any>(0); // 可投
+  const [amount, setAmount] = useState<any>(0); // 可投
 
   const getData = async () => {
-    const { code, data } = await getUserCurrProductAmount();
-    if (code == 0) {
-      // data.
-    }
+    const { code, data } = await getUserCurrProductAmount({
+      id,
+    });
+
     const { code: codeTrade, data: dataTrade } = await getTradeAssetBalance();
     if (codeTrade == 0) {
-      console.log(dataTrade);
+      setCoinRestUseCount(toFixed(Number(limitMaxAmount) - data, "2"));
+      setAvailableUsdtBalance(dataTrade.availableUsdtBalance);
     }
   };
   const onApply = async () => {
@@ -97,7 +101,7 @@ function aiApply() {
           </div>
           <div className="coin-state">
             <div className="left">{t("ai.limit") + " "}(USDT)</div>
-            <div className="right">{limitBuy}</div>
+            <div className="right">{limitMinAmount + "-" + limitMaxAmount}</div>
           </div>
           <div className="border"></div>
           <div className="count-tip">{t("trans.count")}</div>
@@ -110,23 +114,41 @@ function aiApply() {
                   onChange={(e) => onChange(e.target.value)}
                 />
               </div>
-              <div className="btn-max">{t("trans.max")}</div>
+              <div
+                className="btn-max"
+                onClick={() => {
+                  setAmount(
+                    coinRestUseCount > availableUsdtBalance
+                      ? availableUsdtBalance
+                      : coinRestUseCount
+                  );
+                }}
+              >
+                {t("trans.max")}
+              </div>
             </div>
           </div>
           <div className="coin-state">
             <div className="left">
               {t("trans.useable") + " "}({coin})
             </div>
-            <div className="right">{coinUseCount}</div>
+            <div className="right">{toFixed(availableUsdtBalance, 2)}</div>
           </div>
           <div className="coin-state">
             <div className="left">
               {" "}
               {t("ai.rest") + " "}({coin})
             </div>
-            <div className="right">{coinFrozenCount}</div>
+            <div className="right">{toFixed(coinRestUseCount, 2)}</div>
           </div>
-          <div className="btn">{t("ai.apply")}</div>
+          <div
+            className="btn"
+            onClick={() => {
+              onApply();
+            }}
+          >
+            {t("ai.apply")}
+          </div>
         </div>
       </div>
     </div>
