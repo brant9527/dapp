@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState, Fragment } from "react";
+import React, { Component, useCallback, useState, Fragment,memo } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,9 @@ import backImg from "@/assets/left.png";
 import { useTranslation } from "react-i18next";
 import up from "@/assets/up.png";
 import down from "@/assets/down.png";
-function Quotation(props: any) {
+import { toFixed } from "@/utils/public";
+
+function CoinPriceItem(props: any) {
   const { logo, close, rate, symbol, turnover, volume } = props;
   const nav = useNavigate();
 
@@ -35,12 +37,12 @@ function Quotation(props: any) {
               " "
             )}
           >
-            <img src={Number(rate) > 0 ? up : down} />
-            <div className="raise">{Number(rate)}%</div>
+            {/* <img src={Number(rate) > 0 ? up : down} /> */}
+            <div className="raise">{toFixed(Number(rate), 2)}%</div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-export default Quotation;
+export default memo(CoinPriceItem);

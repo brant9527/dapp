@@ -1,0 +1,27 @@
+.root {
+    @include background_color("bgColor1");
+
+    :global {
+        .depth-content {
+            position: relative;
+            overflow: hidden;
+            .depth-bar {
+                padding: 10px 40px;
+                .depth-top {
+                    height: 120px;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 38px;
+                    align-items: center;
+                    @include font_color("fontColor2");
+                }
+                .depth-part {
+                    width: 50%;
+                    .price-bar_wrap {
+                        height: 300px;
+                    }
+                }
+            }
+        }
+    }
+}

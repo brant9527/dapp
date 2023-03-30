@@ -7,7 +7,7 @@ import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
 function Quotation(props: any) {
-  const { data, type, direction } = props;
+  const { data = [], type, direction="right" } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
 

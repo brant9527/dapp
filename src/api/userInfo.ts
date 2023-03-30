@@ -18,4 +18,15 @@ export const getJuniorCertified = (data: any) => {
 export const getRechargeAddress = () => {
   return axios.post("/api/user/base/getRechargeAddress");
 };
-
+export const authentication = (data: any) => {
+  return axios.post("/api/user/base/authentication", data);
+};
+export const collectAdd = (data: any) => {
+  return axios.post("/api/user/collect/add", data);
+};
+export const collectDelete = (data: any) => {
+  return axios.post("/api/user/collect/delete", data);
+};
+export const getCollectList = (data: any) => {
+  return axios.post("/api/user/collect/getCollectList", data);
+};

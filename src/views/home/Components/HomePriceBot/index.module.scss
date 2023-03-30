@@ -6,9 +6,9 @@
       display: flex;
       justify-content: flex-start;
       @include background_color("bgColor1");
-
+      overflow-x: auto;
       .item {
-        margin-right: 68px;
+        margin-right: 38px;
         font-size: 42px;
         height: 91px;
         line-height: 91px;

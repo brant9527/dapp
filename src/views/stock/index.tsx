@@ -7,6 +7,7 @@ import {
   Link,
   Outlet,
   useNavigate,
+  useSearchParams,
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
@@ -32,8 +33,10 @@ import {
 import record from "@/assets/record.png";
 function Stock() {
   const { t } = useTranslation();
+  const [search, setsearch] = useSearchParams();
+  const symbol = search.get("symbol") || "BTC";
   const [type, setType] = useState("buy");
-  const [coin, setCoin] = useState("BTC");
+  const [coin, setCoin] = useState(symbol.replace("USDT", ""));
   const [tradeType, setTradeType] = useState("limit");
   const [balanceUsdt, setBalanceUsdt] = useState<any>(1000);
   const [data, setData] = useState<Array<Array<any>>>([]);
@@ -44,6 +47,7 @@ function Stock() {
   const [useUsdt, setUseUsdt] = useState<any>("");
   const [entrustList, setEntrustList] = useState<any>([]);
   const nav = useNavigate();
+
   const onChangeType = (type: string) => {
     setType(type);
   };
@@ -67,6 +71,8 @@ function Stock() {
   useEffect(() => {
     getData();
   }, []);
+
+  // 获取交易对
   const getData = async () => {
     const { data } = await getDelegationPage({
       pageNo: 1,
@@ -163,10 +169,17 @@ function Stock() {
     }
     await onTradeCancel({ ids });
   }, []);
+  const navHandle = (path: string) => {
+    if (path === "/kLine") {
+      nav(`/kLine?symbol=${symbol}`);
+    } else {
+      nav("/search?tradeType=spot");
+    }
+  };
   return (
     <div className={style.root}>
       <div className="stock-wrap">
-        <NavBar></NavBar>
+        <NavBar navHandle={navHandle} percent="0.21" coin={coin}></NavBar>
         <div className="option-wrap">
           <div className="option-top">
             <div className="left">

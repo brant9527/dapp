@@ -1,0 +1,63 @@
+.root {
+    :global {
+        .kLine-wrap {
+            position: relative;
+            overflow: hidden;
+
+            // padding: 50px 46px;
+            .nav-wrap {
+                position: relative;
+                display: flex;
+                padding: 0 44px;
+                height: 80px;
+                align-items: center;
+                font-size: 52px;
+                height: 150px;
+                @include font_color("fontColor1");
+                .content {
+                    display: flex;
+                    justify-content: center;
+                    flex: 1;
+                    .search {
+                        width: 63px;
+                        height: 51px;
+                    }
+
+                    .coinPart {
+                        // height: 50px;
+                        line-height: 50px;
+                        margin-left: 32px;
+                    }
+
+                    .nav-right {
+                        position: absolute;
+                        right: 0;
+                        width: 46px;
+                        height: 46px;
+                    }
+                }
+            }
+            .kLine-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor2");
+            }
+
+            .kLine-content {
+                @include background_color("bgColor1");
+                height: calc(100vh - 150px);
+                overflow: auto;
+                padding: 0 0 0;
+                border-radius: 50px 50px 0 0;
+                .tradeView {
+                    height: 910px;
+                    width: 100vw;
+                }
+            }
+            .depth-wrap {
+                padding-top: 30px;
+                @include background_color("bgColor2");
+            }
+        }
+    }
+}

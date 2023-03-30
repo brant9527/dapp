@@ -35,6 +35,8 @@ import LendList from "./views/lendList";
 import AiApply from "./views/aiApply";
 import LendAuth from "./views/lendAuth";
 import Withdrawal from "./views/withdrawal";
+import Search from "./views/search";
+import KLine from "./views/kLine";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -46,8 +48,8 @@ import "./app.scss";
 function App() {
   const loginState = useSelector((state: any) => state.loginSlice.value);
   const themes = window.localStorage.getItem("themes") || "light";
-  const { connectProvider, changeProvider, providerString, account, web3 } =
-    useWeb3();
+  // const { connectProvider, changeProvider, providerString, account, web3 } =
+  //   useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
 
   return (
@@ -81,7 +83,9 @@ function App() {
         <Route path="/aiApply" element={<AiApply />} />
         <Route path="/lendAuth" element={<LendAuth />} />
         <Route path="/withdrawal" element={<Withdrawal />} />
-        
+        <Route path="/search" element={<Search />} />
+        <Route path="/kLine" element={<KLine />} />
+
         <Route path="*" element={<Not />} />
       </Routes>
     </div>

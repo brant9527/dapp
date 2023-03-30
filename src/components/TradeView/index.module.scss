@@ -1,0 +1,33 @@
+.root {
+    position: relative;
+    :global {
+        .k-line-scale {
+            // transform: scale(2);
+            // transform-origin: left top;
+            // height: 750px;
+            .k-line-chart {
+                height: 750px;
+                width: 100%;
+            }
+            .part-time {
+                display: flex;
+                border: 1px solid $boder;
+                flex-wrap: nowrap;
+                overflow: auto;
+                .item {
+                    flex-basis: 100px;
+                    flex-shrink: 0;
+                    line-height: 90px;
+                    line-height: 90px;
+                    padding: 20px;
+                    font-size: 32px;
+                    @include font_color("fontColor2");
+                    @include background_color("bgColor1");
+                    &.active {
+                        @include font_color("fontColor1");
+                    }
+                }
+            }
+        }
+    }
+}

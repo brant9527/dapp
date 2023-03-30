@@ -27,17 +27,18 @@
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+        @include font_color("fontColor2");
+        font-size: 30px;
+
         img {
           width: 57px;
           height: 58px;
         }
         .title {
-          font-size: 30px;
           @include font_color("fontColor2");
         }
         &.active {
           .nav-text {
-            font-size: 30px;
             @include font_color("fontColor1");
           }
         }

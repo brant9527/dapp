@@ -7,30 +7,51 @@
 //     5.跌幅榜：getFallSymbolList   无参数
 //     6.推荐位：getRecommendList   无参数
 
-//     返回值都是：
-//     private String symbol;
+// private String symbol;
+
 //     private String tradeType;
+
 //     private String logo;
+
 //     /**
 //      * 成交额
 //      */
 //     private BigDecimal turnover;
+
 //     /**
 //      * 成交量
 //      */
 //     private BigDecimal volume;
+
 //     /**
 //      * 开盘价
 //      */
 //     private BigDecimal open;
+
 //     /**
 //      * 收盘价
 //      */
 //     private BigDecimal close;
+
 //     /**
 //      * 涨跌幅
 //      */
 //     private BigDecimal rate;
+
+//     /**
+//      * 是否是新的交易对 0否，1是
+//      */
+//     private Integer newPair;
+
+//     /**
+//      * 是否热门，0否，1是
+//      */
+//     private Integer hot;
+
+//     /**
+//      * 是否是首页推荐币种，1是，0否
+//      */
+//     private Integer recommend;
 import CFClient from "./cfws";
 import moment from "moment";
 import { toFixed } from "@/utils/public";
@@ -57,45 +78,46 @@ const Io = {
   lastSubscribe: null,
   subscribeCallback: null,
   // 交易中心 k线图部分
-  cfwsKline: function (params: any, subscribe: string, callback: Function) {
+  cfwsKline: function (params: any, subscribe: any, callback: Function) {
     var me = this;
     let resolution = params.resolution;
     delete params.resolution;
     client.ready(function () {
-      var type = "minute";
-      if (resolution == "5") {
-        type = "minute5";
-      } else if (resolution == "15") {
-        type = "minute15";
-      } else if (resolution == "30") {
-        type = "minute30";
-      } else if (resolution == "60") {
-        type = "hour";
-      } else if (resolution == "240") {
-        type = "hour4";
-      } else if (resolution == "1D") {
-        type = "day";
-      } else if (resolution == "1W") {
-        type = "week";
-      } else if (resolution == "1M") {
-        type = "month";
-      }
+      var type = resolution;
+
       var wsCallback = function (data: any) {
         const res = {
           resolution: resolution,
           symbol: params.symbol,
           klines: <any>[],
         };
+        /**
+         *   // 时间戳，毫秒级别，必要字段
+  timestamp: number,
+  // 开盘价，必要字段
+  open: number,
+  // 收盘价，必要字段
+  close: number,
+  // 最高价，必要字段
+  high: number,
+  // 最低价，必要字段
+  low: number,
+  // 成交量，非必须字段
+  volume: number,
+  // 成交额，非必须字段，如果需要展示技术指标'EMV'和'AVP'，则需要为该字段填充数据。
+  turnover: number
+  
+         */
         if (data.length > 0) {
           data.forEach((e: any) => {
             res.klines.push({
-              date: me.dataFormat(e[0]),
+              timestamp: me.dataFormat(e[0] / 1000),
               open: e[1] * 1,
               close: e[2] * 1,
               high: e[3] * 1,
               low: e[4] * 1,
-              time: e[0] * 1000,
-              volume: Number((e[5] * 1).toFixed(0)),
+              volume: e[5] * 1000,
+              turnover: Number((e[6] * 1).toFixed(0)),
             });
           });
         }
@@ -118,7 +140,7 @@ const Io = {
 
       if (!subscribe) return;
       client.subscribe(
-        `kline.${type}.${params.pairId}`,
+        `kline.${type}.${params.symbol}`,
         params,
         function (data: any) {
           const item = {
@@ -160,13 +182,20 @@ const Io = {
   getMarketList: function () {
     return new Promise((resolve, reject) => {
       client.ready(function () {
-        client.request("getMarketList", function (err: any, data: any) {
-          if (err) {
-            resolve(null);
-            return;
+        client.request(
+          /**
+           * 后续新增一个symbol参数获取所有
+           */
+          "getMarketList",
+          { symbol: null },
+          function (err: any, data: any) {
+            if (err) {
+              resolve(null);
+              return;
+            }
+            resolve(data);
           }
-          resolve(data as commonData);
-        });
+        );
       });
     });
   },
@@ -196,7 +225,7 @@ const Io = {
   // 订阅列表数据
   subscribeMarket: function (callback: any) {
     client.ready(function () {
-      client.subscribe("market.*", function (data: any) {
+      client.subscribe("market.*", { symbol: null }, function (data: any) {
         callback(data);
       });
     });

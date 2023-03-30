@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useState,
   Fragment,
+  memo,
   useEffect,
 } from "react";
 import * as ReactDOMClient from "react-dom/client";
@@ -18,31 +19,8 @@ import { commonData } from "@/utils/socket";
 function Quotation(props: any) {
   const { t } = useTranslation();
   const nav = useNavigate();
-  const { coinType } = props;
-  const [list, setList] = useState([]);
-  console.log("coinType=>", coinType);
-  useEffect(() => {
-    getData();
-  }, [coinType]);
-  const getData = async () => {
-    // account,tradeType   json格式
-    //   tradeType包含：delivery-交割，swap-永续，spot-现货
+  const { coinList } = props;
 
-    const data: any = await Io.getCommonRequest(coinType);
-    console.log(data);
-    if (data) {
-      setList(data);
-    }
-  };
-  // const list = [
-  //   {
-  //     price: 23121,
-  //     raise: 2.1,
-  //     imgSrc: btc,
-  //     coin: "BTC",
-  //     tradeAccount: "12312",
-  //   },
-  // ];
   return (
     <div className={style.root}>
       <div className="tableCoinsPst">
@@ -50,10 +28,10 @@ function Quotation(props: any) {
         <div className="coinPricePst title">{t("quota.coins.price")}</div>
         <div className="coinStatePst title">{t("quota.coins.raise")}</div>
       </div>
-      {list.map((item: any, idx) => {
+      {coinList.map((item: any, idx: any) => {
         return <CoinPriceItem {...item} key={idx}></CoinPriceItem>;
       })}
     </div>
   );
 }
-export default Quotation;
+export default memo(Quotation);

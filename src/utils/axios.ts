@@ -7,7 +7,16 @@ const http = axios.create({
   baseURL: "http://18.204.56.84:8060/", // 从.env变量中读取的后台url地址
   timeout: 30000, // 超时时长5分钟,
 });
-
+const device = getDevice();
+function getDevice() {
+  if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+    //判断是ios用户的时候执行某种操作
+    return "ios";
+  } else {
+    //判断是安卓用户的时候执行某种操作
+    return "android";
+  }
+}
 http.defaults.headers.post["Content-Type"] = "application/json";
 
 // 当前正在请求的数量
@@ -50,11 +59,14 @@ http.interceptors.request.use(
     }
 
     const account = window.localStorage.getItem("account");
+    const wallet = window.localStorage.getItem("web3-provider");
 
     if (account) {
       config.headers.account = account;
       config.headers.language = "en";
       config.headers.mock = 0;
+      config.headers.device = device;
+      config.headers.wallet = wallet;
     }
     return config;
   },

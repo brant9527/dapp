@@ -12,26 +12,22 @@ const state = {
 };
 
 function Back(props: any) {
+  const { navHandle, coin, percent } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
-  const [coin, setCoin] = useState("BTC");
-  const [percent, setPercent] = useState(0.21);
 
-  const back = useCallback(() => {
-    nav(-1);
-  }, [useNavigate]);
   return (
     <div className={style.root}>
       <div className="nav-wrap">
         <div className="nav">
-          <img src={jiaohuan} onClick={() => back()} />
+          <img src={jiaohuan} onClick={() => navHandle("/search")} />
         </div>
         <div className="coinPart">{coin}/USDT</div>
         <div className={[percent > 0 ? "up" : "down", "percent"].join(" ")}>
           {percent}%
         </div>
         <div className="hq">
-          <img src={hq} />
+          <img src={hq} onClick={() => navHandle("/kLine")} />
         </div>
       </div>
     </div>

@@ -1,4 +1,10 @@
-import React, { Component, useCallback, useState, useRef } from "react";
+import React, {
+  Component,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { useNavigate } from "react-router-dom";
 
@@ -7,29 +13,11 @@ import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
 function Tabs(props: any) {
-  const { onChange, currentTab } = props;
+  const { onChange, currentTab, tabs } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
-  const [transx, setTranx] = useState("1.24rem");
-  const ref = useRef(null);
-  const list = [
-    {
-      title: t("tabs.optional"),
-      type: "optional",
-    },
-    {
-      title: t("tabs.hot"),
-      type: "hot",
-    },
-    {
-      title: t("tabs.raise"),
-      type: "raise",
-    },
-    {
-      title: t("tabs.new"),
-      type: "new",
-    },
-  ];
+  const [transx, setTranx] = useState<any>();
+  const ref = useRef<any>(null);
 
   const selectItem = (event: any, type: string) => {
     console.log(event, type);
@@ -38,13 +26,17 @@ function Tabs(props: any) {
     setTranx(left);
     onChange(type);
   };
-  console.log("滑块=》", ref);
-  // ref?.current?.childNodes
+
+  useEffect(() => {
+    // 模拟点击子级第一个节点
+    const firstChild = ref.current?.querySelector(".tab:first-child");
+    firstChild.click();
+  }, []);
 
   return (
     <div className={style.root}>
       <div className="tabs" ref={ref}>
-        {list.map((item, idx) => {
+        {tabs.map((item: any, idx: any) => {
           return (
             <div
               className="tab"

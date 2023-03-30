@@ -22,7 +22,8 @@ function Back(props: any) {
         <div className="nav">
           <img src={backImg} onClick={() => back()} />
         </div>
-        <div className="title-bar">{props.content}</div>
+        {props.content && <div className="title-bar">{props.content}</div>}
+        {props.right && <div className="nav-right">{props.right}</div>}
       </div>
     </div>
   );

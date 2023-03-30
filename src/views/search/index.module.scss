@@ -1,0 +1,105 @@
+.root {
+    :global {
+        .search-wrap {
+            position: relative;
+            overflow: hidden;
+            .input-bg {
+                width: 949px;
+                height: 100px;
+
+                background-color: $inputBgQuota;
+                padding: 0 48px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                margin: 44px 44px 0;
+                img {
+                    width: 47px;
+                    height: 47px;
+                    margin-right: 24px;
+                }
+                .text {
+                    font-size: 40px;
+                    width: 800px;
+                    @include font_color("fontColor2");
+                }
+                .cancel {
+                    font-size: 40px;
+                    width: 100px;
+                    text-align: right;
+                    @include font_color("fontColor2");
+                }
+            }
+        }
+        .coinList {
+            @include background_color("bgColor1");
+
+            padding: 50px 46px;
+            border-radius: 50px 50px 0 0;
+            height: calc(100vh - 250px);
+            overflow: auto;
+            .coins-title {
+                font-size: 44px;
+                font-weight: 600;
+                @include font_color("fontColor1");
+            }
+            .coins {
+                padding: 20px 0;
+
+                .coin-item {
+                    display: flex;
+                    align-items: center;
+
+                    justify-content: space-between;
+                    padding: 40px 0;
+                    .coin-left {
+                        display: flex;
+                        flex: 1;
+                        align-items: center;
+                        .coin-logo {
+                            width: 90px;
+                            height: 90px;
+                            margin-right: 44px;
+                        }
+                        .coin-symbol {
+                            font-size: 44px;
+                            font-weight: 600;
+                            @include font_color("fontColor1");
+                        }
+                        .coin-mul {
+                        }
+                    }
+                    .coin-right {
+                        flex: 1;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        .coin-price_part {
+                            margin-right: 44px;
+                            text-align: right;
+                            .coin-price {
+                                font-size: 44px;
+                                font-weight: 600;
+                                @include font_color("fontColor1");
+                            }
+                            .coin-rate {
+                                font-size: 42px;
+                                &.up {
+                                    color: $up;
+                                }
+                                &.down {
+                                    color: $down;
+                                }
+                            }
+                        }
+                        .coin-collect {
+                            width: 46px;
+                            height: 46px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

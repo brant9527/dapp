@@ -5,7 +5,7 @@
     }
     .back-wrap {
       display: flex;
-      padding: 0 98px 0 42px;
+      padding: 0 42px 0 42px;
       height: 150px;
       align-items: center;
       .nav {
@@ -17,6 +17,9 @@
 
       .title-bar {
         flex: 1;
+      }
+      .nav-right {
+        width: 56px;
       }
     }
   }

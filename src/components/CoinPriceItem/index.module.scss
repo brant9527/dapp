@@ -58,11 +58,12 @@
         justify-content: flex-end;
         .raisePart {
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           align-items: center;
           width: 231px;
           height: 107px;
           border-radius: 10px;
+
           img {
             width: 26px;
             height: 15px;
@@ -80,8 +81,8 @@
         }
 
         .raise {
-          font-size: 42px;
-          margin-left: 29px;
+          font-size: 40px;
+          padding:0 20px;
         }
       }
     }

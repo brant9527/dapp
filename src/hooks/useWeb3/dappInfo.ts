@@ -6,7 +6,8 @@ export const APP_NAME = "Trade Dapp";
 export const APP_LOGO_URL =
   "https://gareys-cb.github.io/example-dapp/assets/logo.png";
 // Get your infura api key by creating a free account at https://infura.io/
-export const INFURA_RPC_URL = `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`;
+// export const INFURA_RPC_URL = `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`;
+export const INFURA_RPC_URL = `https://web3.mytokenpocket.vip`;
 // We default to Ethereum, but we could default to any chain.
 // Just make sure your wallet providers support that chain.
 // Find chains here: https://chainlist.org/

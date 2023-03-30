@@ -1,45 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./index.module.scss";
-const HomePriceMid = () => {
-  const coins = [
-    {
-      coin: "BTC",
-      baseCoin: "USDT",
-      raise: 0.12,
-      price: 23212,
-    },
-    {
-      coin: "BTC",
-      baseCoin: "USDT",
-      raise: -0.12,
-      price: 23212,
-    },
-    {
-      coin: "BTC",
-      baseCoin: "USDT",
-      raise: -0.12,
-      price: 23212,
-    },
-  ];
+import socket from "@/utils/socket";
+import { toFixed } from "@/utils/public";
+
+const HomePriceMid = (props: any) => {
+  const { hotList = [] } = props;
+
   return (
     <div className={style.root}>
       <div className="priceMid">
-        {coins.map((item, i) => {
+        {hotList.map((item: any, i: any) => {
           return (
             <div className="item-wrap" key={i}>
               <div className="top">
-                <div className="coin">{item.coin}</div>
-                <div className="baseCoin">/{item.baseCoin}</div>
+                <div className="coin">{item.symbol.replace("USDT", "")}</div>
+                <div className="baseCoin">/usdt</div>
                 <div
-                  className={[item.raise > 0 ? "up" : "down", " raise"].join(
+                  className={[item.rate > 0 ? "up" : "down", " raise"].join(
                     " "
                   )}
                 >
-                  {item.raise}%
+                  {toFixed(item.rate, 2)}%
                 </div>
               </div>
-              <div className={`center ${item.raise > 0 ? "up" : "down"}`}>
-                {item.price}
+              <div className={`center ${item.rate > 0 ? "up" : "down"}`}>
+                {item.close}
               </div>
               <div className="bottom"></div>
             </div>

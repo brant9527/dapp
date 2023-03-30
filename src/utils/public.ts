@@ -20,7 +20,15 @@ export function toFixed(number: any, pp: any) {
   } // eslint-disable-line
   return n[0] + (x == "" ? "" : "." + x); // eslint-disable-line
 }
-
+export function fixPrice(num: any) {
+  const result = Number(num);
+  if (result > 1) {
+    return toFixed(num, 2);
+  } else {
+    const numCnt = num.toString().replace(/[1-9]|\./g, "").length || 0;
+    return toFixed(num, numCnt + 1);
+  }
+}
 // 科学计数法转数值 - 处理 1e-7 这类精度问题
 export function getFullNum(num: any) {
   // 处理非数字

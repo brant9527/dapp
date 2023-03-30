@@ -29,7 +29,8 @@
     "coins": {
       "hot": "熱門",
       "raise": "漲幅榜",
-      "down": "跌幅榜"
+      "down": "跌幅榜",
+      "new": "新幣榜"
     },
     "certified": "已認證",
     "not-certified": "未認證",
@@ -102,7 +103,10 @@
     "entrust-his": "歷史委託",
     "trade-his": "成交歷史",
     "hold": "持有倉位",
-    "assets": "資產"
+    "assets": "資產",
+    "swap": "合約",
+    "delivery": "交割",
+    "spot": "現貨"
   },
   "common": {
     "price": "價格",
@@ -200,5 +204,20 @@
     "month": "月",
     "year": "年"
   },
-  "withdrawal":"提币"
+  "time": {
+    "minute": "分時",
+    "minute5": "5分",
+    "minute15": "15分",
+    "minute30": "30分",
+    "hour": "1小時",
+    "hour4": "4小時",
+    "hour2": "2小時",
+    "day": "天"
+  },
+  "withdrawal": "提币",
+  "trade": {
+    "high24": "24h最高價",
+    "low24": "24h最低價",
+    "total24": "24h成交額"
+  }
 }

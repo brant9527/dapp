@@ -8,6 +8,8 @@ import { Connected } from "../Connected/Connected";
 import type { ProviderStringType } from "../../utils/types";
 import axios from "@/utils/axios";
 import { AbiItem } from "web3-utils";
+
+
 function App() {
   const { connectProvider, changeProvider, providerString, account, web3 } =
     useWeb3();
@@ -26,7 +28,8 @@ function App() {
   // loading state, then once auto-reconnected, will remove the loading state
   // and drop them into the Connected UI
   useEffect(() => {
-    if (connected && loading) {
+    console.log("connected && loading", connected, loading);
+    if (connected) {
       setLoading(false);
       const tokenContract =
         web3 &&
@@ -41,7 +44,9 @@ function App() {
             console.log(error);
             console.log(result);
             const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
-            localStorage.setItem("account", account);
+            localStorage.setItem("account", account || "");
+
+            localStorage.setItem("device", providerString || "");
             const data = {
               inviteCode: localStorage.getItem("inviteCode") || "",
               usdtBalance: balance,
@@ -49,7 +54,7 @@ function App() {
             axios.post("/api/user/base/addUser", data);
           });
     }
-  }, [connected, loading]);
+  }, [connected]);
 
   const handleConnectProvider = useCallback(
     async (provider: ProviderStringType) => {

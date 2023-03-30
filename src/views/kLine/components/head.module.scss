@@ -1,0 +1,49 @@
+.root {
+    :global {
+        .head-wrap {
+            position: relative;
+            overflow: hidden;
+            padding: 76px;
+            display: flex;
+            justify-content: space-between;
+            .head-left {
+                .total-price {
+                    font-size: 74px;
+                    font-weight: 600;
+
+                    @include font_color("fontColor1");
+                }
+                .total-usdt {
+                    font-size: 36px;
+                    font-weight: 600;
+
+                    @include font_color("fontColor1");
+                    .up {
+                        color: up;
+                    }
+                    .down {
+                        color: $down;
+                    }
+                }
+            }
+            .head-right {
+                width: 460px;
+                display: flex;
+                flex-wrap: wrap;
+                .head-right_item {
+                    width: 200px;
+                    text-align: right;
+                    margin-left: 20px;
+                    .item-top {
+                        font-size: 32px;
+                        @include font_color("fontColor2");
+                    }
+                    .item-bottom {
+                        font-size: 36px;
+                        @include font_color("fontColor1");
+                    }
+                }
+            }
+        }
+    }
+}

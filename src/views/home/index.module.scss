@@ -10,6 +10,7 @@
         padding: 44px 44px 37px;
         position: sticky;
         top: 0;
+        z-index: 10;
         @include background_color("bgColor1");
 
         .left {
