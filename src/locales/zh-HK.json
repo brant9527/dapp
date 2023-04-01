@@ -140,7 +140,8 @@
     "uploading": "上傳中…",
     "start-time": "開始時間",
     "end-time": "結束時間",
-    "status": "狀態"
+    "status": "狀態",
+    "params-check": "請輸入價格或數量"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -256,7 +257,7 @@
     "deal-part": "部分成交",
     "amount": "總量",
     "fee": "手續費",
-    "deal-amount":"成交數量"
+    "deal-amount": "成交數量"
   },
   "invite": {
     "title": "邀請返傭",

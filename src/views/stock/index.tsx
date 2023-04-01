@@ -89,15 +89,15 @@ function Stock() {
   const onChangeType = useCallback((type: string) => {
     setType(type);
     setPercent(-1);
-    setCoinPrice("");
-    setCoinAccount("")
+    setUseUsdt("");
+    setCoinAccount("");
   }, []);
-  const onSelectTradeType = (type: string) => {
+  const onSelectTradeType = useCallback((type: string) => {
     setTradeType(type);
     setPercent(-1);
     setCoinPrice("");
     console.log("設置交易類型", type);
-  };
+  }, []);
   const subData = useCallback(async () => {
     Io.subscribeSymbolDepth(symbol, (data: any) => {
       console.log(data);
@@ -215,7 +215,7 @@ function Stock() {
         setCoinAccount("");
       }
     },
-    [balanceAssets, coinPrice, headInfo, calcType]
+    [balanceAssets, coinPrice, headInfo, calcType, type]
   );
   // 输入要使用的usdt
   const onInputUsdt = useCallback(
@@ -271,6 +271,9 @@ function Stock() {
   };
 
   const takeOrder = async () => {
+    if (!useUsdt || !coinAccount) {
+      return Toast.notice(t("common.params-check"), { duration: 2000 });
+    }
     const { code } = await onTradeBuySell({
       algoPrice: tradeType === "limit" ? coinPrice : "",
       algoTime: new Date().getTime(),
