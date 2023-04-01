@@ -112,7 +112,7 @@ function Menulist() {
               <div className="left">
                 {t("home.current-rate")}{" "}
                 <span>
-                  {(userInfo.needAmount || 0) / (userInfo.totalRecharge || 0)} %
+                  {(userInfo.feeRate || 0)} %
                 </span>
               </div>
               <div className="right">

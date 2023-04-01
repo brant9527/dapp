@@ -1,6 +1,7 @@
 import Decimal from "decimal.js";
 import numeral from "numeral";
 import dayjs from "dayjs";
+const reg = /^0.(0*)\d+$/;
 
 // 返回小数位后几位 截取
 // number 数值
@@ -22,11 +23,19 @@ export function toFixed(number: any, pp: any) {
 }
 export function fixPrice(num: any) {
   const result = Number(num);
+  if (!num) {
+    return toFixed(0, 2);
+  }
   if (result > 1) {
     return toFixed(num, 2);
   } else {
-    const numCnt = num.toString().replace(/[1-9]|\./g, "").length || 0;
-    return toFixed(num, numCnt + 1);
+    const str = num.toString();
+    if (!str.match(reg)) {
+      return toFixed(num, 2);
+    }
+    const numCnt = str.match(reg)[1]?.length || 0;
+
+    return toFixed(num, numCnt + 2);
   }
 }
 // 科学计数法转数值 - 处理 1e-7 这类精度问题
@@ -234,5 +243,5 @@ export function numeralFormat(num: number, p: number) {
  * 優化時間
  */
 export function formatTime(time: any, format?: string) {
-  return dayjs(time || new Date()).format(format || "YYYY-MM-DD hh-mm-ss");
+  return dayjs(time || new Date()).format(format || "YYYY-MM-DD hh:mm:ss");
 }

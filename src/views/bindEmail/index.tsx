@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import CusInput from "@/components/CusInput";
 
 import Back from "@/components/Back";
-import { getJuniorCertified } from "@/api/userInfo";
+import { getJuniorCertified, getUserInfo } from "@/api/userInfo";
 
 import Toast from "@/components/Toast";
 
@@ -22,31 +22,32 @@ function BindEmail() {
 
   const nav = useNavigate();
 
-  const [email, setEmail] = useState<any>("");
-  const [mobile, setMobile] = useState<any>("");
+  const [userInfo, setUserInfo] = useState<any>({});
 
   useEffect(() => {
     getData();
   }, []);
-  
+
   const getData = async () => {
     console.log("請求");
+    const { data, code } = await getUserInfo();
+    if (code == 0) {
+      setUserInfo(data);
+    }
   };
   const onInputMobile = async (val: any) => {
     console.log("输入", val);
-    setMobile(val);
+    userInfo.mobile = val;
+    setUserInfo(userInfo);
   };
   const onInputEmail = async (val: any) => {
     console.log("输入", val);
-    setEmail(val);
+    userInfo.email = val;
+
+    setUserInfo(userInfo);
   };
   const onSubmit = async () => {
-    const params = {
-      mobile,
-      email,
-    };
-
-    const data: any = await getJuniorCertified(params);
+    const data: any = await getJuniorCertified(userInfo);
     if (data.code == 0) {
       Toast.notice(t("common.upload-tip"), { duration: 3000 });
       nav("/auth");
@@ -66,14 +67,14 @@ function BindEmail() {
           <CusInput
             alignLeft
             isBtn={false}
-            defaultVal={mobile}
+            defaultVal={userInfo.mobile}
             onInput={onInputMobile}
           ></CusInput>
           <div className="email-label">{t("common.email.address")}</div>
           <CusInput
             alignLeft
             isBtn={false}
-            defaultVal={email}
+            defaultVal={userInfo.email}
             onInput={onInputEmail}
           ></CusInput>
           <div

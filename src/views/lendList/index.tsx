@@ -42,10 +42,7 @@ function Ai() {
     getData();
   }, []);
   const navTo = (item: any) => {
-    nav(
-      "/lend" +
-        `?id=${item.id}&period=${item.period}&rate=${item.rate}`
-    );
+    nav("/lend" + `?id=${item.id}&period=${item.period}&rate=${item.rate}`);
   };
   const getData = async () => {
     const data: any = await getProgressList();
@@ -65,7 +62,7 @@ function Ai() {
       <div className="ai-wrap">
         <Back content={title()}></Back>
         <div className="ai-content">
-          <div className="ai-order-nav">
+          <div className="ai-order-nav" onClick={() => nav("/lendOrderList")}>
             <div className="order">{t("ai.orders")}</div>
             <img src={right} />
           </div>

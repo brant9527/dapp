@@ -11,6 +11,7 @@
         padding: 0 34px;
         font-size: 34px;
         text-align: center;
+
         @include background_color("bgColor2");
         @include font_color("fontColor1");
       }
@@ -76,7 +77,7 @@
           }
           .cancel-sigle {
             position: absolute;
-            bottom: 0;
+            bottom: 40px;
             right: 0;
           }
         }

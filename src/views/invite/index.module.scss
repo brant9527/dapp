@@ -1,0 +1,39 @@
+.root {
+    :global {
+        .invite-wrap {
+            position: relative;
+            overflow: hidden;
+            @include background_color("bgColor1");
+
+            .invite-big-title {
+                text-align: center;
+                font-size: 72px;
+                color: $blue;
+            }
+            .invite-info {
+                text-align: center;
+                font-size: 43px;
+                color: $blue;
+            }
+            .invite-tip {
+                font-size: 40px;
+                @include font_color("fontColor1");
+            }
+            .copy {
+                width: 941px;
+                height: 150px;
+                border-radius: 20px;
+                line-height: 150px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .bg {
+                width: 902px;
+                height: 599px;
+                display: block;
+                margin: 140px auto 70px;
+            }
+        }
+    }
+}

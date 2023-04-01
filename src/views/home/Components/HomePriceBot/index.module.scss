@@ -18,7 +18,8 @@
 
         &.active {
           height: 91px;
-          background-color: #ebf4ff;
+          @include background_color("bgColor2");
+
           border-radius: 10px;
           @include font_color("fontColor1");
         }

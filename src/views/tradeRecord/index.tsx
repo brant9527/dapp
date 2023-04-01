@@ -7,6 +7,7 @@ import {
   Link,
   Outlet,
   useNavigate,
+  useSearchParams,
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
@@ -24,26 +25,28 @@ import {
   getDealRecordPage,
 } from "@/api/trade";
 import Entrust from "@/components/Entrust";
+import EntrustHis from "@/components/EntrustHis";
+import TransactionHis from "@/components/TransactionHis";
 
+const page = {
+  pageNo: 1,
+  pageSize: 20,
+};
 function TransRecord() {
   const { t } = useTranslation();
-  const typeList =[{
-    type:'all',
-    label:t('common.all')
-  }]
+
   const nav = useNavigate();
+  const [search, setsearch] = useSearchParams();
+  const tradeType = search.get("tradeType") || "spot";
   const [hasMore, setHashMore] = useState(true);
   const [type, setType] = useState("1");
   const [entrustList, setEntrustList] = useState<any>([]);
   const [isEnd, setIsEnd] = useState(false);
-  const [filterType,setFilterType] = useState(1)
-  const page = {
-    pageNo: 1,
-    pageSize: 20,
-  };
+
   const onChange = useCallback((val: string) => {
     setType(val);
     setHashMore(true);
+    setEntrustList([]);
     page.pageNo = 1;
   }, []);
 
@@ -62,99 +65,6 @@ function TransRecord() {
     },
   ];
 
-  const assetsList = [
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-  ];
-
   useEffect(() => {
     getData();
   }, [type]);
@@ -167,7 +77,11 @@ function TransRecord() {
     } else {
       ids = [params.id];
     }
-    await onTradeCancel({ ids });
+    const { code, msg } = await onTradeCancel({ ids });
+    if (code !== 0) {
+      return Toast.notice(msg, {});
+    }
+    getData();
   }, []);
   const getData = async () => {
     let isEnd;
@@ -175,19 +89,19 @@ function TransRecord() {
       const { data } = await getDelegationPage({
         ...page,
         status: type,
-        tradeType: "swap",
+        tradeType,
       });
       console.log(data);
       isEnd = data.currPage === data.totalPage;
-      data.list && setEntrustList(data.list);
+      data.list && setEntrustList(entrustList.concat(data.list));
     } else {
       const { data } = await getDealRecordPage({
         ...page,
-        status: type,
-        tradeType: "swap",
+        status: 2,
+        tradeType,
       });
       console.log(data);
-      data.list && setEntrustList(data.list);
+      data.list && setEntrustList(entrustList.concat(data.list));
       isEnd = data.currPage === data.totalPage;
     }
     if (isEnd) {
@@ -196,8 +110,8 @@ function TransRecord() {
     }
   };
   const onLoadMore = () => {
-    console.log("加载更多", Toast);
-    page.pageNo++;
+    ++page.pageNo;
+
     if (hasMore) {
       getData();
     }
@@ -209,12 +123,11 @@ function TransRecord() {
     return <div className="trade-title">{t("common.stock")}</div>;
   }
   function EntrustLeft() {
-    
-    return <div className="part-condition">
-      <div className="condition-type">
-        {t('common.type')}
+    return (
+      <div className="part-condition">
+        <div className="condition-type">{t("common.type")}</div>
       </div>
-    </div>;
+    );
   }
   return (
     <div className={style.root}>
@@ -232,17 +145,26 @@ function TransRecord() {
             {type === "1" ? (
               <Entrust
                 list={entrustList}
-                tradeType="swap"
+                tradeType={tradeType}
                 onCancel={onCancel}
               ></Entrust>
             ) : type === "2" ? (
               <div className="assets-list">
-                {assetsList.map((item, idx) => {
+                {/* {assetsList.map((item, idx) => {
                   return <RecordItem item={item} key={idx}></RecordItem>;
-                })}
+                })} */}
+                {
+                  <EntrustHis
+                    list={entrustList}
+                    tradeType={tradeType}
+                  ></EntrustHis>
+                }
               </div>
             ) : (
-              <div>3</div>
+              <TransactionHis
+                list={entrustList}
+                tradeType={tradeType}
+              ></TransactionHis>
             )}
           </Scroll>
         </div>

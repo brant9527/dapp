@@ -45,7 +45,7 @@
 
             .kLine-content {
                 @include background_color("bgColor1");
-                height: calc(100vh - 150px);
+                height: calc(100vh - 350px);
                 overflow: auto;
                 padding: 0 0 0;
                 border-radius: 50px 50px 0 0;
@@ -53,10 +53,36 @@
                     height: 910px;
                     width: 100vw;
                 }
+                .depth-wrap {
+                    padding-top: 30px;
+                    @include background_color("bgColor2");
+                }
             }
-            .depth-wrap {
-                padding-top: 30px;
-                @include background_color("bgColor2");
+            .btn-wrap {
+                position: fixed;
+                bottom: 0;
+                height: 130px;
+                width: calc(100vw - 140px);
+                padding: 35px 70px;
+                display: flex;
+                justify-content: space-between;
+                z-index: 10;
+                @include background_color('bgColor1');
+                .btn-item {
+                    line-height: 130px;
+                    height: 130px;
+                    width: 460px;
+                    border-radius: 10px;
+                    color: $fontWhite;
+                    font-size: 40px;
+                    text-align: center;
+                    &.btn-buy {
+                        background-color: $up;
+                    }
+                    &.btn-sell {
+                        background-color: $down;
+                    }
+                }
             }
         }
     }

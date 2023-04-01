@@ -1,0 +1,34 @@
+.root {
+    :global {
+        .order-wrap {
+            padding: 40px 0;
+            @include border("bottom");
+
+            .order-item {
+                position: relative;
+                display: flex;
+
+                font-size: 38px;
+                line-height: 80px;
+                justify-content: space-between;
+
+                .left {
+                    @include font_color("fontColor2");
+                    img {
+                        width: 60px;
+                        height: 60px;
+                    }
+                    &.top {
+                        font-size: 42px;
+                    }
+                }
+                .right {
+                    @include font_color("fontColor1");
+                    &.rate {
+                        color: $up;
+                    }
+                }
+            }
+        }
+    }
+}

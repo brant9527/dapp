@@ -7,12 +7,22 @@
 
                 font-size: 38px;
                 padding: 64px 45px;
-                @include border("bottom") ;
+                @include border("bottom");
                 .left {
+                    position: relative;
                     width: 84px;
                     img {
                         width: 52px;
                         height: 52px;
+                    }
+                    .dot {
+                        position: absolute;
+                        right: 30px;
+                        top: 0;
+                        border-radius: 50%;
+                        width: 20px;
+                        height: 20px;
+                        background-color: $down;
                     }
                 }
                 .right {
@@ -38,6 +48,11 @@
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         -webkit-line-clamp: 3;
+
+                        @include font_color("fontColor2");
+                    }
+                    .time {
+                        font-size: 36px;
 
                         @include font_color("fontColor2");
                     }

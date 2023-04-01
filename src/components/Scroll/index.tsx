@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, memo } from "react";
 import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +23,8 @@ const LoadMore: React.FC<Props> = ({
     if (!container) return;
 
     const { scrollTop, scrollHeight, clientHeight } = container;
-    if (scrollTop + clientHeight >= scrollHeight) {
+    
+    if (scrollTop + clientHeight >= scrollHeight-20) {
       onLoadMore();
     }
 
@@ -55,4 +56,4 @@ const LoadMore: React.FC<Props> = ({
   );
 };
 
-export default LoadMore;
+export default memo(LoadMore);

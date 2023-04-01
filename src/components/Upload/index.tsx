@@ -11,7 +11,7 @@ function UploadImage(props: any) {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   useEffect(() => {
-    imgSrc && setPreviewSource(imgSrc);
+    imgSrc && previewFile(imgSrc);
   }, []);
   useEffect(() => {
     handleSubmit();
@@ -68,7 +68,7 @@ function UploadImage(props: any) {
           onChange={handleFileInputChange}
         />
 
-        {previewSource && <img src={previewSource} />}
+        {(imgSrc || previewSource) && <img src={imgSrc || previewSource} />}
       </div>
     </div>
   );

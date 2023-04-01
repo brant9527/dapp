@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
   useRef,
+  memo,
 } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,7 @@ import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
 function Tabs(props: any) {
-  const { onChange, currentTab, tabs } = props;
+  const { onChange, currentTab, tabs, index = 0 } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
   const [transx, setTranx] = useState<any>();
@@ -29,8 +30,8 @@ function Tabs(props: any) {
 
   useEffect(() => {
     // 模拟点击子级第一个节点
-    const firstChild = ref.current?.querySelector(".tab:first-child");
-    firstChild.click();
+    const child = ref.current?.querySelectorAll(".tab")[index];
+    child.click();
   }, []);
 
   return (
@@ -57,4 +58,4 @@ function Tabs(props: any) {
     </div>
   );
 }
-export default Tabs;
+export default memo(Tabs);

@@ -70,7 +70,7 @@ function App() {
     const data: any = await socket.getMarketList();
     const dataOptional: any = await socket.getCommonRequest(
       "getUserCollectList",
-      "swap"
+      { tradeType: "swap" }
     );
 
     const hotListTemp: Array<any> = [];
@@ -103,14 +103,14 @@ function App() {
     console.log("raiseListTemp=>", raiseListTemp);
     console.log("downListTemp=>", downListTemp);
     console.log("newPairListTemp=>", newPairListTemp);
-    console.log("newPairListTemp=>", newPairListTemp);
+
 
     setHotList(hotListTemp);
     setRecommendList(recommendListTemp);
     setRaiseList(raiseListTemp);
     setDownList(downListTemp);
     setNewPairList(newPairListTemp);
-    setOptional(optional);
+    setOptional(dataOptional);
   };
 
   const subData = async () => {
@@ -211,15 +211,10 @@ function App() {
       path: "/stock",
     },
 
-    // {
-    //   label: t("home.btns.xh"),
-    //   src: xh,
-    //   path: "/stock",
-    // },
     {
       label: t("home.btns.xb"),
       src: xinbi,
-      path: "/ai",
+      path: "/quotation?type=getNew",
     },
     {
       label: t("home.btns.ai"),
@@ -240,7 +235,7 @@ function App() {
     {
       label: t("home.btns.yq"),
       src: yq,
-      path: "/ai",
+      path: "/invite",
     },
 
     {
@@ -303,7 +298,9 @@ function App() {
         <div className="home-banner">
           <Banner bannerList={bannerList}></Banner>
         </div>
-        <div className="home-msg">
+        <div className="home-msg" onClick={()=>{
+          navigate('/notice')
+        }}>
           <div className="msg">
             <img src={msgNotify} alt="" />
           </div>

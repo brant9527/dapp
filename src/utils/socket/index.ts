@@ -93,30 +93,30 @@ const Io = {
         };
         /**
          *   // 时间戳，毫秒级别，必要字段
-  timestamp: number,
-  // 开盘价，必要字段
-  open: number,
-  // 收盘价，必要字段
-  close: number,
-  // 最高价，必要字段
-  high: number,
-  // 最低价，必要字段
-  low: number,
-  // 成交量，非必须字段
-  volume: number,
-  // 成交额，非必须字段，如果需要展示技术指标'EMV'和'AVP'，则需要为该字段填充数据。
-  turnover: number
-  
+              timestamp: number,
+              // 开盘价，必要字段
+              open: number,
+              // 收盘价，必要字段
+              close: number,
+              // 最高价，必要字段
+              high: number,
+              // 最低价，必要字段
+              low: number,
+              // 成交量，非必须字段
+              volume: number,
+              // 成交额，非必须字段，如果需要展示技术指标'EMV'和'AVP'，则需要为该字段填充数据。
+              turnover: number
+              
          */
         if (data.length > 0) {
           data.forEach((e: any) => {
             res.klines.push({
-              timestamp: me.dataFormat(e[0] / 1000),
+              timestamp: e[0]*1,
               open: e[1] * 1,
               close: e[2] * 1,
               high: e[3] * 1,
               low: e[4] * 1,
-              volume: e[5] * 1000,
+              volume: e[5] * 1,
               turnover: Number((e[6] * 1).toFixed(0)),
             });
           });
@@ -124,7 +124,7 @@ const Io = {
         callback(res, "all");
         res.klines = [];
       };
-      params.symbol = params.symbol.toLowerCase();
+      // params.symbol = params.symbol.toLowerCase();
       //请求k线数据
       params.table = type;
       client.request(
@@ -143,14 +143,15 @@ const Io = {
         `kline.${type}.${params.symbol}`,
         params,
         function (data: any) {
+          console.log("data=>", data);
           const item = {
-            close: Number(toFixed(data.close, params.decimalWhat)),
-            date: me.dataFormat(data.timestamp),
+            close: data.close * 1,
             high: data.high * 1,
             low: data.low * 1,
             open: data.open * 1,
-            time: data.timestamp * 1000,
-            volume: Number((data.count * 1).toFixed(0)),
+            timestamp: data.beginTime * 1,
+            volume: data.volume * 1,
+            turnover: Number(toFixed(data.turnover, 0)),
           };
           const res = {
             resolution: resolution,
@@ -199,17 +200,17 @@ const Io = {
       });
     });
   },
-  getCommonRequest: function (type: string, tradeType?: string) {
+  getCommonRequest: function (router: string, paramsTemp?:Object) {
     let params = {
       account: localStorage.getItem("account"),
-      tradeType: tradeType,
+      ...paramsTemp
     };
 
     return new Promise((resolve, reject) => {
       client.ready(function () {
         client.request(
-          type,
-          tradeType ? params : null,
+          router,
+          paramsTemp ? params : null,
           function (err: any, data: any) {
             if (err) {
               resolve(null);
@@ -232,14 +233,22 @@ const Io = {
   },
 
   // 订阅详情数据
-  subscribeSymbolInfo: function (pairid: any, callback: Function) {
+  subscribeSymbolInfo: function (symbol: any, callback: Function) {
     client.ready(function () {
-      client.subscribe(`market.${pairid}`, function (data: any) {
+      client.subscribe(`market.${symbol}`, function (data: any) {
         callback(data);
       });
     });
   },
 
+  // 订阅详情数据
+  subscribeSymbolDepth: function (symbol: any, callback: Function) {
+    client.ready(function () {
+      client.subscribe(`depth.${symbol}`, function (data: any) {
+        callback(data);
+      });
+    });
+  },
   // 获取交易对的实时数据
   cfwsPricesSymbol: function (params: any, callback: Function) {
     // 订阅所有价格
@@ -295,10 +304,9 @@ const Io = {
   },
 
   // 订阅我们本站最新成交
-  cfwsLatestMyStation: function (params: any, callback: any) {
-    const pairId = params.pairId;
+  cfwsLatestMyStation: function (symbol: any, callback: any) {
     client.ready(function () {
-      client.subscribe(`order.${pairId}`, callback);
+      client.subscribe(`order.${symbol}`, callback);
     });
   },
   // 订阅全站最新成交

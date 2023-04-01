@@ -72,46 +72,46 @@
                         @include font_color("fontColor1");
                     }
                 }
-                .coin-item {
-                    display: flex;
-                    justify-content: space-between;
-                    font-size: 48px;
-                    margin: 80px 0;
-                    .coin-left {
-                        display: flex;
-                        .coin-logo {
-                            width: 70px;
-                            height: 70px;
-                            margin-right: 20px;
-                            transform: translateY(-15%);
-                        }
-                        .coin-name {
-                            &_top {
-                                font-size: 48px;
-                                height: 36px;
-                                margin-bottom: 34px;
-                                font-weight: bold;
-                            }
-                            &_bottom {
-                                font-size: 38px;
-                                @include font_color("fontColor2");
-                            }
-                        }
-                    }
-                    .coin-right {
-                        .coin-count {
-                            font-size: 48px;
-                            margin-bottom: 25px;
-                            font-weight: bold;
-                            height: 44px;
-                        }
-                        .coin-usdt {
-                            font-size: 38px;
-                            text-align: right;
-                            @include font_color("fontColor2");
-                        }
-                    }
-                }
+                // .coin-item {
+                //     display: flex;
+                //     justify-content: space-between;
+                //     font-size: 48px;
+                //     margin: 80px 0;
+                //     .coin-left {
+                //         display: flex;
+                //         .coin-logo {
+                //             width: 70px;
+                //             height: 70px;
+                //             margin-right: 20px;
+                //             transform: translateY(-15%);
+                //         }
+                //         .coin-name {
+                //             &_top {
+                //                 font-size: 48px;
+                //                 height: 36px;
+                //                 margin-bottom: 34px;
+                //                 font-weight: bold;
+                //             }
+                //             &_bottom {
+                //                 font-size: 38px;
+                //                 @include font_color("fontColor2");
+                //             }
+                //         }
+                //     }
+                //     .coin-right {
+                //         .coin-count {
+                //             font-size: 48px;
+                //             margin-bottom: 25px;
+                //             font-weight: bold;
+                //             height: 44px;
+                //         }
+                //         .coin-usdt {
+                //             font-size: 38px;
+                //             text-align: right;
+                //             @include font_color("fontColor2");
+                //         }
+                //     }
+                // }
                 .coin-cnc-item {
                     display: flex;
                     justify-content: space-between;

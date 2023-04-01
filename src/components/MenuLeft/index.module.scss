@@ -92,10 +92,11 @@
             display: flex;
             font-size: 44px;
             justify-content: space-between;
+            @include font_color("fontColor2");
+
             .left {
             }
             .right {
-              @include font_color("fontColor2");
             }
           }
           .progress-center {
@@ -116,7 +117,9 @@
             font-size: 36px;
             justify-content: space-between;
 
-            @include font_color("fontColor1");
+            @include font_color("fontColor2");
+
+            
 
             span {
               color: $blue;

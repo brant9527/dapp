@@ -7,13 +7,14 @@ import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
 function Quotation(props: any) {
-  const { data = [], type, direction="right" } = props;
+  const { data = [], type = "buy", direction = "right" } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
 
   let total = 0;
+  // price: '28592.4', qty: '8.953'
   data.map((item: any) => {
-    return (total += item[1]);
+    return (total += Number(item.qty));
   });
 
   return (
@@ -30,8 +31,22 @@ function Quotation(props: any) {
             key={index}
           >
             <div className="bar-price-count">
-              <div className={type === "sell" ? "down" : "up"}>{item[0]}</div>
-              <div className="price-bar_right">{item[1]}</div>
+              { direction === "left"  ? (
+                <>
+
+                  <div className="price-bar_right">{item.price}</div>
+                  <div className={type === "sell" ? "down" : "up"}>
+                    {item.qty}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={type === "sell" ? "down" : "up"}>
+                    {item.qty}
+                  </div>
+                  <div className="price-bar_right">{item.price}</div>
+                </>
+              )}
             </div>
             <div
               className={[
@@ -40,7 +55,7 @@ function Quotation(props: any) {
                 direction === "left" ? "left" : "right",
               ].join(" ")}
               style={{
-                width: `${(item[1] / total) * 100}%`,
+                width: `${(item.qty / total) * 100}%`,
               }}
             ></div>
           </div>

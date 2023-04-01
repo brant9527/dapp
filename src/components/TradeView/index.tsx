@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import { init, dispose, registerIndicator, Chart } from "klinecharts";
 
-
 import style from "./index.module.scss";
 import { size } from "lodash";
 import { useTranslation } from "react-i18next";
 import Io from "@/utils/socket";
+import { getLastDealRecordList } from "@/api/trade";
 
 const fruits = ["🍏"];
 
@@ -123,7 +123,6 @@ function TradeView(props: any) {
     chart.current = init("indicator-k-line");
     paneId.current = chart.current?.createIndicator("VOL", false) as string;
 
-
     chart.current?.setBarSpace(20);
     chart.current?.createIndicator("MA", false, {
       id: "candle_pane",
@@ -196,39 +195,46 @@ function TradeView(props: any) {
       from: new Date().getTime() - getTimeCalc(),
       to: new Date().getTime(),
     };
-    Io.cfwsUnsubscribe(`kline.${time}.${symbol}`);
-    Io.cfwsKline(params, "", (data: any, type: any) => {
+    // 开启订阅+请求模式
+    Io.cfwsKline(params, true, (data: any, type: any) => {
       console.log(data.klines, type);
       if (type == "all") {
         chart.current?.applyNewData(data.klines);
       }
       if (type === "one") {
-        chart.current?.updateData(data.klines);
+        chart.current?.updateData(data.klines[0]);
       }
     });
     chart.current?.loadMore((timestamp: any) => {
       setFrom(timestamp);
+      const params = {
+        resolution: time,
+        symbol: symbol,
+        from: timestamp - getTimeCalc(),
+        to: timestamp,
+      };
+      Io.cfwsKline(params, null, (data: any, type: any) => {
+        console.log(data, type);
+        if (type == "all") {
+          chart.current?.applyMoreData(data);
+        }
+      });
     });
-  }, [time]);
-  useEffect(() => {
-    // 时间变化后，请求后面数据
-    const params = {
-      resolution: time,
-      symbol: symbol,
-      from: from - getTimeCalc(),
-      to: from,
+    return () => {
+      Io.cfwsUnsubscribe(`kline.${time}.${symbol}`);
     };
-    Io.cfwsKline(params, null, (data: any, type: any) => {
-      console.log(data, type);
-      if (type == "all") {
-        chart.current?.applyMoreData(data);
-      }
-    });
-  }, [from]);
-  const selectTime = (value: any) => {
-    setTime(value);
-    onChangeMinutes(value);
-  };
+  }, [time]);
+
+  const selectTime = useCallback(
+    (value: any) => {
+      Io.cfwsUnsubscribe(`kline.${time}.${symbol}`);
+
+      setTime(value);
+      onChangeMinutes(value);
+    },
+    [time]
+  );
+
   return (
     <>
       <div className={style.root}>

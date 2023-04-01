@@ -18,82 +18,38 @@ import Scroll from "@/components/Scroll";
 import Toast from "@/components/Toast";
 
 import eth from "@/assets/eth.png";
-import {
-  getDelegationPage,
-  onTradeCancel,
-  getDealRecordPage,
-} from "@/api/trade";
+
 import Entrust from "@/components/Entrust";
+
+import { getMessagePage } from "@/api/home";
 
 function Message() {
   const { t } = useTranslation();
-  const typeList = [
-    {
-      type: "all",
-      label: t("common.all"),
-    },
-  ];
+  
   const nav = useNavigate();
-  const [hasMore, setHashMore] = useState(true);
-  const [type, setType] = useState("1");
-  const [entrustList, setEntrustList] = useState<any>([]);
-  const [isEnd, setIsEnd] = useState(false);
-  const [filterType, setFilterType] = useState(1);
+  const [hasMore, setHashMore] = useState(false);
+
+  const [assetsList, setAssetsList] = useState<any>([]);
+
   const page = {
     pageNo: 1,
     pageSize: 20,
   };
-  const assetsList = [
-    {
-      title: "標題",
-      content: "內容",
-    },
-  ];
-  const onChange = useCallback((val: string) => {
-    setType(val);
-    setHashMore(true);
-    page.pageNo = 1;
-  }, []);
 
   useEffect(() => {
     getData();
-  }, [type]);
-  const onCancel = useCallback(async (params: any) => {
-    console.log("取消參數", params);
-
-    let ids = [];
-    if (params.type === "all") {
-      ids = entrustList.map((item: any) => item.id);
-    } else {
-      ids = [params.id];
-    }
-    await onTradeCancel({ ids });
   }, []);
+
   const getData = async () => {
-    let isEnd;
-    if (type != "dealRecord") {
-      const { data } = await getDelegationPage({
-        ...page,
-        status: type,
-        tradeType: "swap",
-      });
-      console.log(data);
-      isEnd = data.currPage === data.totalPage;
-      data.list && setEntrustList(data.list);
-    } else {
-      const { data } = await getDealRecordPage({
-        ...page,
-        status: type,
-        tradeType: "swap",
-      });
-      console.log(data);
-      data.list && setEntrustList(data.list);
-      isEnd = data.currPage === data.totalPage;
-    }
-    if (isEnd) {
-      setHashMore(false);
-      Toast.notice(t("common.noMore"), { duration: 3000 });
-    }
+    const { data } = await getMessagePage(page);
+
+    setAssetsList(data.list);
+    // const isEnd = data.currPage === data.totalPage;
+
+    // if (isEnd) {
+    //   setHashMore(false);
+    //   Toast.notice(t("common.noMore"), { duration: 3000 });
+    // }
   };
   const onLoadMore = () => {
     console.log("加载更多", Toast);
@@ -105,7 +61,11 @@ function Message() {
   const onRefresh = () => {
     console.log("刷新");
   };
-
+  const onDetail = (item: any) => {
+    nav(
+      `/messageDetail?id=${item.id}&createTime=${item.createTime}&title=${item.title}&content=${item.content}`
+    );
+  };
   return (
     <div className={style.root}>
       <div className="message-wrap">
@@ -118,8 +78,14 @@ function Message() {
             onRefresh={() => onRefresh()}
           >
             <div className="assets-list">
-              {assetsList.map((item, idx) => {
-                return <MsgItem item={item} key={idx}></MsgItem>;
+              {assetsList.map((item: any, idx: any) => {
+                return (
+                  <MsgItem
+                    item={item}
+                    key={idx}
+                    onDetail={() => onDetail(item)}
+                  ></MsgItem>
+                );
               })}
             </div>
           </Scroll>

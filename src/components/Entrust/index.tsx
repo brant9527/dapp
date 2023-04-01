@@ -6,7 +6,7 @@ import style from "./index.module.scss";
 import backImg from "@/assets/left.png";
 
 import { useTranslation } from "react-i18next";
-import { formatTime } from "@/utils/public";
+import { fixPrice, formatTime, toFixed } from "@/utils/public";
 const state = {
   openState: false,
 };
@@ -14,33 +14,36 @@ const state = {
 function Entrust(props: any) {
   const { t } = useTranslation();
   const { children, partLeft, list, onCancel } = props;
-  console.log("list=>", list);
-  const listT = [
-    {
-      algoPrice: 3,
-      algoTime: null,
-      algoType: "",
-      amount: 2,
-      count: 2,
-      createTime: "2023-03-10T20:06:31.000+0000",
-      direction: 2,
-      id: 2,
-      lever: 10,
-      margin: 2,
-      marginMode: "crossed",
-      mock: 0,
-      orderId: "12312312",
-      period: 0,
-      realAmount: 2,
-      realCount: 2,
-      realPrice: 1.2,
-      status: 0,
-      symbol: "BTCUSDT",
-      tradeType: "swap",
-      updateTime: "2023-03-10T20:06:31.000+0000",
-      userId: 3,
-    },
-  ];
+  function getStatus(item: any) {
+    switch (item.direction) {
+      case 1:
+        return t("entrust.open-long");
+      case 2:
+        return t("entrust.open-short");
+
+      case 3:
+        return t("entrust.pindo");
+
+      case 4:
+        return t("entrust.empty");
+
+      case 5:
+        return t("entrust.buy");
+
+      case 6:
+        return t("entrust.sell");
+
+      case 7:
+        return t("entrust.take-profit");
+
+      case 8:
+        return t("entrust.take-loss");
+
+      default:
+        return t("entrust.open-long");
+    }
+  }
+
   return (
     <div className={style.root}>
       <div className="entrust-wrap">
@@ -65,21 +68,34 @@ function Entrust(props: any) {
           {list.map((item: any, index: any) => {
             return (
               <div key={index} className="entrust-info_item">
-                <div className="left s">现价/买入</div>
+                <div
+                  className={`left ${
+                    [1, 3, 5, 7].indexOf(item.direction) > -1 ? "s" : "f"
+                  }`}
+                >
+                  {item.algoType === "limit"
+                    ? t("entrust.limit")
+                    : t("entrust.market")}
+                  /{getStatus(item)}
+                </div>
                 <div className="right">
                   <div className="top">
                     <div className="symbol">{`${
                       item.symbol.split("USDT")[0]
                     }/USDT`}</div>
-                    <div className="time">{formatTime(item.createTime)}</div>
+                    <div className="time">
+                      {formatTime(item.createTime, "YYYY-MM-DD mm:hh:ss")}
+                    </div>
                   </div>
                   <div className="count">
                     <span>{t("common.count")}</span>{" "}
-                    {item.realCount + " / " + item.count}
+                    {toFixed(item.realCount, 2) +
+                      " / " +
+                      toFixed(item.count, 2)}
                   </div>
                   <div className="price">
                     <span>{t("common.price")}</span>
-                    {item.realPrice}
+                    {fixPrice(item.algoPrice)}
                   </div>
                 </div>
                 <div

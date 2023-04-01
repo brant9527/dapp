@@ -83,7 +83,7 @@ const MessageTemplate = ({ args }: { args: Base }) => {
 
 export const notice = (
   message: string,
-  { duration = 3000, ...args }: AProps
+  { duration = 2000, ...args }: AProps
 ) => {
   addMsg(args, message);
   const timer = setTimeout(() => {

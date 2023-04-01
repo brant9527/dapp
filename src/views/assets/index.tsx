@@ -12,6 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import CommonTab from "@/components/CommonTab";
+
 import eth from "@/assets/eth.png";
 import {
   getTotalAssetBalance,
@@ -19,6 +20,7 @@ import {
   getSpotAssetBalance,
   getTradeAssetBalance,
 } from "@/api/trans";
+import AssetsCoin from "@/components/AssetsCoin";
 
 function Assets() {
   const { t } = useTranslation();
@@ -184,7 +186,8 @@ function Assets() {
             <>
               <div className="invest-title">{t("assets.assets")}</div>
               <div className="assets-list">
-                {assetsCoinList.map((item:any, idx) => {
+                <AssetsCoin list={assetsCoinList}></AssetsCoin>
+                {/* {assetsCoinList.map((item:any, idx) => {
                   return (
                     <div className="coin-item" key={idx}>
                       <div className="coin-left">
@@ -202,7 +205,7 @@ function Assets() {
                       </div>
                     </div>
                   );
-                })}
+                })} */}
               </div>
             </>
           ) : (

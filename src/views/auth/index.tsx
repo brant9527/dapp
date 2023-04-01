@@ -44,7 +44,12 @@ function auth() {
   function title() {
     return <div className="auth-title">{t("home.menu-smrz")}</div>;
   }
-
+  const v2 = () => {
+    if (userInfo.juniorStatus != 1) {
+      return Toast.notice(t("auth.need-v1"), { duration: 2000 });
+    }
+    nav("/identity");
+  };
   return (
     <div className={style.root}>
       <div className="auth-wrap">
@@ -71,7 +76,17 @@ function auth() {
                 <span className="wait">{t("status.wait")}</span>
               )}
               {userInfo.juniorStatus == 2 && (
-                <span className="reject">{t("status.reject")}</span>
+                <>
+                  <span className="reject">{t("status.reject")}</span>
+                  <span
+                    className="need-auth"
+                    onClick={() => {
+                      nav("/bindEmail");
+                    }}
+                  >
+                    {" " + t("auth.need-auth")}
+                  </span>
+                </>
               )}
             </div>
           </div>
@@ -86,7 +101,7 @@ function auth() {
                   <span
                     className="need-auth"
                     onClick={() => {
-                      nav("/identity");
+                      v2();
                     }}
                   >
                     {t("auth.need-auth")}
@@ -100,7 +115,17 @@ function auth() {
               )}
 
               {userInfo.highStatus == 2 && (
-                <span className="reject">{t("status.reject")}</span>
+                <>
+                  <span className="reject">{t("status.reject")}</span>
+                  <span
+                    className="need-auth"
+                    onClick={() => {
+                      v2();
+                    }}
+                  >
+                    {" " + t("auth.need-auth")}
+                  </span>
+                </>
               )}
             </div>
           </div>

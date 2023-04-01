@@ -22,12 +22,12 @@ function identity() {
 
   const nav = useNavigate();
 
-  const [realName, setRealName] = useState<string>("");
-  const [idNumber, setIdnumber] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
+  const [realName, setRealName] = useState<any>("");
+  const [idNumber, setIdnumber] = useState<any>("");
+  const [region, setRegion] = useState<any>("");
 
-  const [imgSrcFront, setImgSrcFront] = useState<string>();
-  const [imgSrcBack, setImgSrcBack] = useState<string>();
+  const [imgSrcFront, setImgSrcFront] = useState<any>();
+  const [imgSrcBack, setImgSrcBack] = useState<any>();
 
   useEffect(() => {
     getData();
@@ -39,7 +39,12 @@ function identity() {
     const data: any = await getUserInfo();
     console.log(data);
     if (data) {
-      // setUserInfo(data?.data);
+      const { realName:realNameTemp, idNumber: idNumberTemp,region: regionTemp,frontUrl, backUrl } = data.data;
+      setRealName(realNameTemp);
+      setIdnumber(idNumberTemp);
+      setRegion(regionTemp);
+      setImgSrcFront(frontUrl);
+      setImgSrcBack(backUrl);
     }
   };
   const onSubmit = async () => {
@@ -104,8 +109,8 @@ function identity() {
           ></CusInput>
 
           <div className="upload-part">
-            <Upload src={imgSrcFront} onUpload={onUploadFront}></Upload>
-            <Upload src={imgSrcBack} onUpload={onUploadBack}></Upload>
+            <Upload imgSrc={imgSrcFront} onUpload={onUploadFront}></Upload>
+            <Upload imgSrc={imgSrcBack} onUpload={onUploadBack}></Upload>
           </div>
           <div className="identity-label">{t("auth.country")}</div>
           <CusInput

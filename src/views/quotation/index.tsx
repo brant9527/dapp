@@ -12,7 +12,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import search from "@/assets/search.png";
+import searchPng from "@/assets/search.png";
 import Tabs from "@/components/Tabs";
 import QuotaCoin from "@/components/QuotaCoin";
 import Io from "@/utils/socket";
@@ -21,6 +21,8 @@ import { accSub } from "@/utils/public";
 
 function Quotation() {
   const { t } = useTranslation();
+  const [search, setsearch] = useSearchParams();
+  const tabType = search.get("type") || "";
   const tabs = [
     {
       title: t("home.coins.hot"),
@@ -44,7 +46,11 @@ function Quotation() {
       type: "getNew",
     },
   ];
-  const [coinType, setCoinType] = useState("getHotList");
+  let index = tabs.findIndex((item) => {
+    return item.type === tabType;
+  });
+  index = index === -1 ? 0 : index;
+  const [coinType, setCoinType] = useState(tabs[index].type);
   const [hotList, setHotList] = useState<Array<any>>([]);
   const [recommendList, setRecommendList] = useState<Array<any>>([]);
   const [raiseList, setRaiseList] = useState<Array<any>>([]);
@@ -57,6 +63,7 @@ function Quotation() {
     console.log(type);
     setCoinType(type);
   };
+
   useEffect(() => {
     getData();
   }, []);
@@ -71,7 +78,7 @@ function Quotation() {
     const data: any = await Io.getMarketList();
     const dataOptional: any = await Io.getCommonRequest(
       "getUserCollectList",
-      "swap"
+      { tradeType: "swap" }
     );
 
     const hotListTemp: Array<any> = [];
@@ -111,7 +118,7 @@ function Quotation() {
     setRaiseList(raiseListTemp);
     setDownList(downListTemp);
     setNewPairList(newPairListTemp);
-    setOptional(optional);
+    setOptional(dataOptional);
   };
 
   const subData = async () => {
@@ -214,10 +221,10 @@ function Quotation() {
             nav("/search");
           }}
         >
-          <img src={search} />
+          <img src={searchPng} />
           <span className="text">{t("quota.search")}</span>
         </div>
-        <Tabs tabs={tabs} onChange={onChange}></Tabs>
+        <Tabs tabs={tabs} onChange={onChange} index={index}></Tabs>
         <div className="coinList">
           <QuotaCoin
             coinType={coinType}

@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState, Fragment } from "react";
+import React, { Component, useCallback, useState, Fragment, memo } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -16,10 +16,6 @@ function Bar(props: any) {
   const back = useCallback(() => {
     nav(-1);
   }, [useNavigate]);
-  return (
-    <div className="bar-wrap">
-      
-    </div>
-  );
+  return <div className="bar-wrap"></div>;
 }
-export default Bar;
+export default memo(Bar);

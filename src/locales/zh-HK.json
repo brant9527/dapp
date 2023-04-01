@@ -111,6 +111,7 @@
   "common": {
     "price": "價格",
     "count": "數量",
+    "time": "時間",
     "buy": "買入",
     "sell": "賣出",
     "use": "可用",
@@ -136,7 +137,10 @@
     "copy": "已複製",
     "resign-info": "註冊信息",
     "upload-tip": "已上傳",
-    "uploading": "上傳中…"
+    "uploading": "上傳中…",
+    "start-time": "開始時間",
+    "end-time": "結束時間",
+    "status": "狀態"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -149,7 +153,8 @@
     "id-back": "證件反面",
     "country": "國家",
     "id-auth": "身份認證",
-    "need-auth": "去認證"
+    "need-auth": "去認證",
+    "need-v1": "需要初級認證"
   },
   "ai": {
     "orders": "進行中的訂單",
@@ -170,6 +175,7 @@
     "lend": "借貸",
     "amount": "貨幣金額",
     "lend-term": "借幣期限",
+    "period": "週期（天）",
     "interest": "利息",
     "interest-day": "日利息",
     "repayment": "還款方式",
@@ -180,16 +186,41 @@
     "documents": "證件",
     "risk-level": "風險等級",
     "risk-tip": "當TVL到達80%，或BTC/USDT價格到達0，您的抵押物將被 出售用於還債",
-    "protocol": "我已阅读并同意coin服务协议"
+    "protocol": "我已阅读并同意coin服务协议",
+    "pledge-amount": "質押金額",
+    "lend-amount": "借幣金額"
   },
   "entrust": {
     "cancel-all": "撤銷全部",
-    "cancel": "撤銷"
+    "cancel": "撤銷",
+    "limit": "限價",
+    "market": "市價",
+    "open-long": "開多",
+    "open-short": "開空",
+    "pindo": "平多",
+    "empty": "平空",
+    "buy": "買入",
+    "sell": "賣出",
+    "take-profit": "止盈",
+    "take-loss": "止損"
   },
   "status": {
     "wait": "待審核",
     "passed": "已通過",
-    "reject": "駁回"
+    "reject": "駁回",
+    "pass": {
+      "getMoney": "已放款"
+    },
+    "refused": {
+      "refused": "駁回"
+    },
+    "outTime": {
+      "outTime": "逾期"
+    },
+    "apply": {
+      "repayment": "還款"
+    },
+    "clear": "已結清"
   },
   "config": {
     "days.7": "7天",
@@ -218,6 +249,24 @@
   "trade": {
     "high24": "24h最高價",
     "low24": "24h最低價",
-    "total24": "24h成交額"
+    "total24": "24h成交額",
+    "entrust-order": "委托挂单",
+    "new-deal": "最新成交",
+    "deal-all": "完成成交",
+    "deal-part": "部分成交",
+    "amount": "總量",
+    "fee": "手續費",
+    "deal-amount":"成交數量"
+  },
+  "invite": {
+    "title": "邀請返傭",
+    "big-title": "邀請好友，一起賺錢",
+    "info1": "在COIN現貨，合約的所有交易中賺取高達{{percent}}",
+    "info2": "佣金和 {{amount}}USDT 合約體驗金",
+    "tip": "邀請鏈接",
+    "reward1": "邀請人獎勵：",
+    "reward2": "每個自然日（00:00:00-23:59:59 UTC+8）被邀請人在COIN完成註冊且完成首次入金交易后，邀請人可獲得：",
+    "reward3": "1.邀請2名、4名、6名、8名、10名好友。您將各獲得1張 5USDT新合約體驗金，每人每日最多獲得5張",
+    "reward4": "2.邀請者可獲得手續費30%的返傭比例"
   }
 }

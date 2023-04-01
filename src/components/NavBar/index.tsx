@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState, Fragment } from "react";
+import React, { Component, useCallback, useState, Fragment, memo } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -33,4 +33,4 @@ function Back(props: any) {
     </div>
   );
 }
-export default Back;
+export default memo(Back);

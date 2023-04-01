@@ -25,6 +25,10 @@ import TransRecord from "./views/transRecord";
 import TradeRecord from "./views/tradeRecord";
 import Message from "./views/message";
 import BindEmail from "./views/bindEmail";
+import MessageDetail from "./views/messageDetail";
+import Notice from "./views/notice";
+import NoticeDetail from "./views/noticeDetail";
+import Invite from "./views/invite";
 
 import Ai from "./views/ai";
 import User from "./views/user";
@@ -37,6 +41,7 @@ import LendAuth from "./views/lendAuth";
 import Withdrawal from "./views/withdrawal";
 import Search from "./views/search";
 import KLine from "./views/kLine";
+import LendOrderList from "./views/lendOrderList";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -82,9 +87,15 @@ function App() {
         <Route path="/lendList" element={<LendList />} />
         <Route path="/aiApply" element={<AiApply />} />
         <Route path="/lendAuth" element={<LendAuth />} />
+        <Route path="/lendOrderList" element={<LendOrderList />} />
+
         <Route path="/withdrawal" element={<Withdrawal />} />
         <Route path="/search" element={<Search />} />
         <Route path="/kLine" element={<KLine />} />
+        <Route path="/messageDetail" element={<MessageDetail />} />
+        <Route path="/notice" element={<Notice />} />
+        <Route path="/noticeDetail" element={<NoticeDetail />} />
+        <Route path="/invite" element={<Invite />} />
 
         <Route path="*" element={<Not />} />
       </Routes>

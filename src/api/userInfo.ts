@@ -30,3 +30,6 @@ export const collectDelete = (data: any) => {
 export const getCollectList = (data: any) => {
   return axios.post("/api/user/collect/getCollectList", data);
 };
+export const getCollectStatus = (data: any) => {
+  return axios.post("/api/user/collect/getCollectStatus", data);
+};

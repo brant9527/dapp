@@ -53,6 +53,9 @@
           }
           .price-sell {
             margin: 40px 0;
+            height: 350px;
+
+            overflow: hidden;
           }
           .price-part {
             text-align: center;
@@ -70,6 +73,9 @@
           }
           .price-buy {
             margin-top: 46px;
+            height: 350px;
+
+            overflow: hidden;
           }
         }
         .right {

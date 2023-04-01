@@ -11,22 +11,25 @@ import {
 import msg from "@/assets/msg.png";
 
 import { useTranslation } from "react-i18next";
+import { formatTime } from "@/utils/public";
 
 function MsgItem(props: any) {
-  const { item } = props;
+  const { item, onDetail } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
 
   return (
-    <div className={style.root}>
+    <div className={style.root} onClick={onDetail}>
       <div className="msg-wrap">
         <div className="msg-item">
           <div className="left">
             <img src={msg} />
+            <div className="dot"></div>
           </div>
           <div className="right">
             <div className="title">{item.title}</div>
             <div className="content">{item.content}</div>
+            <div className="time">{formatTime(new Date(item.createTime).getTime())}</div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@
             overflow: hidden;
             .depth-bar {
                 padding: 10px 40px;
+
                 .depth-top {
                     height: 120px;
                     display: flex;
@@ -15,11 +16,57 @@
                     align-items: center;
                     @include font_color("fontColor2");
                 }
+                .depth-buttom {
+                    height: 690px;
+                    display: flex;
+                }
                 .depth-part {
                     width: 50%;
                     .price-bar_wrap {
                         height: 300px;
                     }
+                }
+            }
+            .deal-content {
+                padding: 70px 40px;
+                font-size: 36px;
+                @include font_color("fontColor2");
+
+                .deal-part {
+                    display: flex;
+
+                    .deal-item_wrap {
+                        display: flex;
+
+                        width: 100%;
+                        flex-shrink: 0;
+                        .left {
+                            flex: 1;
+                        }
+                        .center {
+                            flex: 1;
+                            &.buy {
+                                color: $up;
+                            }
+                            &.sell {
+                                color: $down;
+                            }
+                        }
+                        .right {
+                            flex: 1;
+                            justify-content: flex-end;
+                            text-align: right;
+                        }
+                    }
+                }
+
+                .deal-top {
+                    display: flex;
+                }
+                .deal-bottom {
+                    display: flex;
+                    flex-wrap: wrap;
+
                 }
             }
         }

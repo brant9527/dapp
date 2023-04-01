@@ -11,3 +11,11 @@ export const onTradeCancel = (data: any) => {
 export const getDealRecordPage = (data: any) => {
   return axios.post("/api/user/dealRecord/getDealRecordPage", data);
 };
+export const getLastDealRecordList = (data: any) => {
+  return axios.post("/api/user/dealRecord/getLastDealRecordList", data);
+};
+export const getAvailBalance = (data: any) => {
+  return axios.post("/api/user/assetBalance/getAvailBalance", data);
+};
+
+

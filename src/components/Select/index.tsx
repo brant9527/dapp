@@ -5,6 +5,7 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle,
+  memo,
 } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -66,4 +67,4 @@ const Select = forwardRef((props: any, ref) => {
   );
 });
 
-export default Select;
+export default memo(Select);
