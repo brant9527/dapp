@@ -92,7 +92,7 @@ function TransRecord() {
         tradeType,
       });
       console.log(data);
-      isEnd = data.currPage === data.totalPage;
+      isEnd = data.currPage >= data.totalPage;
       data.list && setEntrustList(entrustList.concat(data.list));
     } else {
       const { data } = await getDealRecordPage({
@@ -102,7 +102,7 @@ function TransRecord() {
       });
       console.log(data);
       data.list && setEntrustList(entrustList.concat(data.list));
-      isEnd = data.currPage === data.totalPage;
+      isEnd = data.currPage >= data.totalPage;
     }
     if (isEnd) {
       setHashMore(false);

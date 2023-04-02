@@ -50,18 +50,22 @@
     "all": "總資產",
     "trade": "交易資產",
     "funds": "資金賬戶",
+    "assets-stock": "現貨賬戶",
+
+    "wallet": "錢包賬戶",
     "allAssessment": "總資產評估（USDT）",
     "deposit": "充值",
     "assetsTrans": "劃轉",
     "transfer": "提現",
     "invest": "投資組合",
-    "assets-stock": "現貨賬戶",
+
     "assets-funds": "資金賬戶",
     "assets-contract": "合約賬戶",
     "assets-lever": "槓桿賬戶",
     "useable": "可用",
     "frozen": "凍結",
-    "assets": "資產"
+    "assets": "資產",
+    "income-title": "今日收益"
   },
   "trans": {
     "from": "從",
@@ -135,6 +139,7 @@
     "mobile.number": "手機號碼",
     "btn.next": "下一步",
     "copy": "已複製",
+    "paste": "粘貼",
     "resign-info": "註冊信息",
     "upload-tip": "已上傳",
     "uploading": "上傳中…",
@@ -246,7 +251,15 @@
     "hour2": "2小時",
     "day": "天"
   },
-  "withdrawal": "提币",
+  "withdrawal": {
+    "withdrawal": "提币",
+    "address": "提幣地址",
+    "receive-address": "接收地址",
+    "min-amount": "最少{{amount}}",
+    "fee": "手續費",
+    "receive-amount": "到賬數量",
+    "rest": "餘額"
+  },
   "trade": {
     "high24": "24h最高價",
     "low24": "24h最低價",

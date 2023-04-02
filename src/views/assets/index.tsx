@@ -18,9 +18,12 @@ import {
   getTotalAssetBalance,
   getFundsAssetBalance,
   getSpotAssetBalance,
+  getTradeTodayIncomeRate,
   getTradeAssetBalance,
+  getWalletAssetBalance,
 } from "@/api/trans";
 import AssetsCoin from "@/components/AssetsCoin";
+import { fixPrice } from "@/utils/public";
 
 function Assets() {
   const { t } = useTranslation();
@@ -43,6 +46,14 @@ function Assets() {
       title: t("assets.funds"),
       type: "funds",
     },
+    {
+      title: t("assets.assets-stock"),
+      type: "spot",
+    },
+    {
+      title: t("assets.wallet"),
+      type: "wallet",
+    },
   ];
   const tabsList = [
     {
@@ -55,7 +66,7 @@ function Assets() {
     },
     {
       title: t("assets.transfer"),
-      path: "/transfer",
+      path: "/withdrawal",
     },
   ];
   const navTo = (path: any) => {
@@ -84,44 +95,30 @@ function Assets() {
       usdtBalance: 0,
     },
   ];
-  const assetsCoinListInit = [
-    {
-      logo: eth,
-      asset: "BTC",
-      count: 0.4,
-      fullName: null,
-      usdtBalance: 0,
-    },
-  ];
 
-  const assetsContractCoinListInit = [
-    {
-      logo: eth,
-
-      asset: "BTC",
-      availableBalance: 0,
-      count: 0,
-      freezeBalance: 0,
-      fullName: "Btccoiin",
-    },
-  ];
   const [assetsList, setAssetsList] = useState(assetsAllInit);
   const [assetsCoinList, setAssetsCoinList] = useState([]);
   const [assetsContractCoinList, setAssetsContractCoinList] = useState([]);
+  const [assetsWalletList, setAssetsWalletList] = useState([]);
+  const [assetsSpotList, setAssetsSpotList] = useState([]);
   const [totalBtcBalance, setTotalBtcBalance] = useState(0);
   const [totalUsdtBalance, setTotalUsdtBalance] = useState(0);
-
+  const [income, setIncome] = useState<any>({});
   const getData = async () => {
     let method;
     if (type == "all") {
       method = getTotalAssetBalance;
     } else if (type == "trade") {
       method = getTradeAssetBalance;
-    } else {
+    } else if (type === "funds") {
       method = getFundsAssetBalance;
+    } else if (type === "spot") {
+      method = getSpotAssetBalance;
+    } else {
+      method = getWalletAssetBalance;
     }
     const { data } = await method();
-
+    console.log(data);
     setTotalBtcBalance(data.totalBtcBalance);
     setTotalUsdtBalance(data.totalUsdtBalance);
     if (type === "all") {
@@ -134,12 +131,23 @@ function Assets() {
       );
     } else if (type === "trade") {
       setAssetsCoinList(data.detailList);
-    } else {
+    } else if (type === "funds") {
       setAssetsContractCoinList(data.detailList);
+    } else if (type === "spot") {
+      setAssetsSpotList(data.detailList);
+    } else {
+      setAssetsWalletList(data.detailList);
     }
+  };
+  const getIncme = async () => {
+    const { data } = await getTradeTodayIncomeRate();
+    setIncome(data);
   };
   useEffect(() => {
     getData();
+    if (type === "trade") {
+      getIncme();
+    }
   }, [type]);
   return (
     <div className={style.root}>
@@ -147,8 +155,18 @@ function Assets() {
         <CommonTab onChange={onChange} list={navList} />
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
-          <div className="assets-all-usdt">{totalBtcBalance} BTC</div>
-          <div className="assets-all-about">≈{totalUsdtBalance}</div>
+          <div className="assets-all-usdt">{fixPrice(totalBtcBalance)} BTC</div>
+          <div className="assets-all-about">≈{fixPrice(totalUsdtBalance)}</div>
+          {type === "trade" && (
+            <div className="assets-income">
+              <div className="income-title">{t("assets.income-title")}</div>
+              <div
+                className={`income-val ${income?.income > 0 ? "s" : "f"}`}
+              >{`${fixPrice(income?.income || 0)} / ${fixPrice(
+                income?.rate || 0
+              )}%`}</div>
+            </div>
+          )}
           <div className="assets-tabs">
             {tabsList.map((item, idx) => {
               return (
@@ -166,7 +184,7 @@ function Assets() {
           </div>
         </div>
         <div className="content-bottom">
-          {type === "all" ? (
+          {type === "all" && (
             <>
               <div className="invest-title">{t("assets.invest")}</div>
               <div className="assets-list">
@@ -182,37 +200,20 @@ function Assets() {
                 })}
               </div>
             </>
-          ) : type === "trade" ? (
+          )}
+          {type === "trade" && (
             <>
               <div className="invest-title">{t("assets.assets")}</div>
               <div className="assets-list">
                 <AssetsCoin list={assetsCoinList}></AssetsCoin>
-                {/* {assetsCoinList.map((item:any, idx) => {
-                  return (
-                    <div className="coin-item" key={idx}>
-                      <div className="coin-left">
-                        <img className="coin-logo" src={item.logo} />
-                        <div className="">
-                          <div className="coin-name_top">{item.asset}</div>
-                          <div className="coin-name_bottom">
-                            {item.fullName}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="coin-right">
-                        <div className="coin-count">{item.count}</div>
-                        <div className="coin-usdt">≈{item.usdtBalance}</div>
-                      </div>
-                    </div>
-                  );
-                })} */}
               </div>
             </>
-          ) : (
+          )}
+          {type === "funds" && (
             <>
               <div className="invest-title">{t("assets.assets")}</div>
               <div className="assets-list">
-                {assetsContractCoinList.map((item:any, idx) => {
+                {assetsContractCoinList.map((item: any, idx) => {
                   return (
                     <div className="coin-cnc-item" key={idx}>
                       <div className="coin-cnc-left">
@@ -245,6 +246,22 @@ function Assets() {
                     </div>
                   );
                 })}
+              </div>
+            </>
+          )}
+          {type === "spot" && (
+            <>
+              <div className="invest-title">{t("assets.assets")}</div>
+              <div className="assets-list">
+                <AssetsCoin list={assetsSpotList}></AssetsCoin>
+              </div>
+            </>
+          )}
+          {type === "wallet" && (
+            <>
+              <div className="invest-title">{t("assets.assets")}</div>
+              <div className="assets-list">
+                <AssetsCoin list={assetsWalletList}></AssetsCoin>
               </div>
             </>
           )}

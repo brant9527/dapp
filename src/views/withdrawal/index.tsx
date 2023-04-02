@@ -16,13 +16,16 @@ import Back from "@/components/Back";
 import Upload from "@/components/Upload/index";
 import Toast from "@/components/Toast";
 import { getHighGradeCertified, getUserInfo } from "@/api/userInfo";
+import { getFundsAssetBalance } from "@/api/trans";
+import { toFixed } from "@/utils/public";
 
 function identity() {
   const { t } = useTranslation();
-
+  const ref = useRef<any>(null);
   const nav = useNavigate();
-
-  const [realName, setRealName] = useState<string>("");
+  const [coinUseCount, setCoinUseCount] = useState<any>(0);
+  const [withdrawalAmount, setWithdrawalAmount] = useState<any>(0);
+  const [fee, setFee] = useState<string>("");
   const [idNumber, setIdnumber] = useState<string>("");
   const [region, setRegion] = useState<string>("");
 
@@ -32,24 +35,9 @@ function identity() {
   useEffect(() => {
     getData();
   }, []);
-  const getData = async () => {
-    // account,tradeType   json格式
-    //   tradeType包含：delivery-交割，swap-永续，spot-现货
-    console.log("請求數據");
-    const data: any = await getUserInfo();
-    console.log(data);
-    if (data) {
-      // setUserInfo(data?.data);
-    }
-  };
+
   const onSubmit = async () => {
-    const params = {
-      realName,
-      idNumber,
-      region,
-      backUrl: imgSrcBack,
-      frontUrl: imgSrcFront,
-    };
+    const params = {};
 
     const data: any = await getHighGradeCertified(params);
     if (data.code == 0) {
@@ -60,60 +48,82 @@ function identity() {
 
   const onInputName = async (val: any) => {
     console.log("输入", val);
-    setRealName(val);
   };
-  const onInputIdNumber = async (val: any) => {
+  const onInputIdAmount = async (val: any) => {
     console.log("输入", val);
-    setIdnumber(val);
+    setWithdrawalAmount(val);
   };
-  const onInputCountry = async (val: any) => {
+  const onInputFee = async (val: any) => {
     console.log("输入", val);
-    setRegion(val);
+    setFee(val);
   };
-  const onUploadFront = async (val: any) => {
-    console.log("圖片url", val);
-    setImgSrcFront(val);
-  };
-  const onUploadBack = async (val: any) => {
-    console.log("圖片url", val);
 
-    setImgSrcBack(val);
-  };
   function title() {
-    return <div className="identity-title">{t("auth.id-auth")}</div>;
+    return <div className="withdrawal-title">{t("withdrawal.withdrawal")}</div>;
   }
+  function paste() {
+    return (
+      <div
+        className="withdrawal-title"
+        onClick={() => {
+          const input = ref?.current;
+          input.focus();
+          document.execCommand("paste");
+        }}
+      >
+        {t("common.paste")}
+      </div>
+    );
+  }
+  const getData = async () => {
+    const method = getFundsAssetBalance;
 
+    const { data } = await method();
+    setCoinUseCount(data.availableUsdtBalance || 0);
+  };
+  function inputRight() {
+    return <div className="withdrawal-usdt">USDT</div>;
+  }
   return (
     <div className={style.root}>
-      <div className="identity-wrap">
+      <div className="withdrawal-wrap">
         <Back content={title()}></Back>
-        <div className="identity-content">
-          <div className="identity-label">{t("auth.name")}</div>
+        <div className="withdrawal-content">
+          <div className="withdrawal-label">{t("withdrawal.address")}</div>
           <CusInput
+            ref={ref}
             alignLeft
             isBtn={false}
-            defaultVal={realName}
+            placeholder={t("withdrawal.receive-address")}
             onInput={onInputName}
           ></CusInput>
-          <div className="identity-label">{t("auth.id")}</div>
+          <div className="withdrawal-label">{t("trans.count")}</div>
           <CusInput
             alignLeft
             isBtn={false}
-            defaultVal={idNumber}
-            onInput={onInputIdNumber}
+            placeholder={t("withdrawal.min-amount", { amount: 0.1 })}
+            onInput={onInputIdAmount}
           ></CusInput>
-
-          <div className="upload-part">
-            <Upload src={imgSrcFront} onUpload={onUploadFront}></Upload>
-            <Upload src={imgSrcBack} onUpload={onUploadBack}></Upload>
+          <div className="content-label">
+            <div className="left">
+              {t("withdrawal.rest")}:{coinUseCount}
+            </div>
           </div>
-          <div className="identity-label">{t("auth.country")}</div>
+          <div className="withdrawal-label">{t("withdrawal.fee")}</div>
           <CusInput
             defaultVal={region}
             alignLeft
             isBtn={false}
-            onInput={onInputCountry}
+            onInput={onInputFee}
+            append={inputRight()}
           ></CusInput>
+
+          <div className="content-label">
+            <div className="left"> {t("withdrawal.receive-amount")}</div>
+            <div className="right">
+              {toFixed(Number(withdrawalAmount) - Number(fee), 2)} USDT
+            </div>
+          </div>
           <div
             className="btn-next"
             onClick={() => {

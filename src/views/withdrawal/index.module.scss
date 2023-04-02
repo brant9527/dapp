@@ -1,28 +1,44 @@
 .root {
     :global {
-        .identity-wrap {
+        .withdrawal-wrap {
             position: relative;
             overflow: hidden;
             @include background_color("bgColor1");
             // padding: 50px 46px;
-
-            .identity-title {
+            .withdrawal-usdt {
+                font-size: 44px;
+                padding-right: 40px;
+                @include font_color("fontColor2");
+            }
+            .withdrawal-title {
                 text-align: center;
                 font-size: 50px;
                 @include font_color("fontColor1");
             }
-            .identity-content {
+            .withdrawal-content {
                 padding: 50px 46px;
             }
-            .identity-label {
+            .withdrawal-label {
                 font-size: 42px;
-                margin: 45px 0;
+                margin: 98px 0 36px;
                 @include font_color("fontColor2");
             }
             .upload-part {
-                margin:  40px 0;
+                margin: 40px 0;
                 display: flex;
                 justify-content: space-between;
+            }
+            .content-label {
+                display: flex;
+                justify-content: space-between;
+                font-size: 38px;
+                line-height: 160px;
+                .left {
+                    @include font_color("fontColor2");
+                }
+                .right {
+                    @include font_color("fontColor1");
+                }
             }
             .btn-next {
                 height: 130px;

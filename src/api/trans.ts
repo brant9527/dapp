@@ -15,3 +15,9 @@ export const getTotalAssetBalance = () => {
   return axios.post("/api/user/assetBalance/getTotalAssetBalance");
 };
 
+export const getTradeTodayIncomeRate = () => {
+  return axios.post("/api/user/assetBalance/getTradeTodayIncomeRate");
+};
+export const getWalletAssetBalance = () => {
+  return axios.post("/api/user/assetBalance/getWalletAssetBalance");
+};

@@ -13,7 +13,7 @@ const state = {
 };
 
 function AssetsCoin(props: any) {
-  const { list } = props;
+  const { list = [] } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
   const back = useCallback(() => {

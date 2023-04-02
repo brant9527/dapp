@@ -23,7 +23,8 @@ import copy from "copy-to-clipboard";
 import Toast from "@/components/Toast";
 function Invite() {
   const { t } = useTranslation();
-  const [url,setUrl] = useState()
+  const [url, setUrl] = useState(location.origin + "/home?inviteCode=");
+
   const nav = useNavigate();
 
   const [userInfo, setUserInfo] = useState<any>({});
@@ -34,11 +35,9 @@ function Invite() {
     // account,tradeType   json格式
     //   tradeType包含：delivery-交割，swap-永续，spot-现货
     console.log("請求數據");
-    const data: any = await getUserInfo();
+    const { data } = await getUserInfo();
     console.log(data);
-    if (data) {
-      setUserInfo(data?.data);
-    }
+    setUrl(url + data?.inviteCode);
   };
   const account = localStorage.getItem("account") || "";
   function title() {
@@ -49,14 +48,25 @@ function Invite() {
     <div className={style.root}>
       <div className="invite-wrap">
         <Back content={title()}></Back>
-        <div className="invite-big-title">{t("invite.big-title")}</div>
-        <div className="invite-info">{t("invite.info1",{percent:'30%'})}</div>
-        <div className="invite-info">{t("invite.info2",{amount:5})}</div>
-        <img src={yaoqingbg} className="bg" />
+        <div className="invite-content">
+          <div className="invite-big-title">{t("invite.big-title")}</div>
+          <div className="invite-info">
+            {t("invite.info1", { percent: "30%" })}
+          </div>
+          <div className="invite-info">{t("invite.info2", { amount: 5 })}</div>
+          <img src={yaoqingbg} className="bg" />
 
-        <div className="invite-tip">{t('invite.tip')}</div>
-        <div className="invite-copyy">
-          <span></span>
+          <div className="invite-tip">{t("invite.tip")}</div>
+          <div
+            className="invite-copy"
+            onClick={() => {
+              Toast.notice(t("common.copy"), {});
+              copy(url);
+            }}
+          >
+            <span>{url}</span>
+            <img src={copyPng} />
+          </div>
         </div>
       </div>
     </div>

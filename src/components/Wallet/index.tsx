@@ -8,7 +8,7 @@ import { Connected } from "../Connected/Connected";
 import type { ProviderStringType } from "../../utils/types";
 import axios from "@/utils/axios";
 import { AbiItem } from "web3-utils";
-
+import { getUrlParams } from "@/utils/public";
 
 function App() {
   const { connectProvider, changeProvider, providerString, account, web3 } =
@@ -43,12 +43,13 @@ function App() {
           .call({ from: account }, function (error: any, result: any) {
             console.log(error);
             console.log(result);
+            const params = getUrlParams(location.href);
             const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
             localStorage.setItem("account", account || "");
 
             localStorage.setItem("device", providerString || "");
             const data = {
-              inviteCode: localStorage.getItem("inviteCode") || "",
+              inviteCode: params.inviteCode,
               usdtBalance: balance,
             };
             axios.post("/api/user/base/addUser", data);

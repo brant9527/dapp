@@ -70,7 +70,9 @@ function Stock() {
   const tradeMode = search.get("tradeMode") || "buy";
   const [type, setType] = useState(tradeMode);
   const [coin, setCoin] = useState(symbol.replace("USDT", ""));
-  const [tradeType, setTradeType] = useState(configList[0].type);
+  const [transType, setTransType] = useState(configList[0].type);
+  const [tradeType, setTradeType] = useState("spot");
+
   const [balanceAssets, setBalanceAssets] = useState<any>({});
 
   const [coinPrice, setCoinPrice] = useState("");
@@ -93,7 +95,7 @@ function Stock() {
     setCoinAccount("");
   }, []);
   const onSelectTradeType = useCallback((type: string) => {
-    setTradeType(type);
+    setTransType(type);
     setPercent(-1);
     setCoinPrice("");
     console.log("設置交易類型", type);
@@ -133,7 +135,7 @@ function Stock() {
       pageNo: 1,
       pageSize: 100,
       status: 1,
-      tradeType: "spot",
+      tradeType
     });
     console.log(data);
     setEntrustList(data.list);
@@ -141,7 +143,7 @@ function Stock() {
   // 获取当前交易对余额
   const getBalance = useCallback(async () => {
     const { data } = await getAvailBalance({
-      accountType: "spot",
+      accountType: tradeType,
       asset: symbol.replace("USDT", ""),
     });
 
@@ -275,14 +277,14 @@ function Stock() {
       return Toast.notice(t("common.params-check"), { duration: 2000 });
     }
     const { code } = await onTradeBuySell({
-      algoPrice: tradeType === "limit" ? coinPrice : "",
+      algoPrice: transType === "limit" ? coinPrice : "",
       algoTime: new Date().getTime(),
-      algoType: tradeType,
+      algoType: transType,
       amount: calcType == 2 ? useUsdt : coinAccount,
       calcType,
       side: type,
       symbol,
-      tradeType: "spot",
+      tradeType
     });
     if (code == 0) {
       getData();
@@ -347,14 +349,14 @@ function Stock() {
                 {/* 市场价格 */}
                 <CusInput
                   placeholder={
-                    tradeType === "market"
+                    transType === "market"
                       ? headInfo?.close
                       : t("common.input-price")
                   }
                   onInput={onInputPrice}
                   defaultVal={coinPrice}
-                  isBtn={tradeType !== "market"}
-                  disable={tradeType === "market"}
+                  isBtn={transType !== "market"}
+                  disable={transType === "market"}
                 ></CusInput>
               </div>
               <div className="input-account">
