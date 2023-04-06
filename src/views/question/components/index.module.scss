@@ -1,0 +1,23 @@
+.root {
+    :global {
+        .tip {
+            font-size: 44px;
+            @include font_color("fontColor1");
+            text-indent: 2em;
+        }
+
+        .input-item {
+            margin: 20px 0;
+            input {
+                zoom: 3;
+                font-size: 42px;
+                color: $down;
+            }
+            label {
+                font-size: 42px;
+
+                margin: 0 10px;
+            }
+        }
+    }
+}

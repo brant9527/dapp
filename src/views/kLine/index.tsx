@@ -39,7 +39,6 @@ function Kline() {
   const [coin, setCoin] = useState(symbol);
 
   const [isCollect, setIsCollect] = useState(false);
-
   useEffect(() => {
     getData();
   }, []);
@@ -54,7 +53,7 @@ function Kline() {
     }
   };
 
-  // Toast.notice(t("common.noMore"), { duration: 3000 });
+  // Toast.notice(t("common.noMore"), {  });
 
   const navHandle = () => {
     nav(`/search?returnPath=kLine`);

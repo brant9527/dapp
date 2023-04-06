@@ -41,10 +41,10 @@ function Menulist() {
   const certified = localStorage.getItem("certified");
   const list = [
     { imgSrc: wdzh, label: t("home.menu-wdzh"), path: "/user" },
-    // { imgSrc: jyjl, label: t("home.menu-jyjl"), path: "/transRecord" },
+    { imgSrc: jyjl, label: t("home.menu-bzzx"), path: "/help" },
     { imgSrc: smrz, label: t("home.menu-smrz"), path: "/auth" },
     { imgSrc: yxbd, label: t("home.menu-yxbd"), path: "/bindEmail" },
-    { imgSrc: xyf, label: t("home.menu-xyf"), path: "/" },
+    { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
     // { imgSrc: bdhb, label: t("home.menu-bdhb"), path: "/" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },
   ];
@@ -110,13 +110,10 @@ function Menulist() {
             </div>
             <div className="progress-bottom">
               <div className="left">
-                {t("home.current-rate")}{" "}
-                <span>
-                  {(userInfo.feeRate || 0)} %
-                </span>
+                {t("home.current-rate")} <span>{userInfo.feeRate || 0} %</span>
               </div>
               <div className="right">
-                {t("home.current-target")}{' '}
+                {t("home.current-target")}{" "}
                 <span>{userInfo.needAmount || 0} USDT</span>
               </div>
             </div>

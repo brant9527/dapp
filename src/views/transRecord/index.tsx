@@ -158,7 +158,7 @@ function TransRecord() {
   ];
   const onLoadMore = () => {
     console.log("加载更多", Toast);
-    Toast.notice(t('common.noMore'), { duration: 3000 });
+    Toast.notice(t('common.noMore'), {  });
   };
   const onRefresh = () => {
     console.log("刷新");

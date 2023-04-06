@@ -60,10 +60,11 @@ http.interceptors.request.use(
 
     const account = window.localStorage.getItem("account");
     const wallet = window.localStorage.getItem("web3-provider");
+    const language = window.localStorage.getItem("i18nextLng");
 
     if (account) {
       config.headers.account = account;
-      config.headers.language = "en";
+      config.headers.language = language;
       config.headers.mock = 0;
       config.headers.device = device;
       config.headers.wallet = wallet;

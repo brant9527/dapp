@@ -69,11 +69,16 @@ function LendItem(props: any) {
         <div className="order-item">
           <div className="left">{t("common.status")}</div>
           <div className="right">
+            {(item.status == 1 || item.status == 3 || item.status == 4) && (
+              <>
+                <span className="status">{status(item)}</span>
+                <span className="btn">{t("btn.repayment")}</span>
+              </>
+            )}
             {item.status == 0 && <span className="status">{status(item)}</span>}
-            {item.status == 1 && <span className="status">{status(item)}</span>}
+
             {item.status == 2 && <span className="status">{status(item)}</span>}
-            {item.status == 3 && <span className="status">{status(item)}</span>}
-            {item.status == 4 && <span className="status">{status(item)}</span>}
+
             {item.status == 9 && <span className="status">{status(item)}</span>}
           </div>
         </div>

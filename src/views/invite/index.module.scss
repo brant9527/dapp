@@ -4,13 +4,14 @@
             position: relative;
             overflow: hidden;
             @include background_color("bgColor1");
+            .invite-title {
+                text-align: center;
+                font-size: 42px;
+                @include font_color("fontColor1");
+            }
             .invite-content {
                 padding: 90px;
-                .invite-title {
-                    text-align: center;
-                    font-size: 42px;
-                    @include font_color("fontColor1");
-                }
+                
                 .invite-big-title {
                     text-align: center;
                     font-size: 72px;

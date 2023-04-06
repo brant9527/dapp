@@ -22,12 +22,14 @@ import HomePriceMid from "./Components/HomePriceMid";
 import HomePriceBot from "./Components/HomePriceBot";
 import QuotaCoin from "@/components/QuotaCoin";
 import Banner from "@/components/Banner";
+
 import socket from "@/utils/socket";
 import _ from "lodash";
 
 import { getUnReadMessageCnt, getBannerList } from "@/api/home";
 import { getNoticeList } from "@/api/common";
 import { accSub } from "@/utils/public";
+import Article from "./Components/Article";
 function App() {
   let themes = window.localStorage.getItem("themes") || "light";
 
@@ -98,11 +100,11 @@ function App() {
     downListTemp.sort(function (obj1: any, obj2: any) {
       return accSub(obj1.rate, obj2.rate);
     });
-    console.log("hotListTemp=>", hotListTemp);
-    console.log("recommendListTemp=>", recommendListTemp);
-    console.log("raiseListTemp=>", raiseListTemp);
-    console.log("downListTemp=>", downListTemp);
-    console.log("newPairListTemp=>", newPairListTemp);
+    // console.log("hotListTemp=>", hotListTemp);
+    // console.log("recommendListTemp=>", recommendListTemp);
+    // console.log("raiseListTemp=>", raiseListTemp);
+    // console.log("downListTemp=>", downListTemp);
+    // console.log("newPairListTemp=>", newPairListTemp);
 
 
     setHotList(hotListTemp);
@@ -123,7 +125,7 @@ function App() {
       const downListTemp = _.cloneDeep(downList);
       const optionalTemp = _.cloneDeep(optional);
       data.map((item: any) => {
-        console.log("查看temp值=>>>>", hotList);
+        // console.log("查看temp值=>>>>", hotList);
 
         const hotListTempIndex = hotListTemp.findIndex((cItem) => {
           return item.symbol === cItem.symbol;
@@ -145,15 +147,15 @@ function App() {
           return item.symbol === cItem.symbol;
         });
 
-        console.log(
-          "hotIndex=>",
-          hotListTempIndex,
-          raiseListTempIndex,
-          recommendListTempIndex,
-          newPairListTempIndex,
-          downListTempIndex,
-          optionalTempIndex
-        );
+        // console.log(
+        //   "hotIndex=>",
+        //   hotListTempIndex,
+        //   raiseListTempIndex,
+        //   recommendListTempIndex,
+        //   newPairListTempIndex,
+        //   downListTempIndex,
+        //   optionalTempIndex
+        // );
         if (hotListTempIndex > -1) {
           hotListTemp.splice(hotListTempIndex, 1, item);
         }
@@ -231,7 +233,11 @@ function App() {
       src: mnjy,
       path: "/ai",
     },
-
+    {
+      label: t("home.btns.c2c"),
+      src: c2c,
+      path: "/c2c",
+    },
     {
       label: t("home.btns.yq"),
       src: yq,
@@ -326,6 +332,7 @@ function App() {
           coinList={selectCoinlist(coinType)}
         ></QuotaCoin>
       </div>
+      <Article></Article>
     </div>
   );
 }

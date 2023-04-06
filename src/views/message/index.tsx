@@ -27,7 +27,7 @@ function Message() {
   const { t } = useTranslation();
   
   const nav = useNavigate();
-  const [hasMore, setHashMore] = useState(false);
+  const [hasMore, setHashMore] = useState(true);
 
   const [assetsList, setAssetsList] = useState<any>([]);
 
@@ -44,12 +44,12 @@ function Message() {
     const { data } = await getMessagePage(page);
 
     setAssetsList(data.list);
-    // const isEnd = data.currPage === data.totalPage;
+    const isEnd = data.currPage >= data.totalPage;
 
-    // if (isEnd) {
-    //   setHashMore(false);
-    //   Toast.notice(t("common.noMore"), { duration: 3000 });
-    // }
+    if (isEnd) {
+      setHashMore(false);
+      Toast.notice(t("common.noMore"), {  });
+    }
   };
   const onLoadMore = () => {
     console.log("加载更多", Toast);

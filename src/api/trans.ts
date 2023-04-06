@@ -21,3 +21,15 @@ export const getTradeTodayIncomeRate = () => {
 export const getWalletAssetBalance = () => {
   return axios.post("/api/user/assetBalance/getWalletAssetBalance");
 };
+export const getRechargeRecordPage = (data: any) => {
+  return axios.post("/api/user/assetBalance/getRechargeRecordPage", data);
+};
+export const getRechargeRecordDetail = (data: any) => {
+  return axios.post("/api/user/assetBalance/getRechargeRecordDetail", data);
+};
+export const getWithdrawRecordPage = (data: any) => {
+  return axios.post("/api/user/withdraw/getWithdrawRecordPage", data);
+};
+export const getWithdrawRecordDetail = (data: any) => {
+  return axios.post("/api/user/withdraw/getWithdrawRecordDetail", data);
+};

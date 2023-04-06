@@ -17,5 +17,9 @@ export const getLastDealRecordList = (data: any) => {
 export const getAvailBalance = (data: any) => {
   return axios.post("/api/user/assetBalance/getAvailBalance", data);
 };
+export const getCoinDetail = (data: any) => {
+  return axios.post("/api/common/getCoinDetail", data);
+};
+
 
 

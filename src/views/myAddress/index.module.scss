@@ -3,12 +3,18 @@
     .address-wrap {
       height: 100vh;
       width: 100%;
+
       @include background_color("bgColor1");
       @include font_color("fontColor1");
-      overflow-y: scroll;
 
+      overflow-y: scroll;
+      .record {
+        width: 40px;
+        height: 48px;
+      }
       .address-content {
         padding: 0 40px;
+
         .tip {
           margin-top: 60px;
           font-size: 80px;

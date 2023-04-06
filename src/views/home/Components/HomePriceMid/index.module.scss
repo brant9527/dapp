@@ -5,6 +5,7 @@
       padding: 35px 22px 11px;
       display: flex;
       justify-content: space-between;
+      height: 224px;
       @include background_color("bgColor1");
 
       .item-wrap {

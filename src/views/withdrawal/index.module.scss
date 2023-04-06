@@ -5,6 +5,11 @@
             overflow: hidden;
             @include background_color("bgColor1");
             // padding: 50px 46px;
+            .record {
+                width: 40px;
+                height: 48px;
+                
+            }
             .withdrawal-usdt {
                 font-size: 44px;
                 padding-right: 40px;

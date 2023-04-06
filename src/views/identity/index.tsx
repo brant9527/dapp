@@ -39,7 +39,13 @@ function identity() {
     const data: any = await getUserInfo();
     console.log(data);
     if (data) {
-      const { realName:realNameTemp, idNumber: idNumberTemp,region: regionTemp,frontUrl, backUrl } = data.data;
+      const {
+        realName: realNameTemp,
+        idNumber: idNumberTemp,
+        region: regionTemp,
+        frontUrl,
+        backUrl,
+      } = data.data;
       setRealName(realNameTemp);
       setIdnumber(idNumberTemp);
       setRegion(regionTemp);
@@ -58,7 +64,7 @@ function identity() {
 
     const data: any = await getHighGradeCertified(params);
     if (data.code == 0) {
-      Toast.notice(t("common.upload-tip"), { duration: 3000 });
+      Toast.notice(t("common.upload-tip"), {});
       nav("/auth");
     }
   };

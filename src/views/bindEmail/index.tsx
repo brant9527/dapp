@@ -49,7 +49,7 @@ function BindEmail() {
   const onSubmit = async () => {
     const data: any = await getJuniorCertified(userInfo);
     if (data.code == 0) {
-      Toast.notice(t("common.upload-tip"), { duration: 3000 });
+      Toast.notice(t("common.upload-tip"), {});
       nav("/auth");
     }
   };

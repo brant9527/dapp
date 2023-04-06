@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import style from "./index.module.scss";
 import socket from "@/utils/socket";
 import { toFixed } from "@/utils/public";
-
+import pricedown from "@/assets/pricedown.png";
+import priceup from "@/assets/priceup.png";
 const HomePriceMid = (props: any) => {
   const { hotList = [] } = props;
 
@@ -26,7 +27,9 @@ const HomePriceMid = (props: any) => {
               <div className={`center ${item.rate > 0 ? "up" : "down"}`}>
                 {item.close}
               </div>
-              <div className="bottom"></div>
+              <div className="bottom">
+                <img src={item.rate > 0 ? priceup : pricedown} />
+              </div>
             </div>
           );
         })}

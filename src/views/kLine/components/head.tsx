@@ -35,7 +35,7 @@ function Head() {
     });
   };
 
-  // Toast.notice(t("common.noMore"), { duration: 3000 });
+  // Toast.notice(t("common.noMore"), {  });
 
   return (
     <div className={style.root}>

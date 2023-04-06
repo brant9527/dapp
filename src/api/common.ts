@@ -6,3 +6,13 @@ export const getNoticeList = () => {
 export const searchPair = (data: any) => {
   return axios.post("/api/common/searchPair", data);
 };
+export const getArticleList = () => {
+  return axios.post("/api/common/getArticleList");
+};
+export const questionAnswer = (data:any) => {
+  return axios.post("/api/user/base/questionAnswer",data);
+};
+export const getHelpList = (data:any) => {
+  return axios.post("/api/common/getHelpList",data);
+};
+

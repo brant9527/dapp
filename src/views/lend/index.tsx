@@ -59,7 +59,7 @@ function lend() {
     };
     const { data, code } = await applyLoan(params);
     if (code == 0) {
-      Toast.notice(t("common.upload-tip"), { duration: 3000 });
+      Toast.notice(t("common.upload-tip"), {  });
       localStorage.setItem("lend-amount", "");
 
       nav("/lendList");

@@ -21,6 +21,8 @@
               height: 36px;
               margin-bottom: 34px;
               font-weight: bold;
+              @include font_color("fontColor1");
+
             }
             &_bottom {
               font-size: 38px;
@@ -35,6 +37,8 @@
             font-weight: bold;
             height: 44px;
             text-align: right;
+            @include font_color("fontColor1");
+
           }
           .coin-usdt {
             font-size: 38px;

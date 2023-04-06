@@ -15,13 +15,13 @@ interface loginInt {
 const useStore = create((set, get) => ({
   loginState: false,
   themes: "light",
-  language: "hk",
+  language: "",
   changeThemes: () =>
     set((state: any) => ({
       themes: state.themes === "light" ? "dark" : "light",
     })),
   changeLanguage: () =>
-    set((state: any) => ({ language: state.language === "hk" ? "hk" : "en" })),
+    set((state: any) => ({ language: state.language === "zh-TW" ? "zh-TW" : "en" })),
   changeLoginState: () =>
     set((state: any) => ({
       loginState: (state.loginState = !state.loginState),

@@ -35,6 +35,8 @@
           // height: 120px;
           font-size: 44px;
           text-align: center;
+        @include font_color("fontColor1");
+
         }
         &.align-left {
           input {

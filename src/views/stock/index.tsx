@@ -86,6 +86,9 @@ function Stock() {
   const [headInfo, setHeadInfo] = useState<any>();
   const [tabVal, setTabVal] = useState<any>(list[0].type);
   const [calcType, setCalcType] = useState(1);
+  const priceRef = useRef<any>(null);
+  const accountRef = useRef<any>(null);
+  const usdtRef = useRef<any>(null);
   const nav = useNavigate();
 
   const onChangeType = useCallback((type: string) => {
@@ -135,7 +138,7 @@ function Stock() {
       pageNo: 1,
       pageSize: 100,
       status: 1,
-      tradeType
+      tradeType,
     });
     console.log(data);
     setEntrustList(data.list);
@@ -157,6 +160,7 @@ function Stock() {
   const onInputPrice = useCallback((val: any) => {
     setPercent(-1);
     setCoinPrice(val);
+    priceRef.current.setVal(val);
   }, []);
   const onInputAccount = useCallback(
     (val: any) => {
@@ -174,12 +178,14 @@ function Stock() {
 
       setUseUsdt(usdtVal);
       setCoinAccount(val);
+      usdtRef?.current.setVal(usdtVal);
     },
     [coinPrice, headInfo, calcType]
   );
 
   const onSlideChange = useCallback(
     (val: any) => {
+      console.log(val);
       setPercent(val);
 
       if (val > 0) {
@@ -192,11 +198,16 @@ function Stock() {
             accMul(val, balanceAssets?.availableUsdtBalance),
             2
           );
-          console.log("设置全部约", tempUsdt);
-          setUseUsdt(tempUsdt);
-          setCoinAccount(
-            toFixed(accDiv(tempUsdt, coinPrice || headInfo?.close), 2)
+          const tempAccount = toFixed(
+            accDiv(tempUsdt, coinPrice || headInfo?.close),
+            2
           );
+          console.log("设置全部约", tempUsdt, tempAccount);
+
+          setUseUsdt(tempUsdt);
+          setCoinAccount(tempAccount);
+          usdtRef?.current.setVal(tempUsdt);
+          accountRef?.current.setVal(tempAccount);
         } else {
           if (calcType == 2) {
             setCalcType(1);
@@ -206,11 +217,15 @@ function Stock() {
             accMul(val, balanceAssets?.availableAssetBalance),
             2
           );
+          const tempUseUsdt = toFixed(
+            accMul(tempAssetsBalance, coinPrice || headInfo?.close),
+            2
+          );
           console.log("设置可用数量", tempAssetsBalance);
           setCoinAccount(tempAssetsBalance);
-          setUseUsdt(
-            toFixed(accMul(tempAssetsBalance, coinPrice || headInfo?.close), 2)
-          );
+          setUseUsdt(tempUseUsdt);
+          usdtRef?.current.setVal(tempUseUsdt);
+          accountRef?.current.setVal(tempAssetsBalance);
         }
       } else {
         setUseUsdt("");
@@ -236,6 +251,8 @@ function Stock() {
       setCoinAccount(accountTemp);
 
       setUseUsdt(val);
+
+      accountRef?.current.setVal(accountTemp);
     },
     [coinPrice, headInfo, calcType]
   );
@@ -262,6 +279,9 @@ function Stock() {
       setPercent(-1);
       setCoinAccount("");
       setCoinPrice("");
+      setUseUsdt("");
+      usdtRef?.current.setVal("");
+      accountRef?.current.setVal("");
     }
   }, []);
   const navHandle = (path: string) => {
@@ -284,11 +304,16 @@ function Stock() {
       calcType,
       side: type,
       symbol,
-      tradeType
+      tradeType,
     });
     if (code == 0) {
       getData();
       getBalance();
+      setPercent(-1);
+      setCoinAccount("");
+      setUseUsdt("");
+      usdtRef?.current.setVal("");
+      accountRef?.current.setVal("");
       Toast.notice(t("common.success"), { duration: 2000 });
     }
   };
@@ -348,6 +373,7 @@ function Stock() {
               <div className="input-price">
                 {/* 市场价格 */}
                 <CusInput
+                  ref={priceRef}
                   placeholder={
                     transType === "market"
                       ? headInfo?.close
@@ -361,6 +387,7 @@ function Stock() {
               </div>
               <div className="input-account">
                 <CusInput
+                  ref={accountRef}
                   placeholder={`${t("common.count")}(${coin})`}
                   onInput={onInputAccount}
                   defaultVal={coinAccount}
@@ -371,6 +398,7 @@ function Stock() {
               </div>
               <div className="input-usdt">
                 <CusInput
+                  ref={usdtRef}
                   onInput={onInputUsdt}
                   defaultVal={useUsdt}
                   isBtn={false}

@@ -1,0 +1,54 @@
+.root {
+    :global {
+        .question-wrap {
+            position: relative;
+            overflow: hidden;
+            @include font_color("fontColor1");
+
+            // padding: 50px 46px;
+            .nav-title {
+                text-align: center;
+                font-size: 50px;
+                @include font_color("fontColor2");
+            }
+            .question-title {
+                font-size: 50px;
+                @include font_color("fontColor2");
+            }
+
+            .question-content {
+                @include background_color("bgColor1");
+                height: calc(100vh - 150px);
+                overflow: auto;
+                padding: 0 60px 0;
+                border-radius: 50px 50px 0 0;
+                .tip {
+                    font-size: 44px;
+                    @include font_color("fontColor1");
+                    text-indent: 2em;
+                }
+                .answer-list {
+                    font-size: 42px;
+                    input {
+                        zoom: 3;
+                        font-size: 42px;
+                        color: $down;
+                    }
+                    label {
+                        margin: 0 10px;
+                    }
+                }
+            }
+            .btn {
+                height: 130px;
+                line-height: 130px;
+                font-size: 50px;
+                color: $fontWhite;
+                background-color: $blue;
+                text-align: center;
+                border-radius: 20px;
+                margin: 120px 60px;
+            }
+        }
+    }
+}

@@ -15,6 +15,7 @@
     "menu-yxbd": "郵箱綁定",
     "menu-xyf": "信用分評定",
     "menu-bdhb": "本地貨幣",
+    "menu-bzzx": "幫助中心",
     "menu-yy": "語言",
     "btns": {
       "jy": "交易",
@@ -23,6 +24,7 @@
       "xb": "新幣",
       "mnjy": "模擬交易",
       "jd": "借貸",
+      "c2c": "c2c",
       "yq": "好友邀請",
       "us": "關於我們"
     },
@@ -146,7 +148,9 @@
     "start-time": "開始時間",
     "end-time": "結束時間",
     "status": "狀態",
-    "params-check": "請輸入價格或數量"
+    "params-check": "請輸入價格或數量",
+    "record": "記錄",
+    "help": "幫助中心"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -172,7 +176,11 @@
     "fee": "手續費",
     "amount": "總量",
     "apply": "申购",
-    "rest": "剩餘可投"
+    "rest": "剩餘可投",
+    "total-income": "總收入",
+    "apply-amount": "申購數量",
+    "doing": "進行中",
+    "over": "已結束"
   },
   "loan": {
     "loan": "貸幣"
@@ -194,7 +202,8 @@
     "risk-tip": "當TVL到達80%，或BTC/USDT價格到達0，您的抵押物將被 出售用於還債",
     "protocol": "我已阅读并同意coin服务协议",
     "pledge-amount": "質押金額",
-    "lend-amount": "借幣金額"
+    "lend-amount": "借幣金額",
+    "btn.repayment": "還款"
   },
   "entrust": {
     "cancel-all": "撤銷全部",
@@ -270,7 +279,14 @@
     "deal-part": "部分成交",
     "amount": "總量",
     "fee": "手續費",
-    "deal-amount": "成交數量"
+    "deal-amount": "成交數量",
+    "coin-detail": "幣種詳情",
+    "rank": "排名",
+    "market": "市值",
+    "circulationCnt": "流通數量",
+    "publishCnt": "總量",
+    "publishTime": "發行日期",
+    "introduce": "簡介"
   },
   "invite": {
     "title": "邀請返傭",
@@ -282,5 +298,17 @@
     "reward2": "每個自然日（00:00:00-23:59:59 UTC+8）被邀請人在COIN完成註冊且完成首次入金交易后，邀請人可獲得：",
     "reward3": "1.邀請2名、4名、6名、8名、10名好友。您將各獲得1張 5USDT新合約體驗金，每人每日最多獲得5張",
     "reward4": "2.邀請者可獲得手續費30%的返傭比例"
+  },
+  "question": {
+    "title": "問卷調查",
+    "error": "請選擇完所有題目"
+  },
+  "credit": {
+    "title": "信用積分",
+    "current": "當前信用",
+    "good": "良好",
+    "very-good": "優秀",
+    "normol": "一般",
+    "bad": "一般"
   }
 }

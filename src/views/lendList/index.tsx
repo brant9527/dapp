@@ -51,7 +51,7 @@ function Ai() {
     setProductList(product.data);
   };
 
-  // Toast.notice(t("common.noMore"), { duration: 3000 });
+  // Toast.notice(t("common.noMore"), {  });
 
   function title() {
     return <div className="ai-title">{t("lend.lend")}</div>;

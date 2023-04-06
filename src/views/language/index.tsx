@@ -35,7 +35,7 @@ function App() {
     },
     {
       title: t("lg.hk"),
-      lgType: "hk",
+      lgType: "zh-TW",
     },
   ];
   return (

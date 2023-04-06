@@ -138,6 +138,7 @@
                         .coin-cnc-logo {
                             width: 70px;
                             height: 70px;
+                            border-radius: 50%;
                             margin-right: 20px;
                             transform: translateY(-15%);
                         }
@@ -147,6 +148,8 @@
                                 height: 36px;
                                 margin-bottom: 34px;
                                 font-weight: bold;
+                            @include font_color("fontColor1");
+
                             }
                             &_bottom {
                                 font-size: 38px;
@@ -162,6 +165,8 @@
                             }
                             &_bottom {
                                 font-size: 38px;
+                                @include font_color("fontColor1");
+
                             }
                         }
                     }
@@ -171,6 +176,8 @@
                             font-size: 48px;
                             font-weight: bold;
                             height: 44px;
+                            @include font_color("fontColor1");
+
                         }
                         .coin-cnc-frozen {
                             @include font_color("fontColor2");
@@ -179,6 +186,8 @@
                         }
                         .coin-cnc-usdt {
                             font-size: 38px;
+                            @include font_color("fontColor1");
+
                         }
                     }
                 }

@@ -42,6 +42,13 @@ import Withdrawal from "./views/withdrawal";
 import Search from "./views/search";
 import KLine from "./views/kLine";
 import LendOrderList from "./views/lendOrderList";
+import AiOrderList from "./views/aiOrderList";
+import Question from "./views/question";
+import CreditCore from "./views/creditCore";
+import DrawalAndRecharge from "./views/drawalAndRecharge";
+import Help from "./views/help";
+import HelpNext from "./views/helpNext";
+import HelpDetail from "./views/helpDetail";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -96,7 +103,14 @@ function App() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/noticeDetail" element={<NoticeDetail />} />
         <Route path="/invite" element={<Invite />} />
-
+        <Route path="/aiOrderList" element={<AiOrderList />} />
+        <Route path="/question" element={<Question />} />
+        <Route path="/creditCore" element={<CreditCore />} />
+        <Route path="/drawalAndRecharge" element={<DrawalAndRecharge />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/helpNext" element={<HelpNext />} />
+        <Route path="/helpDetail" element={<HelpDetail />} />
+        
         <Route path="*" element={<Not />} />
       </Routes>
     </div>

@@ -18,7 +18,7 @@ import Toast from "@/components/Toast";
 import { getHighGradeCertified, getUserInfo } from "@/api/userInfo";
 import { getFundsAssetBalance } from "@/api/trans";
 import { toFixed } from "@/utils/public";
-
+import recordPng from "@/assets/record.png";
 function identity() {
   const { t } = useTranslation();
   const ref = useRef<any>(null);
@@ -41,7 +41,7 @@ function identity() {
 
     const data: any = await getHighGradeCertified(params);
     if (data.code == 0) {
-      Toast.notice(t("common.upload-tip"), { duration: 3000 });
+      Toast.notice(t("common.upload-tip"), {});
       nav("/auth");
     }
   };
@@ -60,6 +60,17 @@ function identity() {
 
   function title() {
     return <div className="withdrawal-title">{t("withdrawal.withdrawal")}</div>;
+  }
+  function right() {
+    return (
+      <img
+        className="record"
+        src={recordPng}
+        onClick={() => {
+          nav("/drawalAndRecharge");
+        }}
+      />
+    );
   }
   function paste() {
     return (
@@ -87,7 +98,7 @@ function identity() {
   return (
     <div className={style.root}>
       <div className="withdrawal-wrap">
-        <Back content={title()}></Back>
+        <Back content={title()} right={right()}></Back>
         <div className="withdrawal-content">
           <div className="withdrawal-label">{t("withdrawal.address")}</div>
           <CusInput

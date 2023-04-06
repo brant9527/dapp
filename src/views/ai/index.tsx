@@ -49,7 +49,7 @@ function Ai() {
     setProductList(product.data);
   };
 
-  // Toast.notice(t("common.noMore"), { duration: 3000 });
+
 
   const navTo = (item: any) => {
     nav(
@@ -66,7 +66,12 @@ function Ai() {
       <div className="ai-wrap">
         <Back content={title()}></Back>
         <div className="ai-content">
-          <div className="ai-order-nav">
+          <div
+            className="ai-order-nav"
+            onClick={() => {
+              nav("/aiOrderList");
+            }}
+          >
             <div className="order">{t("ai.orders")}</div>
             <img src={right} />
           </div>

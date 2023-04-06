@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useEffect,
   forwardRef,
+  useImperativeHandle,
 } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ import arrow from "@/assets/xiala.png";
 import { useTranslation } from "react-i18next";
 import { accAdd, accSub, accMul, accDiv } from "@/utils/public";
 
-const CusInput = forwardRef((props: any, ref:any) => {
+const CusInput = forwardRef((props: any, ref: any) => {
   const {
     onInput,
     placeholder,
@@ -28,13 +29,16 @@ const CusInput = forwardRef((props: any, ref:any) => {
     prepend,
     inputType = "text",
   } = props;
-  const [val, setVal] = useState<any>();
+  const [val, setVal] = useState<any>(defaultVal);
 
   const { t } = useTranslation();
   const nav = useNavigate();
   useEffect(() => {
-    setVal(defaultVal);
+    // setVal(defaultVal);
   }, []);
+  useImperativeHandle(ref, () => {
+    return { setVal };
+  });
   const addVal = () => {
     setVal(accAdd(val || 0, 1));
     onInput(val);
@@ -50,6 +54,7 @@ const CusInput = forwardRef((props: any, ref:any) => {
     setVal(valTemp);
     onInput(valTemp);
   };
+
   return (
     <div className={style.root}>
       <div className="cus-input">

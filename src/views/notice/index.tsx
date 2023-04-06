@@ -21,7 +21,7 @@ function Message() {
   const { t } = useTranslation();
 
   const nav = useNavigate();
-  const [hasMore, setHashMore] = useState(false);
+  const [hasMore, setHashMore] = useState(true);
 
   const [assetsList, setAssetsList] = useState<any>([]);
 
@@ -42,7 +42,7 @@ function Message() {
 
     // if (isEnd) {
     //   setHashMore(false);
-    //   Toast.notice(t("common.noMore"), { duration: 3000 });
+    //   Toast.notice(t("common.noMore"), {  });
     // }
   };
   const onLoadMore = () => {

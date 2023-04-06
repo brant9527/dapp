@@ -66,7 +66,40 @@
                 .deal-bottom {
                     display: flex;
                     flex-wrap: wrap;
+                }
+            }
+            .coin-info {
+                padding: 40px;
 
+                .item-info {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 44px;
+                    padding: 30px 0;
+                    .left {
+                        @include font_color("fontColor2");
+                        &.part-logo {
+                            display: flex;
+                            font-size: 44px;
+                            @include font_color("fontColor1");
+
+                            img {
+                                width: 70px;
+                                height: 70px;
+                                border-radius: 50%;
+                                margin-right: 20px;
+                            }
+                            span {
+                            }
+                        }
+                    }
+                    .right {
+                        @include font_color("fontColor1");
+                    }
+                    .introduce {
+                        @include font_color("fontColor1");
+                        font-size: 36px;
+                    }
                 }
             }
         }

@@ -1,0 +1,49 @@
+.root {
+    :global {
+        .credit-wrap {
+            position: relative;
+            overflow: hidden;
+            @include background_color("bgColor1");
+            // padding: 50px 46px;
+            background-image: url("@/assets/xybg.png");
+            background-repeat: no-repeat;
+            background-origin: left top;
+            .credit-title {
+                text-align: center;
+                font-size: 44px;
+                @include font_color("fontColor1");
+            }
+            .credit-content {
+                height: calc(100vh - 150px);
+                overflow: auto;
+                margin: 100px 44px 0;
+                text-align: center;
+                // width: 100%;
+                .core {
+                    width: 565px;
+                    height: 565px;
+                    background-image: url("@/assets/xyq.png");
+                    background-repeat: no-repeat;
+                    background-origin: left top;
+                    margin: auto;
+                    font-size: 130px;
+                }
+                .tip {
+                    font-size: 36px;
+                    padding-top: 190px;
+                    @include font_color("fontColor2");
+                }
+                .status {
+                    font-size: 42px;
+                    color: $ai_blue;
+                    padding-top: 50px;
+                }
+                .shadow-img {
+                    width: 628px;
+                    height: 51px;
+                    margin: 50px auto 0;
+                }
+            }
+        }
+    }
+}

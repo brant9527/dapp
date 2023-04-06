@@ -6,17 +6,17 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 //引入需要实现国际化的简体、繁体、英文三种数据的json文件
 
-import hk from "./src/locales/zh-HK.json";
+import zhTw from "./src/locales/zh-HK.json";
 import en from "./src/locales/en-us.json";
 const resources = {
-  hk: {
-    translation: hk,
+  'zh-TW': {
+    translation: zhTw,
   },
   en: {
     translation: en,
   },
 };
-const lg = window.localStorage.getItem("language") || "hk";
+const lg = "en";
 
 i18n
   .use(LanguageDetector) //嗅探当前浏览器语言 zh-CN

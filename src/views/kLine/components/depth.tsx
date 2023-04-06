@@ -18,6 +18,7 @@ import PriceBar from "@/components/PriceBar";
 import { fixPrice, formatTime } from "@/utils/public";
 import Tabs from "@/components/Tabs";
 import Io from "@/utils/socket";
+import { getCoinDetail } from "@/api/trade";
 
 function Depth() {
   const { t } = useTranslation();
@@ -30,6 +31,10 @@ function Depth() {
       title: t("trade.new-deal"),
       type: "deal",
     },
+    {
+      title: t("trade.coin-detail"),
+      type: "coin",
+    },
   ];
   const nav = useNavigate();
   const [search, setsearch] = useSearchParams();
@@ -40,9 +45,11 @@ function Depth() {
   const [orderList, setOrderList] = useState<any>([]);
   const [coin, setCoin] = useState(symbol);
   const [tabVal, setTabVal] = useState(tabs[0].type);
+  const [coinInfo, setCoinInfo] = useState<any>({});
 
   useEffect(() => {
     getData();
+    onGetCoinDetail();
     let timer: any;
     const getOrder = async () => {
       const data: any = await Io.getCommonRequest("getLastDealRecordList", {
@@ -61,6 +68,13 @@ function Depth() {
       Io.cfwsUnsubscribe("depth." + symbol);
     };
   }, []);
+  const onGetCoinDetail = async () => {
+    const { data } = await getCoinDetail({
+      coin: symbol.replace("USDT", ""),
+    });
+
+    setCoinInfo(data);
+  };
 
   const getData = async () => {
     Io.subscribeSymbolDepth(symbol, (data: any) => {
@@ -73,13 +87,13 @@ function Depth() {
     setTabVal(val);
   };
 
-  // Toast.notice(t("common.noMore"), { duration: 3000 });
+  // Toast.notice(t("common.noMore"), {  });
 
   return (
     <div className={style.root}>
       <div className="depth-content">
         <Tabs tabs={tabs} onChange={onChange}></Tabs>
-        {tabVal === "order" ? (
+        {tabVal === "order" && (
           <div className="depth-bar">
             <div className=" depth-top">
               <div className="depth-part left">{t("common.buy")}</div>
@@ -99,7 +113,8 @@ function Depth() {
               </div>
             </div>
           </div>
-        ) : (
+        )}
+        {tabVal === "deal" && (
           <div className="deal-content">
             <div className="deal-part deal-top">
               <div className="deal-item_wrap">
@@ -126,6 +141,64 @@ function Depth() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+        {tabVal === "coin" && (
+          <div className="coin-info">
+            <div className="item-info">
+              <div className="left part-logo">
+                <img src={coinInfo.logo} />
+                <span>{coinInfo.coin}</span>
+              </div>
+              <div className="right"></div>
+            </div>
+            <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.rank")}</span>
+              </div>
+              <div className="right">No. {coinInfo.rank}</div>
+            </div>
+            <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.market")}</span>
+              </div>
+              <div className="right"> {coinInfo.marketValue}</div>
+            </div>
+            <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.circulationCnt")}</span>
+              </div>
+              <div className="right"> {coinInfo.circulationCnt}</div>
+            </div>
+            <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.publishCnt")}</span>
+              </div>
+              <div className="right"> {coinInfo.publishCnt}</div>
+            </div>
+            <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.publishTime")}</span>
+              </div>
+              <div className="right"> {coinInfo.publishTime}</div>
+            </div>
+            {/* <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.publishTime")}</span>
+              </div>
+              <div className="right"> {coinInfo.website}</div>
+            </div> */}
+            <div className="item-info">
+              <div className="left ">
+                <span>{t("trade.introduce")}</span>
+              </div>
+            </div>
+            <div className="item-info">
+              <div
+                className="introduce"
+                dangerouslySetInnerHTML={{ __html: coinInfo.content }}
+              ></div>
             </div>
           </div>
         )}
