@@ -53,6 +53,7 @@ import {
   getUserPosition,
 } from "@/api/contract";
 import CountDialog from "./CountDialog";
+import CloseDialog from "./CloseDialog";
 
 function Contract() {
   const { t } = useTranslation();
@@ -137,6 +138,7 @@ function Contract() {
   const lossRef = useRef<any>(null);
   const modelRef = useRef<any>(null);
   const countRef = useRef<any>(null);
+  const closeRef = useRef<any>(null);
 
   const nav = useNavigate();
 
@@ -211,8 +213,8 @@ function Contract() {
     setBalanceAssets(data);
   }, []);
   const onGetUserPosition = useCallback(async () => {
-    const { data } = await getUserPosition({ tradeType });
-    getUserPosition(data.detailList);
+    const { data } = await getUserPosition();
+    setAssetsList(data);
   }, []);
 
   const onInputPrice = useCallback((val: any) => {
@@ -453,6 +455,21 @@ function Contract() {
         });
     }
   };
+  /**
+   *  
+   * @param id algoPrice (number, optional): 委托价格，限价时传 ,
+              algoType (string, optional): 委托类型，limit-限价，market-市价 ,
+              count (number, optional): 平仓数量 ,
+              id (integer, optional): 仓位id
+   */
+  
+  const onCloseOrderModel = async (item: any) => {
+    closeRef.current.open(item);
+  };
+  const onSetProfitLossModel = async (item: any) => {
+    closeRef.current.open(item);
+  };
+  
   const maxCount = useMemo(() => {
     return toFixed(
       accDiv(
@@ -751,13 +768,19 @@ function Contract() {
                 onCancel={onCancel}
               ></Entrust>
             ) : (
-              <EntrustPosition list={entrustList}></EntrustPosition>
+              <EntrustPosition
+                list={assetsList}
+                onClose={onCloseOrderModel}
+                onSetProfitLoss={onSetProfitLossModel}
+              ></EntrustPosition>
             )}
           </div>
         </div>
       </div>
       <Model ref={modelRef} title={t("contract.adjust-lever")}>
         <div className="slidenum-wrap">
+          <div className="slidenum-lever">{lever}x</div>
+
           <SlideNum onChange={onChangeSlideNum} defaultVal={lever}></SlideNum>
           <div
             className="slidenum-btn"
@@ -769,6 +792,25 @@ function Contract() {
           </div>
         </div>
       </Model>
+      {/* <Model ref={closeRef} title={t("contract.close")}>
+        <div className="slidenum-wrap">
+          <div className="slidenum-lever">
+            {t("common.count")}
+            {lever}
+          </div>
+
+          <SlideNum onChange={onChangeSlideNum} defaultVal={lever}></SlideNum>
+          <div
+            className="slidenum-btn"
+            onClick={() => {
+              closeRef.current.close();
+            }}
+          >
+            {t("common.sure")}
+          </div>
+        </div>
+      </Model> */}
+      <CloseDialog ref={closeRef}></CloseDialog>
       <CountDialog ref={countRef}></CountDialog>
     </div>
   );

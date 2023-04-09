@@ -17,17 +17,21 @@ const ConfirmDialog = forwardRef(
     return (
       <div className={style.root}>
         {showDialog && (
-          <div className="comfirm-wrap">
-            {title && <div className="title">{title}</div>}
-            <span
-              className="cross"
-              onClick={() => {
-                setShowDialog(false);
-              }}
-            ></span>
+          <>
+            <div className="mask"></div>
 
-            <div className="content">{children}</div>
-          </div>
+            <div className="comfirm-wrap">
+              {title && <div className="title">{title}</div>}
+              <span
+                className="cross"
+                onClick={() => {
+                  setShowDialog(false);
+                }}
+              ></span>
+
+              <div className="content">{children}</div>
+            </div>
+          </>
         )}
       </div>
     );

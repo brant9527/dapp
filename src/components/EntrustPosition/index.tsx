@@ -13,7 +13,14 @@ const state = {
 
 function Entrust(props: any) {
   const { t } = useTranslation();
-  const { children, partLeft, list = [], onCancel, tradeType } = props;
+  const {
+    children,
+    partLeft,
+    list = [],
+    onClose,
+    onSetProfitLoss,
+    tradeType,
+  } = props;
   function getStatus(item: any) {
     switch (item.direction) {
       case 1:
@@ -56,7 +63,7 @@ function Entrust(props: any) {
                   <div
                     className="btn-cancel"
                     onClick={() => {
-                      onCancel({ type: "all" });
+                      onClose({ type: "all" });
                     }}
                   >
                     {t("contract.position.close")}
@@ -87,34 +94,104 @@ function Entrust(props: any) {
                   {/* <div className="time">
                       {formatTime(item.createTime, "YYYY-MM-DD mm:hh:ss")}
                     </div> */}
-                  <div className="position">{t("contract.position.crossed")}</div>
+                  <div className="position">
+                    {t("contract.position.crossed")}
+                  </div>
                   <div className="lever">{item.lever}x</div>
                 </div>
                 <div className="second">
-                  <div className="symbol">{`${
-                    item.symbol?.split("USDT")[0]
-                  }/USDT`}</div>
-                  <div className="time">
-                    {formatTime(item.createTime, "YYYY-MM-DD mm:hh:ss")}
+                  <div className="info-part">
+                    <div className="info-top">{t("contract.notPL")}(USDT)</div>
+                    <div
+                      className={`info-bottom percent-reward ${
+                        item.unrealizedPnl > 0 ? "s" : "f"
+                      }`}
+                    >
+                      {toFixed(item.unrealizedPnl)}
+                    </div>
+                  </div>
+                  <div className="info-part text-right">
+                    <div className="info-top">{t("contract.reward")}</div>
+                    <div
+                      className={`info-bottom percent-reward ${
+                        item.unrealizedPnl > 0 ? "s" : "f"
+                      }`}
+                    >
+                      {toFixed(item.pnlRatio)}%
+                    </div>
                   </div>
                 </div>
                 <div className="count">
-                  <span>{t("common.count")}</span>{" "}
-                  {toFixed(item.realCount, 2) + " / " + toFixed(item.count, 2)}
+                  <div className="info-part">
+                    <div className="info-top">
+                      {t("contract.have-amount")}(USDT)
+                    </div>
+                    <div className="info-bottom">
+                      {toFixed(item.availPosition)}
+                    </div>
+                  </div>
+                  <div className="info-part">
+                    <div className="info-top">
+                      {t("contract.promise-money")}(USDT)
+                    </div>
+                    <div className="info-bottom">{toFixed(item.margin)}</div>
+                  </div>
+                  <div className="info-part text-right">
+                    <div className="info-top">
+                      {t("contract.promise-money-percent")}
+                    </div>
+                    <div
+                      className={`info-bottom ${
+                        item.marginRate > 0 ? "s" : "f"
+                      }`}
+                    >
+                      {toFixed(item.marginRate)}%
+                    </div>
+                  </div>
                 </div>
                 <div className="price">
-                  <span>{t("common.price")}</span>
-                  {fixPrice(item.algoPrice)}
+                  <div className="info-part">
+                    <div className="info-top">
+                      {t("contract.long-price")}(USDT)
+                    </div>
+                    <div className="info-bottom">
+                      {toFixed(item.avgCostPrice)}
+                    </div>
+                  </div>
+                  <div className="info-part">
+                    <div className="info-top">
+                      {t("contract.mark-price")}(USDT)
+                    </div>
+                    <div className="info-bottom">{toFixed(item.currPrice)}</div>
+                  </div>
+                  <div className="info-part text-right">
+                    <div className="info-top">
+                      {t("contract.force-close")}(USDT)
+                    </div>
+                    <div className="info-bottom">
+                      {toFixed(item.forcePrice)}
+                    </div>
+                  </div>
                 </div>
 
                 {tradeType !== "delivery" && (
-                  <div
-                    className="btn-cancel cancel-sigle"
-                    onClick={() => {
-                      onCancel({ type: "single", id: item.id });
-                    }}
-                  >
-                    {t("entrust.cancel")}
+                  <div className="btn-part">
+                    <div
+                      className="btn-option "
+                      onClick={() => {
+                        onSetProfitLoss({ item: item });
+                      }}
+                    >
+                      {t("contract.profit-loss")}
+                    </div>
+                    <div
+                      className="btn-option "
+                      onClick={() => {
+                        onClose({ type: "single", item });
+                      }}
+                    >
+                      {t("contract.position.close")}
+                    </div>
                   </div>
                 )}
               </div>

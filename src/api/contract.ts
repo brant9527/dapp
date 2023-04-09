@@ -22,6 +22,7 @@ export const setStopProfitOrLoss = (data: any) => {
 export const getDeliveryPeriodList = () => {
   return axios.post("/api/delivery/trade/getDeliveryPeriodList");
 };
-export const getUserPosition = (data: any) => {
-  return axios.post("/api/user/position/getUserPosition", data);
+export const getUserPosition = () => {
+  return axios.post("/api/user/position/getUserPosition");
 };
+

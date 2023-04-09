@@ -274,6 +274,12 @@
     }
     .slidenum-wrap {
       padding: 40px 0;
+      .slidenum-lever{
+        @include font_color('fontColor1');
+        font-size: 50px;
+        text-align: center;
+      }
+
       .slidenum-btn {
         margin: 30px auto 0;
         width: 1036px;

@@ -38,7 +38,8 @@
     "not-certified": "未認證",
     "current-rate": "當前費率",
     "current-target": "升級還需交易現貨",
-    "user-info": "賬戶信息"
+    "user-info": "賬戶信息",
+    "desc": "聯繫我了解您的VIP權益"
   },
   "quota": {
     "coins": {
@@ -334,15 +335,21 @@
       "fixed": "逐倉",
       "crossed": "全倉",
       "close": "平倉"
-
     },
     "adjust-lever": "調整槓桿",
     "promise-money": "保证金",
     "delivery-time": "交割時間",
-   
+
     "buy": "買",
     "sell": "賣",
     "swap": "永續",
-    "delivery": "交割"
+    "delivery": "交割",
+    "notPL": "未實現盈虧",
+    "reward": "回報率",
+    "have-amount": "持倉數量",
+    "promise-money-percent": "保證金率",
+    "long-price": "開倉價格",
+    "mark-price": "標記價格",
+    "force-close": "強平價格"
   }
 }

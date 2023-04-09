@@ -30,6 +30,8 @@ import { getUnReadMessageCnt, getBannerList } from "@/api/home";
 import { getNoticeList } from "@/api/common";
 import { accSub } from "@/utils/public";
 import Article from "./Components/Article";
+import { getUserInfo } from "@/api/userInfo";
+
 function App() {
   let themes = window.localStorage.getItem("themes") || "light";
 
@@ -44,7 +46,7 @@ function App() {
   const [downList, setDownList] = useState<Array<any>>([]);
   const [newPairList, setNewPairList] = useState<Array<any>>([]);
   const [optional, setOptional] = useState<Array<any>>([]);
-
+  const [userInfo, setUserInfo] = useState<any>({});
   const { t } = useTranslation();
   console.log("home页刷新");
   const onChangeTheme = useCallback(async () => {
@@ -61,12 +63,19 @@ function App() {
     getMsgUnRead();
     getNoticeListHandle();
     getData();
+    onGetUserInfo();
   }, []);
   useEffect(() => {
     subData();
     return () => cancelSubData();
     console.log(hotList, recommendList, raiseList, downList, newPairList);
   }, [hotList, recommendList, raiseList, downList, newPairList, optional]);
+  const onGetUserInfo = async () => {
+    const { data, code } = await getUserInfo();
+    if (code === 0) {
+      setUserInfo(data);
+    }
+  };
 
   const getData = async () => {
     const data: any = await socket.getMarketList();
@@ -105,7 +114,6 @@ function App() {
     // console.log("raiseListTemp=>", raiseListTemp);
     // console.log("downListTemp=>", downListTemp);
     // console.log("newPairListTemp=>", newPairListTemp);
-
 
     setHotList(hotListTemp);
     setRecommendList(recommendListTemp);
@@ -301,12 +309,17 @@ function App() {
             <img src={chat} className="chat" />
           </div>
         </div>
+
         <div className="home-banner">
           <Banner bannerList={bannerList}></Banner>
         </div>
-        <div className="home-msg" onClick={()=>{
-          navigate('/notice')
-        }}>
+
+        <div
+          className="home-msg"
+          onClick={() => {
+            navigate("/notice");
+          }}
+        >
           <div className="msg">
             <img src={msgNotify} alt="" />
           </div>
@@ -321,6 +334,13 @@ function App() {
               </div>
             );
           })}
+        </div>
+        <div className="vip">
+          <div className="head"></div>
+          <div className="center">
+            <div className="vip-name">{userInfo.fullName}</div>
+            <div className="vip-desc">{t("home.vip-desc")}</div>
+          </div>
         </div>
       </div>
       <HomePriceMid hotList={recommendList} />

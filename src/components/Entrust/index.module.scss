@@ -42,6 +42,16 @@
             &.f {
               color: $down;
             }
+            .circle {
+              width: 70px;
+              height: 70px;
+              line-height: 70px;
+              border: 10px solid $boder;
+              border-radius: 50%;
+              text-align: center;
+              font-size: 30px;
+              margin: 10px auto 0;
+            }
           }
           .right {
             flex: 1;
@@ -52,7 +62,6 @@
               .symbol {
                 font-size: 48px;
                 @include font_color("fontColor1");
-
               }
               .time {
                 font-size: 38px;

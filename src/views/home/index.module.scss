@@ -104,7 +104,10 @@
           width: 900px;
           overflow: hidden;
           line-height: 73px;
+          white-space: nowrap;
+          height: 73px;
           text-overflow: ellipsis;
+
           @include font_color("fontColor1");
         }
       }
@@ -129,6 +132,14 @@
             @include font_color("fontColor1");
           }
         }
+      }
+      .vip {
+        width: 1046px;
+        height: 231px;
+        background-image: url("@/assets/kf.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0 auto;
       }
     }
 

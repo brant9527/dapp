@@ -3,18 +3,7 @@
     .position-wrap {
       position: relative;
       margin-top: 30px;
-      .btn-cancel {
-        height: 70px;
-        line-height: 70px;
-        border-radius: 10px;
-        min-width: 100px;
-        padding: 0 34px;
-        font-size: 34px;
-        text-align: center;
 
-        @include background_color("bgColor2");
-        @include font_color("fontColor1");
-      }
       .position-top {
         display: flex;
         justify-content: space-between;
@@ -30,19 +19,39 @@
         &_item {
           position: relative;
           padding: 46px 0;
+          &:not(:last-child){
+            @include border('bottom')
+          }
+          .info-part {
+            flex: 1;
+            font-size: 32px;
+
+            &.text-right {
+              text-align: right;
+            }
+            .info-top {
+              @include font_color("fontColor2");
+            }
+            .info-bottom {
+              @include font_color("fontColor1");
+              &.percent-reward {
+                font-size: 56px;
+              }
+            }
+          }
           .s {
-            color: $up;
+            color: $up !important;
           }
           .f {
-            color: $down;
+            color: $down !important;
           }
           .top {
             font-size: 38px;
-
             line-height: 60px;
             display: flex;
             align-items: center;
             @include font_color("fontColor1");
+            padding-bottom: 15px;
 
             .b-s {
               font-size: 30px;
@@ -81,37 +90,39 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            .symbol {
-              font-size: 48px;
-              @include font_color("fontColor1");
-            }
-            .time {
-              font-size: 38px;
-              @include font_color("fontColor2");
-            }
+            padding: 15px 0;
           }
+
           .count {
-            font-size: 36px;
-            span {
-              font-size: 38px;
-              padding-right: 35px;
-              @include font_color("fontColor2");
-            }
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+
           }
           .price {
-            font-size: 36px;
-            span {
-              font-size: 38px;
-              padding-right: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
 
-              @include font_color("fontColor2");
-            }
           }
+          .btn-part {
+            display: flex;
+            justify-content:space-between;
+            margin-top: 20px;
+            .btn-option {
+              height: 90px;
+              line-height: 90px;
+              border-radius: 10px;
+              min-width: 200px;
+              padding: 0 34px;
+              font-size: 34px;
+              text-align: center;
 
-          .cancel-sigle {
-            position: absolute;
-            bottom: 40px;
-            right: 0;
+              @include background_color("bgColor2");
+              @include font_color("fontColor1");
+            }
           }
         }
       }

@@ -69,7 +69,7 @@ function Entrust(props: any) {
         <div className="entrust-info">
           {list.map((item: any, index: any) => {
             return (
-              <div key={index} className="entrust-info_item">
+              <div key={item.id} className="entrust-info_item">
                 <div
                   className={`left ${
                     [1, 3, 5, 7].indexOf(item.direction) > -1 ? "s" : "f"
@@ -79,6 +79,9 @@ function Entrust(props: any) {
                     ? t("entrust.limit")
                     : t("entrust.market")}
                   /{getStatus(item)}
+                  <div className="circle">
+                    0%
+                  </div>
                 </div>
                 <div className="right">
                   <div className="top">
@@ -86,14 +89,16 @@ function Entrust(props: any) {
                       item.symbol.split("USDT")[0]
                     }/USDT`}</div>
                     <div className="time">
-                      {formatTime(item.createTime, "YYYY-MM-DD mm:hh:ss")}
+                      {formatTime(
+                        new Date(item.createTime).getTime()
+                      )}
                     </div>
                   </div>
                   <div className="count">
                     <span>{t("common.count")}</span>{" "}
-                    {toFixed(item.realCount, 2) +
+                    {toFixed(item.realCount, 5) +
                       " / " +
-                      toFixed(item.count, 2)}
+                      toFixed(item.count, 5)}
                   </div>
                   <div className="price">
                     <span>{t("common.price")}</span>

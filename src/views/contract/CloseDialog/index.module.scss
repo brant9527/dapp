@@ -1,0 +1,25 @@
+.root {
+    :global {
+        .slidenum-wrap {
+            padding: 40px 0;
+            .slidenum-lever{
+              @include font_color('fontColor1');
+              font-size: 50px;
+              text-align: center;
+            }
+      
+            .slidenum-btn {
+              margin: 30px auto 0;
+              width: 1036px;
+              border-radius: 20px;
+              font-size: 50px;
+              height: 130px;
+              line-height: 130px;
+              color: $fontWhite;
+              font-weight: 600;
+              background-color: $blue;
+              text-align: center;
+            }
+          }
+    }
+}
