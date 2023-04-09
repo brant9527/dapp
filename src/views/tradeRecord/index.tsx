@@ -12,7 +12,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import CommonTab from "@/components/CommonTab";
+import Tabs from "@/components/Tabs";
 import Back from "@/components/Back";
 import RecordItem from "./Components/RecordItem";
 import Scroll from "@/components/Scroll";
@@ -134,7 +134,7 @@ function TransRecord() {
       <div className="trade-wrap">
         <Back content={title()}></Back>
         <div className="trade-nav_border">
-          <CommonTab onChange={onChange} list={navList} />
+          <Tabs onChange={onChange} tabs={navList} />
         </div>
         <div className="trade-content">
           <Scroll

@@ -57,6 +57,7 @@ function Message() {
     console.log("刷新");
   };
   const onDetail = (item: any) => {
+    window.localStorage.setItem("content", item.content);
     nav(
       `/noticeDetail?id=${item.id}&publishTime=${item.publishTime}&title=${item.title}&content=${item.content}`
     );

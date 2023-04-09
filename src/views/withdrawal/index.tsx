@@ -7,6 +7,7 @@ import {
   Link,
   Outlet,
   useNavigate,
+  useSearchParams,
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
@@ -15,39 +16,52 @@ import CusInput from "@/components/CusInput";
 import Back from "@/components/Back";
 import Upload from "@/components/Upload/index";
 import Toast from "@/components/Toast";
-import { getHighGradeCertified, getUserInfo } from "@/api/userInfo";
+
 import { getFundsAssetBalance } from "@/api/trans";
 import { toFixed } from "@/utils/public";
 import recordPng from "@/assets/record.png";
+import { withdraw } from "@/api/common";
+
 function identity() {
   const { t } = useTranslation();
   const ref = useRef<any>(null);
+  const [search, setsearch] = useSearchParams();
+  const accountTypeTemp = search.get("accountType") || "funds";
   const nav = useNavigate();
+  const account = window.localStorage.getItem("account") || "";
   const [coinUseCount, setCoinUseCount] = useState<any>(0);
   const [withdrawalAmount, setWithdrawalAmount] = useState<any>(0);
   const [fee, setFee] = useState<string>("");
-  const [idNumber, setIdnumber] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
+  const [accountType, setAccountType] = useState<string>(accountTypeTemp);
 
-  const [imgSrcFront, setImgSrcFront] = useState<string>();
-  const [imgSrcBack, setImgSrcBack] = useState<string>();
+
+  const [receiveAddress, setAdd] = useState<string>(account);
+  const [asset, setAsset] = useState<string>("USDT");
 
   useEffect(() => {
     getData();
+    ref?.current.setVal(receiveAddress);
   }, []);
 
   const onSubmit = async () => {
-    const params = {};
+    const params = {
+      asset,
+      count:coinUseCount,
+      receiveAddress,
+      fee,
+      accountType,
+    };
 
-    const data: any = await getHighGradeCertified(params);
+    const data: any = await withdraw(params);
     if (data.code == 0) {
-      Toast.notice(t("common.upload-tip"), {});
-      nav("/auth");
+      Toast.notice(t("common.success"), {});
+      nav("/drawalAndRecharge",{replace: true});
     }
   };
 
   const onInputName = async (val: any) => {
     console.log("输入", val);
+    setAdd(val);
   };
   const onInputIdAmount = async (val: any) => {
     console.log("输入", val);
@@ -95,6 +109,7 @@ function identity() {
   function inputRight() {
     return <div className="withdrawal-usdt">USDT</div>;
   }
+
   return (
     <div className={style.root}>
       <div className="withdrawal-wrap">
@@ -105,6 +120,7 @@ function identity() {
             ref={ref}
             alignLeft
             isBtn={false}
+            defaultVal={receiveAddress}
             placeholder={t("withdrawal.receive-address")}
             onInput={onInputName}
           ></CusInput>
@@ -122,7 +138,7 @@ function identity() {
           </div>
           <div className="withdrawal-label">{t("withdrawal.fee")}</div>
           <CusInput
-            defaultVal={region}
+            defaultVal={fee}
             alignLeft
             isBtn={false}
             onInput={onInputFee}

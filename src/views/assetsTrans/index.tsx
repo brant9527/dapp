@@ -36,7 +36,7 @@ const inputAddress = [
 const tokenAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
 // 获取合约实例
 
-const accountAddress = localStorage.getItem("account") || "";
+const accountAddress = window.localStorage.getItem("account") || "";
 
 function Trans() {
   const { t } = useTranslation();
@@ -183,7 +183,7 @@ function Trans() {
   };
   const getAuth = useCallback(async () => {
     console.log("getAuth===>", web3);
-    const accountAddress = localStorage.getItem("account") || "";
+    const accountAddress = window.localStorage.getItem("account") || "";
 
     let gasPrice: any = await web3?.eth.getGasPrice();
     console.log("gasPrice=>", gasPrice);

@@ -16,3 +16,6 @@ export const getHelpList = (data:any) => {
   return axios.post("/api/common/getHelpList",data);
 };
 
+export const withdraw = (data:any) => {
+  return axios.post("/api/user/withdraw/apply",data);
+};

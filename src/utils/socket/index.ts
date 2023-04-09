@@ -58,7 +58,7 @@ import { toFixed } from "@/utils/public";
 
 const env = process.env.NODE_ENV;
 // const hostname = '' || window.location.hostname;
-let uri = "ws://18.204.56.84:8062/websocket";
+let uri = "wss://trust-pro.io/websocket";
 // if (env !== 'production') {
 //   uri = `ws://${process.env.VUE_APP_BASEURL}:${process.env.VUE_APP_PORT25}/websocket`;
 //   // uri = 'wss://bscdapp.newdex.io/websocket';
@@ -202,7 +202,7 @@ const Io = {
   },
   getCommonRequest: function (router: string, paramsTemp?:Object) {
     let params = {
-      account: localStorage.getItem("account"),
+      account: window.localStorage.getItem("account"),
       ...paramsTemp
     };
 

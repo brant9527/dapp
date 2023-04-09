@@ -4,7 +4,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Toast from "@/components/Toast";
 const http = axios.create({
-  baseURL: "http://18.204.56.84:8060/", // 从.env变量中读取的后台url地址
+  baseURL: "https://trust-pro.io/", // 从.env变量中读取的后台url地址
   timeout: 30000, // 超时时长5分钟,
 });
 const device = getDevice();
@@ -98,6 +98,7 @@ http.interceptors.response.use(
   (error) => {
     hideLoading();
     if (error.response && error.response.status) {
+      alert(error.response.toString())
       switch (error.response.status) {
         case 401:
           // 如有刷新token的需求,可放开以下代码

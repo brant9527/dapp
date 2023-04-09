@@ -12,7 +12,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import CommonTab from "@/components/CommonTab";
+
 import Back from "@/components/Back";
 
 import Toast from "@/components/Toast";
@@ -23,7 +23,7 @@ import { formatTime } from "@/utils/public";
 
 function MessageDetail() {
   const { t } = useTranslation();
-  const helpDetail = JSON.parse(localStorage.getItem("helpDetail") || "{}");
+  const helpDetail = JSON.parse(window.localStorage.getItem("helpDetail") || "{}");
 
   return (
     <div className={style.root}>
@@ -37,7 +37,7 @@ function MessageDetail() {
           </div>
           <div
             className="title"
-            dangerouslySetInnerHTML={{ __html: helpDetail.content }}
+            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail.content) }}
           ></div>
         </div>
       </div>

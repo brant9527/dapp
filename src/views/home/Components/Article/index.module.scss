@@ -6,9 +6,9 @@
       padding: 40px;
       .article-item {
         position: relative;
-        padding: 80px 80px;
+        padding: 40px 40px 80px;
 
-        @include border("top");
+        @include border("bottom");
         .title {
           font-size: 44px;
           font-weight: 600;
@@ -33,10 +33,16 @@
           @include font_color("fontColor2");
         }
         .time {
-          margin:  35px 0 60px;
+          margin: 35px 0 60px;
           font-size: 36px;
           @include font_color("fontColor2");
         }
+      }
+      .acticle-title {
+        font-size: 56px;
+        font-weight: 600;
+        @include font_color("fontColor1");
+        margin-bottom: 40px;
       }
     }
   }

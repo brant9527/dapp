@@ -12,7 +12,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import CommonTab from "@/components/CommonTab";
+
 import Back from "@/components/Back";
 
 import Toast from "@/components/Toast";

@@ -24,6 +24,7 @@
           margin-left: 26px;
           .top {
             display: flex;
+            align-items: flex-end;
             .coin {
               font-size: 44px;
               @include font_color("fontColor1");

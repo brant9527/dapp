@@ -39,7 +39,7 @@ function Invite() {
     console.log(data);
     setUrl(url + data?.inviteCode);
   };
-  const account = localStorage.getItem("account") || "";
+  const account = window.localStorage.getItem("account") || "";
   function title() {
     return <div className="invite-title">{t("invite.title")}</div>;
   }

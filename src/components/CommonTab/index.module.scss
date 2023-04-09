@@ -1,6 +1,6 @@
 .root {
-  height: 150px;
-
+position: relative;
+overflow: hidden;
   :global {
     .tabs {
       position: relative;
@@ -8,33 +8,31 @@
       @include font_color("fontColor2");
       overflow: auto;
       flex-wrap: nowrap;
-      height: 150px;
+      height: 98px;
+      width: 1040px;
+      border: 1px solid $boder;
+      margin: 40px auto 0;
+      border-radius: 20px;
 
       .tab {
-        height: 150px;
-        line-height: 150px;
+        flex: 1;
+        height: 98px;
+        width: 520px;
+        line-height: 98px;
 
-        padding: 0 50px;
         text-align: center;
         font-size: 42px;
-        width: 180px;
-        flex-grow: 0;
-        flex-shrink: 0;
+
+        // flex-grow: 0;
+        // flex-shrink: 0;
+        @include font_color("fontColor2");
 
         &.active {
           font-size: 44px;
           font-weight: bold;
           @include font_color("fontColor1");
+          @include background_color("bgColor1");
         }
-      }
-      .line {
-        position: absolute;
-        bottom: 0;
-        width: 82px;
-        height: 10px;
-        background-color: $blue;
-        transform: translateX(0) translateX(-50%);
-        transition-duration: 0.3s;
       }
     }
   }

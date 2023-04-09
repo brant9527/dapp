@@ -134,6 +134,7 @@
 
     .quota {
       padding: 44px;
+      min-height: 600px;
       @include background_color("bgColor1");
     }
   }

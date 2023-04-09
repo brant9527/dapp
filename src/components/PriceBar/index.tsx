@@ -31,20 +31,20 @@ function Quotation(props: any) {
             key={index}
           >
             <div className="bar-price-count">
-              { direction === "left"  ? (
+              {direction === "left" ? (
                 <>
-
-                  <div className="price-bar_right">{item.price}</div>
                   <div className={type === "sell" ? "down" : "up"}>
                     {item.qty}
                   </div>
+                  <div className="price-bar_right">{item.price}</div>
                 </>
               ) : (
                 <>
+                  <div className="price-bar_right">{item.price}</div>
+
                   <div className={type === "sell" ? "down" : "up"}>
                     {item.qty}
                   </div>
-                  <div className="price-bar_right">{item.price}</div>
                 </>
               )}
             </div>

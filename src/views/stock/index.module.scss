@@ -46,9 +46,11 @@
             @include font_color("fontColor2");
 
             .price {
+              text-align: right;
+
             }
             .account {
-              text-align: right;
+
             }
           }
           .price-sell {

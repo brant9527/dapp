@@ -21,6 +21,7 @@ import QuotaCoin from "@/components/QuotaCoin";
 import { searchPair } from "@/api/common";
 import _ from "lodash";
 import { collectAdd, collectDelete, getCollectList } from "@/api/userInfo";
+import { toFixed } from "@/utils/public";
 
 function Search() {
   const { t } = useTranslation();
@@ -124,7 +125,7 @@ function Search() {
                               item.riseFallRate > 0 ? "up" : "down"
                             }`}
                           >
-                            {item.riseFallRate}%
+                            {toFixed(item.riseFallRate * 100, 2)}%
                           </div>
                         </div>
 
@@ -139,6 +140,7 @@ function Search() {
                             e.stopPropagation();
                           }}
                           src={item.collectStatus ? collect : noCollect}
+
                         />
                       </div>
                     </div>
@@ -155,7 +157,11 @@ function Search() {
               <div className="coins">
                 {swapList.map((item: any, cIdx) => {
                   return (
-                    <div className="coin-item" key={cIdx}>
+                    <div className="coin-item" key={cIdx}
+                    onClick={() => {
+                      nav(`/contract?symbol=${item.symbol}&tradeType=swap`);
+                    }}
+                    >
                       <div className="coin-left">
                         <img src={item.logo} className="coin-logo" />
                         <div className="coin-symbol">
@@ -170,20 +176,24 @@ function Search() {
                               item.riseFallRate > 0 ? "up" : "down"
                             }`}
                           >
-                            {item.riseFallRate}%
+                            {toFixed(item.riseFallRate * 100, 2)}%
                           </div>
                         </div>
 
                         <img
                           className="coin-collect"
-                          onClick={() => {
+                          onClick={(e) => {
                             if (item.collectStatus) {
                               onDel({ ...item, tradeType: "swap" });
                             } else {
                               onAdd({ ...item, tradeType: "swap" });
                             }
+                            e.stopPropagation();
+
                           }}
-                          src={item.collectStatus ? noCollect : noCollect}
+
+                          src={item.collectStatus ? collect : noCollect}
+
                         />
                       </div>
                     </div>
@@ -200,7 +210,10 @@ function Search() {
               <div className="coins">
                 {deliveryList.map((item: any, cIdx) => {
                   return (
-                    <div className="coin-item" key={cIdx + 1}>
+                    <div className="coin-item" key={cIdx + 1}
+                    onClick={() => {
+                      nav(`/contract?symbol=${item.symbol}&tradeType=delivery`);
+                    }}>
                       <div className="coin-left">
                         <img src={item.logo} className="coin-logo" />
                         <div className="coin-symbol">
@@ -215,20 +228,23 @@ function Search() {
                               item.riseFallRate > 0 ? "up" : "down"
                             }`}
                           >
-                            {item.riseFallRate}%
+                            {toFixed(item.riseFallRate * 100, 2)}%
                           </div>
                         </div>
 
                         <img
                           className="coin-collect"
-                          onClick={() => {
+                          onClick={(e) => {
                             if (item.collectStatus) {
                               onDel({ ...item, tradeType: "delivery" });
                             } else {
                               onAdd({ ...item, tradeType: "delivery" });
                             }
+                            e.stopPropagation();
+
                           }}
-                          src={item.collectStatus ? noCollect : noCollect}
+                          src={item.collectStatus ? collect : noCollect}
+
                         />
                       </div>
                     </div>

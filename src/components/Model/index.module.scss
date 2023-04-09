@@ -1,0 +1,54 @@
+.root {
+    :global {
+        .comfirm-wrap {
+            position: fixed;
+
+            @include background_color("bgColor2");
+            @include font_color("fontColor1");
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            z-index: 11;
+            border-radius: 40px 40px 0 0;
+            box-shadow: 0 10px 22px 0 rgb(0 0 0/ 10%);
+            padding: 120px 40px 0 40px;
+            .content {
+                min-height: 300px;
+            }
+            .cross {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                width: 100px;
+                height: 100px;
+
+                &:before,
+                &:after {
+                    content: "";
+                    width: 60%;
+                    height: 4px;
+                    background-color: $boder;
+                    position: absolute;
+                    top: 49%;
+                    left: 20%;
+                    transform: translateY(-50%) rotate(45deg);
+                }
+
+                &:after {
+                    transform: translateY(-50%) rotate(-45deg);
+                }
+            }
+            .title {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                line-height: 120px;
+                text-align: center;
+                @include font_color("fontColor1");
+                font-size: 44px;
+            }
+        }
+    }
+}

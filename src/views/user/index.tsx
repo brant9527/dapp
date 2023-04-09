@@ -40,7 +40,7 @@ function user() {
       setUserInfo(data?.data);
     }
   };
-  const account = localStorage.getItem("account") || "";
+  const account = window.localStorage.getItem("account") || "";
   function title() {
     return <div className="user-title">{t("home.user-info")}</div>;
   }
@@ -70,7 +70,7 @@ function user() {
             </div>
           </div>
           <div className="info-item">
-            <div className="left">ETH</div>
+            <div className="left">{t("common.address")}</div>
             <div className="right">
               {userInfo.ethAddress}
               <img

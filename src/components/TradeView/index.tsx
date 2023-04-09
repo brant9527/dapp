@@ -127,59 +127,59 @@ function TradeView(props: any) {
     chart.current?.createIndicator("MA", false, {
       id: "candle_pane",
     });
-    chart.current?.setStyles({
-      candle: {
-        area: {
-          lineSize: 1,
-        },
+    // chart.current?.setStyles({
+    //   candle: {
+    //     area: {
+    //       lineSize: 1,
+    //     },
 
-        tooltip: {
-          text: {
-            size: 30,
-          },
-        },
-        priceMark: {
-          last: { text: { size: 30 } },
-        },
-      },
-      indicator: {
-        tooltip: {
-          text: {
-            size: 30,
-          },
-        },
-        lastValueMark: {
-          text: {
-            size: 30,
-          },
-        },
-      },
-      xAxis: {
-        tickText: {
-          size: 30,
-        },
-      },
-      yAxis: {
-        tickText: {
-          size: 30,
-        },
-      },
+    //     tooltip: {
+    //       text: {
+    //         size: 30,
+    //       },
+    //     },
+    //     priceMark: {
+    //       last: { text: { size: 30 } },
+    //     },
+    //   },
+    //   indicator: {
+    //     tooltip: {
+    //       text: {
+    //         size: 30,
+    //       },
+    //     },
+    //     lastValueMark: {
+    //       text: {
+    //         size: 30,
+    //       },
+    //     },
+    //   },
+    //   xAxis: {
+    //     tickText: {
+    //       size: 30,
+    //     },
+    //   },
+    //   yAxis: {
+    //     tickText: {
+    //       size: 30,
+    //     },
+    //   },
 
-      crosshair: {
-        horizontal: {
-          text: { size: 30 },
-          line: {
-            size: 5,
-          },
-        },
-        vertical: {
-          text: { size: 30 },
-          line: {
-            size: 5,
-          },
-        },
-      },
-    });
+    //   crosshair: {
+    //     horizontal: {
+    //       text: { size: 30 },
+    //       line: {
+    //         size: 5,
+    //       },
+    //     },
+    //     vertical: {
+    //       text: { size: 30 },
+    //       line: {
+    //         size: 5,
+    //       },
+    //     },
+    //   },
+    // });
     chart.current?.setOffsetRightDistance(0);
 
     return () => {

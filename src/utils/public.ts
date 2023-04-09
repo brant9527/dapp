@@ -6,7 +6,7 @@ const reg = /^0.(0*)\d+$/;
 // 返回小数位后几位 截取
 // number 数值
 // p 位数
-export function toFixed(number: any, pp: any) {
+export function toFixed(number: any, pp: any = 2) {
   let num = isNaN(number) || !number ? 0 : number;
   const p = isNaN(pp) || !pp ? 0 : pp;
   num = getFullNum(num);

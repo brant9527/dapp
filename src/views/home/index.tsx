@@ -35,7 +35,7 @@ function App() {
 
   const [bannerList, setBannerList] = useState([]);
   const [unReadMsg, setUnReadMsg] = useState(0);
-  const [noticeList, setNoticeList] = useState(0);
+  const [noticeList, setNoticeList] = useState<Array<any>>([{}]);
   const [coinType, setCoinType] = useState("getHotList");
 
   const [hotList, setHotList] = useState<Array<any>>([]);
@@ -310,7 +310,7 @@ function App() {
           <div className="msg">
             <img src={msgNotify} alt="" />
           </div>
-          <div className="msg-notify">关于定投指数关连计算每月调仓的通知</div>
+          <div className="msg-notify">{noticeList[0]?.title}</div>
         </div>
         <div className="home-btns">
           {btnList.map((item, i) => {

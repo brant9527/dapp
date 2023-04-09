@@ -25,7 +25,7 @@ function myAddress() {
   const { t } = useTranslation();
   const [coin, setCoin] = useState("USDT");
   const [address, setAddress] = useState("");
-  const account = localStorage.getItem("account");
+  const account = window.localStorage.getItem("account");
   const nav = useNavigate();
 
   useEffect(() => {

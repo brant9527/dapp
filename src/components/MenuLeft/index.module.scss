@@ -6,17 +6,20 @@
     .menu-wrap {
       width: 100vw;
       height: 100vh;
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      z-index: 11;
+      z-index: 10099;
+      @include background_color("bgColor1");
       .menu-content {
         position: absolute;
         width: calc(100vw - 80px);
-        height: 100vh;
+        height:calc(100vh - 80px);
         left: 0;
         z-index: 11;
         padding: 40px;
+        overflow: auto;
+
         @include font_color("fontColor1");
         @include background_color("bgColor1");
         .user-info {
@@ -118,8 +121,6 @@
             justify-content: space-between;
 
             @include font_color("fontColor2");
-
-            
 
             span {
               color: $blue;

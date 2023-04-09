@@ -11,7 +11,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import CommonTab from "@/components/CommonTab";
+
 import Back from "@/components/Back";
 import MsgItem from "./Components/MsgItem";
 import Scroll from "@/components/Scroll";

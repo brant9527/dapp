@@ -42,6 +42,7 @@ import {
 import record from "@/assets/record.png";
 import Io from "@/utils/socket";
 import { getTradeAssetBalance } from "@/api/trans";
+import { getUserInfo } from "@/api/userInfo";
 
 function Stock() {
   const { t } = useTranslation();
@@ -86,9 +87,11 @@ function Stock() {
   const [headInfo, setHeadInfo] = useState<any>();
   const [tabVal, setTabVal] = useState<any>(list[0].type);
   const [calcType, setCalcType] = useState(1);
+  const [userInfo, setUserInfo] = useState<any>({});
   const priceRef = useRef<any>(null);
   const accountRef = useRef<any>(null);
   const usdtRef = useRef<any>(null);
+
   const nav = useNavigate();
 
   const onChangeType = useCallback((type: string) => {
@@ -143,6 +146,15 @@ function Stock() {
     console.log(data);
     setEntrustList(data.list);
   };
+  const onGetUserInfo = useCallback(async () => {
+    const { data: user, code } = await getUserInfo();
+    if (code === 0) {
+      setUserInfo(user);
+    }
+  }, []);
+  useEffect(() => {
+    onGetUserInfo();
+  }, [onGetUserInfo]);
   // 获取当前交易对余额
   const getBalance = useCallback(async () => {
     const { data } = await getAvailBalance({
@@ -300,7 +312,10 @@ function Stock() {
       algoPrice: transType === "limit" ? coinPrice : "",
       algoTime: new Date().getTime(),
       algoType: transType,
-      amount: calcType == 2 ? useUsdt : coinAccount,
+      amount:
+        calcType == 2
+          ? useUsdt * (1 - userInfo?.feeRate)
+          : coinAccount * (1 - userInfo?.feeRate),
       calcType,
       side: type,
       symbol,

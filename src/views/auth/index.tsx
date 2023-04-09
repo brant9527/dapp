@@ -40,7 +40,7 @@ function auth() {
       setUserInfo(data?.data);
     }
   };
-  const account = localStorage.getItem("account") || "";
+  const account = window.localStorage.getItem("account") || "";
   function title() {
     return <div className="auth-title">{t("home.menu-smrz")}</div>;
   }

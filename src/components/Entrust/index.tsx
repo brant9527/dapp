@@ -13,7 +13,7 @@ const state = {
 
 function Entrust(props: any) {
   const { t } = useTranslation();
-  const { children, partLeft, list, onCancel } = props;
+  const { children, partLeft, list, onCancel, tradeType } = props;
   function getStatus(item: any) {
     switch (item.direction) {
       case 1:
@@ -52,14 +52,16 @@ function Entrust(props: any) {
             <>
               <div className="entrust-left">{partLeft}</div>
               <div className="entrust-right">
-                <div
-                  className="btn-cancel"
-                  onClick={() => {
-                    onCancel({ type: "all" });
-                  }}
-                >
-                  {t("entrust.cancel-all")}
-                </div>
+                {tradeType !== "delivery" && (
+                  <div
+                    className="btn-cancel"
+                    onClick={() => {
+                      onCancel({ type: "all" });
+                    }}
+                  >
+                    {t("entrust.cancel-all")}
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -98,14 +100,16 @@ function Entrust(props: any) {
                     {fixPrice(item.algoPrice)}
                   </div>
                 </div>
-                <div
-                  className="btn-cancel cancel-sigle"
-                  onClick={() => {
-                    onCancel({ type: "single", id: item.id });
-                  }}
-                >
-                  {t("entrust.cancel")}
-                </div>
+                {tradeType != "delivery" && (
+                  <div
+                    className="btn-cancel cancel-sigle"
+                    onClick={() => {
+                      onCancel({ type: "single", id: item.id });
+                    }}
+                  >
+                    {t("entrust.cancel")}
+                  </div>
+                )}
               </div>
             );
           })}

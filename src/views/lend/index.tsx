@@ -39,7 +39,7 @@ function lend() {
     getData();
   }, []);
   useEffect(() => {
-    const num = localStorage.getItem("lend-amount") || "";
+    const num = window.localStorage.getItem("lend-amount") || "";
     setAmount(num);
   }, []);
   const getData = async () => {
@@ -60,11 +60,11 @@ function lend() {
     const { data, code } = await applyLoan(params);
     if (code == 0) {
       Toast.notice(t("common.upload-tip"), {  });
-      localStorage.setItem("lend-amount", "");
+      window.localStorage.setItem("lend-amount", "");
 
       nav("/lendList");
     } else {
-      localStorage.setItem("lend-amount", amount);
+      window.localStorage.setItem("lend-amount", amount);
       nav("/lendAuth");
     }
   };

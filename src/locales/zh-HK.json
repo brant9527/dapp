@@ -14,7 +14,7 @@
     "menu-smrz": "實名認證",
     "menu-yxbd": "郵箱綁定",
     "menu-xyf": "信用分評定",
-    "menu-bdhb": "本地貨幣",
+    "menu-wjdc": "問卷調查",
     "menu-bzzx": "幫助中心",
     "menu-yy": "語言",
     "btns": {
@@ -112,11 +112,15 @@
     "assets": "資產",
     "swap": "合約",
     "delivery": "交割",
-    "spot": "現貨"
+    "spot": "現貨",
+    "contract-delivery": "交割合约",
+    "contract-swap": "永续合约",
+    "postion": "当前持倉"
   },
   "common": {
     "price": "價格",
     "count": "數量",
+    "direction": "方向",
     "time": "時間",
     "buy": "買入",
     "sell": "賣出",
@@ -150,7 +154,10 @@
     "status": "狀態",
     "params-check": "請輸入價格或數量",
     "record": "記錄",
-    "help": "幫助中心"
+    "help": "幫助中心",
+    "close": "關閉",
+    "address": "地址",
+    "acticle-title": "資訊"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -248,10 +255,13 @@
     "day": "天",
     "week": "周",
     "month": "月",
-    "year": "年"
+    "year": "年",
+    "second": "秒",
+    "minute": "分",
+    "hour": "小時"
   },
   "time": {
-    "minute": "分時",
+    "minute": "1分",
     "minute5": "5分",
     "minute15": "15分",
     "minute30": "30分",
@@ -310,5 +320,29 @@
     "very-good": "優秀",
     "normol": "一般",
     "bad": "一般"
+  },
+  "contract": {
+    "golong": "買入/做多",
+    "short-selling": "賣出/做空",
+    "do-more": "做多",
+    "do-short": "做空",
+    "profit-loss": "止盈/止損",
+    "profit": "止盈",
+    "loss": "止損",
+    "max": "最大",
+    "position": {
+      "fixed": "逐倉",
+      "crossed": "全倉",
+      "close": "平倉"
+
+    },
+    "adjust-lever": "調整槓桿",
+    "promise-money": "保证金",
+    "delivery-time": "交割時間",
+   
+    "buy": "買",
+    "sell": "賣",
+    "swap": "永續",
+    "delivery": "交割"
   }
 }

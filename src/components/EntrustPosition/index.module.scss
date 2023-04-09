@@ -1,0 +1,120 @@
+.root {
+  :global {
+    .position-wrap {
+      position: relative;
+      margin-top: 30px;
+      .btn-cancel {
+        height: 70px;
+        line-height: 70px;
+        border-radius: 10px;
+        min-width: 100px;
+        padding: 0 34px;
+        font-size: 34px;
+        text-align: center;
+
+        @include background_color("bgColor2");
+        @include font_color("fontColor1");
+      }
+      .position-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // position: sticky;
+        top: 0;
+        .part-left {
+        }
+        .part-right {
+        }
+      }
+      .position-info {
+        &_item {
+          position: relative;
+          padding: 46px 0;
+          .s {
+            color: $up;
+          }
+          .f {
+            color: $down;
+          }
+          .top {
+            font-size: 38px;
+
+            line-height: 60px;
+            display: flex;
+            align-items: center;
+            @include font_color("fontColor1");
+
+            .b-s {
+              font-size: 30px;
+              line-height: 50px;
+              padding: 0 10px;
+              color: $fontWhite;
+              margin-right: 20px;
+
+              &.buy {
+                background-color: $up;
+              }
+              &.sell {
+                background-color: $down;
+              }
+            }
+            .symbol {
+              margin-right: 20px;
+              font-weight: 600;
+            }
+            .orderType {
+              margin-right: 20px;
+            }
+            .position {
+              font-size: 30px;
+              @include font_color("fontColor2");
+              margin-right: 20px;
+            }
+            .lever {
+              font-size: 30px;
+
+              @include font_color("fontColor2");
+            }
+          }
+
+          .second {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .symbol {
+              font-size: 48px;
+              @include font_color("fontColor1");
+            }
+            .time {
+              font-size: 38px;
+              @include font_color("fontColor2");
+            }
+          }
+          .count {
+            font-size: 36px;
+            span {
+              font-size: 38px;
+              padding-right: 35px;
+              @include font_color("fontColor2");
+            }
+          }
+          .price {
+            font-size: 36px;
+            span {
+              font-size: 38px;
+              padding-right: 35px;
+
+              @include font_color("fontColor2");
+            }
+          }
+
+          .cancel-sigle {
+            position: absolute;
+            bottom: 40px;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}

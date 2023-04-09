@@ -29,7 +29,7 @@ function MsgItem(props: any) {
           </div>
           <div className="right">
             <div className="title">{item.title}</div>
-            <div className="content">{item.content}</div>
+            <div className="content" dangerouslySetInnerHTML={{__html:decodeURI(item.content)}}></div>
 
             <div className="time">{formatTime(new Date(item.publishTime).getTime())}</div>
 

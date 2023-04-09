@@ -1,0 +1,291 @@
+.root {
+  :global {
+    .contract-wrap {
+      position: relative;
+      overflow: hidden;
+      .input-bg {
+        width: 949px;
+        height: 100px;
+
+        background-color: $inputBgQuota;
+        padding: 0 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        margin: 44px 44px 0;
+        img {
+          width: 47px;
+          height: 47px;
+          margin-right: 24px;
+        }
+        .text {
+          font-size: 40px;
+          @include font_color("fontColor2");
+        }
+      }
+    }
+    .option-wrap {
+      @include background_color("bgColor1");
+
+      padding: 50px 40px;
+      border-radius: 50px 50px 0 0;
+      height: calc(100vh - 550px);
+      overflow: auto;
+      // 价格顶部
+      .option-top {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        .left {
+          // margin-bottom: 32px;
+          width: 432px;
+          .title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 34px;
+            @include font_color("fontColor2");
+
+            .price {
+              text-align: right;
+            }
+            .account {
+            }
+          }
+          .price-sell {
+            margin: 40px 0;
+            height: 490px;
+
+            overflow: hidden;
+          }
+          .price-part {
+            text-align: center;
+            .price-top {
+              margin-bottom: 16px;
+              font-size: 48px;
+              height: 44px;
+            }
+            .price-usdt {
+              font-size: 34px;
+              height: 35px;
+
+              @include font_color("fontColor2");
+            }
+          }
+          .price-buy {
+            margin-top: 46px;
+            height: 490px;
+
+            overflow: hidden;
+          }
+        }
+        .right {
+          width: 570px;
+          .useable-usdt {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            line-height: 110px;
+            .label-left {
+              font-size: 34px;
+              @include font_color("fontColor2");
+            }
+            .balance-usdt {
+              font-size: 36px;
+              @include font_color("fontColor1");
+            }
+          }
+          .input-price {
+            margin-top: 24px;
+          }
+          .input-fix_wrap {
+            margin-top: 4px;
+            position: relative;
+            height: 120px;
+            .input-account {
+              position: absolute;
+              top: 0;
+              &.fixTop {
+                z-index: 1;
+              }
+            }
+          }
+
+          .slide-part {
+            margin: 40px 0;
+          }
+          .input-usdt {
+          }
+          .trade-type-part {
+            // margin-top: 40px;
+          }
+          .btn-option {
+            width: 570px;
+            height: 110px;
+            line-height: 110px;
+            color: $fontWhite;
+            font-size: 50px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            margin-top: 10px;
+            &__buy {
+              background-color: $up;
+            }
+            &__sell {
+              background-color: $down;
+            }
+          }
+          .symbol-select {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            .symbol-item {
+              width: 283px;
+              text-align: center;
+              line-height: 80px;
+              font-size: 36px;
+              @include font_color("fontColor2");
+              @include background_color("bgColor2");
+
+              &.active {
+                @include font_color("fontColor1");
+              }
+            }
+          }
+          .profit-loss {
+            .top {
+              display: flex;
+              font-size: 36px;
+              align-items: center;
+              .dot {
+                width: 34px;
+                height: 34px;
+                border-radius: 50%;
+                background-color: $boder;
+                margin-right: 10px;
+                @include font_color("fontColor1");
+                &.active {
+                  background-color: #edbc45;
+                }
+              }
+            }
+            .bottom {
+              display: flex;
+              justify-content: space-between;
+              margin: 21px 0;
+              .profit-loss_input {
+                width: 270px;
+              }
+            }
+          }
+          .max-u {
+            display: flex;
+            justify-content: space-between;
+            font-size: 36px;
+            line-height: 60px;
+
+            .max-left {
+              @include font_color("fontColor2");
+            }
+            .max-right {
+              @include font_color("fontColor1");
+            }
+          }
+          .peroid-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .peroid-item {
+              width: 170px;
+              line-height: 76px;
+              background-color: $inputBg;
+              margin-bottom: 30px;
+              font-size: 30px;
+              text-align: center;
+              @include font_color("fontColor2");
+              border-radius: 10px;
+
+              &.active {
+                background-color: $blue;
+                color: $fontWhite;
+              }
+            }
+          }
+        }
+      }
+      .option-select {
+        .option-left {
+          display: flex;
+          align-items: center;
+          height: 80px;
+
+          .position {
+            width: 270px;
+          }
+          .lever {
+            display: flex;
+            position: relative;
+            height: 90px;
+            line-height: 90px;
+            width: 130px;
+            padding: 0 40px;
+            @include font_color("fontColor1");
+            @include background_color("bgColor2");
+            border-radius: 20px;
+            align-items: center;
+            margin-left: 20px;
+            .trade-name {
+              font-size: 34px;
+              flex: 1;
+              text-align: left;
+            }
+            .trade-img {
+              width: 26px;
+              height: 15px;
+              transition: all 0.3s;
+              transform-origin: center;
+
+              &.arrow-active {
+                // transform-origin: 75% 75%;
+                /* transform-origin: center; */
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+        .delivery-day {
+        }
+      }
+    }
+    .option-bottom {
+      display: flex;
+      align-items: center;
+      position: relative;
+      @include border("bottom");
+
+      .hold-tabs {
+        flex: 1;
+      }
+      .record {
+        width: 40px;
+        height: 48px;
+      }
+    }
+    .slidenum-wrap {
+      padding: 40px 0;
+      .slidenum-btn {
+        margin: 30px auto 0;
+        width: 1036px;
+        border-radius: 20px;
+        font-size: 50px;
+        height: 130px;
+        line-height: 130px;
+        color: $fontWhite;
+        font-weight: 600;
+        background-color: $blue;
+        text-align: center;
+      }
+    }
+  }
+}

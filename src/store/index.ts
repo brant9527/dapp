@@ -21,7 +21,7 @@ const useStore = create((set, get) => ({
       themes: state.themes === "light" ? "dark" : "light",
     })),
   changeLanguage: () =>
-    set((state: any) => ({ language: state.language === "zh-TW" ? "zh-TW" : "en" })),
+    set((state: any) => ({ language: state.language === "zh_TW" ? "zh_TW" : "en" })),
   changeLoginState: () =>
     set((state: any) => ({
       loginState: (state.loginState = !state.loginState),

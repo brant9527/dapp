@@ -49,8 +49,7 @@ const CusInput = forwardRef((props: any, ref: any) => {
     onInput(val);
   };
   const inputChange = (e: any) => {
-    const valTemp = e.target.value;
-
+    const valTemp = e.target.value.replace(/^\D*(\d*(?:\.\d{0,9})?).*$/g, '$1')
     setVal(valTemp);
     onInput(valTemp);
   };

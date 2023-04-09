@@ -58,7 +58,7 @@ function TransRecord() {
                 className="help-item"
                 key={idx}
                 onClick={() => {
-                  localStorage.setItem("helpDetail", JSON.stringify(item));
+                  window.localStorage.setItem("helpDetail", JSON.stringify(item));
                   nav("/helpDetail");
                 }}
               >

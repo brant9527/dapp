@@ -11,7 +11,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import CommonTab from "@/components/CommonTab";
+import Tabs from "@/components/Tabs";
 
 import eth from "@/assets/eth.png";
 import {
@@ -152,7 +152,7 @@ function Assets() {
   return (
     <div className={style.root}>
       <div className="assets-wrap">
-        <CommonTab onChange={onChange} list={navList} />
+        <Tabs onChange={onChange} tabs={navList} />
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
           <div className="assets-all-usdt">{fixPrice(totalBtcBalance)} BTC</div>

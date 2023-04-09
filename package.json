@@ -7,7 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "deploy": "./deploy.sh",
-    "lint": "yarn run eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "yarn run eslint . --ext .js,.jsx,.ts,.tsx",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.0.1",

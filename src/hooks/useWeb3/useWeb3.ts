@@ -22,7 +22,7 @@ export const useWeb3 = () => {
 
   const changeProvider = useCallback(() => {
     // Removes localstorage key that defines the wallet provider
-    localStorage.removeItem(LS_KEY);
+    window.localStorage.removeItem(LS_KEY);
     // Clear out web3 and ethereum state variables
     setProviderString(undefined);
     setProvider(undefined);
@@ -43,7 +43,7 @@ export const useWeb3 = () => {
         // Set the localstorage key with the selected wallet provider
         // 'coinbase', 'metamask', or 'walletconnect'
         // We will use this key to connect the user automatically
-        localStorage.setItem(LS_KEY, selectedProvider);
+        window.localStorage.setItem(LS_KEY, selectedProvider);
         // set the web3, provider, and account state variables using the
         // resolved values from the connectWallet function
         setProviderString(selectedProvider);
@@ -122,9 +122,9 @@ export const useWeb3 = () => {
     // state when the user disconnects the dapp from their Coinbase Wallet
     const beforeUnloadListener = () => {
       if (
-        !localStorage.getItem("-walletlink:https://www.walletlink.org:version")
+        !window.localStorage.getItem("-walletlink:https://www.walletlink.org:version")
       ) {
-        localStorage.removeItem(LS_KEY);
+        window.localStorage.removeItem(LS_KEY);
       }
     };
 

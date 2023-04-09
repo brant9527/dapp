@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState, Fragment,memo } from "react";
+import React, { Component, useCallback, useState, Fragment, memo } from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { useNavigate } from "react-router-dom";
 
@@ -17,14 +17,19 @@ function CoinPriceItem(props: any) {
   return (
     <div className={style.root}>
       <div className="tableCoinsPst">
-        <div className="coinTypePst ">
+        <div
+          className="coinTypePst"
+          onClick={() => {
+            nav("/contract?symbol=" + symbol);
+          }}
+        >
           {logo && <img src={logo} />}
           <div className="right">
             <div className="top">
               <div className="coin">{symbol.replace("USDT", "")}</div>
-              <div className="usdt">/usdt</div>
+              <div className="usdt">/USDT</div>
             </div>
-            <div className="account">{turnover}K</div>
+            <div className="account">{toFixed(turnover / 1000, 2)}K</div>
           </div>
         </div>
         <div className="coinPricePst ">
@@ -38,7 +43,7 @@ function CoinPriceItem(props: any) {
             )}
           >
             {/* <img src={Number(rate) > 0 ? up : down} /> */}
-            <div className="raise">{toFixed(Number(rate), 2)}%</div>
+            <div className="raise">{toFixed(Number(rate) * 100, 2)}%</div>
           </div>
         </div>
       </div>

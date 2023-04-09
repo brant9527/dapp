@@ -8,7 +8,7 @@ import backImg from "@/assets/left.png";
 import { useTranslation } from "react-i18next";
 
 function Back(props: any) {
-  const { onChangeType, type } = props;
+  const { onChangeType, type, isContract = false } = props;
 
   const { t } = useTranslation();
   const nav = useNavigate();
@@ -22,7 +22,7 @@ function Back(props: any) {
             onChangeType("buy");
           }}
         >
-          {t("common.buy")}
+          {isContract ? t("contract.do-more") : t("common.buy")}
         </div>
         <div className={["btn-arrow", `btn-arrow_${type}`].join(" ")}></div>
         <div
@@ -33,7 +33,7 @@ function Back(props: any) {
             onChangeType("sell");
           }}
         >
-          {t("common.sell")}
+          {isContract ? t("contract.do-short") : t("common.sell")}
         </div>
       </div>
     </div>

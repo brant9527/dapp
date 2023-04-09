@@ -9,7 +9,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import zhTw from "./src/locales/zh-HK.json";
 import en from "./src/locales/en-us.json";
 const resources = {
-  'zh-TW': {
+  'zh_TW': {
     translation: zhTw,
   },
   en: {

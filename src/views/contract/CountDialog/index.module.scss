@@ -1,0 +1,78 @@
+.root {
+    :global {
+        .time-count {
+            display: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            .time-dialog {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 810px;
+                z-index: 11;
+                border: 40px;
+                padding: 70px;
+                border-radius: 40px;
+                font-size: 44px;
+
+                @include background_color("bgColor1");
+                @include font_color("fontColor1");
+                .count-wrap {
+                    position: relative;
+                    width: 170px;
+                    height: 175px;
+                    margin: 10px auto 50px;
+                    img {
+                        width: 100%;
+                        position: absolute;
+                        top: 0;
+                    }
+                    .dash {
+                        width: 100%;
+                    }
+                    .zhizhen {
+                        width: 100px;
+                        height: 100px;
+                        position: absolute;
+                        top: 46px;
+                        left: 30px;
+                        animation: changeright 6s linear infinite;
+                    }
+                }
+                .symbol {
+                    font-size: 54px;
+                    font-weight: 600;
+                    padding-bottom: 25px;
+                    text-align: center;
+                }
+                .info {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 25px 0;
+                    .left {
+                        @include font_color("fontColor2");
+                    }
+                    .right {
+                        @include font_color("fontColor1");
+                        &.up {
+                            color: $up;
+                        }
+                        &.down {
+                            color: $down;
+                        }
+                    }
+                }
+                .btn {
+                    line-height: 130px;
+                    border-radius: 20px;
+                    text-align: center;
+                    background-color: $inputBg;
+                    @include font_color("fontColor2");
+                }
+            }
+        }
+    }
+}

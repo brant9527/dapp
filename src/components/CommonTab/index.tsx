@@ -7,21 +7,17 @@ import style from "./index.module.scss";
 import { useTranslation } from "react-i18next";
 
 function Tabs(props: any) {
-  const { onChange, currentTab, list = [] } = props;
+  const { onChange, defaultIndex = 0, list = [] } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
-  const [transx, setTranx] = useState("1.24rem");
+
   const ref = useRef(null);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(defaultIndex);
   const selectItem = (event: any, type: string) => {
     console.log(event, type);
-    const target = event.target;
-    const left = target.clientWidth / 2 + event.target.offsetLeft + "px";
-    setTranx(left);
+
     onChange(type);
   };
-  console.log("滑块=》", ref);
-  // ref?.current?.childNodes
 
   return (
     <div className={style.root}>
@@ -40,10 +36,6 @@ function Tabs(props: any) {
             </div>
           );
         })}
-        <div
-          className="line"
-          style={{ transform: `translateX(${transx}) translateX(-50%)` }}
-        ></div>
       </div>
     </div>
   );

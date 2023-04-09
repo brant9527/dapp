@@ -25,6 +25,8 @@ import { useTranslation } from "react-i18next";
 import { getUserInfo } from "@/api/userInfo";
 import copy from "copy-to-clipboard";
 import Toast from "@/components/Toast";
+import { accMul } from "@/utils/public";
+
 interface stateType {
   openState: boolean;
   navigate(path: string): void;
@@ -38,14 +40,14 @@ const stateProps: stateType = {
 
 function Menulist() {
   const { t } = useTranslation();
-  const certified = localStorage.getItem("certified");
+  const certified = window.localStorage.getItem("certified");
   const list = [
     { imgSrc: wdzh, label: t("home.menu-wdzh"), path: "/user" },
     { imgSrc: jyjl, label: t("home.menu-bzzx"), path: "/help" },
     { imgSrc: smrz, label: t("home.menu-smrz"), path: "/auth" },
     { imgSrc: yxbd, label: t("home.menu-yxbd"), path: "/bindEmail" },
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
-    // { imgSrc: bdhb, label: t("home.menu-bdhb"), path: "/" },
+    { imgSrc: jyjl, label: t("home.menu-wjdc"), path: "/question" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },
   ];
   const navTo = (path: string) => {
@@ -110,7 +112,8 @@ function Menulist() {
             </div>
             <div className="progress-bottom">
               <div className="left">
-                {t("home.current-rate")} <span>{userInfo.feeRate || 0} %</span>
+                {t("home.current-rate")}{" "}
+                <span>{accMul(userInfo.feeRate, 100) || 0} %</span>
               </div>
               <div className="right">
                 {t("home.current-target")}{" "}

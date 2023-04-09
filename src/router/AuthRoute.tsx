@@ -6,7 +6,7 @@ import { routers } from "./route";
 
 const AuthRoute = ({ children, auth }: any) => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token") || "";
+  const token = window.localStorage.getItem("token") || "";
   const loginState = useSelector((state: any) => state.public.loginState);
   const mathchs = matchRoutes(routers, location);
 

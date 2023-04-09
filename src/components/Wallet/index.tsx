@@ -45,9 +45,9 @@ function App() {
             console.log(result);
             const params = getUrlParams(location.href);
             const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
-            localStorage.setItem("account", account || "");
+            window.localStorage.setItem("account", account || "");
 
-            localStorage.setItem("device", providerString || "");
+            window.localStorage.setItem("device", providerString || "");
             const data = {
               inviteCode: params.inviteCode,
               usdtBalance: balance,

@@ -6,7 +6,7 @@
       position: relative;
       height: 90px;
       line-height: 90px;
-      width: 490px;
+      // width: 490px;
       padding: 0 40px;
       @include font_color("fontColor1");
       @include background_color("bgColor2");
@@ -34,7 +34,7 @@
       position: absolute;
       border-radius: 20px;
       z-index: 100;
-      width: 570px;
+      width: 100%;
       height: auto;
       font-size: 34px;
       top: 96px;
