@@ -28,6 +28,7 @@ export const useWeb3 = () => {
     setProvider(undefined);
     setWeb3(undefined);
     setAccount(undefined);
+    localStorage.removeItem("account");
   }, [provider]);
 
   const connectProvider = useCallback(
@@ -50,6 +51,7 @@ export const useWeb3 = () => {
         setProvider(connectedProvider);
         setWeb3(web3Instance);
         setAccount(accounts[0]);
+        localStorage.setItem("account", accounts[0]);
       } catch {
         // If the user cancels the request to connect from the wallet provider
         console.warn("FAILED TO SIGN IN!");
