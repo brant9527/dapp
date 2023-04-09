@@ -60,17 +60,10 @@ import "./app.scss";
 function App() {
   const loginState = useSelector((state: any) => state.loginSlice.value);
   const themes = window.localStorage.getItem("themes") || "light";
-  const noAccount = window.localStorage.getItem("noAccount") || "";
   // const { connectProvider, changeProvider, providerString, account, web3 } =
   //   useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   const nav = useNavigate();
-  useEffect(() => {
-    console.log(noAccount, 'noAccountnoAccount')
-    if (noAccount) {
-      nav('/home')
-    }
-  }, [noAccount])
   return (
     <div className="app-bg">
       {/* <Wallet open={noAccount}/> */}
