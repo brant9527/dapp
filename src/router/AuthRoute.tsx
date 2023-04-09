@@ -6,13 +6,18 @@ import { routers } from "./route";
 
 const AuthRoute = ({ children, auth }: any) => {
   const navigate = useNavigate();
-  const token = window.localStorage.getItem("token") || "";
+  const token = localStorage.getItem("token") || "";
+  const noAccount = localStorage.getItem("noAccount") || ""
   const loginState = useSelector((state: any) => state.public.loginState);
   const mathchs = matchRoutes(routers, location);
 
   const isExist = mathchs?.some((item) => item.pathname == location.pathname);
 
   useEffect(() => {
+    if (noAccount) {
+      console.log("账号为空");
+      navigate("/index");
+    }
     if (token == "" && auth) {
       console.log("token 过期，请重新登录!");
       navigate("/index");

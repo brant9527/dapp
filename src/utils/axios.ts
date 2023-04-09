@@ -3,6 +3,7 @@ import axios, { CreateAxiosDefaults } from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Toast from "@/components/Toast";
+import { useNavigate } from "react-router-dom";
 const http = axios.create({
   baseURL: "https://trust-pro.io/", // 从.env变量中读取的后台url地址
   timeout: 30000, // 超时时长5分钟,
@@ -88,10 +89,16 @@ http.interceptors.response.use(
     if (response.config.headers.showLoading !== false) {
       hideLoading();
     }
+    // const nav = useNavigate();
     const { code, msg } = response.data;
     console.log(response.data);
+    localStorage.removeItem('noAccount')
     if (code != 0) {
-      Toast.notice(msg, {});
+      if (code == 1001) {
+        localStorage.setItem('noAccount', 'true')
+      } else {
+        Toast.notice(msg, {});
+      }
     }
     return response.data;
   },

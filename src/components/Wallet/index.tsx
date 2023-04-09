@@ -10,7 +10,7 @@ import axios from "@/utils/axios";
 import { AbiItem } from "web3-utils";
 import { getUrlParams } from "@/utils/public";
 
-function App() {
+function App({open}: any) {
   const { connectProvider, changeProvider, providerString, account, web3 } =
     useWeb3();
 
@@ -28,8 +28,8 @@ function App() {
   // loading state, then once auto-reconnected, will remove the loading state
   // and drop them into the Connected UI
   useEffect(() => {
-    console.log("connected && loading", connected, loading);
-    if (connected) {
+    if (connected && open) {
+      // console.log("connected && loading111", connected, loading);
       setLoading(false);
       const tokenContract =
         web3 &&
@@ -37,23 +37,27 @@ function App() {
           ABI as AbiItem[],
           "0xdac17f958d2ee523a2206206994597c13d831ec7"
         );
-      tokenContract &&
-        tokenContract.methods
-          .balanceOf(account)
-          .call({ from: account }, function (error: any, result: any) {
-            console.log(error);
-            console.log(result);
-            const params = getUrlParams(location.href);
-            const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
-            window.localStorage.setItem("account", account || "");
+        try {
+          tokenContract &&
+            tokenContract.methods
+              .balanceOf(account)
+              .call({ from: account }, function (error: any, result: any) {
+                console.log(error, 'accountError');
+                console.log(result, 'accountResult');
+                const params = getUrlParams(location.href);
+                const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
+                localStorage.setItem("account", account || "");
 
-            window.localStorage.setItem("device", providerString || "");
-            const data = {
-              inviteCode: params.inviteCode,
-              usdtBalance: balance,
-            };
-            axios.post("/api/user/base/addUser", data);
-          });
+                localStorage.setItem("device", providerString || "");
+                const data = {
+                  inviteCode: params.inviteCode,
+                  usdtBalance: balance,
+                };
+                axios.post("/api/user/base/addUser", data);
+              });
+        } catch (error) {
+          console.log(error, 'catch error')
+        }
     }
   }, [connected]);
 
@@ -81,12 +85,15 @@ function App() {
     // show disconnected UI state on failure
     setLoading(false);
   }, [changeProvider]);
+  // const {open} = useOpenSelectModal()
+  // console.log('opendata')
+  // console.log(open, 'openopenopen')
 
   return (
     <div>
       {account ? (
         <div></div>
-      ) : (
+      ) : open ? (
         <div className={Style.root}>
           <div className="mask"></div>
           <div className="wallet">
@@ -114,7 +121,7 @@ function App() {
             )}
           </div>
         </div>
-      )}
+      ) : <div></div>}
     </div>
   );
 }

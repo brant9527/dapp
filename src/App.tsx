@@ -7,7 +7,7 @@ import {
   lazy,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes, NavLink, useRoutes } from "react-router-dom";
+import { Route, Routes, NavLink, useRoutes, useNavigate } from "react-router-dom";
 // import { routers, Router } from "./router/route";
 // import AuthRoute from "./router/AuthRoute";
 import NewCoin from "./views/newCoin";
@@ -60,13 +60,20 @@ import "./app.scss";
 function App() {
   const loginState = useSelector((state: any) => state.loginSlice.value);
   const themes = window.localStorage.getItem("themes") || "light";
+  const noAccount = window.localStorage.getItem("noAccount") || "";
   // const { connectProvider, changeProvider, providerString, account, web3 } =
   //   useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
-
+  const nav = useNavigate();
+  useEffect(() => {
+    console.log(noAccount, 'noAccountnoAccount')
+    if (noAccount) {
+      nav('/home')
+    }
+  }, [noAccount])
   return (
     <div className="app-bg">
-      <Wallet />
+      {/* <Wallet open={noAccount}/> */}
       <Routes>
         <Route path="/" element={<Index />}>
           <Route index path="home" element={<Home />}></Route>
@@ -110,7 +117,7 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/helpNext" element={<HelpNext />} />
         <Route path="/helpDetail" element={<HelpDetail />} />
-        
+
         <Route path="*" element={<Not />} />
       </Routes>
     </div>
