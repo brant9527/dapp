@@ -3,7 +3,7 @@
         .comfirm-wrap {
             position: fixed;
 
-            @include background_color("bgColor2");
+            @include background_color("bgColor1");
             @include font_color("fontColor1");
             left: 0;
             right: 0;

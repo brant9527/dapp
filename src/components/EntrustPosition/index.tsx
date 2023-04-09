@@ -174,7 +174,7 @@ function Entrust(props: any) {
                   </div>
                 </div>
 
-                {tradeType !== "delivery" && (
+                {item.tradeType !== "delivery" && (
                   <div className="btn-part">
                     <div
                       className="btn-option "

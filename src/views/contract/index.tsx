@@ -54,6 +54,7 @@ import {
 } from "@/api/contract";
 import CountDialog from "./CountDialog";
 import CloseDialog from "./CloseDialog";
+import ProfitLossModel from "./ProfitLossModel";
 
 function Contract() {
   const { t } = useTranslation();
@@ -139,6 +140,7 @@ function Contract() {
   const modelRef = useRef<any>(null);
   const countRef = useRef<any>(null);
   const closeRef = useRef<any>(null);
+  const profitLossRef = useRef<any>(null);
 
   const nav = useNavigate();
 
@@ -462,14 +464,14 @@ function Contract() {
               count (number, optional): 平仓数量 ,
               id (integer, optional): 仓位id
    */
-  
+
   const onCloseOrderModel = async (item: any) => {
     closeRef.current.open(item);
   };
   const onSetProfitLossModel = async (item: any) => {
-    closeRef.current.open(item);
+    profitLossRef.current.open(item);
   };
-  
+
   const maxCount = useMemo(() => {
     return toFixed(
       accDiv(
@@ -810,7 +812,11 @@ function Contract() {
           </div>
         </div>
       </Model> */}
-      <CloseDialog ref={closeRef}></CloseDialog>
+      <CloseDialog ref={closeRef} onConfirm={onGetUserPosition}></CloseDialog>
+      <ProfitLossModel
+        ref={profitLossRef}
+        onConfirm={getDelegationPage}
+      ></ProfitLossModel>
       <CountDialog ref={countRef}></CountDialog>
     </div>
   );

@@ -153,12 +153,43 @@
         }
       }
       .vip {
-        width: 1046px;
-        height: 231px;
+        width: 926px;
+        height: 131px;
         background-image: url("@/assets/kf.png");
         background-repeat: no-repeat;
         background-size: cover;
         margin: 0 auto;
+        display: flex;
+        padding: 50px 60px;
+
+        .vip-head {
+          width: 134px;
+          height: 134px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 40px;
+          img{
+            width: 100%;
+          }
+        }
+        .center {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .vip-name {
+            color: $fontWhite;
+            font-size: 50px;
+            height: 60px;
+          }
+          .vip-desc {
+            color: #3ee4ff;
+            font-size: 36px;
+            border-radius: 20px;
+            line-height: 48px;
+            border: 1px solid #3ee4ff;
+            padding:0 20px;
+          }
+        }
       }
     }
 

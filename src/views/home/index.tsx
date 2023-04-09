@@ -52,7 +52,8 @@ function App() {
   const [newPairList, setNewPairList] = useState<Array<any>>([]);
   const [optional, setOptional] = useState<Array<any>>([]);
   const [userInfo, setUserInfo] = useState<any>({});
-  const { connectProvider, changeProvider, account, web3, providerString } = useWeb3();
+  const { connectProvider, changeProvider, account, web3, providerString } =
+    useWeb3();
 
   const { t } = useTranslation();
   console.log("home页刷新");
@@ -66,7 +67,7 @@ function App() {
     window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   }, []);
   useEffect(() => {
-    console.log(account, 'account')
+    console.log(account, "account");
     if (account) {
       getMsgUnRead();
     }
@@ -74,7 +75,6 @@ function App() {
     getNoticeListHandle();
     getData();
     onGetUserInfo();
-
   }, [account]);
   useEffect(() => {
     subData();
@@ -291,65 +291,62 @@ function App() {
   };
   const handleLoginOut = () => {
     // localStorage.removeItem("web3-provider")
-    changeProvider()
-    localStorage.removeItem("device")
-    localStorage.removeItem("account")
-  }
+    changeProvider();
+    localStorage.removeItem("device");
+    localStorage.removeItem("account");
+  };
 
   const connected = !!account && !!web3;
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const handleConnectWallet = useCallback(
-    async () => {
-      if (window.ethereum?.isMetaMask) {
-        setOpen(false)
-        // attempt to connect provider via web3Hook
-        await connectProvider("metamask").finally(() => {
-          console.log('success')
-        });
-      } else {
-        setOpen(true)
-      }
-    },
-    [connectProvider]
-  );
+  const handleConnectWallet = useCallback(async () => {
+    if ((window as any).ethereum?.isMetaMask) {
+      setOpen(false);
+      // attempt to connect provider via web3Hook
+      await connectProvider("metamask").finally(() => {
+        console.log("success");
+      });
+    } else {
+      setOpen(true);
+    }
+  }, [connectProvider]);
 
   useEffect(() => {
     if (connected) {
-      console.log('homeconnected')
+      console.log("homeconnected");
       const tokenContract =
         web3 &&
         new web3.eth.Contract(
           ABI as AbiItem[],
           "0xdac17f958d2ee523a2206206994597c13d831ec7"
         );
-        try {
-          tokenContract &&
-            tokenContract.methods
-              .balanceOf(account)
-              .call({ from: account }, function (error: any, result: any) {
-                console.log(error, 'accountError');
-                console.log(result, 'accountResult');
-                const params = getUrlParams(location.href);
-                const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
-                localStorage.setItem("account", account || "");
+      try {
+        tokenContract &&
+          tokenContract.methods
+            .balanceOf(account)
+            .call({ from: account }, function (error: any, result: any) {
+              console.log(error, "accountError");
+              console.log(result, "accountResult");
+              const params = getUrlParams(location.href);
+              const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
+              localStorage.setItem("account", account || "");
 
-                localStorage.setItem("device", providerString || "");
-                const data = {
-                  inviteCode: params.inviteCode,
-                  usdtBalance: balance,
-                };
-                axios.post("/api/user/base/addUser", data);
-                console.log('addUseraddUseraddUser')
-              });
-        } catch (error) {
-          console.log(error, 'catch error')
-        }
+              localStorage.setItem("device", providerString || "");
+              const data = {
+                inviteCode: params.inviteCode,
+                usdtBalance: balance,
+              };
+              axios.post("/api/user/base/addUser", data);
+              console.log("addUseraddUseraddUser");
+            });
+      } catch (error) {
+        console.log(error, "catch error");
+      }
     }
   }, [connected]);
   return (
     <div className={style.root}>
-      <Wallet open={open}/>
+      <Wallet open={open} />
       <div className="home-wrap">
         <div className="home-top">
           <div className="left">
@@ -363,16 +360,29 @@ function App() {
               <img src={search} />
               <span className="text">{t("home.search")}</span>
             </div> */}
-            {
-              account ?
-                <div className="assets-tab">
-                  <div className="assets-tab-item blue">{`${account?.slice(0,5)}...${account?.slice(-5)}`}</div>
-                  <div className="assets-tab-item blue" onClick={() => handleLoginOut()}>退出</div>
-                </div> :
-                <div className="assets-tab">
-                  <div className="assets-tab-item blue" onClick={() => handleConnectWallet()}>连接</div>
+            {account ? (
+              <div className="assets-tab">
+                <div className="assets-tab-item blue">{`${account?.slice(
+                  0,
+                  5
+                )}...${account?.slice(-5)}`}</div>
+                <div
+                  className="assets-tab-item blue"
+                  onClick={() => handleLoginOut()}
+                >
+                  退出
                 </div>
-            }
+              </div>
+            ) : (
+              <div className="assets-tab">
+                <div
+                  className="assets-tab-item blue"
+                  onClick={() => handleConnectWallet()}
+                >
+                  连接
+                </div>
+              </div>
+            )}
           </div>
           <div className="right">
             <div
@@ -414,13 +424,21 @@ function App() {
             );
           })}
         </div>
-        <div className="vip">
-          <div className="head"></div>
-          <div className="center">
-            <div className="vip-name">{userInfo.fullName}</div>
-            <div className="vip-desc">{t("home.vip-desc")}</div>
-          </div>
-        </div>
+        {userInfo.customerStatus && (
+          <a
+            href={`tg://resolve?domain=${userInfo.customerTelegram}&start=${userInfo.customerTelegramId}`}
+          >
+            <div className="vip">
+              <div className="vip-head">
+                <img src={userInfo.customerHeadUrl} />
+              </div>
+              <div className="center">
+                <div className="vip-name">{userInfo.customerName}</div>
+                <div className="vip-desc">{t("home.vip-desc")}</div>
+              </div>
+            </div>
+          </a>
+        )}
       </div>
       <HomePriceMid hotList={recommendList} />
       <div className="quota">

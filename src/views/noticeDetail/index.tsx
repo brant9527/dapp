@@ -24,8 +24,7 @@ function MessageDetail() {
   const { t } = useTranslation();
   const [search, setsearch] = useSearchParams();
   const id = search.get("id");
-  const content =
-    window.localStorage.getItem("content");
+  const content = window.localStorage.getItem("content") || "";
   console.log("content=>", content);
   const publishTime = search.get("publishTime") || "";
   const title = search.get("title");

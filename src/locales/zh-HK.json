@@ -39,7 +39,7 @@
     "current-rate": "當前費率",
     "current-target": "升級還需交易現貨",
     "user-info": "賬戶信息",
-    "desc": "聯繫我了解您的VIP權益"
+    "vip-desc": "聯繫我了解您的VIP權益"
   },
   "quota": {
     "coins": {
@@ -114,8 +114,8 @@
     "swap": "合約",
     "delivery": "交割",
     "spot": "現貨",
-    "contract-delivery": "交割合约",
-    "contract-swap": "永续合约",
+    "contract-delivery": "交割合約",
+    "contract-swap": "永续合約",
     "postion": "当前持倉"
   },
   "common": {
@@ -350,6 +350,7 @@
     "promise-money-percent": "保證金率",
     "long-price": "開倉價格",
     "mark-price": "標記價格",
-    "force-close": "強平價格"
+    "force-close": "強平價格",
+    "contract":"合約"
   }
 }

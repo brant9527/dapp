@@ -1,0 +1,59 @@
+.root {
+  :global {
+    .profitLoss-wrap {
+      padding: 40px 0;
+      .info {
+        font-size: 30px;
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+        .info-left {
+          @include font_color("fontColor2");
+        }
+        .info-right {
+          @include font_color("fontColor1");
+
+          display: flex;
+          &.s {
+            color: $up;
+          }
+          &.f {
+            color: $down;
+          }
+          div {
+            margin-right: 10px;
+          }
+        }
+      }
+      .input-part {
+        display: flex;
+        justify-content: space-between;
+        .ipt-left {
+          width: 500px;
+        }
+        .ipt-right {
+          width: 500px;
+        }
+      }
+      .profitLoss-lever {
+        @include font_color("fontColor1");
+        font-size: 50px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .profitLoss-btn {
+        margin: 30px auto 0;
+        width: 1036px;
+        border-radius: 20px;
+        font-size: 50px;
+        height: 130px;
+        line-height: 130px;
+        color: $fontWhite;
+        font-weight: 600;
+        background-color: $blue;
+        text-align: center;
+      }
+    }
+  }
+}

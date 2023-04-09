@@ -33,8 +33,8 @@ import Model from "@/components/Model";
 import SlideNum from "@/components/SlideNum";
 import { closeOrder, oneClickCloseOrder } from "@/api/contract";
 
-const CloseDialog = forwardRef((props, ref) => {
-  const { onConfirm }: any = props;
+const CloseDialog = forwardRef(({ content = "", title, children, onConfirm, cancel = false }: any, ref) => {
+
 
   const [info, setInfo] = useState<any>({});
   const [lever, setLever] = useState(100);
@@ -44,7 +44,7 @@ const CloseDialog = forwardRef((props, ref) => {
     return {
       open: (data: any) => {
         setInfo(data.item);
-        console.log("data=>>>>", data);
+
         closeRef.current.open();
         setLever(100);
       },
@@ -59,9 +59,9 @@ const CloseDialog = forwardRef((props, ref) => {
     setLever(val);
   }, []);
   const onCloseOrder = useCallback(async () => {
-    console.log('info=>>>>',info)
+    console.log("info=>>>>", info);
     const params = {
-      algoType: info.algoType,
+      algoType: "market",
       count: amount,
       id: info.id,
     };
@@ -69,19 +69,20 @@ const CloseDialog = forwardRef((props, ref) => {
     if (code == 0) {
       onConfirm && onConfirm();
       closeRef.current.close();
+      Toast.notice(t("common.success"), {});
     }
-  },[info,amount]);
- 
+  }, [info, amount]);
+
   return (
     <Model ref={closeRef} title={t("contract.position.close")}>
-      <div className="slidenum-wrap">
-        <div className="slidenum-lever">
+      <div className="closeDialog-wrap">
+        <div className="closeDialog-lever">
           {t("common.count")}：{amount}
         </div>
 
         <SlideNum onChange={onChangeSlideNum} defaultVal={lever}></SlideNum>
         <div
-          className="slidenum-btn"
+          className="closeDialog-btn"
           onClick={() => {
             onCloseOrder();
           }}
