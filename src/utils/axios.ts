@@ -1,5 +1,5 @@
 import axios, { CreateAxiosDefaults } from "axios";
-
+// import {createHashHistory} from 'history';
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Toast from "@/components/Toast";
@@ -95,7 +95,10 @@ http.interceptors.response.use(
     localStorage.removeItem('noAccount')
     if (code != 0) {
       if (code == 1001) {
-        localStorage.setItem('noAccount', 'true')
+        // const history = createHashHistory();
+        // history.push('/home');
+        // localStorage.setItem('noAccount', 'true')
+        location.href= `${location.origin}/home`
       } else {
         Toast.notice(msg, {});
       }

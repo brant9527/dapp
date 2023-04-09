@@ -70,6 +70,7 @@ function App() {
     console.log(account, "account");
     if (account) {
       getMsgUnRead();
+      onGetUserInfo();
     }
     getBanner();
     getNoticeListHandle();
