@@ -1,7 +1,7 @@
 function not() {
   return (
     <div>
-      <h1>测试404</h1>
+      <h1>404 not found</h1>
     </div>
   );
 }

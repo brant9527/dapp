@@ -3,7 +3,18 @@
     .position-wrap {
       position: relative;
       margin-top: 30px;
+      .btn-option {
+        height: 90px;
+        line-height: 90px;
+        border-radius: 10px;
+        min-width: 200px;
+        padding: 0 34px;
+        font-size: 34px;
+        text-align: center;
 
+        @include background_color("bgColor2");
+        @include font_color("fontColor1");
+      }
       .position-top {
         display: flex;
         justify-content: space-between;
@@ -19,8 +30,8 @@
         &_item {
           position: relative;
           padding: 46px 0;
-          &:not(:last-child){
-            @include border('bottom')
+          &:not(:last-child) {
+            @include border("bottom");
           }
           .info-part {
             flex: 1;
@@ -98,31 +109,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-
           }
           .price {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-
           }
           .btn-part {
             display: flex;
-            justify-content:space-between;
+            justify-content: space-between;
             margin-top: 20px;
-            .btn-option {
-              height: 90px;
-              line-height: 90px;
-              border-radius: 10px;
-              min-width: 200px;
-              padding: 0 34px;
-              font-size: 34px;
-              text-align: center;
-
-              @include background_color("bgColor2");
-              @include font_color("fontColor1");
-            }
           }
         }
       }

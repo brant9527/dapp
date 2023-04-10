@@ -102,6 +102,7 @@ function Contract() {
   const symbol = search.get("symbol") || "BTCUSDT";
   const tradeMode = search.get("tradeMode") || "buy";
   const tradeTypeTemp = search.get("tradeType") || commonList[0].type;
+  const tradeTypeIndex = tradeTypeTemp === commonList[0].type ? 0 : 1;
   const [type, setType] = useState(tradeMode);
   const [coin, setCoin] = useState(symbol.replace("USDT", ""));
   const [transType, setTransType] = useState(configList[0].type);
@@ -356,7 +357,7 @@ function Contract() {
     } else {
       nav("/search?tradeType=" + tradeType);
     }
-  }, []);
+  }, [tradeType]);
   const onInputProfit = useCallback((val: any) => {
     setStopPfPrice(val);
   }, []);
@@ -501,6 +502,8 @@ function Contract() {
       <div className="contract-wrap">
         <CommonTab
           onChange={onChangeContractType}
+          defaultIndex={tradeTypeIndex}
+
           list={commonList}
         ></CommonTab>
         <NavBar
@@ -583,6 +586,7 @@ function Contract() {
               <div className="trade-type-part">
                 <TradeSelect
                   onSelect={onSelectTradeType}
+                  tradeType={tradeType}
                   configList={configList}
                 ></TradeSelect>
               </div>

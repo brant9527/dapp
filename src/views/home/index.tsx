@@ -396,7 +396,13 @@ function App() {
               {unReadMsg ? <div className="tip-num">{unReadMsg}</div> : ""}
             </div>
             <img src={theme} className="theme" onClick={onChangeTheme} />
-            <img src={chat} className="chat" />
+            <img
+              src={chat}
+              className="chat"
+              onClick={() => {
+                (window as any).Tawk_API.maximize();
+              }}
+            />
           </div>
         </div>
 
@@ -425,7 +431,7 @@ function App() {
             );
           })}
         </div>
-        {userInfo.customerStatus && (
+        {!!userInfo.customerStatus && (
           <a
             href={`tg://resolve?domain=${userInfo.customerTelegram}&start=${userInfo.customerTelegramId}`}
           >

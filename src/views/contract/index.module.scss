@@ -158,6 +158,8 @@
               display: flex;
               font-size: 36px;
               align-items: center;
+              @include font_color("fontColor1");
+
               .dot {
                 width: 34px;
                 height: 34px;
@@ -274,8 +276,8 @@
     }
     .slidenum-wrap {
       padding: 40px 0;
-      .slidenum-lever{
-        @include font_color('fontColor1');
+      .slidenum-lever {
+        @include font_color("fontColor1");
         font-size: 50px;
         text-align: center;
       }

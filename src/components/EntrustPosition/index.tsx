@@ -61,7 +61,7 @@ function Entrust(props: any) {
               <div className="position-right">
                 {tradeType !== "delivery" && (
                   <div
-                    className="btn-cancel"
+                    className="btn-option"
                     onClick={() => {
                       onClose({ type: "all" });
                     }}

@@ -1,4 +1,10 @@
-import React, { Component, useCallback, useState, Fragment } from "react";
+import React, {
+  Component,
+  useCallback,
+  useState,
+  Fragment,
+  useEffect,
+} from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -7,12 +13,15 @@ import arrow from "@/assets/xiala.png";
 
 import { useTranslation } from "react-i18next";
 function TradeSelect(props: any) {
-  const { onSelect, configList } = props;
+  const { onSelect, configList = [], tradeType }: any = props;
   const [type, setType] = useState();
   const [stateFlag, setStateFlag] = useState(false);
   const [current, setCurrent] = useState(configList[0]);
   const { t } = useTranslation();
   const nav = useNavigate();
+  useEffect(() => {
+    setCurrent(configList[0]);
+  }, [tradeType]);
   const selectType = (item: any) => {
     console.log("selectType", item);
     setCurrent(item);
@@ -38,13 +47,27 @@ function TradeSelect(props: any) {
         <div className="fixed-wrap">
           {configList.map((item: any, idx: number) => {
             return (
-              <div
-                className="select-item"
-                key={idx}
-                onClick={() => selectType(item)}
-              >
-                {item.label}
-              </div>
+              <>
+                {tradeType === "delivery" ? (
+                  idx == 0 && (
+                    <div
+                      className="select-item"
+                      key={idx}
+                      onClick={() => selectType(item)}
+                    >
+                      {item.label}
+                    </div>
+                  )
+                ) : (
+                  <div
+                    className="select-item"
+                    key={idx}
+                    onClick={() => selectType(item)}
+                  >
+                    {item.label}
+                  </div>
+                )}
+              </>
             );
           })}
         </div>

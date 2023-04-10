@@ -24,11 +24,11 @@
 
           // height: 250px;
           word-break: break-all;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 3;
+          // overflow: hidden;
+          // text-overflow: ellipsis;
+          // display: -webkit-box;
+          // -webkit-box-orient: vertical;
+          // -webkit-line-clamp: 3;
 
           @include font_color("fontColor2");
         }

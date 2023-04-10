@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />
-    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name=viewport />
 
-    <title>Example Dapp</title>
-    <script type="module">
-      import { Buffer } from "buffer";
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />
+  <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name=viewport />
+
+  <title>Example Dapp</title>
+  <script type="module">
+    import { Buffer } from "buffer";
       import process from "process";
       import util from "util";
       window.global = window;
@@ -15,9 +16,31 @@
       window.process = process;
       window.util = util;
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <!-- <script src="//code.tidio.co/6tsedeirpons3a0yovcsxxcqtj8wnwjb.js" async></script> -->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/643376394247f20fefeab7c1/1gtkgbl1c';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+      window.Tawk_API.onLoad = function () {
+        window.Tawk_API.hideWidget();
+      };
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
 </html>
