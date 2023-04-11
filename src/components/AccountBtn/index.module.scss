@@ -43,6 +43,7 @@
           transform: translateX(-50%);
           border: 18px solid transparent;
           border-bottom-color: $boder;
+          @include border_color("bgColor2");
         }
         .items-cls {
           font-size: 24px;

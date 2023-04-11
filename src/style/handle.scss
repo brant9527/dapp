@@ -35,6 +35,14 @@
   }
 }
 
+//获取边框颜色
+@mixin border_color($color, $direction: "bottom") {
+  @include themeify {
+    transition: border-color, color 0.5s;
+    border-bottom-color: themed($color);
+  }
+}
+
 @mixin border($direction: "bottom") {
   @if ($direction== "bottom") {
     &::after {

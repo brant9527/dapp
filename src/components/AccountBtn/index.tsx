@@ -1,12 +1,14 @@
-import React, { Component, useCallback, useState, Fragment } from "react"
-import * as ReactDOMClient from "react-dom/client"
-import { Outlet, useNavigate } from "react-router-dom"
+import React, { useState } from "react"
 
 import style from "./index.module.scss"
 
 function AccountBtn(props: any) {
   const { account, handleLoginOut, handleConnectWallet } = props
   const [showBtn, setShowBtn] = useState<boolean>(false)
+  const handleConnectWalletFunc = () => {
+    handleConnectWallet()
+    setShowBtn(false)
+  }
   return (
     <div className={style.root}>
       {account ? (
@@ -29,7 +31,7 @@ function AccountBtn(props: any) {
         <div className="assets-tab">
           <div
             className="assets-tab-item blue"
-            onClick={() => handleConnectWallet()}
+            onClick={() => handleConnectWalletFunc()}
           >
             连接
           </div>
