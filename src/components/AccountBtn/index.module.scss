@@ -1,0 +1,54 @@
+.root {
+  :global {
+    .assets-tab {
+      display: flex;
+      margin-left: 30px;
+      position: relative;
+      .assets-tab-item {
+        font-size: 42px;
+        width: 300px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        border-radius: 20px;
+        @include font_color("fontColor2");
+
+        @include background_color("bgColor2");
+        &.blue {
+          color: $fontWhite;
+          background-color: $blue;
+        }
+        margin-right: 10px;
+      }
+      .login-out-wrap {
+        box-sizing: border-box;
+        position: absolute;
+        top: 140px;
+        left: 0;
+        transition: all 1s;
+        width: 100%;
+        text-align: center;
+        padding: 20px 15px;
+        border-radius: 10px;
+        @include background_color("bgColor2");
+        @include font_color("fontColor2");
+
+        &::before {
+          content: "";
+          display: inline-block;
+          vertical-align: middle;
+          position: absolute;
+          top: -38px;
+          left: 50%;
+          transform: translateX(-50%);
+          border: 18px solid transparent;
+          border-bottom-color: $boder;
+        }
+        .items-cls {
+          font-size: 24px;
+          padding: 15px 0;
+        }
+      }
+    }
+  }
+}

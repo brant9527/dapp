@@ -92,7 +92,7 @@ http.interceptors.response.use(
     // const nav = useNavigate();
     const { code, msg } = response.data;
     console.log(response.data);
-    localStorage.removeItem('noAccount')
+    // localStorage.removeItem('noAccount')
     if (code != 0) {
       if (code == 1001) {
         // const history = createHashHistory();

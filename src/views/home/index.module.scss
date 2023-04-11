@@ -21,7 +21,7 @@
             margin-right: 39px;
           }
           .input-bg {
-            width: 481px;
+            width: 201px;
             height: 101px;
             border-radius: 10px;
             background-color: $inputBg;
@@ -37,25 +37,6 @@
             .text {
               font-size: 40px;
               @include font_color(fontColor2);
-            }
-          }
-          .assets-tab {
-            display: flex;
-            .assets-tab-item {
-              font-size: 42px;
-              width: 300px;
-              height: 100px;
-              line-height: 100px;
-              text-align: center;
-              border-radius: 20px;
-              @include font_color("fontColor2");
-
-              @include background_color("bgColor2");
-              &.blue {
-                color: $fontWhite;
-                background-color: $blue;
-              }
-              margin-right: 10px;
             }
           }
         }

@@ -36,6 +36,7 @@ import { ABI } from "../../hooks/useWeb3/dappInfo";
 import { AbiItem } from "web3-utils";
 import axios from "@/utils/axios";
 import Wallet from "@/components/Wallet";
+import AccountBtn from "@/components/AccountBtn";
 
 function App() {
   let themes = window.localStorage.getItem("themes") || "light";
@@ -75,7 +76,7 @@ function App() {
     getBanner();
     getNoticeListHandle();
     getData();
-    onGetUserInfo();
+    // onGetUserInfo();
   }, [account]);
   useEffect(() => {
     subData();
@@ -352,7 +353,7 @@ function App() {
         <div className="home-top">
           <div className="left">
             <img src={user} onClick={openMenu} />
-            {/* <div
+            <div
               className="input-bg"
               onClick={() => {
                 navigate("/search");
@@ -360,8 +361,9 @@ function App() {
             >
               <img src={search} />
               <span className="text">{t("home.search")}</span>
-            </div> */}
-            {account ? (
+            </div>
+            <AccountBtn account={account} handleLoginOut={handleLoginOut} handleConnectWallet={handleConnectWallet}/>
+            {/* {account ? (
               <div className="assets-tab">
                 <div className="assets-tab-item blue">{`${account?.slice(
                   0,
@@ -383,7 +385,7 @@ function App() {
                   连接
                 </div>
               </div>
-            )}
+            )} */}
           </div>
           <div className="right">
             <div
