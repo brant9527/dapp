@@ -12,7 +12,6 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-
 import Back from "@/components/Back";
 
 import Toast from "@/components/Toast";
@@ -25,7 +24,7 @@ function MessageDetail() {
   const { t } = useTranslation();
   const [search, setsearch] = useSearchParams();
   const id = search.get("id");
-  const content = search.get("content");
+  const content = window.localStorage.getItem("content") || "";
   const createTime = search.get("createTime") || "";
   const title = search.get("title");
   const getData = async () => {
@@ -43,8 +42,13 @@ function MessageDetail() {
 
         <div className="message-content">
           <div className="title">{title}</div>
-          <div className="createTime">{formatTime(new Date(createTime).getTime())}</div>
-          <div className="title">{content}</div>
+          <div className="createTime">
+            {formatTime(new Date(createTime).getTime())}
+          </div>
+          <div
+            className="title"
+            dangerouslySetInnerHTML={{ __html: decodeURI(content) }}
+          ></div>
         </div>
       </div>
     </div>

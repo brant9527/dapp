@@ -1,9 +1,11 @@
 import React, { useState, forwardRef, useImperativeHandle, memo } from "react";
 import style from "./index.module.scss";
-const ConfirmDialog = forwardRef(
-  ({ content = "", children,onConfirm, cancel = false }: any, ref) => {
-    const [showDialog, setShowDialog] = useState(false);
+import { useTranslation } from "react-i18next";
 
+const ConfirmDialog = forwardRef(
+  ({ content = "", children, onConfirm, cancel = false }: any, ref) => {
+    const [showDialog, setShowDialog] = useState(false);
+    const { t } = useTranslation();
     const handleConfirm = () => {
       onConfirm();
       setShowDialog(false);
@@ -16,20 +18,23 @@ const ConfirmDialog = forwardRef(
     return (
       <div className={style.root}>
         {showDialog && (
-          <div className="comfirm-wrap">
+          <div className="confirm-wrap">
             <div className="content">{children}</div>
             <div className="foot">
-              <div className="comfirm-btn comfirm-btn-ok" onClick={handleConfirm}>
-                确认
-              </div>
               {cancel && (
                 <div
-                  className="comfirm-btn comfirm-btn-cancel"
+                  className="confirm-btn confirm-btn-cancel"
                   onClick={() => setShowDialog(false)}
                 >
-                  取消
+                  {t("common.cancel")}
                 </div>
               )}
+              <div
+                className="confirm-btn confirm-btn-ok"
+                onClick={handleConfirm}
+              >
+                {t("common.sure")}
+              </div>
             </div>
           </div>
         )}

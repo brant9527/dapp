@@ -21,6 +21,7 @@ import { accSub } from "@/utils/public";
 
 function Quotation() {
   const { t } = useTranslation();
+  window.localStorage.setItem("mock", "0");
   const [search, setsearch] = useSearchParams();
   const tabType = search.get("type") || "";
   const tabs = [
@@ -76,10 +77,9 @@ function Quotation() {
 
   const getData = async () => {
     const data: any = await Io.getMarketList();
-    const dataOptional: any = await Io.getCommonRequest(
-      "getUserCollectList",
-      { tradeType: "swap" }
-    );
+    const dataOptional: any = await Io.getCommonRequest("getUserCollectList", {
+      tradeType: "swap",
+    });
 
     const hotListTemp: Array<any> = [];
     const recommendListTemp: Array<any> = [];

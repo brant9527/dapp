@@ -8,6 +8,9 @@
                 font-size: 38px;
                 padding: 64px 45px;
                 @include border("bottom");
+                text-align: justify;
+
+                word-break: break-all;
                 .left {
                     position: relative;
                     width: 84px;

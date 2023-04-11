@@ -12,8 +12,8 @@ export const readMessage = (data: any) => {
 export const getBannerList = () => {
   return axios.post("/api/common/getBannerList");
 };
-export const getHelpType = () => {
-  return axios.post("/api/common/getHelpType");
+export const getHelpType = (data?:any) => {
+  return axios.post("/api/common/getHelpType",data);
 };
 export const getHelpList = (data: any) => {
   return axios.post("/api/common/getHelpList", data);

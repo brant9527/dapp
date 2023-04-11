@@ -13,7 +13,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import Back from "@/components/Back";
-import RecordItem from "./Components/RecordItem";
+
 import Scroll from "@/components/Scroll";
 import Toast from "@/components/Toast";
 
@@ -58,11 +58,14 @@ function TransRecord() {
                 className="help-item"
                 key={idx}
                 onClick={() => {
-                  window.localStorage.setItem("helpDetail", JSON.stringify(item));
+                  window.localStorage.setItem(
+                    "helpDetail",
+                    JSON.stringify(item)
+                  );
                   nav("/helpDetail");
                 }}
               >
-                <div> {item.content}</div>
+                <div> {item.title}</div>
                 <div>
                   <img src={rightPng} />
                 </div>

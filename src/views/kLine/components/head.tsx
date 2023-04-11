@@ -43,7 +43,7 @@ function Head() {
         <div className="head-left">
           <div className="total-price">{fixPrice(headInfo?.close)}</div>
           <div className="total-usdt">
-            ≈{fixPrice(headInfo?.close)}{" "}
+            ≈$ {fixPrice(headInfo?.close)}{" "}
             <span className={`${headInfo?.rate > 0 ? "up" : "down"}`}>
               {toFixed(headInfo?.rate, 2)}%
             </span>
@@ -60,7 +60,7 @@ function Head() {
           </div>
           <div className="head-right_item">
             <div className="item-top">{t("trade.total24")}</div>
-            <div className="item-bottom">{headInfo?.volume}</div>
+            <div className="item-bottom">{headInfo?.volume}K</div>
           </div>
         </div>
       </div>

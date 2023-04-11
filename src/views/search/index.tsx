@@ -16,7 +16,6 @@ import searchPng from "@/assets/search.png";
 import noCollect from "@/assets/no-collect.png";
 import collect from "@/assets/collect.png";
 
-
 import QuotaCoin from "@/components/QuotaCoin";
 import { searchPair } from "@/api/common";
 import _ from "lodash";
@@ -140,7 +139,6 @@ function Search() {
                             e.stopPropagation();
                           }}
                           src={item.collectStatus ? collect : noCollect}
-
                         />
                       </div>
                     </div>
@@ -157,10 +155,18 @@ function Search() {
               <div className="coins">
                 {swapList.map((item: any, cIdx) => {
                   return (
-                    <div className="coin-item" key={cIdx}
-                    onClick={() => {
-                      nav(`/contract?symbol=${item.symbol}&tradeType=swap`);
-                    }}
+                    <div
+                      className="coin-item"
+                      key={cIdx}
+                      onClick={() => {
+                        const mock = window.localStorage.getItem("mock");
+                        if (mock) {
+                          return nav(
+                            `/mockTrade?symbol=${item.symbol}&tradeType=swap`
+                          );
+                        }
+                        nav(`/contract?symbol=${item.symbol}&tradeType=swap`);
+                      }}
                     >
                       <div className="coin-left">
                         <img src={item.logo} className="coin-logo" />
@@ -189,11 +195,8 @@ function Search() {
                               onAdd({ ...item, tradeType: "swap" });
                             }
                             e.stopPropagation();
-
                           }}
-
                           src={item.collectStatus ? collect : noCollect}
-
                         />
                       </div>
                     </div>
@@ -210,10 +213,21 @@ function Search() {
               <div className="coins">
                 {deliveryList.map((item: any, cIdx) => {
                   return (
-                    <div className="coin-item" key={cIdx + 1}
-                    onClick={() => {
-                      nav(`/contract?symbol=${item.symbol}&tradeType=delivery`);
-                    }}>
+                    <div
+                      className="coin-item"
+                      key={cIdx + 1}
+                      onClick={() => {
+                        const mock = window.localStorage.getItem("mock");
+                        if (mock) {
+                          return nav(
+                            `/mockTrade?symbol=${item.symbol}&tradeType=swap`
+                          );
+                        }
+                        nav(
+                          `/contract?symbol=${item.symbol}&tradeType=delivery`
+                        );
+                      }}
+                    >
                       <div className="coin-left">
                         <img src={item.logo} className="coin-logo" />
                         <div className="coin-symbol">
@@ -241,10 +255,8 @@ function Search() {
                               onAdd({ ...item, tradeType: "delivery" });
                             }
                             e.stopPropagation();
-
                           }}
                           src={item.collectStatus ? collect : noCollect}
-
                         />
                       </div>
                     </div>

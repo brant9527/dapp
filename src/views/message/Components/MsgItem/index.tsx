@@ -24,12 +24,17 @@ function MsgItem(props: any) {
         <div className="msg-item">
           <div className="left">
             <img src={msg} />
-            <div className="dot"></div>
+            {item.status === 0 && <div className="dot"></div>}
           </div>
           <div className="right">
             <div className="title">{item.title}</div>
-            <div className="content">{item.content}</div>
-            <div className="time">{formatTime(new Date(item.createTime).getTime())}</div>
+            <div
+              className="content"
+              dangerouslySetInnerHTML={{ __html: decodeURI(item.content) }}
+            ></div>
+            <div className="time">
+              {formatTime(new Date(item.createTime).getTime())}
+            </div>
           </div>
         </div>
       </div>

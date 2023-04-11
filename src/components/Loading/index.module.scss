@@ -1,0 +1,157 @@
+.root {
+  :global {
+    .change-btn {
+      @include font_color("fontColor");
+    }
+    .menu-wrap {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10099;
+      @include background_color("bgColor1");
+      .menu-content {
+        position: absolute;
+        width: calc(100vw - 80px);
+        height:calc(100vh - 80px);
+        left: 0;
+        z-index: 11;
+        padding: 40px;
+        overflow: auto;
+
+        @include font_color("fontColor1");
+        @include background_color("bgColor1");
+        .user-info {
+          position: relative;
+
+          height: 200px;
+          display: block;
+          margin: auto;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          font-size: 40px;
+          @include font_color("fontColor2");
+          margin: 60px 0;
+          .user {
+            width: 138px;
+            height: 138px;
+          }
+          .user-detail {
+            margin-left: 32px;
+            .user-core {
+              span {
+                @include font_color("fontColor1");
+              }
+            }
+            .user-uid {
+              display: flex;
+              align-items: center;
+              margin-top: 24px;
+              img {
+                width: 41px;
+                height: 41px;
+                margin-left: 20px;
+              }
+            }
+            .user-bg {
+              position: absolute;
+              width: 223px;
+              height: 93px;
+              display: flex;
+              justify-content: center;
+              right: 0;
+              top: 60px;
+              align-items: center;
+              border-radius: 40px;
+
+              &.certified {
+                color: $up;
+                background-color: $priceUpBg;
+              }
+              &.not-certified {
+                color: $down;
+                background-color: $priceDownBg;
+              }
+            }
+          }
+        }
+        .menu-back {
+          padding-bottom: 20px;
+          img {
+            width: 70px;
+            height: 59px;
+          }
+        }
+        .progress {
+          width: 920px;
+          height: 160px;
+          padding: 55px 55px;
+          background-color: #f2f5fc;
+          border-radius: 40px;
+          margin-bottom: 60px;
+          .progress-top {
+            display: flex;
+            font-size: 44px;
+            justify-content: space-between;
+            @include font_color("fontColor2");
+
+            .left {
+            }
+            .right {
+            }
+          }
+          .progress-center {
+            width: 924px;
+            height: 18px;
+            background-color: #bcc2cc;
+            margin: 30px 0;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            .progress-bar {
+              height: 18px;
+              background-color: $blue;
+            }
+          }
+          .progress-bottom {
+            display: flex;
+            font-size: 36px;
+            justify-content: space-between;
+
+            @include font_color("fontColor2");
+
+            span {
+              color: $blue;
+            }
+          }
+        }
+        .list-item {
+          display: flex;
+          align-items: center;
+          height: 160px;
+          justify-content: space-between;
+          .left {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            .icon {
+              width: 83px;
+              height: 83px;
+            }
+            .label {
+              font-size: 44px;
+              margin-left: 40px;
+              @include font_color("fontColor1");
+            }
+          }
+          .right {
+            width: 23px;
+            height: 39px;
+          }
+        }
+      }
+    }
+  }
+}

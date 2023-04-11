@@ -15,7 +15,7 @@ import msgNotify from "@/assets/msg-notify.png";
 import theme from "@/assets/yueliang.png";
 import { useTranslation } from "react-i18next";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuList from "@/components/MenuLeft";
 import HomePriceMid from "./Components/HomePriceMid";
@@ -36,10 +36,12 @@ import { ABI } from "../../hooks/useWeb3/dappInfo";
 import { AbiItem } from "web3-utils";
 import axios from "@/utils/axios";
 import Wallet from "@/components/Wallet";
-
+import Confirm from "@/components/Confirm";
+import Toast from "@/components/Toast";
 function App() {
   let themes = window.localStorage.getItem("themes") || "light";
-
+  // 初始化mock值
+  window.localStorage.setItem("mock", "0");
   const [bannerList, setBannerList] = useState([]);
   const [unReadMsg, setUnReadMsg] = useState(0);
   const [noticeList, setNoticeList] = useState<Array<any>>([{}]);
@@ -54,7 +56,7 @@ function App() {
   const [userInfo, setUserInfo] = useState<any>({});
   const { connectProvider, changeProvider, account, web3, providerString } =
     useWeb3();
-
+  const confirmRef = useRef<any>(null);
   const { t } = useTranslation();
   console.log("home页刷新");
   const onChangeTheme = useCallback(async () => {
@@ -75,7 +77,6 @@ function App() {
     getBanner();
     getNoticeListHandle();
     getData();
-    onGetUserInfo();
   }, [account]);
   useEffect(() => {
     subData();
@@ -128,8 +129,8 @@ function App() {
 
     setHotList(hotListTemp);
     setRecommendList(recommendListTemp);
-    setRaiseList(raiseListTemp);
-    setDownList(downListTemp);
+    setRaiseList(raiseListTemp.filter((item: any) => item.rate > 0));
+    setDownList(downListTemp.filter((item: any) => item.rate < 0));
     setNewPairList(newPairListTemp);
     setOptional(dataOptional);
   };
@@ -250,12 +251,12 @@ function App() {
     {
       label: t("home.btns.mnjy"),
       src: mnjy,
-      path: "/ai",
+      path: "/mockTrade",
     },
     {
-      label: t("home.btns.c2c"),
+      label: t("home.btns.C2C"),
       src: c2c,
-      path: "/c2c",
+      path: "/C2C",
     },
     {
       label: t("home.btns.yq"),
@@ -311,7 +312,13 @@ function App() {
       setOpen(true);
     }
   }, [connectProvider]);
-
+  const onConfirm = () => {
+    try {
+      (window as any).Tawk_API.maximize();
+    } catch (error) {
+      Toast.notice("need vpn", {});
+    }
+  };
   useEffect(() => {
     if (connected) {
       console.log("homeconnected");
@@ -424,7 +431,16 @@ function App() {
         <div className="home-btns">
           {btnList.map((item, i) => {
             return (
-              <div className="btn-item" key={i} onClick={() => nav(item.path)}>
+              <div
+                className="btn-item"
+                key={i}
+                onClick={() => {
+                  if (item.path.indexOf("/C2C") > -1) {
+                    return confirmRef.current.open();
+                  }
+                  nav(item.path);
+                }}
+              >
                 <img src={item.src} />
                 <div className="btn-label">{item.label}</div>
               </div>
@@ -457,6 +473,9 @@ function App() {
         ></QuotaCoin>
       </div>
       <Article></Article>
+      <Confirm onConfirm={onConfirm} cancel={true} ref={confirmRef}>
+        <div className="confirm-tip">{t("home.customer-tip")}</div>
+      </Confirm>
     </div>
   );
 }

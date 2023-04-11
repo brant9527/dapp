@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import Back from "@/components/Back";
-import Comfirm from "@/components/Comfirm";
+import Confirm from "@/components/Confirm";
 
 import questionList from "./questionLg/tw.json";
 import RadioGroup from "./components/RadioGroup";
@@ -22,7 +22,7 @@ function Ques() {
   const { t } = useTranslation();
 
   const nav = useNavigate();
-  const comfirmRef = useRef<any>(null);
+  const confirmRef = useRef<any>(null);
   const [ansList, setAnsList] = useState<any>([]);
 
   const onChange = useCallback(
@@ -70,7 +70,7 @@ function Ques() {
       count: questionList.qList.length,
     });
     if (code === 0) {
-      nav("/home");
+      nav("/");
     }
   };
   return (
@@ -128,14 +128,14 @@ function Ques() {
           <div
             className="btn"
             onClick={() => {
-              comfirmRef.current.open();
+              confirmRef.current.open();
             }}
           >
             {t("common.sure")}
           </div>
-          <Comfirm onConfirm={submit} ref={comfirmRef}>
+          <Confirm onConfirm={submit} ref={confirmRef}>
             <div className="tip">{questionList.tip3}</div>
-          </Comfirm>
+          </Confirm>
         </div>
       </div>
     </div>

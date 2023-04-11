@@ -67,6 +67,10 @@ function Invite() {
             <span>{url}</span>
             <img src={copyPng} />
           </div>
+          <div className="invite-tip">{t("invite.reward1")}</div>
+          <div className="invite-tip">{t("invite.reward2")}</div>
+          <div className="invite-tip">{t("invite.reward3")}</div>
+          <div className="invite-tip">{t("invite.reward4")}</div>
         </div>
       </div>
     </div>

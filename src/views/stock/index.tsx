@@ -46,6 +46,8 @@ import { getUserInfo } from "@/api/userInfo";
 
 function Stock() {
   const { t } = useTranslation();
+  // 初始化mock值
+  window.localStorage.setItem("mock", '0');
   const configList = [
     {
       label: t("common.trade.market"),

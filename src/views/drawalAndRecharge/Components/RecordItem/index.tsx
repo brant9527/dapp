@@ -8,30 +8,44 @@ import {
   Outlet,
   useNavigate,
 } from "react-router-dom";
-
+import rightPng from "@/assets/right.png";
 import { useTranslation } from "react-i18next";
+import { formatTime } from "@/utils/public";
 
 function RecordItem(props: any) {
-  const { item } = props;
+  const { item, type = "recharge", onSelect } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
 
   return (
     <div className={style.root}>
-      <div className="record-item">
-        <div className="record-item_left">
-          <div className="item-top">{item.coin}</div>
-          <div className="item-b">{item.time}</div>
-        </div>
-        <div className="record-item_right">
-          <div className="item-top">{item.count}</div>
-          <div className="item-b">
-            <span
-              className={["dot", item.state == 1 ? "dot_s" : "dot_f"].join(" ")}
-            ></span>
-            {item.state == 1 ? t("common.success") : t("common.faild")}
+      <div className="record-wrap" onClick={() => onSelect && onSelect()}>
+        <div className="record-item">
+          <div className="record-item_left">
+            <div className="item-top">{item.coin || item.asset}</div>
+            <div className="item-b">
+              {formatTime(
+                new Date(
+                  item.time || item.rechargeTime || item.createTime
+                ).getTime() || new Date()
+              )}
+            </div>
+          </div>
+          <div className="record-item_right">
+            <div className="item-top">{item.count}</div>
+            <div className="item-b">
+              {type === "withdrawl" && (
+                <span
+                  className={["dot", item.status == 1 ? "dot_s" : "dot_f"].join(
+                    " "
+                  )}
+                ></span>
+              )}
+              {item.status == 1 ? t("common.success") : t("common.faild")}
+            </div>
           </div>
         </div>
+        {type === "withdrawl" && <img className="right" src={rightPng} />}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 
 import Tabs from "@/components/Tabs";
 import Back from "@/components/Back";
-import RecordItem from "./Components/RecordItem";
+
 import Scroll from "@/components/Scroll";
 import Toast from "@/components/Toast";
 
@@ -120,15 +120,13 @@ function TransRecord() {
     console.log("刷新");
   };
   function title() {
-    return <div className="trade-title">{t("common.stock")}</div>;
-  }
-  function EntrustLeft() {
     return (
-      <div className="part-condition">
-        <div className="condition-type">{t("common.type")}</div>
+      <div className="trade-title">
+        {tradeType === "spot" ? t("common.stock") : t("contract.contract")}
       </div>
     );
   }
+
   return (
     <div className={style.root}>
       <div className="trade-wrap">

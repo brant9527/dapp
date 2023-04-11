@@ -1,6 +1,6 @@
 .root {
     :global {
-        .comfirm-wrap {
+        .confirm-wrap {
             position: fixed;
 
             @include background_color("bgColor1");
@@ -15,6 +15,7 @@
             padding: 120px 40px 0 40px;
             .content {
                 min-height: 300px;
+                
             }
             .cross {
                 position: absolute;

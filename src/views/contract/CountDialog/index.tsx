@@ -50,22 +50,23 @@ const CountDialog = forwardRef((props, ref) => {
   const startCount = useCallback(
     (count: number) => {
       let timeTemp: number = count;
-      const timerTmep = setInterval(() => {
+      const timerTemp = setInterval(() => {
         setTime(--timeTemp);
+
         if (!timeTemp || timeTemp <= 0) {
-          clearInterval(timer);
+          clearInterval(timerTemp);
           return setShowDialog(false);
         }
-      }, 0);
-      setTimer(timerTmep);
+      }, 1000);
+      setTimer(timerTemp);
     },
-    [info, time]
+    [info]
   );
 
   useImperativeHandle(ref, () => {
     return {
       open: (data: any) => {
-        console.log("初始化数据=》》》》》", data);
+
         setInfo(data);
         setTime(data.period);
         setTimeout(() => {

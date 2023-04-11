@@ -101,7 +101,9 @@ function TransRecord() {
   function title() {
     return <div className="trade-title">{t("common.record")}</div>;
   }
-  
+  const navToDetail = (item: any) => {
+    nav("/withdrawlDetail?id=" + item.id);
+  };
   return (
     <div className={style.root}>
       <div className="trade-wrap">
@@ -118,14 +120,26 @@ function TransRecord() {
             {type === "1" && (
               <div className="assets-list">
                 {recordList.map((item: any, idx: any) => {
-                  return <RecordItem item={item} key={idx}></RecordItem>;
+                  return (
+                    <div key={idx}>
+                      <RecordItem item={item}></RecordItem>
+                    </div>
+                  );
                 })}
               </div>
             )}
             {type === "2" && (
               <div className="assets-list">
                 {recordList.map((item: any, idx: any) => {
-                  return <RecordItem item={item} key={idx}></RecordItem>;
+                  return (
+                    <div key={idx}>
+                      <RecordItem
+                        item={item}
+                        type={"withdrawl"}
+                        onSelect={() => navToDetail(item)}
+                      ></RecordItem>
+                    </div>
+                  );
                 })}
               </div>
             )}

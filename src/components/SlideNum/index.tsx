@@ -62,10 +62,13 @@ const Slider = function (props: any) {
   const [value, setValue] = useState(defaultVal || 1);
   const inputRef = useRef<any>(null);
 
-  function handleInputChange() {
+  function handleInputChange(e: any) {
     const value = inputRef.current.value;
     setValue(value);
     onChange(value);
+    e.preventDefault();
+
+    e.stopPropagation();
   }
 
   return (

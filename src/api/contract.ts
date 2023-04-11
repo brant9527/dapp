@@ -9,8 +9,8 @@ export const openDeliverytOrder = (data: any) => {
 export const cancelContractOrder = (data: any) => {
   return axios.post("/api/swap/trade/cancel", data);
 };
-export const oneClickCloseOrder = (data: any) => {
-  return axios.post("/api/swap/trade/oneClickCloseOrder", data);
+export const oneClickCloseOrder = () => {
+  return axios.post("/api/swap/trade/oneClickCloseOrder");
 };
 
 export const closeOrder = (data: any) => {

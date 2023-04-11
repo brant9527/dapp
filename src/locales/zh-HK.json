@@ -24,7 +24,7 @@
       "xb": "新幣",
       "mnjy": "模擬交易",
       "jd": "借貸",
-      "c2c": "c2c",
+      "C2C": "C2C",
       "yq": "好友邀請",
       "us": "關於我們"
     },
@@ -39,7 +39,8 @@
     "current-rate": "當前費率",
     "current-target": "升級還需交易現貨",
     "user-info": "賬戶信息",
-    "vip-desc": "聯繫我了解您的VIP權益"
+    "vip-desc": "聯繫我了解您的VIP權益",
+    "customer-tip": "C2C 請聯繫客服"
   },
   "quota": {
     "coins": {
@@ -64,7 +65,7 @@
 
     "assets-funds": "資金賬戶",
     "assets-contract": "合約賬戶",
-    "assets-lever": "槓桿賬戶",
+    "assets-lever": "錢包賬戶",
     "useable": "可用",
     "frozen": "凍結",
     "assets": "資產",
@@ -158,7 +159,11 @@
     "help": "幫助中心",
     "close": "關閉",
     "address": "地址",
-    "acticle-title": "資訊"
+    "acticle-title": "資訊",
+    "good": "利好",
+    "bad": "利空",
+    "about-us": "關於我們",
+    "customer": "聯繫專屬客服"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -272,13 +277,16 @@
     "day": "天"
   },
   "withdrawal": {
-    "withdrawal": "提币",
+    "withdrawal": "提現",
     "address": "提幣地址",
     "receive-address": "接收地址",
     "min-amount": "最少{{amount}}",
     "fee": "手續費",
     "receive-amount": "到賬數量",
-    "rest": "餘額"
+    "withdrawal-amount": "提幣數量",
+    "rest": "餘額",
+    "apply-time": "申請時間",
+    "step": "提現流程"
   },
   "trade": {
     "high24": "24h最高價",
@@ -334,7 +342,8 @@
     "position": {
       "fixed": "逐倉",
       "crossed": "全倉",
-      "close": "平倉"
+      "close": "平倉",
+      "close-all": "一鍵平倉"
     },
     "adjust-lever": "調整槓桿",
     "promise-money": "保证金",
@@ -351,6 +360,7 @@
     "long-price": "開倉價格",
     "mark-price": "標記價格",
     "force-close": "強平價格",
-    "contract":"合約"
+    "contract": "合約",
+    "close-tip": "確認一鍵平倉嗎？"
   }
 }

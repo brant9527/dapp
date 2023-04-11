@@ -62,11 +62,12 @@ http.interceptors.request.use(
     const account = window.localStorage.getItem("account");
     const wallet = window.localStorage.getItem("web3-provider");
     const language = window.localStorage.getItem("i18nextLng");
+    const mock = window.localStorage.getItem("mock");
 
     if (account) {
       config.headers.account = account;
       config.headers.language = language;
-      config.headers.mock = 0;
+      config.headers.mock = mock || 0;
       config.headers.device = device;
       config.headers.wallet = wallet;
     }
@@ -92,13 +93,13 @@ http.interceptors.response.use(
     // const nav = useNavigate();
     const { code, msg } = response.data;
     console.log(response.data);
-    localStorage.removeItem('noAccount')
+    localStorage.removeItem("noAccount");
     if (code != 0) {
       if (code == 1001) {
         // const history = createHashHistory();
         // history.push('/home');
         // localStorage.setItem('noAccount', 'true')
-        location.href= `${location.origin}/home`
+        location.href = `${location.origin}/`;
       } else {
         Toast.notice(msg, {});
       }
@@ -108,7 +109,7 @@ http.interceptors.response.use(
   (error) => {
     hideLoading();
     if (error.response && error.response.status) {
-      alert(error.response.toString())
+      alert(error.response.toString());
       switch (error.response.status) {
         case 401:
           // 如有刷新token的需求,可放开以下代码

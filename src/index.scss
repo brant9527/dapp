@@ -39,3 +39,7 @@ input {
 ::-webkit-scrollbar {
   width: 0;
 }
+html,
+body {
+  overflow: hidden;
+}

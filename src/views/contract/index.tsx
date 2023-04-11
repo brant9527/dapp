@@ -55,8 +55,13 @@ import {
 import CountDialog from "./CountDialog";
 import CloseDialog from "./CloseDialog";
 import ProfitLossModel from "./ProfitLossModel";
+import Confirm from "@/components/Confirm";
 
-function Contract() {
+function Contract({ mock }: any) {
+  // 初始化mock值,当模拟交易没阈值的时候才可以初始化
+  if (!mock) {
+    window.localStorage.setItem("mock", "0");
+  }
   const { t } = useTranslation();
   const configList = [
     {
@@ -142,6 +147,7 @@ function Contract() {
   const countRef = useRef<any>(null);
   const closeRef = useRef<any>(null);
   const profitLossRef = useRef<any>(null);
+  const confirmRef = useRef<any>(null);
 
   const nav = useNavigate();
 
@@ -150,6 +156,8 @@ function Contract() {
     setPercent(-1);
     setUseUsdt("");
     setCoinAccount("");
+    usdtRef?.current.setVal("");
+    accountRef?.current.setVal("");
   }, []);
   const onSelectTradeType = useCallback((type: string) => {
     setTransType(type);
@@ -169,6 +177,9 @@ function Contract() {
     console.log("订阅数据");
     return () => Io.cfwsUnsubscribe("depth." + symbol);
   }, [subData]);
+  useEffect(() => {
+    getData();
+  }, [tradeType]);
   useEffect(() => {
     getData();
     getBalance();
@@ -327,37 +338,40 @@ function Contract() {
     setTradeType(val);
   }, []);
 
-  const onCancel = useCallback(async (params: any) => {
-    let ids = [];
-    let method: any = "";
+  const onCancel = useCallback(
+    async (params: any) => {
+      let ids = [];
 
-    if (params.type === "all") {
-      ids = entrustList.map((item: any) => item.id);
-      method = oneClickCloseOrder;
-    } else {
-      ids = [params.id];
-      method = cancelContractOrder;
-    }
-    const { code } = await method({ ids });
-    if (code == 0) {
-      Toast.notice(t("common.success"), { duration: 2000 });
-      getData();
-      getBalance();
-      setPercent(-1);
-      setCoinAccount("");
-      setCoinPrice("");
-      setUseUsdt("");
-      usdtRef?.current.setVal("");
-      accountRef?.current.setVal("");
-    }
-  }, []);
-  const navHandle = useCallback((path: string) => {
-    if (path === "/kLine") {
-      nav(`/kLine?symbol=${symbol}&tradeType=${tradeType}`);
-    } else {
-      nav("/search?tradeType=" + tradeType);
-    }
-  }, [tradeType]);
+      if (params.type === "all") {
+        ids = entrustList.map((item: any) => item.id);
+      } else {
+        ids = [params.id];
+      }
+      const { code } = await cancelContractOrder({ ids });
+      if (code == 0) {
+        Toast.notice(t("common.success"), { duration: 2000 });
+        getData();
+        getBalance();
+        setPercent(-1);
+        setCoinAccount("");
+        setCoinPrice("");
+        setUseUsdt("");
+        usdtRef?.current.setVal("");
+        accountRef?.current.setVal("");
+      }
+    },
+    [entrustList]
+  );
+  const navHandle = useCallback(
+    (path: string) => {
+      if (path === "/kLine") {
+        nav(`/kLine?symbol=${symbol}&tradeType=${tradeType}`);
+      } else {
+        nav("/search?tradeType=" + tradeType);
+      }
+    },
+    [tradeType]
+  );
   const onInputProfit = useCallback((val: any) => {
     setStopPfPrice(val);
   }, []);
@@ -387,7 +401,7 @@ function Contract() {
       Number(promiseMoney) + fee >
       Number(balanceAssets?.availableUsdtBalance)
     ) {
-      console.log("计算1");
+      console.log("total>rest");
       const maxPromiseMoney = accDiv(
         Number(balanceAssets?.availableUsdtBalance),
         accAdd(accMul(lever, userInfo.feeRate), 1)
@@ -395,7 +409,7 @@ function Contract() {
       amountTemp =
         Number(accDiv(maxPromiseMoney, coinPrice || headInfo?.close)) * 10;
     } else {
-      console.log("计算2");
+      console.log("count normol");
 
       amountTemp = accMul(coinAccount, accSub(1, userInfo?.feeRate));
     }
@@ -467,7 +481,17 @@ function Contract() {
    */
 
   const onCloseOrderModel = async (item: any) => {
+    if (item.type === "all") {
+      return confirmRef.current.open();
+    }
     closeRef.current.open(item);
+  };
+  const onConfirmClose = async () => {
+    const { data, code } = await oneClickCloseOrder();
+    if (code === 0) {
+      getBalance();
+      Toast.notice(t("common.success"), { duration: 2000 });
+    }
   };
   const onSetProfitLossModel = async (item: any) => {
     profitLossRef.current.open(item);
@@ -503,7 +527,6 @@ function Contract() {
         <CommonTab
           onChange={onChangeContractType}
           defaultIndex={tradeTypeIndex}
-
           list={commonList}
         ></CommonTab>
         <NavBar
@@ -819,9 +842,12 @@ function Contract() {
       <CloseDialog ref={closeRef} onConfirm={onGetUserPosition}></CloseDialog>
       <ProfitLossModel
         ref={profitLossRef}
-        onConfirm={getDelegationPage}
+        onConfirm={onGetUserPosition}
       ></ProfitLossModel>
       <CountDialog ref={countRef}></CountDialog>
+      <Confirm onConfirm={onConfirmClose} cancel={true} ref={confirmRef}>
+        <div className="confirm-tip">{t("contract.close-tip")}</div>
+      </Confirm>
     </div>
   );
 }

@@ -10,6 +10,9 @@
                 height: calc(100vh - 250px);
                 overflow: auto;
                 margin: 0 44px;
+                text-align: justify;
+
+                word-break: break-all;
                 .title {
                     font-size: 48px;
                     font-weight: 600;
@@ -23,7 +26,6 @@
                     @include font_color("fontColor2");
                 }
                 .content {
-
                     padding: 40px;
                 }
             }

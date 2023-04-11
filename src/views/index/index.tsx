@@ -33,7 +33,7 @@ function App() {
       title: t("nav.home"),
       src1: home1,
       src2: home2,
-      path: "home",
+      path: "/",
     },
     {
       title: t("nav.quotation"),

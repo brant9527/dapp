@@ -66,7 +66,7 @@ function Entrust(props: any) {
                       onClose({ type: "all" });
                     }}
                   >
-                    {t("contract.position.close")}
+                    {t("contract.position.close-all")}
                   </div>
                 )}
               </div>

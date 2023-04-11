@@ -111,7 +111,7 @@ const Io = {
         if (data.length > 0) {
           data.forEach((e: any) => {
             res.klines.push({
-              timestamp: e[0]*1,
+              timestamp: e[0] * 1,
               open: e[1] * 1,
               close: e[2] * 1,
               high: e[3] * 1,
@@ -200,10 +200,10 @@ const Io = {
       });
     });
   },
-  getCommonRequest: function (router: string, paramsTemp?:Object) {
+  getCommonRequest: function (router: string, paramsTemp?: Object) {
     let params = {
       account: window.localStorage.getItem("account"),
-      ...paramsTemp
+      ...paramsTemp,
     };
 
     return new Promise((resolve, reject) => {
@@ -329,9 +329,15 @@ const Io = {
   },
 
   // Account 订阅推送
-  accountBind: function (params: any) {
+  accountBind: function (params: any, callback: any) {
     client.ready(function () {
-      client.subscribe("account.message", params);
+      client.request("getAccountPopMessage", params, function (err: any, data: any) {
+        if (err) {
+          return;
+        }
+        callback(data);
+      });
+      client.subscribe("account.message", params, callback);
     });
   },
   accountOut: function (params: any) {

@@ -7,7 +7,15 @@ import {
   lazy,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes, NavLink, useRoutes, useNavigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  NavLink,
+  useRoutes,
+  useNavigate,
+  Router,
+  redirect,
+} from "react-router-dom";
 // import { routers, Router } from "./router/route";
 // import AuthRoute from "./router/AuthRoute";
 import NewCoin from "./views/newCoin";
@@ -39,6 +47,8 @@ import LendList from "./views/lendList";
 import AiApply from "./views/aiApply";
 import LendAuth from "./views/lendAuth";
 import Withdrawal from "./views/withdrawal";
+import WithdrawlDetail from "./views/withdrawlDetail";
+
 import Search from "./views/search";
 import KLine from "./views/kLine";
 import LendOrderList from "./views/lendOrderList";
@@ -49,6 +59,11 @@ import DrawalAndRecharge from "./views/drawalAndRecharge";
 import Help from "./views/help";
 import HelpNext from "./views/helpNext";
 import HelpDetail from "./views/helpDetail";
+import Us from "./views/us";
+import UsDetail from "./views/usDetail";
+import UsNext from "./views/usNext";
+import MockTrade from "./views/mockTrade";
+import ConfirmMsg from "./components/ConfirmMsg";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -64,16 +79,19 @@ function App() {
   //   useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   const nav = useNavigate();
+
   return (
     <div className="app-bg">
       {/* <Wallet open={noAccount}/> */}
+      <ConfirmMsg></ConfirmMsg>
       <Routes>
         <Route path="/" element={<Index />}>
-          <Route index path="home" element={<Home />}></Route>
-          <Route path="assets" element={<Assets />}></Route>
-          <Route path="stock" element={<Stock />}></Route>
-          <Route path="quotation" element={<Quotation />}></Route>
-          <Route path="contract" element={<Contract />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/assets" element={<Assets />}></Route>
+          <Route path="/stock" element={<Stock />}></Route>
+          <Route path="/quotation" element={<Quotation />}></Route>
+          <Route path="/contract" element={<Contract />}></Route>
+          <Route path="/mockTrade" element={<MockTrade />} />
         </Route>
         <Route path="/language" element={<Language />}></Route>
         <Route path="/myAddress" element={<MyAddress />}></Route>
@@ -110,6 +128,10 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/helpNext" element={<HelpNext />} />
         <Route path="/helpDetail" element={<HelpDetail />} />
+        <Route path="/us" element={<Us />} />
+        <Route path="/usNext" element={<UsNext />} />
+        <Route path="/usDetail" element={<UsDetail />} />
+        <Route path="/withdrawlDetail" element={<WithdrawlDetail />} />
 
         <Route path="*" element={<Not />} />
       </Routes>

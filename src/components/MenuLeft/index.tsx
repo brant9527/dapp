@@ -49,6 +49,7 @@ function Menulist() {
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
     { imgSrc: jyjl, label: t("home.menu-wjdc"), path: "/question" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },
+
   ];
   const navTo = (path: string) => {
     return stateProps.navigate(path);

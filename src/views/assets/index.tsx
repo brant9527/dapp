@@ -27,6 +27,8 @@ import { fixPrice } from "@/utils/public";
 
 function Assets() {
   const { t } = useTranslation();
+  // 初始化mock值
+  window.localStorage.setItem("mock", '0');
   const nav = useNavigate();
   const [type, setType] = useState("all");
   const onChange = (type: string) => {

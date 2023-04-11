@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import style from "./index.module.scss";
 import { getArticleList } from "@/api/common";
 import { formatTime } from "@/utils/public";
-
+import good from "@/assets/good.png";
+import bad from "@/assets/bad.png";
 const Article = (props: any) => {
   const { handleSelect } = props;
   const { t } = useTranslation();
@@ -30,8 +31,23 @@ const Article = (props: any) => {
 
               <div
                 className="content"
-                dangerouslySetInnerHTML={{ __html:decodeURI( item.content) }}
+                style={{color:'red!important'}}
+                dangerouslySetInnerHTML={{ __html: decodeURI(item.content) }}
               ></div>
+              <div className="emotion">
+                <div className="emotion-item">
+                  <span>
+                    {t("common.good")}({item.goodCnt})
+                  </span>
+                  <img src={good} />
+                </div>
+                <div className="emotion-item">
+                  <span>
+                    {t("common.bad")}({item.badCnt})
+                  </span>
+                  <img src={bad} />
+                </div>
+              </div>
             </div>
           );
         })}

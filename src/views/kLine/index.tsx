@@ -30,7 +30,7 @@ import { getProgressList, getProductList } from "@/api/ai";
 
 function Kline() {
   const { t } = useTranslation();
-
+  const mock = window.localStorage.getItem("mock");
   const nav = useNavigate();
   const [search, setsearch] = useSearchParams();
   const symbol = search.get("symbol") || "BTC";
@@ -56,18 +56,30 @@ function Kline() {
   // Toast.notice(t("common.noMore"), {  });
 
   const navHandle = () => {
+    if (mock) {
+      return;
+    }
     nav(`/search?returnPath=kLine`);
   };
   const onChangeMinutes = useCallback((minuteType: any) => {
     console.log("minuteType=>", "");
   }, []);
   const navTo = (type: any) => {
+    if (mock) {
+      return nav(
+        `/mockTrade?symbol=${symbol}&tradeMode=${type}&tradeType=${tradeType}`
+      );
+    }
     if (tradeType == "spot") {
       nav(`/stock?symbol=${symbol}&tradeMode=${type}`);
     } else if (tradeType == "swap") {
-      nav(`/contract?symbol=${symbol}&tradeMode=${type}&tradeTab=1`);
+      nav(
+        `/contract?symbol=${symbol}&tradeMode=${type}&tradeType=${tradeType}`
+      );
     } else {
-      nav(`/contract?symbol=${symbol}&tradeMode=${type}&tradeTab=2`);
+      nav(
+        `/contract?symbol=${symbol}&tradeMode=${type}&tradeType=${tradeType}`
+      );
     }
   };
   const onClickCollect = async () => {

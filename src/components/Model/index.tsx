@@ -18,9 +18,9 @@ const ConfirmDialog = forwardRef(
       <div className={style.root}>
         {showDialog && (
           <>
-            <div className="mask"></div>
+            <div className="mask" ></div>
 
-            <div className="comfirm-wrap">
+            <div className="confirm-wrap">
               {title && <div className="title">{title}</div>}
               <span
                 className="cross"

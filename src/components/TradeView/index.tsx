@@ -135,47 +135,47 @@ function TradeView(props: any) {
 
     //     tooltip: {
     //       text: {
-    //         size: 30,
+    //         size: 10,
     //       },
     //     },
     //     priceMark: {
-    //       last: { text: { size: 30 } },
+    //       last: { text: { size: 10 } },
     //     },
     //   },
     //   indicator: {
     //     tooltip: {
     //       text: {
-    //         size: 30,
+    //         size: 10,
     //       },
     //     },
     //     lastValueMark: {
     //       text: {
-    //         size: 30,
+    //         size: 10,
     //       },
     //     },
     //   },
     //   xAxis: {
     //     tickText: {
-    //       size: 30,
+    //       size: 10,
     //     },
     //   },
     //   yAxis: {
     //     tickText: {
-    //       size: 30,
+    //       size: 10,
     //     },
     //   },
 
     //   crosshair: {
     //     horizontal: {
-    //       text: { size: 30 },
+    //       text: { size: 10 },
     //       line: {
-    //         size: 5,
+    //         size: 1,
     //       },
     //     },
     //     vertical: {
-    //       text: { size: 30 },
+    //       text: { size: 10 },
     //       line: {
-    //         size: 5,
+    //         size: 1,
     //       },
     //     },
     //   },
@@ -252,7 +252,9 @@ function TradeView(props: any) {
               );
             })}
           </div>
-          <div id="indicator-k-line" className="k-line-chart" />
+          <div className="scale-wrap">
+            <div id="indicator-k-line" className="k-line-chart" />
+          </div>
         </div>
         {/* <div className="k-line-chart-menu-container">
           <span style={{ paddingRight: 10 }}>主图指标</span>

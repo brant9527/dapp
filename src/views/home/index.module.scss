@@ -168,7 +168,7 @@
           border-radius: 50%;
           overflow: hidden;
           margin-right: 40px;
-          img{
+          img {
             width: 100%;
           }
         }
@@ -187,12 +187,17 @@
             border-radius: 20px;
             line-height: 48px;
             border: 1px solid #3ee4ff;
-            padding:0 20px;
+            padding: 0 20px;
           }
         }
       }
     }
-
+    .confirm-tip {
+      font-size: 42px;
+      line-height: 120px;
+      text-align: center;
+      @include font_color("fontColor1");
+    }
     .quota {
       padding: 44px;
       min-height: 600px;

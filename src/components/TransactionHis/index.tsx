@@ -54,7 +54,7 @@ function TransactionHis(props: any) {
                 <div className="content">
                   <div className="item-wrap">
                     <div className="symbol">{`${
-                      item.feeAsset
+                      item.feeAsset || item.symbol.replace("USDT", "")
                     }/USDT`}</div>
                     <div className="time">
                       {formatTime(item.dealTime, "YYYY-MM-DD mm:hh:ss")}

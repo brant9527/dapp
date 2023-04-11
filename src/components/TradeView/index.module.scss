@@ -5,10 +5,19 @@
             // transform: scale(2);
             // transform-origin: left top;
             // height: 750px;
-            .k-line-chart {
+            .scale-wrap {
+                width: 1125px;
+                overflow: hidden;
                 height: 750px;
-                width: 100%;
+                .k-line-chart {
+                    height: 1000px;
+                    width: 1500;
+                    zoom: 0.75;
+                    // transform: scale(0.75);
+                    // transform-origin: left top;
+                }
             }
+
             .part-time {
                 display: flex;
                 border: 1px solid $boder;
@@ -17,7 +26,7 @@
                 .item {
                     flex-basis: 100px;
                     flex-shrink: 0;
-                    line-height: 90px;
+                    text-align: center;
                     line-height: 90px;
                     padding: 20px;
                     font-size: 32px;

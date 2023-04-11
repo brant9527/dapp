@@ -11,7 +11,6 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-
 import Back from "@/components/Back";
 import MsgItem from "./Components/MsgItem";
 import Scroll from "@/components/Scroll";
@@ -25,7 +24,7 @@ import { getMessagePage } from "@/api/home";
 
 function Message() {
   const { t } = useTranslation();
-  
+
   const nav = useNavigate();
   const [hasMore, setHashMore] = useState(true);
 
@@ -48,7 +47,7 @@ function Message() {
 
     if (isEnd) {
       setHashMore(false);
-      Toast.notice(t("common.noMore"), {  });
+      Toast.notice(t("common.noMore"), {});
     }
   };
   const onLoadMore = () => {
@@ -62,8 +61,9 @@ function Message() {
     console.log("刷新");
   };
   const onDetail = (item: any) => {
+    window.localStorage.setItem("content", item.content);
     nav(
-      `/messageDetail?id=${item.id}&createTime=${item.createTime}&title=${item.title}&content=${item.content}`
+      `/messageDetail?id=${item.id}&createTime=${item.createTime}&title=${item.title}`
     );
   };
   return (

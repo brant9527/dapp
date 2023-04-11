@@ -27,9 +27,9 @@ function RecordItem(props: any) {
           <div className="item-top">{item.count}</div>
           <div className="item-b">
             <span
-              className={["dot", item.state == 1 ? "dot_s" : "dot_f"].join(" ")}
+              className={["dot", item.status == 1 ? "dot_s" : "dot_f"].join(" ")}
             ></span>
-            {item.state == 1 ? t("common.success") : t("common.faild")}
+            {item.status == 1 ? t("common.success") : t("common.faild")}
           </div>
         </div>
       </div>

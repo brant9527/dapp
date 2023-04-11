@@ -38,12 +38,12 @@ function Message() {
     const { data } = await getNoticeList();
 
     setAssetsList(data);
-    // const isEnd = data.currPage === data.totalPage;
+    const isEnd = data.currPage >= data.totalPage;
 
-    // if (isEnd) {
-    //   setHashMore(false);
-    //   Toast.notice(t("common.noMore"), {  });
-    // }
+    if (isEnd) {
+      setHashMore(false);
+      Toast.notice(t("common.noMore"), {});
+    }
   };
   const onLoadMore = () => {
     console.log("加载更多", Toast);
@@ -59,7 +59,7 @@ function Message() {
   const onDetail = (item: any) => {
     window.localStorage.setItem("content", item.content);
     nav(
-      `/noticeDetail?id=${item.id}&publishTime=${item.publishTime}&title=${item.title}&content=${item.content}`
+      `/noticeDetail?id=${item.id}&publishTime=${item.publishTime}&title=${item.title}`
     );
   };
   return (

@@ -13,7 +13,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import Back from "@/components/Back";
-import RecordItem from "./Components/RecordItem";
+
 import Scroll from "@/components/Scroll";
 import Toast from "@/components/Toast";
 

@@ -10,12 +10,14 @@
                 @include font_color("fontColor1");
             }
             .invite-content {
-                padding: 90px;
-                
+                padding: 0 90px;
+                height: calc(100vh - 150px);
+                overflow: auto;
                 .invite-big-title {
                     text-align: center;
                     font-size: 72px;
                     color: $blue;
+                    padding-top: 90px;
                 }
                 .invite-info {
                     text-align: center;
@@ -43,8 +45,7 @@
                         width: 800px;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                    white-space: nowrap;
-
+                        white-space: nowrap;
                     }
                     img {
                         width: 62px;
