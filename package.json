@@ -7,9 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "deploy": "./deploy.sh",
-    "lint": "yarn run eslint . --ext .js,.jsx,.ts,.tsx",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
-
+    "lint": "yarn run eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.0.1",
@@ -64,7 +62,10 @@
     "@typescript-eslint/parser": "^5.12.1",
     "@vitejs/plugin-react": "^1.0.7",
     "eslint": "^8.10.0",
+    "rollup-plugin-visualizer": "^5.9.0",
     "typescript": "^4.5.5",
-    "vite": "^2.8.0"
+    "vite": "^2.8.0",
+    "vite-plugin-cdn-import": "^0.3.5",
+    "webpack-bundle-analyzer": "^4.8.0"
   }
 }

@@ -115,8 +115,8 @@ function Quotation() {
 
     setHotList(hotListTemp);
     setRecommendList(recommendListTemp);
-    setRaiseList(raiseListTemp);
-    setDownList(downListTemp);
+    setRaiseList(raiseListTemp.filter((item: any) => item.rate > 0));
+    setDownList(downListTemp.filter((item: any) => item.rate < 0));
     setNewPairList(newPairListTemp);
     setOptional(dataOptional);
   };

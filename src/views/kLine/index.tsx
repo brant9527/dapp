@@ -56,7 +56,7 @@ function Kline() {
   // Toast.notice(t("common.noMore"), {  });
 
   const navHandle = () => {
-    if (mock) {
+    if (mock != "0") {
       return;
     }
     nav(`/search?returnPath=kLine`);
@@ -65,7 +65,7 @@ function Kline() {
     console.log("minuteType=>", "");
   }, []);
   const navTo = (type: any) => {
-    if (mock) {
+    if (mock != "0") {
       return nav(
         `/mockTrade?symbol=${symbol}&tradeMode=${type}&tradeType=${tradeType}`
       );

@@ -24,8 +24,9 @@ function MessageDetail() {
   const { t } = useTranslation();
   const [search, setsearch] = useSearchParams();
   const id = search.get("id");
-  const content = window.localStorage.getItem("content") || "";
   const createTime = search.get("createTime") || "";
+  console.log(createTime,new Date(createTime))
+  const content = window.localStorage.getItem("content") || "";
   const title = search.get("title");
   const getData = async () => {
     const { data } = await readMessage({

@@ -91,8 +91,9 @@ function App() {
           <Route path="/stock" element={<Stock />}></Route>
           <Route path="/quotation" element={<Quotation />}></Route>
           <Route path="/contract" element={<Contract />}></Route>
-          <Route path="/mockTrade" element={<MockTrade />} />
         </Route>
+        <Route path="/mockTrade" element={<MockTrade />} />
+
         <Route path="/language" element={<Language />}></Route>
         <Route path="/myAddress" element={<MyAddress />}></Route>
         <Route path="/assetsTrans" element={<AssetsTrans />}></Route>

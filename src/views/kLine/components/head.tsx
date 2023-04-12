@@ -26,6 +26,9 @@ function Head() {
 
   useEffect(() => {
     getData();
+    return () => {
+      Io.cfwsUnsubscribe("market." + symbol);
+    };
   }, []);
 
   const getData = async () => {

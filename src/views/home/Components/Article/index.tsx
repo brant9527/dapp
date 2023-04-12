@@ -32,7 +32,7 @@ const Article = (props: any) => {
               <div
                 className="content"
                 style={{color:'red!important'}}
-                dangerouslySetInnerHTML={{ __html: decodeURI(item.content) }}
+                dangerouslySetInnerHTML={{ __html: decodeURI(item?.content) }}
               ></div>
               <div className="emotion">
                 <div className="emotion-item">

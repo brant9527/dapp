@@ -63,7 +63,7 @@ function Message() {
   const onDetail = (item: any) => {
     window.localStorage.setItem("content", item.content);
     nav(
-      `/messageDetail?id=${item.id}&createTime=${item.createTime}&title=${item.title}`
+      `/messageDetail?id=${item.id}&createTime=${new Date(item.createTime)}&title=${item.title}`
     );
   };
   return (

@@ -2,7 +2,7 @@
   :global {
     .assets-tab {
       display: flex;
-      margin-left: 30px;
+      margin-right: 20px;
       position: relative;
       .assets-tab-item {
         font-size: 42px;
@@ -31,7 +31,7 @@
         padding: 20px 15px;
         border-radius: 10px;
         @include background_color("bgColor2");
-        @include font_color("fontColor2");
+        @include font_color("fontColor1");
 
         &::before {
           content: "";
@@ -46,8 +46,11 @@
           @include border_color("bgColor2");
         }
         .items-cls {
-          font-size: 24px;
+          font-size: 36px;
           padding: 15px 0;
+          // @include background_color("bgColor2");
+          // @include font_color("fontColor1");
+
         }
       }
     }

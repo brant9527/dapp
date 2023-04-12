@@ -72,7 +72,7 @@ function TransRecord() {
                   </div>
                 </div>
                 <div
-                  dangerouslySetInnerHTML={{ __html: decodeURI(item.content) }}
+                  dangerouslySetInnerHTML={{ __html: decodeURI(item?.content) }}
                 ></div>
               </>
             );

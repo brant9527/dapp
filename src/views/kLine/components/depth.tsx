@@ -198,7 +198,7 @@ function Depth() {
             <div className="item-info">
               <div
                 className="introduce"
-                dangerouslySetInnerHTML={{ __html: decodeURI(coinInfo.content) }}
+                dangerouslySetInnerHTML={{ __html: decodeURI(coinInfo?.content) }}
               ></div>
             </div>
           </div>

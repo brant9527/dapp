@@ -33,11 +33,11 @@ function MessageDetail() {
         <div className="notice-content">
           <div className="title">{helpDetail.title}</div>
           <div className="createTime">
-            {formatTime(new Date(helpDetail.publishTime).getTime())}
+            {formatTime(new Date(helpDetail?.publishTime).getTime())}
           </div>
           <div
             className="title"
-            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail.content) }}
+            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail?.content) }}
           ></div>
         </div>
       </div>

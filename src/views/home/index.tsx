@@ -79,7 +79,7 @@ function App() {
     getBanner();
     getNoticeListHandle();
     getData();
-
+    
   }, [account]);
   useEffect(() => {
     subData();
@@ -362,6 +362,8 @@ function App() {
         <div className="home-top">
           <div className="left">
             <img src={user} onClick={openMenu} />
+            
+            <AccountBtn account={account} handleLoginOut={handleLoginOut} handleConnectWallet={handleConnectWallet}/>
             <div
               className="input-bg"
               onClick={() => {
@@ -371,30 +373,7 @@ function App() {
               <img src={search} />
               <span className="text">{t("home.search")}</span>
             </div>
-            <AccountBtn account={account} handleLoginOut={handleLoginOut} handleConnectWallet={handleConnectWallet}/>
-            {/* {account ? (
-              <div className="assets-tab">
-                <div className="assets-tab-item blue">{`${account?.slice(
-                  0,
-                  5
-                )}...${account?.slice(-5)}`}</div>
-                <div
-                  className="assets-tab-item blue"
-                  onClick={() => handleLoginOut()}
-                >
-                  退出
-                </div>
-              </div>
-            ) : (
-              <div className="assets-tab">
-                <div
-                  className="assets-tab-item blue"
-                  onClick={() => handleConnectWallet()}
-                >
-                  连接
-                </div>
-              </div>
-            )} */}
+           
           </div>
           <div className="right">
             <div

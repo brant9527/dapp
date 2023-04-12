@@ -37,7 +37,7 @@ function MessageDetail() {
           </div>
           <div
             className="title"
-            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail.content) }}
+            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail?.content) }}
           ></div>
         </div>
       </div>

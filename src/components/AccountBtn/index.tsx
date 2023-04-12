@@ -1,14 +1,16 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
-import style from "./index.module.scss"
+import style from "./index.module.scss";
+import { useTranslation } from "react-i18next";
 
 function AccountBtn(props: any) {
-  const { account, handleLoginOut, handleConnectWallet } = props
-  const [showBtn, setShowBtn] = useState<boolean>(false)
+  const { account, handleLoginOut, handleConnectWallet } = props;
+  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const { t } = useTranslation();
   const handleConnectWalletFunc = () => {
-    handleConnectWallet()
-    setShowBtn(false)
-  }
+    handleConnectWallet();
+    setShowBtn(false);
+  };
   return (
     <div className={style.root}>
       {account ? (
@@ -16,13 +18,16 @@ function AccountBtn(props: any) {
           <div
             className="assets-tab-item blue"
             onClick={() => {
-              setShowBtn(!showBtn)
+              setShowBtn(!showBtn);
+              setTimeout(() => {
+                setShowBtn(false);
+              }, 3000);
             }}
           >{`${account?.slice(0, 5)}...${account?.slice(-5)}`}</div>
           {showBtn && (
             <div className="login-out-wrap">
               <div className="items-cls" onClick={() => handleLoginOut()}>
-                退出
+                {t("home.quit")}
               </div>
             </div>
           )}
@@ -33,11 +38,11 @@ function AccountBtn(props: any) {
             className="assets-tab-item blue"
             onClick={() => handleConnectWalletFunc()}
           >
-            连接
+            {t("home.connect")}
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
-export default AccountBtn
+export default AccountBtn;

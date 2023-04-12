@@ -29,8 +29,11 @@ const ConfirmMsg = forwardRef((props, ref) => {
         (data: any) => {
           console.log(data);
           // data.ask?.reverse()
-          setMsgInfo(data);
-          confirmRef.current.open();
+          if (data) {
+            setMsgInfo(data);
+
+            confirmRef.current.open();
+          }
         }
       );
     }
@@ -44,9 +47,10 @@ const ConfirmMsg = forwardRef((props, ref) => {
 
   return (
     <div className={style.root}>
+
       <Confirm ref={confirmRef} onConfirm={onConfirm}>
         <div
-          dangerouslySetInnerHTML={{ __html: decodeURI(msgInfo.content) }}
+          dangerouslySetInnerHTML={{ __html: decodeURI(msgInfo?.content) }}
         ></div>
       </Confirm>
     </div>

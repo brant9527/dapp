@@ -40,7 +40,10 @@
     "current-target": "升級還需交易現貨",
     "user-info": "賬戶信息",
     "vip-desc": "聯繫我了解您的VIP權益",
-    "customer-tip": "C2C 請聯繫客服"
+    "customer-tip": "C2C 請聯繫客服",
+    "quitMock": "退出模擬交易",
+    "quit": "退出",
+    "connect": "連接"
   },
   "quota": {
     "coins": {
@@ -216,7 +219,8 @@
     "protocol": "我已阅读并同意coin服务协议",
     "pledge-amount": "質押金額",
     "lend-amount": "借幣金額",
-    "btn.repayment": "還款"
+    "btn.repayment": "還款",
+    "tip-amount": "請輸入數量"
   },
   "entrust": {
     "cancel-all": "撤銷全部",

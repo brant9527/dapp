@@ -23,7 +23,7 @@ import DrawlItem from "./drawlItem";
 import { getWithdrawRecordDetail } from "@/api/trans";
 import { getUserInfo } from "@/api/userInfo";
 
-function DrawlIDetail() {
+function DrawlDetail() {
   const { t } = useTranslation();
 
   const [search, setsearch] = useSearchParams();
@@ -69,6 +69,7 @@ function DrawlIDetail() {
                       className={`step ${
                         item.step <= info.step ? "active" : ""
                       }`}
+                      key={idx}
                     >
                       {item.step}. {item.schedule}
                     </div>
@@ -95,4 +96,4 @@ function DrawlIDetail() {
   );
 }
 
-export default DrawlIDetail;
+export default DrawlDetail;

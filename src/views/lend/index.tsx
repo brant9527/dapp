@@ -53,13 +53,16 @@ function lend() {
     // }
   };
   const onSubmit = async () => {
+    if (!amount) {
+      return Toast.notice(t("lend.tip-amount"), {});
+    }
     const params = {
       amount,
       productId: id,
     };
     const { data, code } = await applyLoan(params);
     if (code == 0) {
-      Toast.notice(t("common.upload-tip"), {  });
+      Toast.notice(t("common.upload-tip"), {});
       window.localStorage.setItem("lend-amount", "");
 
       nav("/lendList");

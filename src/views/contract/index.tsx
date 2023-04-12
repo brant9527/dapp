@@ -535,7 +535,7 @@ function Contract({ mock }: any) {
           coin={coin}
           contractType={tradeType}
         ></NavBar>
-        <div className="option-wrap">
+        <div className={`option-wrap ${mock ? "option-wrap_mock" : ""}`}>
           <div className="option-select">
             <div className="option-left">
               <div className="position">

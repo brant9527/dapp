@@ -18,25 +18,29 @@ const ConfirmDialog = forwardRef(
     return (
       <div className={style.root}>
         {showDialog && (
-          <div className="confirm-wrap">
-            <div className="content">{children}</div>
-            <div className="foot">
-              {cancel && (
+          <>
+            <div className="mask"></div>
+
+            <div className="confirm-wrap">
+              <div className="content">{children}</div>
+              <div className="foot">
+                {cancel && (
+                  <div
+                    className="confirm-btn confirm-btn-cancel"
+                    onClick={() => setShowDialog(false)}
+                  >
+                    {t("common.cancel")}
+                  </div>
+                )}
                 <div
-                  className="confirm-btn confirm-btn-cancel"
-                  onClick={() => setShowDialog(false)}
+                  className="confirm-btn confirm-btn-ok"
+                  onClick={handleConfirm}
                 >
-                  {t("common.cancel")}
+                  {t("common.sure")}
                 </div>
-              )}
-              <div
-                className="confirm-btn confirm-btn-ok"
-                onClick={handleConfirm}
-              >
-                {t("common.sure")}
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     );

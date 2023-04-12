@@ -160,7 +160,7 @@ function Search() {
                       key={cIdx}
                       onClick={() => {
                         const mock = window.localStorage.getItem("mock");
-                        if (mock) {
+                        if (mock == "1") {
                           return nav(
                             `/mockTrade?symbol=${item.symbol}&tradeType=swap`
                           );
