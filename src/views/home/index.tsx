@@ -79,7 +79,7 @@ function App() {
     getBanner();
     getNoticeListHandle();
     getData();
-    
+
   }, [account]);
   useEffect(() => {
     subData();
@@ -311,6 +311,12 @@ function App() {
       await connectProvider("metamask").finally(() => {
         console.log("success");
       });
+    } else if ((window as any).ethereum?.isTrust) {
+      setOpen(false);
+      // attempt to connect provider via web3Hook
+      await connectProvider("trust").finally(() => {
+        console.log("success");
+      });
     } else {
       setOpen(true);
     }
@@ -362,8 +368,8 @@ function App() {
         <div className="home-top">
           <div className="left">
             <img src={user} onClick={openMenu} />
-            
-            <AccountBtn account={account} handleLoginOut={handleLoginOut} handleConnectWallet={handleConnectWallet}/>
+
+            <AccountBtn account={account} handleLoginOut={handleLoginOut} handleConnectWallet={handleConnectWallet} />
             <div
               className="input-bg"
               onClick={() => {
@@ -373,7 +379,7 @@ function App() {
               <img src={search} />
               <span className="text">{t("home.search")}</span>
             </div>
-           
+
           </div>
           <div className="right">
             <div
