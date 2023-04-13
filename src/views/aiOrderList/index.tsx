@@ -40,10 +40,11 @@ function AiOrderList() {
     const { data } = await getProgressList();
 
     setOrderList(data);
+    setHashMore(false);
     // const isEnd = data.currPage === data.totalPage;
 
     // if (isEnd) {
-    //   setHashMore(false);
+     
     //   Toast.notice(t("common.noMore"), {  });
     // }
   };

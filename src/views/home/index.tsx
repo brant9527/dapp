@@ -270,7 +270,7 @@ function App() {
     {
       label: t("home.btns.us"),
       src: c2c,
-      path: "/us",
+      path: "/usNext?id=4",
     },
   ];
   const handleSelect = useCallback((type: string) => {

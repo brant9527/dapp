@@ -59,8 +59,8 @@ import DrawalAndRecharge from "./views/drawalAndRecharge";
 import Help from "./views/help";
 import HelpNext from "./views/helpNext";
 import HelpDetail from "./views/helpDetail";
-import Us from "./views/us";
-import UsDetail from "./views/usDetail";
+
+
 import UsNext from "./views/usNext";
 import MockTrade from "./views/mockTrade";
 import ConfirmMsg from "./components/ConfirmMsg";
@@ -129,9 +129,7 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/helpNext" element={<HelpNext />} />
         <Route path="/helpDetail" element={<HelpDetail />} />
-        <Route path="/us" element={<Us />} />
         <Route path="/usNext" element={<UsNext />} />
-        <Route path="/usDetail" element={<UsDetail />} />
         <Route path="/withdrawlDetail" element={<WithdrawlDetail />} />
 
         <Route path="*" element={<Not />} />

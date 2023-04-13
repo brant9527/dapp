@@ -39,6 +39,8 @@ function Message() {
     const { data } = await getProgressList();
 
     setOrderList(data.voList);
+      setHashMore(false);
+
     // const isEnd = data.currPage === data.totalPage;
 
     // if (isEnd) {
