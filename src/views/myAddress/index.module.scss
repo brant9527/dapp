@@ -14,7 +14,8 @@
       }
       .address-content {
         padding: 0 40px;
-
+        height: calc(100vh - 150px);
+        overflow: auto;
         .tip {
           margin-top: 60px;
           font-size: 80px;
@@ -70,7 +71,7 @@
           font-size: 44px;
         }
         .address-chain {
-          width: 960px;
+
 
           margin: 30px auto 65px;
           padding: 40px;
@@ -79,6 +80,13 @@
           @include background_color("bgColor2");
           @include font_color("fontColor1");
           font-size: 44px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          img{
+              width: 21px;
+              height: 32px;
+          }
         }
         .btn {
           margin: 30px auto 0;

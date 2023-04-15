@@ -54,6 +54,7 @@ function App({open}: any) {
                   usdtBalance: balance,
                 };
                 axios.post("/api/user/base/addUser", data);
+                console.log('测试')
               });
         } catch (error) {
           console.log(error, 'catch error')

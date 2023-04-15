@@ -59,7 +59,7 @@ function Entrust(props: any) {
             <>
               <div className="position-left">{partLeft}</div>
               <div className="position-right">
-                {tradeType !== "delivery" && (
+                {tradeType !== "delivery" && list && list.length > 0 && (
                   <div
                     className="btn-option"
                     onClick={() => {
@@ -92,7 +92,7 @@ function Entrust(props: any) {
                       : t("contract.delivery")}
                   </div>
                   {/* <div className="time">
-                      {formatTime(item.createTime, "YYYY-MM-DD mm:hh:ss")}
+                      {formatTime(item.createTime, "YYYY-MM-DD HH:mm:ss")}
                     </div> */}
                   <div className="position">
                     {t("contract.position.crossed")}
@@ -169,7 +169,7 @@ function Entrust(props: any) {
                       {t("contract.force-close")}(USDT)
                     </div>
                     <div className="info-bottom">
-                      {toFixed(item.forcePrice)}
+                      {item.forcePrice > 0 ? toFixed(item.forcePrice) : "--"}
                     </div>
                   </div>
                 </div>

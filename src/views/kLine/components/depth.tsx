@@ -129,7 +129,7 @@ function Depth() {
                   <div className="deal-item_wrap" key={item.timestamp}>
                     
                     <div className="left">
-                      {formatTime(item.timestamp, "hh:mm:ss")}
+                      {formatTime(item.timestamp, "HH:mm:ss")}
                     </div>
                     <div
                       className={`center ${

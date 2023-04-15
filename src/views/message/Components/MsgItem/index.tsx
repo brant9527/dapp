@@ -24,7 +24,7 @@ function MsgItem(props: any) {
         <div className="msg-item">
           <div className="left">
             <img src={msg} />
-            {item.status === 0 && <div className="dot"></div>}
+            {item.read === 0 && <div className="dot"></div>}
           </div>
           <div className="right">
             <div className="title">{item.title}</div>

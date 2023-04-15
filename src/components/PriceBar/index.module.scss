@@ -19,6 +19,9 @@
         right: 0;
         left: 0;
         bottom: 0;
+        .up,.down{
+          padding-right: 10px;
+        }
       }
       .price-bar {
         position: absolute;
@@ -37,6 +40,7 @@
         }
         &.right {
           right: 0;
+         
         }
       }
 
@@ -45,6 +49,7 @@
       .price-bar_right {
         padding-right: 20px;
       }
+      
     }
   }
 }

@@ -47,7 +47,7 @@ import { getUserInfo } from "@/api/userInfo";
 function Stock() {
   const { t } = useTranslation();
   // 初始化mock值
-  window.localStorage.setItem("mock", '0');
+  window.localStorage.setItem("mock", "0");
   const configList = [
     {
       label: t("common.trade.market"),
@@ -101,6 +101,9 @@ function Stock() {
     setPercent(-1);
     setUseUsdt("");
     setCoinAccount("");
+
+    usdtRef?.current.setVal("");
+    accountRef?.current.setVal("");
   }, []);
   const onSelectTradeType = useCallback((type: string) => {
     setTransType(type);
@@ -125,9 +128,10 @@ function Stock() {
     getBalance();
     getDataHead();
     getAssetBalance();
-    const timer: any = setTimeout(() => {
+    const timer: any = setInterval(() => {
       getBalance();
-    }, 10000);
+      getAssetBalance();
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -210,11 +214,11 @@ function Stock() {
 
           const tempUsdt = toFixed(
             accMul(val, balanceAssets?.availableUsdtBalance),
-            2
+            4
           );
           const tempAccount = toFixed(
             accDiv(tempUsdt, coinPrice || headInfo?.close),
-            2
+            4
           );
           console.log("设置全部约", tempUsdt, tempAccount);
 
@@ -229,11 +233,11 @@ function Stock() {
 
           const tempAssetsBalance = toFixed(
             accMul(val, balanceAssets?.availableAssetBalance),
-            2
+            4
           );
           const tempUseUsdt = toFixed(
             accMul(tempAssetsBalance, coinPrice || headInfo?.close),
-            2
+            4
           );
           console.log("设置可用数量", tempAssetsBalance);
           setCoinAccount(tempAssetsBalance);
@@ -260,7 +264,7 @@ function Stock() {
         setCoinAccount("");
         return;
       }
-      const accountTemp = toFixed(accDiv(val, coinPrice || headInfo?.close), 2);
+      const accountTemp = toFixed(accDiv(val, coinPrice || headInfo?.close), 4);
 
       setCoinAccount(accountTemp);
 
@@ -310,14 +314,34 @@ function Stock() {
     if (!useUsdt || !coinAccount) {
       return Toast.notice(t("common.params-check"), { duration: 2000 });
     }
+
+    const fee = Number(accMul(useUsdt, userInfo?.feeRate)); // 手續費
+    let amountTemp: any = 0;
+    // 判斷 當前倉位usdt大于 扣除手续费剩下金额时
+    if (
+      Number(accAdd(useUsdt, fee)) > Number(balanceAssets?.availableUsdtBalance)
+    ) {
+      console.log("total>rest");
+
+      amountTemp =
+        calcType == 2
+          ? accMul(
+              Number(balanceAssets?.availableUsdtBalance),
+              1 - userInfo.feeRate
+            )
+          : accMul(
+              Number(balanceAssets?.availableAssetBalance),
+              1 - userInfo.feeRate
+            );
+    } else {
+      console.log("count normol");
+      amountTemp = calcType == 2 ? useUsdt : coinAccount;
+    }
     const { code } = await onTradeBuySell({
       algoPrice: transType === "limit" ? coinPrice : "",
       algoTime: new Date().getTime(),
       algoType: transType,
-      amount:
-        calcType == 2
-          ? useUsdt * (1 - userInfo?.feeRate)
-          : coinAccount * (1 - userInfo?.feeRate),
+      amount: amountTemp,
       calcType,
       side: type,
       symbol,
@@ -425,8 +449,11 @@ function Stock() {
                 <div className="label-left">{t("common.use")}</div>
                 <div className="balance-usdt">
                   {type === "buy"
-                    ? fixPrice(balanceAssets?.availableUsdtBalance || 0)
-                    : fixPrice(balanceAssets?.availableAssetBalance || 0)}{" "}
+                    ? fixPrice(balanceAssets?.availableUsdtBalance || 0, 4)
+                    : fixPrice(
+                        balanceAssets?.availableAssetBalance || 0,
+                        4
+                      )}{" "}
                   {type === "buy" ? "USDT" : symbol.replace("USDT", "")}
                 </div>
               </div>

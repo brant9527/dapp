@@ -25,7 +25,7 @@ import { useTranslation } from "react-i18next";
 import { getUserInfo } from "@/api/userInfo";
 import copy from "copy-to-clipboard";
 import Toast from "@/components/Toast";
-import { accMul } from "@/utils/public";
+import { accMul, toFixed } from "@/utils/public";
 
 interface stateType {
   openState: boolean;
@@ -49,7 +49,6 @@ function Menulist() {
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
     { imgSrc: jyjl, label: t("home.menu-wjdc"), path: "/question" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },
-
   ];
   const navTo = (path: string) => {
     return stateProps.navigate(path);
@@ -109,7 +108,16 @@ function Menulist() {
               <div className="right">Prime {userInfo.memberLevel + 1}</div>
             </div>
             <div className="progress-center">
-              <div className="progress-bar" style={{ width: "50%" }}></div>
+              <div
+                className="progress-bar"
+                style={{
+                  width: `${toFixed(
+                    (1 -
+                      (userInfo.needAmount || 0) / (userInfo.minAmount || 0)) *
+                      100
+                  )}%`,
+                }}
+              ></div>
             </div>
             <div className="progress-bottom">
               <div className="left">

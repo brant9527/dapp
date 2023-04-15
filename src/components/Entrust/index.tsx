@@ -52,7 +52,7 @@ function Entrust(props: any) {
             <>
               <div className="entrust-left">{partLeft}</div>
               <div className="entrust-right">
-                {tradeType !== "delivery" && (
+                {tradeType !== "delivery" && list && list.length > 0 && (
                   <div
                     className="btn-cancel"
                     onClick={() => {
@@ -79,9 +79,7 @@ function Entrust(props: any) {
                     ? t("entrust.limit")
                     : t("entrust.market")}
                   /{getStatus(item)}
-                  <div className="circle">
-                    0%
-                  </div>
+                  <div className="circle">0%</div>
                 </div>
                 <div className="right">
                   <div className="top">
@@ -89,9 +87,7 @@ function Entrust(props: any) {
                       item.symbol.split("USDT")[0]
                     }/USDT`}</div>
                     <div className="time">
-                      {formatTime(
-                        new Date(item.createTime).getTime()
-                      )}
+                      {formatTime(new Date(item.createTime).getTime())}
                     </div>
                   </div>
                   <div className="count">

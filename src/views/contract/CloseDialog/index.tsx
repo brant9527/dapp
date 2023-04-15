@@ -80,7 +80,7 @@ const CloseDialog = forwardRef(
               {t("common.count")}：{amount}
             </div>
 
-            <SlideNum onChange={onChangeSlideNum} defaultVal={lever}></SlideNum>
+            <SlideNum onChange={onChangeSlideNum} defaultVal={lever} max={100}></SlideNum>
             <div
               className="closeDialog-btn"
               onClick={() => {

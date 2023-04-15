@@ -16,16 +16,21 @@ import i18in from "../../../react-i18next-config";
 
 import Back from "@/components/Back";
 import recordPng from "@/assets/record.png";
+import rightPng from "@/assets/right.png";
 
 import copy from "copy-to-clipboard";
 import { getRechargeAddress } from "@/api/userInfo";
 import Toast from "@/components/Toast";
+import Select from "@/components/Select";
 
 function myAddress() {
   const { t } = useTranslation();
   const [coin, setCoin] = useState("USDT");
   const [address, setAddress] = useState("");
+  const [current, setCurrent] = useState<any>({});
+  const [dataList, setDataList] = useState<any>([]);
   const account = window.localStorage.getItem("account");
+  const selectRef = useRef<any>(null);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -33,7 +38,11 @@ function myAddress() {
   }, []);
   const getData = async () => {
     const { code, data } = await getRechargeAddress();
-    if (code == 0) setAddress(data.address || account);
+    if (code == 0 && data && data.length > 0) {
+      setDataList(data);
+      setCurrent(data[0]);
+      setAddress(data[0].address || account);
+    }
   };
   function right() {
     return (
@@ -46,16 +55,16 @@ function myAddress() {
       />
     );
   }
+  const onSelect = (item: any) => {
+    setCurrent(item);
+  };
   return (
     <div className={style.root}>
       <div className="address-wrap">
         <Back content={<div></div>} right={right()} />
         {address && (
           <div className="address-content">
-            <div className="tip">
-              {t("address.recharge")}
-              {coin}
-            </div>
+            <div className="tip">{t("address.recharge")}</div>
             <QRCodeSVG
               width={400}
               height={400}
@@ -66,7 +75,7 @@ function myAddress() {
             <div className="qrtip ">
               <div className="tip1">
                 {t("address.tip1", {
-                  coin,
+                  coin:current.chain,
                 })}
               </div>
               <div className="tip2">{t("address.tip2")}</div>
@@ -83,7 +92,15 @@ function myAddress() {
               {address}
             </div>
             <div className="address-text">{t("address.chain")}</div>
-            <div className="address-chain">Ethereum (ERC20)</div>
+            <div
+              className="address-chain"
+              onClick={() => {
+                selectRef.current.open();
+              }}
+            >
+              <div>{current.chain}</div>
+              <img src={rightPng} />
+            </div>
             <div
               className="btn"
               onClick={() => {
@@ -96,6 +113,13 @@ function myAddress() {
           </div>
         )}
       </div>
+      <Select
+        ref={selectRef}
+        configList={dataList.map((item: any) => {
+          return { ...item, label: item.chain };
+        })}
+        onSelect={onSelect}
+      ></Select>
     </div>
   );
 }

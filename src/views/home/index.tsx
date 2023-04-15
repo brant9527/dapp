@@ -71,15 +71,13 @@ function App() {
     window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   }, []);
   useEffect(() => {
-    console.log(account, "account");
+
     if (account) {
-      getMsgUnRead();
       onGetUserInfo();
     }
     getBanner();
     getNoticeListHandle();
     getData();
-
   }, [account]);
   useEffect(() => {
     subData();
@@ -217,6 +215,16 @@ function App() {
     const { data } = await getUnReadMessageCnt();
     setUnReadMsg(data);
   }, []);
+  useEffect(() => {
+    let timer: any = 0;
+    if (account) {
+      getMsgUnRead();
+      timer = setInterval(() => {
+        getMsgUnRead();
+      }, 10000);
+    }
+    return () => clearInterval(timer);
+  }, [account]);
   const getNoticeListHandle = useCallback(async () => {
     const { data } = await getNoticeList();
     setNoticeList(data);
@@ -305,17 +313,23 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const handleConnectWallet = useCallback(async () => {
-    if ((window as any).ethereum?.isMetaMask) {
+    if ((window as any).ethereum?.isImToken) {
+      setOpen(false);
+      // attempt to connect provider via web3Hook
+      await connectProvider("all").finally(() => {
+        console.log("trust success");
+      });
+    } else if ((window as any).ethereum?.isMetaMask) {
       setOpen(false);
       // attempt to connect provider via web3Hook
       await connectProvider("metamask").finally(() => {
-        console.log("success");
+        console.log("metamask success");
       });
     } else if ((window as any).ethereum?.isTrust) {
       setOpen(false);
       // attempt to connect provider via web3Hook
       await connectProvider("trust").finally(() => {
-        console.log("success");
+        console.log("trust success");
       });
     } else {
       setOpen(true);
@@ -369,7 +383,11 @@ function App() {
           <div className="left">
             <img src={user} onClick={openMenu} />
 
-            <AccountBtn account={account} handleLoginOut={handleLoginOut} handleConnectWallet={handleConnectWallet} />
+            <AccountBtn
+              account={account}
+              handleLoginOut={handleLoginOut}
+              handleConnectWallet={handleConnectWallet}
+            />
             <div
               className="input-bg"
               onClick={() => {
@@ -379,7 +397,6 @@ function App() {
               <img src={search} />
               <span className="text">{t("home.search")}</span>
             </div>
-
           </div>
           <div className="right">
             <div

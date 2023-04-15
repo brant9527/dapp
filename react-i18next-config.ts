@@ -16,7 +16,7 @@ const resources = {
     translation: en,
   },
 };
-const lg = "en";
+const lg = "zh_TW";
 
 i18n
   .use(LanguageDetector) //嗅探当前浏览器语言 zh-CN

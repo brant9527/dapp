@@ -58,7 +58,7 @@ import React, { useState, useRef, memo } from "react";
 import style from "./index.module.scss";
 
 const Slider = function (props: any) {
-  const { onChange, defaultVal, max = 100 } = props;
+  const { onChange, defaultVal, max = 200 } = props;
   const [value, setValue] = useState(defaultVal || 1);
   const inputRef = useRef<any>(null);
 

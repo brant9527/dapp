@@ -13,7 +13,7 @@ const state = {
 };
 
 function Back(props: any) {
-  const { navHandle, coin, percent, contractType } = props;
+  const { navHandle, coin, percent, contractType, mock = 0 } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
 
@@ -34,6 +34,12 @@ function Back(props: any) {
           {toFixed(percent * 100, 2)}%
         </div>
         <div className="hq">
+          {!!mock && (
+            <div className="btn-back-home" onClick={() => nav("/")}>
+              {t("home.quitMock")}
+            </div>
+          )}
+
           <img src={hq} onClick={() => navHandle("/kLine")} />
         </div>
       </div>

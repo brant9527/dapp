@@ -74,7 +74,7 @@ function EntrustHis(props: any) {
                       item.symbol.split("USDT")[0]
                     }/USDT`}</div>
                     <div className="time">
-                      {formatTime(item.createTime, "YYYY-MM-DD mm:hh:ss")}
+                      {formatTime(item.createTime, "YYYY-MM-DD HH:mm:ss")}
                     </div>
                   </div>
                   <div className="item-wrap">

@@ -1,13 +1,12 @@
 .root {
   :global {
-    
     .nav-wrap {
       position: relative;
 
       display: flex;
       padding: 0 44px;
       height: 80px;
-      align-items:center;
+      align-items: center;
       font-size: 52px;
       height: 150px;
       @include font_color("fontColor1");
@@ -22,12 +21,11 @@
         // height: 50px;
         line-height: 50px;
         margin-left: 32px;
-        .contract-type{
+        .contract-type {
           // position: absolute;
           bottom: 0px;
           font-size: 36px;
         }
-
       }
       .percent {
         line-height: 50px;
@@ -40,6 +38,21 @@
         flex: 1;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+        .btn-back-home {
+
+          // width: 230px;
+          padding: 0 20px;
+          line-height: 80px;
+          border-radius: 10px;
+
+          margin-right: 40px;;
+          font-size: 36px;
+          box-shadow: 0 10px 22px 0 rgb(0 0 0/ 10%);
+
+          @include font_color("fontColor1");
+          @include background_color("bgColor2");
+        }
         img {
           width: 57px;
           height: 59px;

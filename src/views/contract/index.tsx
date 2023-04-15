@@ -137,7 +137,7 @@ function Contract({ mock }: any) {
   const [periodInfo, setPeriodInfo] = useState<any>([]);
   const [selectPeriod, setSelectPeriod] = useState<any>([]);
 
-  const [lever, setLever] = useState(10);
+  const [lever, setLever] = useState(100);
   const priceRef = useRef<any>(null);
   const accountRef = useRef<any>(null);
   const usdtRef = useRef<any>(null);
@@ -186,9 +186,10 @@ function Contract({ mock }: any) {
     getDataHead();
     onGetUserPosition();
     onGetDeliveryPeriodList();
-    const timer: any = setTimeout(() => {
+    const timer: any = setInterval(() => {
       getBalance();
-    }, 10000);
+      onGetUserPosition();
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -394,7 +395,6 @@ function Contract({ mock }: any) {
     let params = {};
     let method: any = "";
     const fee = Number(accMul(useUsdt, userInfo?.feeRate)); // 手續費
-    const amountUsdt = accSub(balanceAssets?.availableUsdtBalance, fee); // 當前扣掉手續費還剩多少
     let amountTemp: any = 0;
     // 判斷 當前倉位usdt大于 扣除手续费剩下金额时
     if (
@@ -402,16 +402,20 @@ function Contract({ mock }: any) {
       Number(balanceAssets?.availableUsdtBalance)
     ) {
       console.log("total>rest");
+      // 最大保证金额
       const maxPromiseMoney = accDiv(
         Number(balanceAssets?.availableUsdtBalance),
         accAdd(accMul(lever, userInfo.feeRate), 1)
       );
-      amountTemp =
-        Number(accDiv(maxPromiseMoney, coinPrice || headInfo?.close)) * 10;
+      //
+      amountTemp = accMul(
+        Number(accDiv(maxPromiseMoney, coinPrice || headInfo?.close)),
+        lever
+      );
     } else {
       console.log("count normol");
 
-      amountTemp = accMul(coinAccount, accSub(1, userInfo?.feeRate));
+      amountTemp = coinAccount;
     }
 
     if (tradeType === "swap") {
@@ -490,6 +494,8 @@ function Contract({ mock }: any) {
     const { data, code } = await oneClickCloseOrder();
     if (code === 0) {
       getBalance();
+      onGetUserPosition();
+
       Toast.notice(t("common.success"), { duration: 2000 });
     }
   };
@@ -534,6 +540,7 @@ function Contract({ mock }: any) {
           percent={toFixed(headInfo?.rate, 2)}
           coin={coin}
           contractType={tradeType}
+          mock={mock}
         ></NavBar>
         <div className={`option-wrap ${mock ? "option-wrap_mock" : ""}`}>
           <div className="option-select">

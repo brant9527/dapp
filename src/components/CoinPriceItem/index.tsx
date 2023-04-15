@@ -16,12 +16,12 @@ function CoinPriceItem(props: any) {
 
   return (
     <div className={style.root}>
-      <div className="tableCoinsPst">
+      <div className="tableCoinsPst" onClick={() => {
+            nav("/contract?symbol=" + symbol);
+          }}>
         <div
           className="coinTypePst"
-          onClick={() => {
-            nav("/contract?symbol=" + symbol);
-          }}
+          
         >
           {logo && <img src={logo} />}
           <div className="right">

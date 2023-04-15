@@ -14,7 +14,8 @@ export type ProviderStringType =
   | "coinbase"
   | "metamask"
   | "walletconnect"
-  | "trust";
+  | "trust"
+  | "all";
 
 /**
  * This represents the return type of the connectProvider function, which contains

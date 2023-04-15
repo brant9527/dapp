@@ -32,7 +32,6 @@ function MockTrade() {
     <div className={style.root}>
       <div className="mock-wrap">
         <Contract mock={true}></Contract>
-        <div className="btn-back-home" onClick={()=> nav('/')}>{t("home.quitMock")}</div>
       </div>
     </div>
   );

@@ -109,7 +109,7 @@ http.interceptors.response.use(
   (error) => {
     hideLoading();
     if (error.response && error.response.status) {
-      alert(error.response.toString());
+      console.log(error.response.toString());
       switch (error.response.status) {
         case 401:
           // 如有刷新token的需求,可放开以下代码

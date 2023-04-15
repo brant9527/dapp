@@ -21,21 +21,21 @@ export function toFixed(number: any, pp: any = 2) {
   } // eslint-disable-line
   return n[0] + (x == "" ? "" : "." + x); // eslint-disable-line
 }
-export function fixPrice(num: any) {
+export function fixPrice(num: any, pp = 2) {
   const result = Number(num);
   if (!num) {
-    return toFixed(0, 2);
+    return toFixed(0, pp);
   }
   if (result > 1) {
-    return toFixed(num, 2);
+    return toFixed(num, pp);
   } else {
     const str = num.toString();
     if (!str.match(reg)) {
-      return toFixed(num, 2);
+      return toFixed(num, pp);
     }
     const numCnt = str.match(reg)[1]?.length || 0;
 
-    return toFixed(num, numCnt + 2);
+    return toFixed(num, numCnt + pp);
   }
 }
 // 科学计数法转数值 - 处理 1e-7 这类精度问题
@@ -243,5 +243,17 @@ export function numeralFormat(num: number, p: number) {
  * 優化時間
  */
 export function formatTime(time: any, format?: string) {
-  return dayjs(time || new Date()).format(format || "YYYY-MM-DD hh:mm:ss");
+  return dayjs(time || new Date()).format(format || "YYYY-MM-DD HH:mm:ss");
+}
+
+export function getNumSymbol(val: any) {
+  const valTemp = Number(val);
+  if (valTemp > 1000000000) {
+    return toFixed(accDiv(valTemp, 1000000000)) + "B";
+  } else if (valTemp > 1000000) {
+    return toFixed(accDiv(valTemp, 1000000)) + "M";
+  } else if (valTemp > 1000) {
+    return toFixed(accDiv(valTemp, 1000)) + "K";
+  }
+  return toFixed(valTemp);
 }

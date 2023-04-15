@@ -41,7 +41,7 @@ function RecordItem(props: any) {
                   )}
                 ></span>
               )}
-              {item.status == 1 ? t("common.success") : t("common.faild")}
+              {item.status == 0 ? t("common.faild") : t("common.success")}
             </div>
           </div>
         </div>

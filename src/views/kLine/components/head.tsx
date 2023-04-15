@@ -13,7 +13,14 @@ import {
 import { useTranslation } from "react-i18next";
 
 import Toast from "@/components/Toast";
-import { fixPrice, toFixed } from "@/utils/public";
+import {
+  accDiv,
+  accMul,
+  accSub,
+  fixPrice,
+  toFixed,
+  getNumSymbol,
+} from "@/utils/public";
 import Io from "@/utils/socket";
 function Head() {
   const { t } = useTranslation();
@@ -62,8 +69,22 @@ function Head() {
             <div className="item-bottom">{fixPrice(headInfo?.low)}</div>
           </div>
           <div className="head-right_item">
+            <div className="item-top">{t("trade.total-val24")}</div>
+            <div className="item-bottom">{getNumSymbol(headInfo?.volume)}</div>
+          </div>
+          <div className="head-right_item">
             <div className="item-top">{t("trade.total24")}</div>
-            <div className="item-bottom">{headInfo?.volume}K</div>
+            <div className="item-bottom">
+              {getNumSymbol(
+                accMul(
+                  accDiv(
+                    accSub(Number(headInfo?.high), Number(headInfo?.low)),
+                    2
+                  ),
+                  headInfo?.volume
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>

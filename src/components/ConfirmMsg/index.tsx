@@ -27,7 +27,7 @@ const ConfirmMsg = forwardRef((props, ref) => {
       Io.accountBind(
         { account, language: window.localStorage.getItem("i18nextLng") },
         (data: any) => {
-          console.log(data);
+
           // data.ask?.reverse()
           if (data) {
             setMsgInfo(data);

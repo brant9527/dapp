@@ -5,20 +5,20 @@
             overflow: hidden;
             @include background_color("bgColor1");
             // padding: 50px 46px;
-            .btn-back-home {
-                position: fixed;
-                // width: 230px;
-                padding:0 40px;
-                line-height: 110px;
-                border-radius: 20px;
-                right: 60px;
-                top: 300px;
-                font-size: 36px;
-                box-shadow: 0 10px 22px 0 rgb(0 0 0/ 10%);
+            // .btn-back-home {
+            //     position: fixed;
+            //     // width: 230px;
+            //     padding:0 40px;
+            //     line-height: 110px;
+            //     border-radius: 20px;
+            //     right: 60px;
+            //     top: 300px;
+            //     font-size: 36px;
+            //     box-shadow: 0 10px 22px 0 rgb(0 0 0/ 10%);
 
-                @include font_color("fontColor1");
-                @include background_color("bgColor2");
-            }
+            //     @include font_color("fontColor1");
+            //     @include background_color("bgColor2");
+            // }
         }
     }
 }

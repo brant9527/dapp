@@ -9,7 +9,7 @@ const initMetaMaskProvider = () =>
   // We will prefer a provider where the property `isMetaMask` is set to true
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window.ethereum as any)?.providers?.find(
-    (p: MetaMaskInpageProvider) => !!p.isMetaMask
+    (p: any) => !!(p.isMetaMask||p.isImToken)
   ) ?? window.ethereum;
 
 /**

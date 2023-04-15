@@ -58,17 +58,16 @@ function auth() {
           <div className="item-top">
             <div className="auth-left">LV.1 {t("auth.primary-auth")}</div>
             <div className="auth-right">
-              {userInfo.ethAddress &&
-                typeof userInfo.juniorStatus !== "number" && (
-                  <span
-                    className="need-auth"
-                    onClick={() => {
-                      nav("/bindEmail");
-                    }}
-                  >
-                    {t("auth.need-auth")}
-                  </span>
-                )}
+              {userInfo.ethAddress && userInfo.juniorStatus == -1 && (
+                <span
+                  className="need-auth"
+                  onClick={() => {
+                    nav("/bindEmail");
+                  }}
+                >
+                  {t("auth.need-auth")}
+                </span>
+              )}
               {userInfo.juniorStatus == 1 && (
                 <span className="passed">{t("status.passed")}</span>
               )}
@@ -96,17 +95,16 @@ function auth() {
           <div className="item-top">
             <div className="auth-left">LV.2 {t("auth.advanced-auth")}</div>
             <div className="auth-right">
-              {userInfo.ethAddress &&
-                typeof userInfo.highStatus !== "number" && (
-                  <span
-                    className="need-auth"
-                    onClick={() => {
-                      v2();
-                    }}
-                  >
-                    {t("auth.need-auth")}
-                  </span>
-                )}
+              {userInfo.ethAddress && userInfo.highStatus == -1 && (
+                <span
+                  className="need-auth"
+                  onClick={() => {
+                    v2();
+                  }}
+                >
+                  {t("auth.need-auth")}
+                </span>
+              )}
               {userInfo.highStatus == 0 && (
                 <span className="wait">{t("status.wait")} </span>
               )}

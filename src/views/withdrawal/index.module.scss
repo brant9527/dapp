@@ -19,13 +19,19 @@
                 text-align: center;
                 font-size: 50px;
                 @include font_color("fontColor1");
+
             }
             .withdrawal-content {
-                padding: 50px 46px;
+                padding: 0 46px;
+                height: calc(100vh - 150px);
+                overflow: auto;
             }
             .withdrawal-label {
                 font-size: 42px;
                 margin: 98px 0 36px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 @include font_color("fontColor2");
             }
             .upload-part {
@@ -42,6 +48,7 @@
                     @include font_color("fontColor2");
                 }
                 .right {
+                    display: flex;
                     @include font_color("fontColor1");
                 }
             }
@@ -55,6 +62,24 @@
                 border-radius: 20px;
                 margin: 120px 60px;
             }
+            .choose-chain {
+
+      
+                margin: 30px auto 65px;
+                padding: 40px;
+                text-align: left;
+                border-radius: 20px;
+                @include background_color("bgColor2");
+                @include font_color("fontColor1");
+                font-size: 44px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                img{
+                    width: 21px;
+                    height: 32px;
+                }
+              }
         }
     }
 }

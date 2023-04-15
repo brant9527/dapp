@@ -1,18 +1,15 @@
 #!/usr/bin/env sh
 
 # abort on errors
-set -e
+
 
 # build
-npm run build
+
 
 # navigate into the build output directory
-cd dist
 
-git init
-git add -A
-git commit -m 'deploy'
-
-git push -f https://github.com/gareys-cb/example-dapp.git master:gh-pages
-
-cd -
+scp /Users/zyb/development/trade-dapp/dist.zip root@174.129.214.112:/data/exchange
+ssh root@174.129.214.112
+cd /data/exchange
+rm -rf dist
+unzip dist.zip
