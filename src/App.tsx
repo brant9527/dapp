@@ -22,7 +22,7 @@ import NewCoin from "./views/newCoin";
 import Index from "./views/index";
 import Home from "./views/home";
 import Not from "./views/not";
-import Assets from "./views/assets";
+import Assets from "./views/assetsAll";
 import Contract from "./views/contract";
 import Quotation from "./views/quotation";
 import Stock from "./views/stock";
@@ -62,6 +62,8 @@ import HelpDetail from "./views/helpDetail";
 
 
 import UsNext from "./views/usNext";
+import UsDetail from "./views/usDetail";
+
 import MockTrade from "./views/mockTrade";
 import ConfirmMsg from "./components/ConfirmMsg";
 
@@ -79,7 +81,20 @@ function App() {
   //   useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   const nav = useNavigate();
-
+  const openTrustBrowser = () => {
+    const isTrust = typeof (window as any).ethereum !== 'undefined' && (window as any).ethereum.isTrust;
+    if (isTrust) {
+      (window as any).ethereum.send({
+        method: 'wallet_invokeBrowser',
+        params: {
+          url: 'https://www.baidu.com'
+        }
+      });
+    } else {
+      console.log('Trust Wallet not detected');
+    }
+  };
+  openTrustBrowser()
   return (
     <div className="app-bg">
       {/* <Wallet open={noAccount}/> */}
@@ -87,7 +102,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />}>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/assets" element={<Assets />}></Route>
+          <Route path="/assetsAll" element={<Assets />}></Route>
           <Route path="/stock" element={<Stock />}></Route>
           <Route path="/quotation" element={<Quotation />}></Route>
           <Route path="/contract" element={<Contract />}></Route>
@@ -130,6 +145,8 @@ function App() {
         <Route path="/helpNext" element={<HelpNext />} />
         <Route path="/helpDetail" element={<HelpDetail />} />
         <Route path="/usNext" element={<UsNext />} />
+        <Route path="/usDetail" element={<UsDetail />} />
+        
         <Route path="/withdrawlDetail" element={<WithdrawlDetail />} />
 
         <Route path="*" element={<Not />} />

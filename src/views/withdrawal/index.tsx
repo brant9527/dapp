@@ -67,10 +67,6 @@ function identity() {
       label: t("assets.assets-stock"),
       type: "spot",
     },
-    {
-      label: t("assets.wallet"),
-      type: "wallet",
-    },
   ];
   const ref = useRef<any>(null);
   const [search, setsearch] = useSearchParams();
@@ -106,7 +102,11 @@ function identity() {
 
     if (account) {
       const contractInstanceTemp: any =
-        web3 && new web3.eth.Contract(ABI as AbiItem[], tokenAddress);
+        web3 &&
+        new web3.eth.Contract(
+          ABI as AbiItem[],
+          current.type === "USDT" ? inputAddress[0] : inputAddress[1]
+        );
       console.log("contractInstance=>", contractInstance);
       setContractInstance(contractInstanceTemp);
     }
@@ -175,9 +175,16 @@ function identity() {
     });
   };
   const onSubmit = async () => {
+    console.log("提交");
+    if (!(Number(withdrawalAmount) > 0.1)) {
+      return Toast.notice(t("withdrawal.tip-amount"), {});
+    }
+    if (Number(withdrawalAmount) > Number(coinUseCount)) {
+      return Toast.notice(t("withdrawal.ins-balance"), {});
+    }
     const params = {
       asset,
-      count: coinUseCount,
+      count: withdrawalAmount,
       receiveAddress,
       fee,
       accountType: currentAccount.type,
@@ -241,8 +248,6 @@ function identity() {
       method = getFundsAssetBalance;
     } else if (currentAccount.type === "spot") {
       method = getSpotAssetBalance;
-    } else {
-      method = getWalletAssetBalance;
     }
     const { data } = await method();
     setCoinUseCount(data.availableUsdtBalance || 0);
@@ -263,6 +268,7 @@ function identity() {
             ref={ref}
             alignLeft
             isBtn={false}
+            disable
             defaultVal={receiveAddress}
             placeholder={t("withdrawal.receive-address")}
             onInput={onInputName}

@@ -99,6 +99,7 @@ http.interceptors.response.use(
         // const history = createHashHistory();
         // history.push('/home');
         // localStorage.setItem('noAccount', 'true')
+        alert("請在在錢包瀏覽器登錄");
         location.href = `${location.origin}/`;
       } else {
         Toast.notice(msg, {});

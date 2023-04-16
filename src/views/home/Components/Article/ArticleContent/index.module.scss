@@ -1,0 +1,18 @@
+.root {
+  :global {
+    .article-content {
+      overflow: hidden;
+
+      max-height: 300px;
+
+      &.extend {
+        max-height: max-content;
+      }
+    }
+    .btn-article-more {
+      text-align: center;
+      font-size: 36px;
+      color: $blue;
+    }
+  }
+}

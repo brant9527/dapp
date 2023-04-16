@@ -7,6 +7,7 @@ import {
   Link,
   Outlet,
   useNavigate,
+  useSearchParams,
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
@@ -22,6 +23,8 @@ function BindEmail() {
 
   const nav = useNavigate();
 
+  const [search, setsearch] = useSearchParams();
+  const isPhone = search.get("isPhone");
   const [userInfo, setUserInfo] = useState<any>({});
 
   useEffect(() => {
@@ -63,13 +66,17 @@ function BindEmail() {
       <div className="email-wrap">
         <Back content={title()}></Back>
         <div className="email-content">
-          <div className="email-label">{t("common.mobile.number")}</div>
-          <CusInput
-            alignLeft
-            isBtn={false}
-            defaultVal={userInfo.mobile}
-            onInput={onInputMobile}
-          ></CusInput>
+          {!isPhone&& (
+            <>
+              <div className="email-label">{t("common.mobile.number")}</div>
+              <CusInput
+                alignLeft
+                isBtn={false}
+                defaultVal={userInfo.mobile}
+                onInput={onInputMobile}
+              ></CusInput>
+            </>
+          )}
           <div className="email-label">{t("common.email.address")}</div>
           <CusInput
             alignLeft

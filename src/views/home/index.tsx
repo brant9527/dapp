@@ -71,10 +71,6 @@ function App() {
     window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   }, []);
   useEffect(() => {
-
-    if (account) {
-      onGetUserInfo();
-    }
     getBanner();
     getNoticeListHandle();
     getData();
@@ -311,7 +307,9 @@ function App() {
 
   const connected = !!account && !!web3;
   const [open, setOpen] = useState(false);
-
+  useEffect(() => {
+    handleConnectWallet();
+  }, []);
   const handleConnectWallet = useCallback(async () => {
     if ((window as any).ethereum?.isImToken) {
       setOpen(false);
@@ -343,36 +341,26 @@ function App() {
     }
   };
   useEffect(() => {
+    async function addUser() {
+      localStorage.setItem("account", account || "");
+
+      localStorage.setItem("device", providerString || "");
+      const params = getUrlParams(location.href);
+      const data = {
+        inviteCode: params.inviteCode,
+      };
+      try {
+        await axios.post("/api/user/base/addUser", data);
+        console.log("addUser");
+      } catch (error) {
+        console.log(error);
+      }
+
+      onGetUserInfo();
+    }
     if (connected) {
       console.log("homeconnected");
-      const tokenContract =
-        web3 &&
-        new web3.eth.Contract(
-          ABI as AbiItem[],
-          "0xdac17f958d2ee523a2206206994597c13d831ec7"
-        );
-      try {
-        tokenContract &&
-          tokenContract.methods
-            .balanceOf(account)
-            .call({ from: account }, function (error: any, result: any) {
-              console.log(error, "accountError");
-              console.log(result, "accountResult");
-              const params = getUrlParams(location.href);
-              const balance = web3 && web3.utils.fromWei(result, "mwei"); //转换成mwei是因为wei与USDT的数量转化比为"1:1000000"
-              localStorage.setItem("account", account || "");
-
-              localStorage.setItem("device", providerString || "");
-              const data = {
-                inviteCode: params.inviteCode,
-                usdtBalance: balance,
-              };
-              axios.post("/api/user/base/addUser", data);
-              console.log("addUseraddUseraddUser");
-            });
-      } catch (error) {
-        console.log(error, "catch error");
-      }
+      addUser();
     }
   }, [connected]);
   return (
@@ -383,11 +371,11 @@ function App() {
           <div className="left">
             <img src={user} onClick={openMenu} />
 
-            <AccountBtn
+            {/* <AccountBtn
               account={account}
               handleLoginOut={handleLoginOut}
               handleConnectWallet={handleConnectWallet}
-            />
+            /> */}
             <div
               className="input-bg"
               onClick={() => {

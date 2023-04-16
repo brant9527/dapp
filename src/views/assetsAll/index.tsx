@@ -52,10 +52,7 @@ function Assets() {
       title: t("assets.assets-stock"),
       type: "spot",
     },
-    {
-      title: t("assets.wallet"),
-      type: "wallet",
-    },
+    
   ];
   const tabsList = [
     {
@@ -91,11 +88,7 @@ function Assets() {
       btcBalance: 0,
       usdtBalance: 0,
     },
-    {
-      title: t("assets.assets-lever"),
-      btcBalance: 0,
-      usdtBalance: 0,
-    },
+    
   ];
 
   const [assetsList, setAssetsList] = useState(assetsAllInit);

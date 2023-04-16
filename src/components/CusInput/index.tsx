@@ -28,6 +28,7 @@ const CusInput = forwardRef((props: any, ref: any) => {
     append,
     prepend,
     inputType = "text",
+    inputLimit = "number",
   } = props;
   const [val, setVal] = useState<any>(defaultVal);
 
@@ -49,7 +50,10 @@ const CusInput = forwardRef((props: any, ref: any) => {
     onInput(val);
   };
   const inputChange = (e: any) => {
-    const valTemp = e.target.value.replace(/^\D*(\d*(?:\.\d{0,9})?).*$/g, "$1");
+    let valTemp = e.target.value;
+    if (inputLimit==='number') {
+      valTemp = valTemp.replace(/^\D*(\d*(?:\.\d{0,9})?).*$/g, "$1");
+    }
     setVal(valTemp);
     onInput(valTemp);
   };

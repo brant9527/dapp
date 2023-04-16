@@ -6,6 +6,7 @@ import { getArticleList } from "@/api/common";
 import { formatTime } from "@/utils/public";
 import good from "@/assets/good.png";
 import bad from "@/assets/bad.png";
+import ArticleContent from "./ArticleContent";
 const Article = (props: any) => {
   const { handleSelect } = props;
   const { t } = useTranslation();
@@ -28,12 +29,12 @@ const Article = (props: any) => {
               <div className="time">
                 {formatTime(new Date(item.publishTime).getTime())}
               </div>
-
-              <div
+              <ArticleContent content={item.content}></ArticleContent>
+              {/* <div
                 className="content"
                 style={{color:'red!important'}}
                 dangerouslySetInnerHTML={{ __html: decodeURI(item?.content) }}
-              ></div>
+              ></div> */}
               <div className="emotion">
                 <div className="emotion-item">
                   <span>

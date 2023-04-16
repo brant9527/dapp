@@ -16,8 +16,13 @@ export const getJuniorCertified = (data: any) => {
   return axios.post("/api/user/base/juniorCertified", data);
 };
 export const getRechargeAddress = () => {
-  return axios.post("/api/user/base/getRechargeAddress");
+  return axios.post("/api/user/recharge/getRechargeAddress");
 };
+export const rechargeApply = (data:any) => {
+  return axios.post("/api/user/recharge/apply",data);
+};
+
+
 export const authentication = (data: any) => {
   return axios.post("/api/user/base/authentication", data);
 };

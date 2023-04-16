@@ -57,7 +57,7 @@ function App() {
       title: t("nav.assets"),
       src1: zichan1,
       src2: zichan2,
-      path: "assets",
+      path: "assetsAll",
     },
   ];
   return (

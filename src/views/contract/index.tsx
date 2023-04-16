@@ -392,6 +392,15 @@ function Contract({ mock }: any) {
     if (!useUsdt || !coinAccount || !promiseMoney) {
       return Toast.notice(t("common.params-check"), { duration: 2000 });
     }
+    // 沒有餘額或者大於資產不允許交易
+
+    if (
+      !Number(promiseMoney) ||
+      Number(promiseMoney) > balanceAssets?.availableUsdtBalance
+    ) {
+      return Toast.notice(t("common.need-amount"), { duration: 2000 });
+    }
+
     let params = {};
     let method: any = "";
     const fee = Number(accMul(useUsdt, userInfo?.feeRate)); // 手續費
@@ -436,6 +445,10 @@ function Contract({ mock }: any) {
         marginMode,
       };
     } else {
+      // 沒有餘額或者大於資產不允許交易
+      if (!selectPeriod.period) {
+        return Toast.notice(t("common.need-period"), { duration: 2000 });
+      }
       params = {
         algoPrice: transType === "limit" ? coinPrice : "",
         algoTime: new Date().getTime(),
@@ -525,7 +538,7 @@ function Contract({ mock }: any) {
     );
   }, [lever, balanceAssets]);
   const promiseMoney = useMemo(() => {
-    return toFixed(accDiv(Number(useUsdt), Number(lever || 0)), 2);
+    return accDiv(Number(useUsdt), Number(lever || 0));
   }, [lever, useUsdt]);
   return (
     <div className={style.root}>
@@ -537,7 +550,7 @@ function Contract({ mock }: any) {
         ></CommonTab>
         <NavBar
           navHandle={navHandle}
-          percent={toFixed(headInfo?.rate, 2)}
+          percent={headInfo?.rate}
           coin={coin}
           contractType={tradeType}
           mock={mock}
@@ -770,7 +783,7 @@ function Contract({ mock }: any) {
               <div className="max-u">
                 <div className="max-left">{t("contract.promise-money")}</div>
 
-                <div className="max-right">{promiseMoney} USDT</div>
+                <div className="max-right">{toFixed(promiseMoney)} USDT</div>
               </div>
               <div
                 className={"btn-option btn-option__" + type}

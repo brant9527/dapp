@@ -45,7 +45,11 @@ function Menulist() {
     { imgSrc: wdzh, label: t("home.menu-wdzh"), path: "/user" },
     { imgSrc: jyjl, label: t("home.menu-bzzx"), path: "/help" },
     { imgSrc: smrz, label: t("home.menu-smrz"), path: "/auth" },
-    { imgSrc: yxbd, label: t("home.menu-yxbd"), path: "/bindEmail" },
+    {
+      imgSrc: yxbd,
+      label: t("home.menu-yxbd"),
+      path: "/bindEmail?isPhone=false",
+    },
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
     { imgSrc: jyjl, label: t("home.menu-wjdc"), path: "/question" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },

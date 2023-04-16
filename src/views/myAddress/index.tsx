@@ -17,15 +17,17 @@ import i18in from "../../../react-i18next-config";
 import Back from "@/components/Back";
 import recordPng from "@/assets/record.png";
 import rightPng from "@/assets/right.png";
+import copyPng from "@/assets/btn-copy.png";
 
 import copy from "copy-to-clipboard";
-import { getRechargeAddress } from "@/api/userInfo";
+import { getRechargeAddress, rechargeApply } from "@/api/userInfo";
 import Toast from "@/components/Toast";
 import Select from "@/components/Select";
+import CusInput from "@/components/CusInput";
 
 function myAddress() {
   const { t } = useTranslation();
-  const [coin, setCoin] = useState("USDT");
+  const [amount, setAmount] = useState("");
   const [address, setAddress] = useState("");
   const [current, setCurrent] = useState<any>({});
   const [dataList, setDataList] = useState<any>([]);
@@ -41,7 +43,22 @@ function myAddress() {
     if (code == 0 && data && data.length > 0) {
       setDataList(data);
       setCurrent(data[0]);
-      setAddress(data[0].address || account);
+      setAddress(data[0].address);
+    }
+  };
+  const apply = async () => {
+    if (!amount) {
+      return Toast.notice(t("lend.tip-amount"), {});
+    }
+    const params = {
+      ...current,
+      count: amount,
+      receiveAddress: current.address,
+    };
+    const { code, data } = await rechargeApply(params);
+    if (code == 0) {
+      Toast.notice(t("common.success"), {});
+      nav('/assetsAll')
     }
   };
   function right() {
@@ -57,6 +74,11 @@ function myAddress() {
   }
   const onSelect = (item: any) => {
     setCurrent(item);
+    setAddress(item.address);
+  };
+  const onInputAmount = async (val: any) => {
+    console.log("输入", val);
+    setAmount(val);
   };
   return (
     <div className={style.root}>
@@ -75,7 +97,7 @@ function myAddress() {
             <div className="qrtip ">
               <div className="tip1">
                 {t("address.tip1", {
-                  coin:current.chain,
+                  coin: current.chain,
                 })}
               </div>
               <div className="tip2">{t("address.tip2")}</div>
@@ -89,7 +111,7 @@ function myAddress() {
                 copy(address);
               }}
             >
-              {address}
+              {address} <img src={copyPng} />
             </div>
             <div className="address-text">{t("address.chain")}</div>
             <div
@@ -98,14 +120,21 @@ function myAddress() {
                 selectRef.current.open();
               }}
             >
-              <div>{current.chain}</div>
+              <div>{`${current.chain}(${current.asset})`}</div>
               <img src={rightPng} />
+            </div>
+            <div className="address-text">{t("trans.count")}</div>
+            <div className="address-amount">
+              <CusInput
+                alignLeft
+                isBtn={false}
+                onInput={onInputAmount}
+              ></CusInput>
             </div>
             <div
               className="btn"
               onClick={() => {
-                Toast.notice(t("common.copy"), {});
-                copy(address);
+                apply();
               }}
             >
               {t("common.sure")}
@@ -116,7 +145,7 @@ function myAddress() {
       <Select
         ref={selectRef}
         configList={dataList.map((item: any) => {
-          return { ...item, label: item.chain };
+          return { ...item, label: `${item.chain}(${item.asset})` };
         })}
         onSelect={onSelect}
       ></Select>

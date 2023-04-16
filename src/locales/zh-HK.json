@@ -37,7 +37,7 @@
     "certified": "已認證",
     "not-certified": "未認證",
     "current-rate": "當前費率",
-    "current-target": "升級還需充值",
+    "current-target": "升級還需存入",
     "user-info": "賬戶信息",
     "vip-desc": "聯繫我了解您的VIP權益",
     "customer-tip": "C2C 請聯繫客服",
@@ -61,9 +61,9 @@
 
     "wallet": "錢包賬戶",
     "allAssessment": "總資產評估（USDT）",
-    "deposit": "充值",
+    "deposit": "存入",
     "assetsTrans": "劃轉",
-    "transfer": "提現",
+    "transfer": "轉出",
     "invest": "投資組合",
 
     "assets-funds": "資金賬戶",
@@ -86,20 +86,20 @@
     "useable": "可用資產",
     "frozen": "凍結資產",
     "sure": "確認劃轉",
-    "assets-account":"資產賬戶",
-    "assets-choose-tip":"USDT:USDC 1比1兌換"
+    "assets-account": "資產賬戶",
+    "assets-choose-tip": "USDT:USDC 1比1兌換"
   },
   "record": {
-    "record": "充值記錄",
+    "record": "存款記錄",
     "recordIn": "轉入記錄",
     "recordOut": "轉出記錄",
     "recordChange": "賬變記錄"
   },
   "address": {
-    "recharge": "充值",
-    "tip1": "僅支持該地址充值{{coin}}",
-    "tip2": "不支持充值其他幣種，請核對",
-    "address": "ETH 充值地址",
+    "recharge": "存入",
+    "tip1": "僅支持該地址存入{{coin}}",
+    "tip2": "不支持存入其他幣種，請核對",
+    "address": "ETH 存入地址",
     "chain": "主网"
   },
   "lg": {
@@ -160,6 +160,8 @@
     "end-time": "結束時間",
     "status": "狀態",
     "params-check": "請輸入價格或數量",
+    "need-amount": "餘額不足，請確認資質后重新下單",
+    "need-period": "請選擇交割週期",
     "record": "記錄",
     "help": "幫助中心",
     "close": "關閉",
@@ -167,8 +169,10 @@
     "acticle-title": "資訊",
     "good": "利好",
     "bad": "利空",
-    "about-us": "關於我們",
-    "customer": "聯繫專屬客服"
+    "about-us": "關於平台",
+    "customer": "聯繫專屬客服",
+    "more": "更多",
+    "fold": "收起"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -292,7 +296,8 @@
     "withdrawal-amount": "提幣數量",
     "rest": "餘額",
     "apply-time": "申請時間",
-    "step": "提現流程"
+    "step": "提現流程",
+    "ins-balance": "餘額不足"
   },
   "trade": {
     "high24": "24h最高價",

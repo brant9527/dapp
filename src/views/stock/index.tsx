@@ -314,6 +314,22 @@ function Stock() {
     if (!useUsdt || !coinAccount) {
       return Toast.notice(t("common.params-check"), { duration: 2000 });
     }
+    // 沒有餘額或者大於資產不允許交易
+    if (calcType == 2) {
+      if (
+        !Number(useUsdt) ||
+        Number(useUsdt) > balanceAssets?.availableUsdtBalance
+      ) {
+        return Toast.notice(t("common.need-amount"), { duration: 2000 });
+      }
+    } else {
+      if (
+        !Number(coinAccount) ||
+        coinAccount > balanceAssets?.availableAssetBalance
+      ) {
+        return Toast.notice(t("common.need-amount"), { duration: 2000 });
+      }
+    }
 
     const fee = Number(accMul(useUsdt, userInfo?.feeRate)); // 手續費
     let amountTemp: any = 0;
@@ -363,7 +379,7 @@ function Stock() {
       <div className="stock-wrap">
         <NavBar
           navHandle={navHandle}
-          percent={toFixed(headInfo?.rate, 2)}
+          percent={headInfo?.rate}
           coin={coin}
         ></NavBar>
         <div className="option-wrap">

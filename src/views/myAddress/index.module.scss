@@ -69,10 +69,12 @@
           @include background_color("bgColor2");
           @include font_color("fontColor1");
           font-size: 44px;
+          img {
+            width: 40px;
+            height: 40px;
+          }
         }
         .address-chain {
-
-
           margin: 30px auto 65px;
           padding: 40px;
           text-align: left;
@@ -83,13 +85,16 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          img{
-              width: 21px;
-              height: 32px;
+          img {
+            width: 21px;
+            height: 32px;
           }
         }
+        .address-amount {
+          margin: 30px auto 65px;
+        }
         .btn {
-          margin: 30px auto 0;
+          margin: 30px auto 100px;
           width: 1036px;
           border-radius: 20px;
           font-size: 50px;

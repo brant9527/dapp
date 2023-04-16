@@ -58,22 +58,20 @@ function TransRecord() {
                 <div
                   className="us-item"
                   key={idx}
-                  // onClick={() => {
-                  //   window.localStorage.setItem(
-                  //     "usDetail",
-                  //     JSON.stringify(item)
-                  //   );
-                  //   nav("/usDetail");
-                  // }}
+                  onClick={() => {
+                    window.localStorage.setItem(
+                      "usDetail",
+                      JSON.stringify(item)
+                    );
+                    nav("/usDetail");
+                  }}
                 >
                   <div> {item.title}</div>
                   <div>
-                    {/* <img src={rightPng} /> */}
+                    <img src={rightPng} />
                   </div>
                 </div>
-                <div
-                  dangerouslySetInnerHTML={{ __html: decodeURI(item?.content) }}
-                ></div>
+              
               </>
             );
           })}

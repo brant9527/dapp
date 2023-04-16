@@ -104,6 +104,7 @@ function identity() {
             alignLeft
             isBtn={false}
             defaultVal={realName}
+            inputLimit="text"
             onInput={onInputName}
           ></CusInput>
           <div className="identity-label">{t("auth.id")}</div>
@@ -111,6 +112,8 @@ function identity() {
             alignLeft
             isBtn={false}
             defaultVal={idNumber}
+            inputLimit="text"
+
             onInput={onInputIdNumber}
           ></CusInput>
 
@@ -123,6 +126,8 @@ function identity() {
             defaultVal={region}
             alignLeft
             isBtn={false}
+            inputLimit="text"
+
             onInput={onInputCountry}
           ></CusInput>
           <div
