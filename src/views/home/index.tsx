@@ -330,7 +330,7 @@ function App() {
         console.log("trust success");
       });
     } else {
-      setOpen(true);
+      // setOpen(true);
     }
   }, [connectProvider]);
   const onConfirm = () => {

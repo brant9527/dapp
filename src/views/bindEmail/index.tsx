@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import CusInput from "@/components/CusInput";
 
 import Back from "@/components/Back";
-import { getJuniorCertified, getUserInfo } from "@/api/userInfo";
+import { bindEmail, getJuniorCertified, getUserInfo } from "@/api/userInfo";
 
 import Toast from "@/components/Toast";
 
@@ -24,6 +24,7 @@ function BindEmail() {
   const nav = useNavigate();
 
   const [search, setsearch] = useSearchParams();
+  // 有值默认是只需要绑定邮箱
   const isPhone = search.get("isPhone");
   const [userInfo, setUserInfo] = useState<any>({});
 
@@ -50,15 +51,24 @@ function BindEmail() {
     setUserInfo(userInfo);
   };
   const onSubmit = async () => {
-    const data: any = await getJuniorCertified(userInfo);
+    if(isPhone){
+      const data: any = await bindEmail(userInfo);
+    if (data.code == 0) {
+      Toast.notice(t("common.upload-tip"), {});
+      nav("/");
+    }
+    }else{
+      const data: any = await getJuniorCertified(userInfo);
     if (data.code == 0) {
       Toast.notice(t("common.upload-tip"), {});
       nav("/auth");
     }
+    }
+    
   };
 
   function title() {
-    return <div className="email-title">{t("common.email.bind")}</div>;
+    return <div className="email-title">{isPhone?t("common.email.bind"):t("auth.primary-auth")}</div>;
   }
 
   return (

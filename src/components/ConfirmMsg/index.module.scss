@@ -1,7 +1,19 @@
 .root {
     :global {
-        .comfirm-msg{
-            
+        .comfirm-msg {
+        }
+        .close-confirm {
+            font-size: 56px;
+            font-weight: bold;
+            text-align: center;
+            @include font_color("fontColor1");
+        }
+        .close-confirm1 {
+            font-size: 42px;
+
+            text-align: center;
+            margin: 40px 0 80px;
+            @include font_color("fontColor2");
         }
     }
 }

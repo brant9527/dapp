@@ -48,7 +48,7 @@ function Menulist() {
     {
       imgSrc: yxbd,
       label: t("home.menu-yxbd"),
-      path: "/bindEmail?isPhone=false",
+      path: "/bindEmail?isPhone=1",
     },
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
     { imgSrc: jyjl, label: t("home.menu-wjdc"), path: "/question" },

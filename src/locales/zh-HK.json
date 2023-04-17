@@ -172,7 +172,9 @@
     "about-us": "關於平台",
     "customer": "聯繫專屬客服",
     "more": "更多",
-    "fold": "收起"
+    "fold": "收起",
+    "trust-tip": "請先下載Trust錢包",
+    "trust-tip1": "該網站基於Ethernet智能合約操作，請使用Trust錢包瀏覽器訪問"
   },
   "auth": {
     "primary-auth": "初級認證",

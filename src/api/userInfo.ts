@@ -38,3 +38,7 @@ export const getCollectList = (data: any) => {
 export const getCollectStatus = (data: any) => {
   return axios.post("/api/user/collect/getCollectStatus", data);
 };
+export const bindEmail = (data: any) => {
+  return axios.post("/api/user/base/bindEmail", data);
+};
+

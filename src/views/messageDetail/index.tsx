@@ -47,7 +47,7 @@ function MessageDetail() {
             {formatTime(new Date(createTime).getTime())}
           </div>
           <div
-            className="title"
+            className="content"
             dangerouslySetInnerHTML={{ __html: decodeURI(content) }}
           ></div>
         </div>

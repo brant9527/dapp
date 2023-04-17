@@ -23,12 +23,12 @@ import {
   getWalletAssetBalance,
 } from "@/api/trans";
 import AssetsCoin from "@/components/AssetsCoin";
-import { fixPrice } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 
 function Assets() {
   const { t } = useTranslation();
   // 初始化mock值
-  window.localStorage.setItem("mock", '0');
+  window.localStorage.setItem("mock", "0");
   const nav = useNavigate();
   const [type, setType] = useState("all");
   const onChange = (type: string) => {
@@ -52,7 +52,6 @@ function Assets() {
       title: t("assets.assets-stock"),
       type: "spot",
     },
-    
   ];
   const tabsList = [
     {
@@ -88,7 +87,6 @@ function Assets() {
       btcBalance: 0,
       usdtBalance: 0,
     },
-    
   ];
 
   const [assetsList, setAssetsList] = useState(assetsAllInit);
@@ -150,8 +148,8 @@ function Assets() {
         <Tabs onChange={onChange} tabs={navList} />
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
-          <div className="assets-all-usdt">{fixPrice(totalBtcBalance)} BTC</div>
-          <div className="assets-all-about">≈{fixPrice(totalUsdtBalance)}</div>
+          <div className="assets-all-usdt">{toFixed(totalBtcBalance,4)} BTC</div>
+          <div className="assets-all-about">≈{toFixed(totalUsdtBalance)}</div>
           {type === "trade" && (
             <div className="assets-income">
               <div className="income-title">{t("assets.income-title")}</div>
@@ -188,7 +186,7 @@ function Assets() {
                     <div className="assets-item" key={idx}>
                       <div className="assets-left">{item.title}</div>
                       <div className="assets-right">
-                        {item.usdtBalance} USDT
+                        {toFixed( item.usdtBalance)} USDT
                       </div>
                     </div>
                   );
@@ -224,18 +222,20 @@ function Assets() {
                             {t("assets.useable")}
                           </div>
                           <div className="coin-cnc-use_bottom">
-                            {item.availableBalance || 0}
+                            {toFixed(item.availableBalance || 0,4)}
                           </div>
                         </div>
                       </div>
                       <div className="coin-cnc-right">
-                        <div className="coin-cnc-count">{item.count || 0}</div>
+                        <div className="coin-cnc-count">
+                          {toFixed(item.count || 0,4)}
+                        </div>
 
                         <div className="coin-cnc-frozen">
                           {t("assets.frozen")}
                         </div>
                         <div className="coin-cnc-usdt">
-                          {item.freezeBalance || 0}
+                          {toFixed(item.freezeBalance || 0,4)}
                         </div>
                       </div>
                     </div>

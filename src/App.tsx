@@ -60,7 +60,6 @@ import Help from "./views/help";
 import HelpNext from "./views/helpNext";
 import HelpDetail from "./views/helpDetail";
 
-
 import UsNext from "./views/usNext";
 import UsDetail from "./views/usDetail";
 
@@ -81,20 +80,9 @@ function App() {
   //   useWeb3();
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   const nav = useNavigate();
-  const openTrustBrowser = () => {
-    const isTrust = typeof (window as any).ethereum !== 'undefined' && (window as any).ethereum.isTrust;
-    if (isTrust) {
-      (window as any).ethereum.send({
-        method: 'wallet_invokeBrowser',
-        params: {
-          url: 'https://www.baidu.com'
-        }
-      });
-    } else {
-      console.log('Trust Wallet not detected');
-    }
-  };
-  openTrustBrowser()
+
+ 
+  // openTrustBrowser();
   return (
     <div className="app-bg">
       {/* <Wallet open={noAccount}/> */}
@@ -146,7 +134,7 @@ function App() {
         <Route path="/helpDetail" element={<HelpDetail />} />
         <Route path="/usNext" element={<UsNext />} />
         <Route path="/usDetail" element={<UsDetail />} />
-        
+
         <Route path="/withdrawlDetail" element={<WithdrawlDetail />} />
 
         <Route path="*" element={<Not />} />
