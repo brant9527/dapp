@@ -62,6 +62,11 @@
               .symbol {
                 font-size: 48px;
                 @include font_color("fontColor1");
+                span {
+                  font-size: 36px;
+                  margin-left: 20px;
+                  @include font_color("fontColor2");
+                }
               }
               .time {
                 font-size: 38px;

@@ -83,9 +83,14 @@ function Entrust(props: any) {
                 </div>
                 <div className="right">
                   <div className="top">
-                    <div className="symbol">{`${
-                      item.symbol.split("USDT")[0]
-                    }/USDT`}</div>
+                    <div className="symbol">
+                      {`${item.symbol.split("USDT")[0]}/USDT`}
+                      <span>
+                        {item.tradeType === "spot"
+                          ? ""
+                          : t("tabs.swap")}
+                      </span>
+                    </div>
                     <div className="time">
                       {formatTime(new Date(item.createTime).getTime())}
                     </div>

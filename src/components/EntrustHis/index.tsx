@@ -70,9 +70,16 @@ function EntrustHis(props: any) {
               <div key={index} className="entrustHis-info_item">
                 <div className="content">
                   <div className="item-wrap">
-                    <div className="symbol">{`${
-                      item.symbol.split("USDT")[0]
-                    }/USDT`}</div>
+                    <div className="symbol">
+                      {`${item.symbol.split("USDT")[0]}/USDT`}{" "}
+                      <span className="trade-type">
+                        {item.tradeType == "swap"
+                          ? t("tabs.swap")
+                          : item.tradeType == "spot"
+                          ? t("tabs.spot")
+                          : t("tabs.delivery")}
+                      </span>
+                    </div>
                     <div className="time">
                       {formatTime(item.createTime, "YYYY-MM-DD HH:mm:ss")}
                     </div>

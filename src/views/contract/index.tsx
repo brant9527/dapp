@@ -270,7 +270,7 @@ function Contract({ mock }: any) {
             setCalcType(2);
           }
           // 修改为余额倍数最大值
-          const tempUsdt = toFixed(accMul(val, maxUsdt), 2);
+          const tempUsdt = toFixed(accMul(val, maxUsdt), 4);
           const tempAccount = toFixed(
             accDiv(tempUsdt, coinPrice || headInfo?.close),
             4

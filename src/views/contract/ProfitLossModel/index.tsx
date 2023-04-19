@@ -68,7 +68,7 @@ const ProfitLossModel = forwardRef(
       const params = {
         algoTime: new Date().getTime(),
         algoType: "limit",
-        count: amount,
+        amount,
         id: info.id,
         side: info.side,
         stopLsPrice: stopLsPrice,
@@ -141,7 +141,11 @@ const ProfitLossModel = forwardRef(
               {t("common.count")}：{amount}
             </div>
 
-            <SlideNum onChange={onChangeSlideNum} defaultVal={lever} max={100}></SlideNum>
+            <SlideNum
+              onChange={onChangeSlideNum}
+              defaultVal={lever}
+              max={100}
+            ></SlideNum>
             <div
               className="profitLoss-btn"
               onClick={() => {

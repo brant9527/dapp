@@ -53,10 +53,16 @@ function TransactionHis(props: any) {
               <div key={index} className="transHis-info_item">
                 <div className="content">
                   <div className="item-wrap">
-                    <div className="symbol">{`${item.symbol?.replace(
-                      "USDT",
-                      ""
-                    )}/USDT`}</div>
+                    <div className="symbol">
+                      {`${item.symbol?.replace("USDT", "")}/USDT`}
+                      <span className="trade-type">
+                        {item.tradeType == "swap"
+                          ? t("tabs.swap")
+                          : item.tradeType == "spot"
+                          ? t("tabs.spot")
+                          : t("tabs.delivery")}
+                      </span>
+                    </div>
                     <div className="time">
                       {formatTime(item.dealTime, "YYYY-MM-DD HH:mm:ss")}
                     </div>
@@ -81,7 +87,9 @@ function TransactionHis(props: any) {
                     <div className="price">{fixPrice(item.count)}</div>
                   </div>
                   <div className="item-wrap">
-                    <div className="count">{t("trade.fee")}({item.feeAsset})</div>
+                    <div className="count">
+                      {t("trade.fee")}({item.feeAsset})
+                    </div>
                     <div className="count">{toFixed(item.fee, 6)}</div>
                   </div>
                   <div className="item-wrap">

@@ -41,7 +41,7 @@ import {
 } from "@/utils/public";
 import record from "@/assets/record.png";
 import Io from "@/utils/socket";
-import { getTradeAssetBalance } from "@/api/trans";
+import { getSpotAssetBalance} from "@/api/trans";
 import { getUserInfo } from "@/api/userInfo";
 
 function Stock() {
@@ -171,7 +171,7 @@ function Stock() {
     setBalanceAssets(data);
   }, []);
   const getAssetBalance = useCallback(async () => {
-    const { data } = await getTradeAssetBalance();
+    const { data } = await getSpotAssetBalance();
     setAssetsList(data.detailList);
   }, []);
 

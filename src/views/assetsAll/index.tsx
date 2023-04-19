@@ -134,17 +134,16 @@ function Assets() {
     const { data } = await getTradeTodayIncomeRate();
     setIncome(data);
   }, [type]);
+
   useEffect(() => {
     getData();
     getIncme();
-  }, [type]);
-  useEffect(() => {
     const timer = setInterval(() => {
       getData();
       getIncme();
     }, 3000);
     return () => clearInterval(timer);
-  }, []);
+  }, [type]);
   return (
     <div className={style.root}>
       <div className="assets-wrap">

@@ -11,15 +11,11 @@ import {
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
-
-import i18in from "../../../react-i18next-config";
-
 import Back from "@/components/Back";
-
 import Toast from "@/components/Toast";
-
 import { onTradeBuySell } from "@/api/trade";
 import { toFixed } from "@/utils/public";
+import Io from "@/utils/socket";
 
 function Exchange() {
   const { t } = useTranslation();
@@ -27,14 +23,27 @@ function Exchange() {
   const [search, setsearch] = useSearchParams();
   const symbol = search.get("asset");
   const maxAcount = search.get("count") || 0;
-  const price = search.get("price") || 0;
+
 
   const [coin, setCoin] = useState("USDT");
 
   const [coinFrozenCount, setCoinFrozenCount] = useState(0);
   const [amount, setAmount] = useState<any>(0);
   const [contractAddress, setContractAddress] = useState();
+  const [info, setInfo] = useState<any>({});
   const phoneRef = useRef(null);
+  useEffect(() => {
+    getData();
+    return () => {
+      Io.cfwsUnsubscribe("market." + symbol + "USDT");
+    };
+  }, []);
+  const getData = async () => {
+    Io.subscribeSymbolInfo(symbol + "USDT", (data: any) => {
+      console.log(data[0]);
+      setInfo(data[0]);
+    });
+  };
   const transAsstes = async () => {
     const params = {
       algoTime: new Date(),
@@ -53,8 +62,8 @@ function Exchange() {
     }
   };
   const talUsdt = useMemo(() => {
-    return toFixed(Number(price) * amount, 4);
-  }, [price, amount]);
+    return toFixed(Number(info.close) * amount, 4);
+  }, [info, amount]);
   return (
     <>
       <div className={style.root}>
@@ -111,7 +120,7 @@ function Exchange() {
             <div className="coin-state">
               <div className="left">{t("exchange.current-rate")}</div>
               <div className="right">
-                {symbol}≈{price}
+                {symbol}≈{info.close}
                 {coin}
               </div>
             </div>
