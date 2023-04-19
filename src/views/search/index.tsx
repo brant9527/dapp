@@ -217,8 +217,8 @@ function Search() {
                       className="coin-item"
                       key={cIdx + 1}
                       onClick={() => {
-                        const mock = window.localStorage.getItem("mock");
-                        if (mock) {
+                        const mock = window.localStorage.getItem("mock")||'';
+                        if (mock === "1") {
                           return nav(
                             `/mockTrade?symbol=${item.symbol}&tradeType=swap`
                           );

@@ -117,7 +117,7 @@ function Entrust(props: any) {
                         item.unrealizedPnl > 0 ? "s" : "f"
                       }`}
                     >
-                      {toFixed(item.pnlRatio)}%
+                      {toFixed(item.pnlRatio * 100)}%
                     </div>
                   </div>
                 </div>
@@ -127,7 +127,7 @@ function Entrust(props: any) {
                       {t("contract.have-amount")}(USDT)
                     </div>
                     <div className="info-bottom">
-                      {toFixed(item.availPosition)}
+                      {toFixed(item.availPosition * item.avgCostPrice)}
                     </div>
                   </div>
                   <div className="info-part">
@@ -145,7 +145,7 @@ function Entrust(props: any) {
                         item.marginRate > 0 ? "s" : "f"
                       }`}
                     >
-                      {toFixed(item.marginRate)}%
+                      {toFixed(item.marginRate*100)}%
                     </div>
                   </div>
                 </div>

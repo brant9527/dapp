@@ -14,7 +14,7 @@
                 @include font_color("fontColor1");
             }
             .credit-content {
-                height: calc(100vh - 150px);
+                height: calc(100vh - 150px - env(safe-area-inset-bottom));
                 overflow: auto;
                 margin: 100px 44px 0;
                 text-align: center;

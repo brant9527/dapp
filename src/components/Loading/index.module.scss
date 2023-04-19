@@ -14,7 +14,7 @@
       .menu-content {
         position: absolute;
         width: calc(100vw - 80px);
-        height:calc(100vh - 80px);
+        height:calc(100vh - 80px - env(safe-area-inset-bottom));
         left: 0;
         z-index: 11;
         padding: 40px;

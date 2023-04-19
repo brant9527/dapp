@@ -22,7 +22,6 @@
               margin-bottom: 34px;
               font-weight: bold;
               @include font_color("fontColor1");
-
             }
             &_bottom {
               font-size: 38px;
@@ -31,6 +30,8 @@
           }
         }
         .coin-right {
+          display: flex;
+          align-items: center;
           .coin-count {
             font-size: 48px;
             margin-bottom: 25px;
@@ -38,12 +39,19 @@
             height: 44px;
             text-align: right;
             @include font_color("fontColor1");
-
           }
           .coin-usdt {
             font-size: 38px;
             text-align: right;
             @include font_color("fontColor2");
+          }
+          .exchange-wrap {
+            width: 160px;
+            .exchange {
+              font-size: 38px;
+              margin-left: 30px;
+              color: $blue;
+            }
           }
         }
       }

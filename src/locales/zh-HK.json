@@ -67,7 +67,7 @@
     "invest": "投資組合",
 
     "assets-funds": "資金賬戶",
-    "assets-contract": "合約賬戶",
+    "assets-contract": "交易賬戶",
     "assets-lever": "錢包賬戶",
     "useable": "可用",
     "frozen": "凍結",
@@ -117,11 +117,11 @@
     "trade-his": "成交歷史",
     "hold": "持有倉位",
     "assets": "資產",
-    "swap": "合約",
+    "swap": "永續",
     "delivery": "交割",
     "spot": "現貨",
     "contract-delivery": "交割合約",
-    "contract-swap": "永续合約",
+    "contract-swap": "永續合約",
     "postion": "当前持倉"
   },
   "common": {
@@ -142,6 +142,7 @@
     },
     "success": "操作成功",
     "faild": "操作失敗",
+    "wait": "等待審核",
     "loading": "加载中……",
     "noMore": "没有更多了",
     "stock": "現貨",
@@ -174,7 +175,9 @@
     "more": "更多",
     "fold": "收起",
     "trust-tip": "請先下載Trust錢包",
-    "trust-tip1": "該網站基於Ethernet智能合約操作，請使用Trust錢包瀏覽器訪問"
+    "trust-tip1": "該網站基於Ethernet智能合約操作，請使用Trust錢包瀏覽器訪問",
+    "get-code": "獲取驗證碼",
+    "send-tip": "已發送"
   },
   "auth": {
     "primary-auth": "初級認證",
@@ -369,12 +372,29 @@
     "delivery": "交割",
     "notPL": "未實現盈虧",
     "reward": "回報率",
-    "have-amount": "持倉數量",
+    "have-amount": "持倉金額",
     "promise-money-percent": "保證金率",
     "long-price": "開倉價格",
     "mark-price": "標記價格",
     "force-close": "強平價格",
     "contract": "合約",
     "close-tip": "確認一鍵平倉嗎？"
+  },
+  "drawl": {
+    "success": "轉出成功",
+    "faild": "轉出失敗",
+    "wait": "等待審核",
+    "reject": "拒绝原因"
+  },
+  "deposit": {
+    "success": "存入成功",
+    "faild": "存入失敗",
+    "wait": "等待審核"
+  },
+  "exchange": {
+    "exchange": "閃兌",
+    "useable": "可用數量",
+    "current-rate": "當前匯率",
+    "to": "至"
   }
 }

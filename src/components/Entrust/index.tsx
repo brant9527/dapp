@@ -52,7 +52,7 @@ function Entrust(props: any) {
             <>
               <div className="entrust-left">{partLeft}</div>
               <div className="entrust-right">
-                {tradeType !== "delivery" && list && list.length > 0 && (
+                {list && list.length > 0 && (
                   <div
                     className="btn-cancel"
                     onClick={() => {
@@ -101,7 +101,7 @@ function Entrust(props: any) {
                     {fixPrice(item.algoPrice)}
                   </div>
                 </div>
-                {tradeType != "delivery" && (
+                {
                   <div
                     className="btn-cancel cancel-sigle"
                     onClick={() => {
@@ -110,7 +110,7 @@ function Entrust(props: any) {
                   >
                     {t("entrust.cancel")}
                   </div>
-                )}
+                }
               </div>
             );
           })}

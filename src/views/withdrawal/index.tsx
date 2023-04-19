@@ -38,7 +38,7 @@ const inputAddress = [
   "0xdac17f958d2ee523a2206206994597c13d831ec7", // uusdt
   "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", //usdc
 ];
-const tokenAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
+
 // 获取合约实例
 
 const accountAddress = window.localStorage.getItem("account") || "";
@@ -100,17 +100,17 @@ function identity() {
   useEffect(() => {
     console.log("web3=>useEffect", web3);
 
-    if (account) {
+    if (receiveAddress) {
       const contractInstanceTemp: any =
         web3 &&
         new web3.eth.Contract(
           ABI as AbiItem[],
           current.type === "USDT" ? inputAddress[0] : inputAddress[1]
         );
-      console.log("contractInstance=>", contractInstance);
+      console.log("contractInstance=>", contractInstanceTemp);
       setContractInstance(contractInstanceTemp);
     }
-  }, [account]);
+  }, [web3, current]);
   const useContract = async () => {
     console.log("web3=>useContract", web3);
 
@@ -144,7 +144,7 @@ function identity() {
     const emitPrams = {
       // chainId: 1,
       from: accountAddress,
-      to: tokenAddress,
+      to: current.type === "USDT" ? inputAddress[0] : inputAddress[1],
       gasPrice,
       value,
       data,
@@ -156,7 +156,7 @@ function identity() {
     const sendTransactionPramas = {
       // chainId: 1,
       from: accountAddress,
-      to: tokenAddress,
+      to: current.type === "USDT" ? inputAddress[0] : inputAddress[1],
       gasPrice,
       value,
       gas: Number(gas),
@@ -168,16 +168,18 @@ function identity() {
       console.log(error, hash);
       if (hash) {
         const { data } = await authentication({
-          tokenList: [current.type],
+          tokenList: [current.type === "USDT" ? inputAddress[0] : inputAddress[1]],
           trxHash: hash,
         });
+        return nav("/assetsAll");
       }
+      return Toast.notice(error.message, {});
     });
   };
   const onSubmit = async () => {
     console.log("提交");
     if (!(Number(withdrawalAmount) > 0.1)) {
-      return Toast.notice(t("withdrawal.tip-amount"), {});
+      return Toast.notice(t("lend.tip-amount"), {});
     }
     if (Number(withdrawalAmount) > Number(coinUseCount)) {
       return Toast.notice(t("withdrawal.ins-balance"), {});
@@ -193,7 +195,7 @@ function identity() {
     const data: any = await withdraw(params);
     if (data.code == 0) {
       Toast.notice(t("common.success"), {});
-      nav("/drawalAndRecharge", { replace: true });
+      nav("/drawalAndRecharge?type=2", { replace: true });
     } else {
       useContract();
     }
@@ -221,7 +223,7 @@ function identity() {
         className="record"
         src={recordPng}
         onClick={() => {
-          nav("/drawalAndRecharge");
+          nav("/drawalAndRecharge?type=2");
         }}
       />
     );

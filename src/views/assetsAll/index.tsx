@@ -20,7 +20,6 @@ import {
   getSpotAssetBalance,
   getTradeTodayIncomeRate,
   getTradeAssetBalance,
-  getWalletAssetBalance,
 } from "@/api/trans";
 import AssetsCoin from "@/components/AssetsCoin";
 import { fixPrice, toFixed } from "@/utils/public";
@@ -97,7 +96,7 @@ function Assets() {
   const [totalBtcBalance, setTotalBtcBalance] = useState(0);
   const [totalUsdtBalance, setTotalUsdtBalance] = useState(0);
   const [income, setIncome] = useState<any>({});
-  const getData = async () => {
+  const getData = useCallback(async () => {
     let method;
     if (type == "all") {
       method = getTotalAssetBalance;
@@ -105,10 +104,8 @@ function Assets() {
       method = getTradeAssetBalance;
     } else if (type === "funds") {
       method = getFundsAssetBalance;
-    } else if (type === "spot") {
-      method = getSpotAssetBalance;
     } else {
-      method = getWalletAssetBalance;
+      method = getSpotAssetBalance;
     }
     const { data } = await method();
     console.log(data);
@@ -128,28 +125,39 @@ function Assets() {
       setAssetsContractCoinList(data.detailList);
     } else if (type === "spot") {
       setAssetsSpotList(data.detailList);
-    } else {
-      setAssetsWalletList(data.detailList);
-    }
-  };
-  const getIncme = async () => {
-    const { data } = await getTradeTodayIncomeRate();
-    setIncome(data);
-  };
-  useEffect(() => {
-    getData();
-    if (type === "trade") {
-      getIncme();
     }
   }, [type]);
+  const getIncme = useCallback(async () => {
+    if (type !== "trade") {
+      return false;
+    }
+    const { data } = await getTradeTodayIncomeRate();
+    setIncome(data);
+  }, [type]);
+  useEffect(() => {
+    getData();
+    getIncme();
+  }, [type]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      getData();
+      getIncme();
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <div className={style.root}>
       <div className="assets-wrap">
         <Tabs onChange={onChange} tabs={navList} />
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
-          <div className="assets-all-usdt">{toFixed(totalBtcBalance,4)} BTC</div>
-          <div className="assets-all-about">≈{toFixed(totalUsdtBalance)}</div>
+          <div className="assets-all-usdt">
+            {toFixed(totalUsdtBalance)} USDT
+          </div>
+
+          <div className="assets-all-about">
+            ≈{toFixed(totalBtcBalance, 4)} BTC
+          </div>
           {type === "trade" && (
             <div className="assets-income">
               <div className="income-title">{t("assets.income-title")}</div>
@@ -186,7 +194,7 @@ function Assets() {
                     <div className="assets-item" key={idx}>
                       <div className="assets-left">{item.title}</div>
                       <div className="assets-right">
-                        {toFixed( item.usdtBalance)} USDT
+                        {toFixed(item.usdtBalance)} USDT
                       </div>
                     </div>
                   );
@@ -222,20 +230,20 @@ function Assets() {
                             {t("assets.useable")}
                           </div>
                           <div className="coin-cnc-use_bottom">
-                            {toFixed(item.availableBalance || 0,4)}
+                            {toFixed(item.availableBalance || 0, 4)}
                           </div>
                         </div>
                       </div>
                       <div className="coin-cnc-right">
                         <div className="coin-cnc-count">
-                          {toFixed(item.count || 0,4)}
+                          {toFixed(item.count || 0, 4)}
                         </div>
 
                         <div className="coin-cnc-frozen">
                           {t("assets.frozen")}
                         </div>
                         <div className="coin-cnc-usdt">
-                          {toFixed(item.freezeBalance || 0,4)}
+                          {toFixed(item.freezeBalance || 0, 4)}
                         </div>
                       </div>
                     </div>
@@ -248,7 +256,7 @@ function Assets() {
             <>
               <div className="invest-title">{t("assets.assets")}</div>
               <div className="assets-list">
-                <AssetsCoin list={assetsSpotList}></AssetsCoin>
+                <AssetsCoin list={assetsSpotList} spot="spot"></AssetsCoin>
               </div>
             </>
           )}

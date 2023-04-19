@@ -189,6 +189,7 @@ function Contract({ mock }: any) {
     const timer: any = setInterval(() => {
       getBalance();
       onGetUserPosition();
+      getData()
     }, 3000);
     return () => clearTimeout(timer);
   }, []);

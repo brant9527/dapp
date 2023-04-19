@@ -36,21 +36,6 @@ const page = {
 };
 function TransRecord() {
   const { t } = useTranslation();
-
-  const nav = useNavigate();
-  // const [search, setsearch] = useSearchParams();
-  // const tradeType = search.get("tradeType") || "spot";
-  const [hasMore, setHashMore] = useState(true);
-  const [type, setType] = useState("1");
-  const [recordList, setRecordList] = useState<any>([]);
-
-  const onChange = useCallback((val: string) => {
-    setType(val);
-    setHashMore(true);
-    setRecordList([]);
-    page.pageNo = 1;
-  }, []);
-
   const navList = [
     {
       title: t("assets.deposit"),
@@ -61,6 +46,22 @@ function TransRecord() {
       type: "2",
     },
   ];
+  const nav = useNavigate();
+  const [search, setsearch] = useSearchParams();
+  const tabType = search.get("type") || "1";
+  const index = navList.findIndex(item=>item.type==tabType)
+  const [hasMore, setHashMore] = useState(true);
+  const [type, setType] = useState(tabType);
+  const [recordList, setRecordList] = useState<any>([]);
+
+  const onChange = useCallback((val: string) => {
+    setType(val);
+    setHashMore(true);
+    setRecordList([]);
+    page.pageNo = 1;
+  }, []);
+
+ 
 
   useEffect(() => {
     getData();
@@ -109,7 +110,7 @@ function TransRecord() {
       <div className="trade-wrap">
         <Back content={title()}></Back>
         <div className="trade-nav_border">
-          <Tabs onChange={onChange} tabs={navList} />
+          <Tabs onChange={onChange} tabs={navList} index={index} />
         </div>
         <div className="trade-content">
           <Scroll

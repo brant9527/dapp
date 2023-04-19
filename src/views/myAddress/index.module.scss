@@ -14,16 +14,16 @@
       }
       .address-content {
         padding: 0 40px;
-        height: calc(100vh - 150px);
+        height: calc(100vh - 150px - env(safe-area-inset-bottom));
         overflow: auto;
         .tip {
-          margin-top: 60px;
+
           font-size: 80px;
         }
 
         .qrcode {
           display: block;
-          margin: 160px auto 0;
+          margin: 20px auto 0;
           width: 490px;
           height: 490px;
           padding: 10px;
@@ -59,7 +59,7 @@
         }
         .address-part {
           width: 960px;
-          height: 170px;
+          height: 120px;
           margin: 30px auto 65px;
           padding: 40px;
           text-align: left;

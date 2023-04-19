@@ -21,6 +21,7 @@ import eth from "@/assets/eth.png";
 import Entrust from "@/components/Entrust";
 
 import { getMessagePage } from "@/api/home";
+import { formatTime } from "@/utils/public";
 
 function Message() {
   const { t } = useTranslation();
@@ -63,7 +64,7 @@ function Message() {
   const onDetail = (item: any) => {
     window.localStorage.setItem("content", item.content);
     nav(
-      `/messageDetail?id=${item.id}&createTime=${new Date(item.createTime)}&title=${item.title}`
+      `/messageDetail?id=${item.id}&createTime=${formatTime(new Date(item.createTime).getTime())}&title=${item.title}`
     );
   };
   return (

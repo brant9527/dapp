@@ -30,7 +30,7 @@
 
       padding: 50px 40px;
       border-radius: 50px 50px 0 0;
-      height: calc(100vh - 410px);
+      height: calc(100vh - 410px - env(safe-area-inset-bottom));
       overflow: auto;
       // 价格顶部
       .option-top {

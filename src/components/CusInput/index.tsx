@@ -27,8 +27,7 @@ const CusInput = forwardRef((props: any, ref: any) => {
     alignLeft = false,
     append,
     prepend,
-    inputType = "text",
-    inputLimit = "number",
+    inputType = "number",
   } = props;
   const [val, setVal] = useState<any>(defaultVal);
 
@@ -51,7 +50,7 @@ const CusInput = forwardRef((props: any, ref: any) => {
   };
   const inputChange = (e: any) => {
     let valTemp = e.target.value;
-    if (inputLimit==='number') {
+    if (inputType==='number') {
       valTemp = valTemp.replace(/^\D*(\d*(?:\.\d{0,9})?).*$/g, "$1");
     }
     setVal(valTemp);
@@ -70,7 +69,7 @@ const CusInput = forwardRef((props: any, ref: any) => {
         <div className={`input ${alignLeft ? " align-left" : ""}`}>
           <input
             ref={ref}
-            type={inputType}
+
             disabled={disable}
             placeholder={placeholder || t("common.input-tip")}
             value={val || defaultVal}

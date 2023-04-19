@@ -64,6 +64,8 @@ import UsNext from "./views/usNext";
 import UsDetail from "./views/usDetail";
 
 import MockTrade from "./views/mockTrade";
+import Exchange from "./views/exchange";
+
 import ConfirmMsg from "./components/ConfirmMsg";
 
 import Wallet from "@/components/Wallet/index";
@@ -81,7 +83,6 @@ function App() {
   window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
   const nav = useNavigate();
 
- 
   // openTrustBrowser();
   return (
     <div className="app-bg">
@@ -136,6 +137,7 @@ function App() {
         <Route path="/usDetail" element={<UsDetail />} />
 
         <Route path="/withdrawlDetail" element={<WithdrawlDetail />} />
+        <Route path="/exchange" element={<Exchange />} />
 
         <Route path="*" element={<Not />} />
       </Routes>

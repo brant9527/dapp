@@ -68,7 +68,7 @@
             padding: 65px 42px;
             @include background_color("bgColor1");
 
-            height: calc(100vh - 1030px);
+            height: calc(100vh - 1030px - env(safe-area-inset-bottom));
             overflow: auto;
             .invest-title {
                 font-size: 52px;

@@ -44,7 +44,7 @@ function MessageDetail() {
         <div className="message-content">
           <div className="title">{title}</div>
           <div className="createTime">
-            {formatTime(new Date(createTime).getTime())}
+            {createTime}
           </div>
           <div
             className="content"

@@ -13,12 +13,19 @@ const state = {
 };
 
 function AssetsCoin(props: any) {
-  const { list = [] } = props;
+  const { list = [], spot } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
   const back = useCallback(() => {
     nav(-1);
   }, [useNavigate]);
+  const onExchange = (item: any) => {
+    nav(
+      `/exchange?price=${toFixed(item.usdtBalance / item.count, 4)}&count=${
+        item.count
+      }&asset=${item.asset}`
+    );
+  };
   return (
     <div className={style.root}>
       <div className="assets-coin">
@@ -33,8 +40,25 @@ function AssetsCoin(props: any) {
                 </div>
               </div>
               <div className="coin-right">
-                <div className="coin-count">{toFixed(item.count, 2)}</div>
-                <div className="coin-usdt">≈{fixPrice(item.usdtBalance)}</div>
+                <div>
+                  <div className="coin-count">{toFixed(item.count, 2)}</div>
+                  <div className="coin-usdt">≈{fixPrice(item.usdtBalance)}</div>
+                </div>
+                {spot && (
+                  <div className="exchange-wrap">
+                    {item.asset !== "USDT" && (
+                      <div
+                        className="exchange"
+                        onClick={(e) => {
+                          onExchange(item);
+                          e.stopPropagation();
+                        }}
+                      >
+                        {t("exchange.exchange") + " >"}{" "}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           );

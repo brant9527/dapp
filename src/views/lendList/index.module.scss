@@ -14,7 +14,7 @@
 
             .ai-content {
                 @include background_color("bgColor1");
-                height: calc(100vh - 150px);
+                height: calc(100vh - 150px - env(safe-area-inset-bottom));
                 overflow: auto;
                 padding: 0 60px 0;
                 border-radius: 50px 50px 0 0;

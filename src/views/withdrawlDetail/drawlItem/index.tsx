@@ -58,6 +58,12 @@ function DrawlItem(props: any) {
             {<span className="status">{status(item)}</span>}
           </div>
         </div>
+        <div className="order-item">
+          <div className="left">{t("drawl.reject")}</div>
+          <div className="right">
+            {<span className="status">{item.reason}</span>}
+          </div>
+        </div>
       </div>
     </div>
   );

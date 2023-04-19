@@ -20,6 +20,7 @@ import {
   fixPrice,
   toFixed,
   getNumSymbol,
+  accAdd,
 } from "@/utils/public";
 import Io from "@/utils/socket";
 function Head() {
@@ -55,7 +56,7 @@ function Head() {
           <div className="total-usdt">
             ≈$ {fixPrice(headInfo?.close)}{" "}
             <span className={`${headInfo?.rate > 0 ? "up" : "down"}`}>
-              {toFixed(headInfo?.rate, 2)}%
+              {toFixed(headInfo?.rate * 100, 2)}%
             </span>
           </div>
         </div>
@@ -78,7 +79,7 @@ function Head() {
               {getNumSymbol(
                 accMul(
                   accDiv(
-                    accSub(Number(headInfo?.high), Number(headInfo?.low)),
+                    accAdd(Number(headInfo?.high), Number(headInfo?.low)),
                     2
                   ),
                   headInfo?.volume

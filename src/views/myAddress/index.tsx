@@ -58,7 +58,7 @@ function myAddress() {
     const { code, data } = await rechargeApply(params);
     if (code == 0) {
       Toast.notice(t("common.success"), {});
-      nav('/assetsAll')
+      nav("/assetsAll");
     }
   };
   function right() {
@@ -67,7 +67,7 @@ function myAddress() {
         className="record"
         src={recordPng}
         onClick={() => {
-          nav("/drawalAndRecharge");
+          nav("/drawalAndRecharge?type=1");
         }}
       />
     );

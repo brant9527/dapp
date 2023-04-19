@@ -109,17 +109,27 @@ function Menulist() {
           <div className="progress">
             <div className="progress-top">
               <div className="left">Prime {userInfo.memberLevel}</div>
-              <div className="right">Prime {userInfo.memberLevel + 1}</div>
+              <div className="right">
+                Prime{" "}
+                {userInfo.maxLevel === userInfo.memberLevel
+                  ? userInfo.memberLevel
+                  : (userInfo.memberLevel + 1)}
+              </div>
             </div>
             <div className="progress-center">
               <div
                 className="progress-bar"
                 style={{
-                  width: `${toFixed(
-                    (1 -
-                      (userInfo.needAmount || 0) / (userInfo.minAmount || 0)) *
-                      100
-                  )}%`,
+                  width: `${
+                    userInfo.maxLevel !== userInfo.memberLevel
+                      ? toFixed(
+                          (1 -
+                            (userInfo.needAmount || 0) /
+                              (userInfo.minAmount || 0)) *
+                            100
+                        )
+                      : 100
+                  }%`,
                 }}
               ></div>
             </div>
@@ -130,7 +140,12 @@ function Menulist() {
               </div>
               <div className="right">
                 {t("home.current-target")}{" "}
-                <span>{userInfo.needAmount || 0} USDT</span>
+                <span>
+                  {userInfo.maxLevel !== userInfo.memberLevel
+                    ? userInfo.needAmount || 0
+                    : "0"}{" "}
+                  USDT
+                </span>
               </div>
             </div>
           </div>

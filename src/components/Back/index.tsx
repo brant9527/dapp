@@ -14,7 +14,11 @@ function Back(props: any) {
   const { t } = useTranslation();
   const nav = useNavigate();
   const back = useCallback(() => {
-    nav(-1);
+    if (window.history.length > 2) {
+      nav(-1);
+    } else {
+      nav("/");
+    }
   }, [useNavigate]);
   return (
     <div className={style.root}>

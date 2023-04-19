@@ -13,7 +13,7 @@
             }
             .identity-content {
                 padding: 50px 46px;
-                height: calc(100vh - 250px);
+                height: calc(100vh - 250px - env(safe-area-inset-bottom));
                 overflow: auto;
             }
             .identity-label {

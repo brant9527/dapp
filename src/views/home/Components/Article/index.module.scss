@@ -29,7 +29,7 @@
         }
         .content {
           // width: 863px;
-
+          line-height: 40px;
           word-break: break-all;
           // overflow: hidden;
           // text-overflow: ellipsis;
@@ -40,7 +40,7 @@
           @include font_color("fontColor2");
         }
         .time {
-          margin: 35px 0 60px;
+          margin: 15px 0 30px;
           font-size: 36px;
           @include font_color("fontColor2");
         }

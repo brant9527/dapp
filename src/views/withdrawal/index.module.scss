@@ -23,7 +23,7 @@
             }
             .withdrawal-content {
                 padding: 0 46px;
-                height: calc(100vh - 150px);
+                height: calc(100vh - 150px - env(safe-area-inset-bottom));
                 overflow: auto;
             }
             .withdrawal-label {

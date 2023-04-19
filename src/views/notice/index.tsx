@@ -16,6 +16,7 @@ import NoticeItem from "./Components/NoticeItem";
 import Scroll from "@/components/Scroll";
 import Toast from "@/components/Toast";
 import { getNoticeList } from "@/api/common";
+import { formatTime } from "@/utils/public";
 
 function Message() {
   const { t } = useTranslation();
@@ -59,7 +60,9 @@ function Message() {
   const onDetail = (item: any) => {
     window.localStorage.setItem("content", item.content);
     nav(
-      `/noticeDetail?id=${item.id}&publishTime=${new Date(item.publishTime)}&title=${item.title}`
+      `/noticeDetail?id=${item.id}&publishTime=${formatTime(
+        new Date(item.publishTime).getTime()
+      )}&title=${item.title}`
     );
   };
   return (

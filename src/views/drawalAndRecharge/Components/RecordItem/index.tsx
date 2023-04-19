@@ -36,12 +36,28 @@ function RecordItem(props: any) {
             <div className="item-b">
               {type === "withdrawl" && (
                 <span
-                  className={["dot", item.status == 1 ? "dot_s" : "dot_f"].join(
-                    " "
-                  )}
+                  className={[
+                    "dot",
+                    item.status == 1
+                      ? "dot_s"
+                      : item.status == 2
+                      ? "dot_f"
+                      : "",
+                  ].join(" ")}
                 ></span>
               )}
-              {item.status == 0 ? t("common.faild") : t("common.success")}
+              {type !== "withdrawl" &&
+                (item.status == 0
+                  ? t("deposit.wait")
+                  : item.status == 1
+                  ? t("deposit.success")
+                  : t("deposit.faild"))}
+              {type === "withdrawl" &&
+                (item.status == 0
+                  ? t("drawl.wait")
+                  : item.status == 1
+                  ? t("drawl.success")
+                  : t("drawl.faild"))}
             </div>
           </div>
         </div>

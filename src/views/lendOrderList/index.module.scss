@@ -7,7 +7,7 @@
             // padding: 50px 46px;
 
             .order-content {
-                height: calc(100vh - 250px);
+                height: calc(100vh - 250px - env(safe-area-inset-bottom));
                 overflow: auto;
                 margin: 0 44px;
 
