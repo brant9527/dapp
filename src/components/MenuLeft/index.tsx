@@ -83,7 +83,7 @@ function Menulist() {
             <img src={user} className="user" />
             <div className="user-detail">
               <div className="user-core">
-                信用積分: <span>{userInfo.creditScore}</span>
+               {t('home.menu_core')}: <span>{userInfo.creditScore}</span>
               </div>
               <div className="user-uid">
                 UID:{userInfo.userId}{" "}

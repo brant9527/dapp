@@ -41,7 +41,7 @@ import {
 } from "@/utils/public";
 import record from "@/assets/record.png";
 import Io from "@/utils/socket";
-import { getSpotAssetBalance} from "@/api/trans";
+import { getSpotAssetBalance } from "@/api/trans";
 import { getUserInfo } from "@/api/userInfo";
 
 function Stock() {
@@ -131,6 +131,7 @@ function Stock() {
     const timer: any = setInterval(() => {
       getBalance();
       getAssetBalance();
+      getData();
     }, 2000);
     return () => clearTimeout(timer);
   }, []);

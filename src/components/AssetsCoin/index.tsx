@@ -21,7 +21,7 @@ function AssetsCoin(props: any) {
   }, [useNavigate]);
   const onExchange = (item: any) => {
     nav(
-      `/exchange?price=${toFixed(item.usdtBalance / item.count, 4)}&count=${
+      `/exchange?count=${
         item.count
       }&asset=${item.asset}`
     );
@@ -41,7 +41,7 @@ function AssetsCoin(props: any) {
               </div>
               <div className="coin-right">
                 <div>
-                  <div className="coin-count">{toFixed(item.count, 2)}</div>
+                  <div className="coin-count">{toFixed(item.count, 4)}</div>
                   <div className="coin-usdt">≈{fixPrice(item.usdtBalance)}</div>
                 </div>
                 {spot && (

@@ -79,6 +79,9 @@ function EntrustHis(props: any) {
                           ? t("tabs.spot")
                           : t("tabs.delivery")}
                       </span>
+                      {item.lever && (
+                        <span className="trade-type">{item.lever}x</span>
+                      )}
                     </div>
                     <div className="time">
                       {formatTime(item.createTime, "YYYY-MM-DD HH:mm:ss")}

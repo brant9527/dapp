@@ -8,23 +8,25 @@ import LanguageDetector from "i18next-browser-languagedetector";
 
 import zhTw from "./src/locales/zh-HK.json";
 import en from "./src/locales/en-us.json";
+const language = window.localStorage.getItem("language") || "en";
 const resources = {
-  'zh_TW': {
+  zh_TW: {
     translation: zhTw,
   },
   en: {
     translation: en,
   },
 };
-const lg = "zh_TW";
 
 i18n
-  .use(LanguageDetector) //嗅探当前浏览器语言 zh-CN
+  // .use(LanguageDetector) //嗅探当前浏览器语言 zh-CN
   .use(initReactI18next) // 将 i18n 向下传递给 react-i18next
   .init({
     //初始化
     resources, //本地多语言数据
-    fallbackLng: lg, //默认当前环境的语言
+
+    fallbackLng: language,
+
     detection: {
       caches: ["localStorage", "sessionStorage", "cookie"],
     },

@@ -100,11 +100,13 @@
               position: relative;
               flex: 1;
 
+
               padding-right: 40px;
-              @include border("right");
+              // @include border("right");
               input {
                 width: 100%;
                 font-size: 44px;
+                @include font_color("fontColor2");
               }
             }
             .btn-max {

@@ -18,6 +18,7 @@
       height: 160px;
       width: 100vw;
       justify-content: center;
+      padding-bottom: env(safe-area-inset-bottom);
       .nav-item-wrap {
         flex: 1;
       }

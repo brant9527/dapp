@@ -1,24 +1,400 @@
 {
   "nav": {
-    "home": "home",
-    "contract": "contract",
-    "quotation": "quotation",
-    "stock": "stock",
-    "assets": "assets"
+    "home": "Home",
+    "contract": "Contract",
+    "quotation": "Markets",
+    "stock": "Stock",
+    "assets": "Assets"
   },
   "home": {
-    "search": "search",
-    "menu_core": "user core",
-    "menu-wdzh": "my accout",
-    "menu-jyjl": "trade record",
-    "menu-smrz": "實名認證",
-    "menu-yxbd": "郵箱綁定",
-    "menu-xyf": "信用分評定",
-    "menu-bdhb": "本地火幣",
-    "menu-yy": "語言"
+    "search": "Search",
+    "menu_core": "Credit Points",
+    "menu-wdzh": "My Account",
+    "menu-jyjl": "Transaction Records",
+    "menu-smrz": "Real Name Authentication",
+    "menu-yxbd": "Email Binding",
+    "menu-xyf": "Credit Assessment",
+    "menu-wjdc": "Questionnaire Survey",
+    "menu-bzzx": "Help Center",
+    "menu-yy": "Language",
+    "btns": {
+      "jy": "Transaction",
+      "ai": "AI Quantification",
+      "xh": "Spot",
+      "xb": "New Currency",
+      "mnjy": "Mock Trading",
+      "jd": "Loan",
+      "C2C": "C2C",
+      "yq": "Invite Friends",
+      "us": "About Us"
+    },
+    "coins": {
+      "hot": "Hot",
+      "raise": "Rise List",
+      "down": "Fall List",
+      "new": "New Currency List"
+    },
+    "certified": "Certified",
+    "not-certified": "Not Certified",
+    "current-rate": "Current Rate",
+    "current-target": "Upgrade Need to Deposit",
+    "user-info": "Account Information",
+    "vip-desc": "Contact me to understand your VIP rights",
+    "customer-tip": "C2C Please contact customer service",
+    "quitMock": "Quit Mock Trading",
+    "quit": "Quit",
+    "connect": "Connect"
+  },
+  "quota": {
+    "coins": {
+      "name": "Coin Name",
+      "price": "Latest Price",
+      "raise": "24H Change"
+    },
+    "search": "Search Coins/Pair/Futures"
+  },
+  "assets": {
+    "all": "Total Assets",
+    "trade": "Trading Assets",
+    "funds": "Funds Account",
+    "assets-stock": "Spot Account",
+
+    "wallet": "Wallet Account",
+    "allAssessment": "Total Assets Assessment (USDT)",
+    "deposit": "Deposit",
+    "assetsTrans": "Transfer",
+    "transfer": "Transfer Out",
+    "invest": "Investment Portfolio",
+
+    "assets-funds": "Funds Account",
+    "assets-contract": "Trading Account",
+    "assets-lever": "Wallet Account",
+    "useable": "Available",
+    "frozen": "Frozen",
+    "assets": "Assets",
+    "income-title": "Today's Income"
+  },
+  "trans": {
+    "from": "From",
+    "to": "To",
+    "tip": "Transfer",
+    "funds": "Funds Account",
+    "trade": "Trading Account",
+    "spot": "Spot Account",
+    "count": "Count",
+    "max": "Max",
+    "useable": "Usable Assets",
+    "frozen": "Frozen Assets",
+    "sure": "Confirm Transfer",
+    "assets-account": "Assets Account",
+    "assets-choose-tip": "USDT:USDC 1-to-1 exchange"
+  },
+  "record": {
+    "record": "Deposit Record",
+    "recordIn": "In Record",
+    "recordOut": "Out Record",
+    "recordChange": "Account Change Record"
+  },
+  "address": {
+    "recharge": "Deposit",
+    "tip1": "Only support deposit {{coin}} to this address",
+    "tip2": "Do not support deposit other coins, please check carefully",
+    "address": "ETH Deposit Address",
+    "chain": "Mainnet"
   },
   "lg": {
     "en": "english",
     "hk": "chinese"
+  },
+  "tabs": {
+    "optional": "Optional",
+    "hot": "Hot",
+    "raise": "Raise List",
+    "new": "New Coin Dynamic",
+
+    "entrust": "Open Orders",
+    "entrust-his": "Orders History",
+    "trade-his": "Trade History",
+    "hold": "Open Orders",
+    "assets": "Assets",
+    "swap": "Swap",
+    "delivery": "Delivery",
+    "spot": "Spot",
+    "contract-delivery": "Contract Delivery",
+    "contract-swap": "Contract Swap",
+    "postion": "Positions"
+  },
+  "common": {
+    "price": "Price",
+    "count": "Count",
+    "direction": "Direction",
+    "time": "Time",
+    "buy": "Buy",
+    "sell": "Sell",
+    "use": "Use",
+    "input-tip": "Please input",
+    "input-price": "Please input price",
+    "sure": "Sure",
+    "trade": {
+      "limit": "Limit",
+      "market": "Market",
+      "owe": "Stop loss and profit"
+    },
+    "success": "Successful Operation",
+    "faild": "Operation Failed",
+    "wait": "Waiting for audit",
+    "loading": "Loading……",
+    "noMore": "No more",
+    "stock": "Spot",
+    "cancel": "Cancel",
+    "email.bind": "Bind mailbox",
+    "email.address": "Mailbox address",
+    "mobile.bind": "Bind mobile phone",
+    "mobile.number": "Mobile phone number",
+    "btn.next": "Next",
+    "copy": "Copied",
+    "paste": "Paste",
+    "resign-info": "Registration information",
+    "upload-tip": "Uploaded",
+    "uploading": "Uploading…",
+    "start-time": "Start time",
+    "end-time": "End time",
+    "status": "Status",
+    "params-check": "Please enter price or quantity",
+    "need-amount": "Insufficient balance, please reorder after confirming qualification",
+    "need-period": "Please select delivery period",
+    "record": "Record",
+    "help": "Help center",
+    "close": "Close",
+    "address": "Address",
+    "acticle-title": "Information",
+    "good": "Good",
+    "bad": "Bad",
+    "about-us": "About platform",
+    "customer": "Contact exclusive customer service",
+    "more": "More",
+    "fold": "Fold",
+    "trust-tip": "Please download Trust wallet first",
+    "trust-tip1": "This website is based on Ethernet smart contract operation, please use Trust wallet browser to access",
+    "get-code": "Get verification code",
+    "send-tip": "Sent"
+  },
+  "auth": {
+    "primary-auth": "Primary authentication",
+    "advanced-auth": "Advanced authentication",
+    "primary-tip": "After authentication, you can withdraw cash, 24-hour limit 200BTC, C2C transaction single currency limit 1000USDT",
+    "advanced-tip": "After authentication, you can withdraw cash, 24-hour limit 400BTC, C2C transaction single currency limit 10000USDT",
+    "name": "Name",
+    "id": "ID number",
+    "id-front": "Front of the certificate",
+    "id-back": "Back of the certificate",
+    "country": "Country",
+    "id-auth": "Identity Authentication",
+    "need-auth": "go authentication",
+    "need-v1": "Requires primary authentication"
+  },
+  "ai": {
+    "orders": "Ongoing Orders",
+    "suggest": "Recommendation",
+    "high.income": "High Income",
+    "new.user": "New User Gifts",
+    "term": "Term",
+    "limit": "Limit",
+    "fee": "Fee",
+    "amount": "Total Amount",
+    "apply": "Subscription",
+    "rest": "Remaining",
+    "total-income": "Total Income",
+    "apply-amount": "Subscription Amount",
+    "doing": "Doing",
+    "over": "Over"
+  },
+  "loan": {
+    "loan": "Loan"
+  },
+  "lend": {
+    "lend": "Loan",
+    "amount": "Monetary Amount",
+    "lend-term": "Loan Term",
+    "period": "Period (Days)",
+    "interest": "Interest",
+    "interest-day": "Daily Interest",
+    "repayment": "Repayment Method",
+    "repayment-type": "Maturity Principal and Interest",
+    "proof-house": "Property Proof",
+    "proof-income": "Income Proof",
+    "bank-detail": "Bank Details",
+    "documents": "Documents",
+    "risk-level": "Risk Level",
+    "risk-tip": "When TVL reaches 80%, or the BTC/USDT price reaches 0, your collateral will be sold to repay the debt",
+    "protocol": "I have read and agreed to the Coin Service Agreement",
+    "pledge-amount": "Pledge Amount",
+    "lend-amount": "Loan Amount",
+    "btn.repayment": "Repayment",
+    "tip-amount": "Please enter the quantity"
+  },
+  "entrust": {
+    "cancel-all": "Cancel all",
+    "cancel": "Cancel",
+    "limit": "Limit",
+    "market": "Market",
+    "open-long": "Buy",
+    "open-short": "Sell",
+    "pindo": "Pindo",
+    "empty": "Empty",
+    "buy": "Buy",
+    "sell": "Sell",
+    "take-profit": "Take-profit",
+    "take-loss": "Take-loss"
+  },
+  "status": {
+    "wait": "Pending Review",
+    "passed": "Passed",
+    "reject": "Reject",
+    "pass": {
+      "getMoney": "Loan Released"
+    },
+    "refused": {
+      "refused": "Reject"
+    },
+    "outTime": {
+      "outTime": "Overdue"
+    },
+    "apply": {
+      "repayment": "Repayment"
+    },
+    "clear": "Cleared"
+  },
+  "config": {
+    "days.7": "7 Days",
+    "days.30": "One Month",
+    "days.60": "Three Months",
+    "days.180": "Half Year",
+    "days.365": "One Year"
+  },
+  "symbol": {
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "second": "Second",
+    "minute": "Minute",
+    "hour": "Hour"
+  },
+  "time": {
+    "minute": "1 minute",
+    "minute5": "5 minutes",
+    "minute15": "15 minutes",
+    "minute30": "30 minutes",
+    "hour": "1 hour",
+    "hour4": "4 hours",
+    "hour2": "2 hours",
+    "day": "day"
+  },
+  "withdrawal": {
+    "withdrawal": "Withdrawal",
+    "address": "Withdrawal Address",
+    "receive-address": "Receive Address",
+    "min-amount": "Minimum {{amount}}",
+    "fee": "Fee",
+    "receive-amount": "Receive Amount",
+    "withdrawal-amount": "Withdrawal Amount",
+    "rest": "Balance",
+    "apply-time": "Apply Time",
+    "step": "Withdrawal Step",
+    "ins-balance": "Insufficient Balance"
+  },
+  "trade": {
+    "high24": "24h Highest Price",
+    "low24": "24h Lowest Price",
+    "total24": "24h Transaction Amount",
+    "total-val24": "24h Transaction Volume",
+    "entrust-order": "Entrust Order",
+    "new-deal": "Latest Transaction",
+    "deal-all": "Filled",
+    "deal-part": "Partially Completed",
+    "amount": "Total Amount",
+    "fee": "Fee",
+    "deal-amount": "Transaction Amount",
+    "coin-detail": "Coin Details",
+    "rank": "Rank",
+    "market": "Market Value",
+    "circulationCnt": "Circulation Amount",
+    "publishCnt": "Total Amount",
+    "publishTime": "Issue Date",
+    "introduce": "Introduction"
+  },
+  "invite": {
+    "title": "Invite Rebate",
+    "big-title": "Invite friends to make money together",
+    "info1": "Earn up to {{percent}} in all trading of COIN spot and contract",
+    "info2": "Commissions and {{amount}}USDT contract experience gold",
+    "tip": "Invitation link",
+    "reward1": "Inviter reward:",
+    "reward2": "After the invited person completes the registration and the first deposit transaction in COIN within each natural day (00:00:00-23:59:59 UTC+8), the inviter can get:",
+    "reward3": "1. Invite 2, 4, 6, 8, 10 friends. You will get 1 5USDT new contract experience gold each, and each person can get up to 5 pieces per day",
+    "reward4": "2. Inviters can get a 30% return rate of handling fee"
+  },
+  "question": {
+    "title": "Questionnaire survey",
+    "error": "Please select all the questions"
+  },
+  "credit": {
+    "title": "Credit score",
+    "current": "Current credit",
+    "good": "Good",
+    "very-good": "Excellent",
+    "normol": "Normal",
+    "bad": "Normal"
+  },
+  "contract": {
+    "golong": "Buy/Long",
+    "short-selling": "Sell/Short",
+    "do-more": "Long",
+    "do-short": "Short",
+    "profit-loss": "Take Profit/Loss",
+    "profit": "Take Profit",
+    "loss": "Stop Loss",
+    "max": "Max",
+    "position": {
+      "fixed": "Isolated",
+      "crossed": "Cross",
+      "close": "Close Position",
+      "close-all": "Cancel All"
+    },
+    "adjust-lever": "Adjust Leverage",
+    "promise-money": "Margin",
+    "delivery-time": "Delivery Time",
+
+    "buy": "B",
+    "sell": "S",
+    "swap": "Swap",
+    "delivery": "Delivery",
+    "notPL": "PNL",
+    "reward": "ROE",
+    "have-amount": "Size",
+    "promise-money-percent": "Risk",
+    "long-price": "Entry Price",
+    "mark-price": "Mark Price",
+    "force-close": "Liq.Price",
+    "contract": "Contract",
+    "close-tip": "Are you sure to one-click close?"
+  },
+  "drawl": {
+    "success": "Transfer out success",
+    "faild": "Transfer out failed",
+    "wait": "Waiting for review",
+    "reject": "Reject reason"
+  },
+  "deposit": {
+    "success": "Stored successfully",
+    "faild": "Stored failed",
+    "wait": "Waiting for audit"
+  },
+  "exchange": {
+    "exchange": "Exchange",
+    "useable": "Useable Amount",
+    "current-rate": "Current Rate",
+    "to": "To"
   }
 }

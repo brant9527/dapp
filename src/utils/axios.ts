@@ -61,12 +61,12 @@ http.interceptors.request.use(
 
     const account = window.localStorage.getItem("account");
     const wallet = window.localStorage.getItem("web3-provider");
-    const language = window.localStorage.getItem("i18nextLng");
+    const language = window.localStorage.getItem("i18nextLng") || "en";
     const mock = window.localStorage.getItem("mock");
 
     if (account) {
       config.headers.account = account;
-      config.headers.language = language;
+      config.headers.language = language === "zh-CN" ? "zh_TW" : language;
       config.headers.mock = mock || 0;
       config.headers.device = device;
       config.headers.wallet = wallet;

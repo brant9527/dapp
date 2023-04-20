@@ -14,15 +14,12 @@ function App() {
   const [language, setLanguage] = useState(
     window.localStorage.getItem("language") || "en"
   );
-
+  useEffect(() => {
+    i18in.changeLanguage(language);
+  }, []);
   const OnChageLg = useCallback(
     (type: string) => {
-      if (language === type) {
-        return;
-      } else {
-        setLanguage(type);
-      }
-
+      setLanguage(type);
       window.localStorage.setItem("language", type);
       i18in.changeLanguage(type);
     },

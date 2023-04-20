@@ -15,7 +15,7 @@ import msgNotify from "@/assets/msg-notify.png";
 import theme from "@/assets/yueliang.png";
 import { useTranslation } from "react-i18next";
 
-import { useCallback, useEffect, useRef, useState,memo } from "react";
+import { useCallback, useEffect, useRef, useState, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuList from "@/components/MenuLeft";
 import HomePriceMid from "./Components/HomePriceMid";
@@ -209,6 +209,7 @@ function App() {
   }, []);
   const getMsgUnRead = useCallback(async () => {
     const { data } = await getUnReadMessageCnt();
+
     setUnReadMsg(data);
   }, []);
   useEffect(() => {

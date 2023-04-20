@@ -1,0 +1,144 @@
+{
+  "tip": "Dear Investor: This questionnaire is intended to help investors understand their own risk tolerance and protect their legitimate rights and interests. Please fill out the questionnaire honestly, accurately, and completely. If there is any fraud, concealment or other false statement resulting in the investigation results not matching the actual situation, the company shall not be liable. Investors should purchase investment products that are compatible with their risk preferences. If the risk level of the selected investment product is higher than its risk tolerance, we will do asset verification to ensure that you have enough risk resistance. (Please check the following content carefully and submit it to us. Thank you.)",
+  "qList": [
+    {
+      "title": "1、What is your current age group：",
+      "ans": [
+        "a. 28-35 years old",
+        "b. 18-28 years old",
+        "c. 36-45 years old",
+        "d. 46-55 years old",
+        "e. 56 years old or above"
+      ]
+    },
+    {
+      "title": "2、How many years of cryptocurrency investment experience do you have so far：",
+      "ans": [
+        "a. No knowledge and experience",
+        "b. Knowledge but no experience",
+        "c. Knowledge and less than 2 years of experience",
+        "d. Knowledge and 2-5 years of experience",
+        "e. Knowledge and more than 5 years of experience"
+      ]
+    },
+    {
+      "title": "3、What is your expected investment period：",
+
+      "ans": [
+        "a. More than 10 years",
+        "b. 6-10 years",
+        "c. 3-5 years",
+        "d. 1-3 years",
+        "e. Less than 1 year"
+      ]
+    },
+    {
+      "title": "4、What is the current annual income of your family？",
+      "ans": [
+        "a. More than 5 million",
+        "b. 3-5 million",
+        "c. 1.5-3 million",
+        "d. 0.5-1.5 million",
+        "e. 0.1-0.5 million",
+        "f. Less than 0.1 million"
+      ]
+    },
+    {
+      "title": "5、In general, what percentage of your family's annual income can be used for investment or savings？",
+      "ans": [
+        "a. More than 50%",
+        "b. 35%-50%",
+        "c. 25%-35%",
+        "d. 10%-25%",
+        "e. 0%-10%"
+      ]
+    },
+    {
+      "title": "6、What is your main purpose of investing? Please select the description that best suits you from the following answers:",
+      "ans": [
+        "a. Care about long-term high returns and can accept short-term asset value fluctuations.",
+        "b. Tend to long-term growth and pay less attention to short-term returns and fluctuations.",
+        "c. Hope to have certain appreciation of investment and obtain moderate annual returns with fluctuations.",
+        "d. Just want to ensure the safety of assets and at the same time hope to get fixed returns.",
+        "e. Hope to use investments and returns from investments for large purchases in the short term."
+      ]
+    },
+    {
+      "title": "7、Which of the following descriptions best matches your attitude towards the performance of an investment in the next year?",
+      "ans": [
+        "a. If there is a loss, I don't care.",
+        "b. I can bear losses up to 25%.",
+        "c. I can only bear losses up to 10%.",
+        "d. I can hardly bear any losses.",
+        "e. I need to get a return higher than the regular savings rate for a year."
+      ]
+    },
+    {
+      "title": "8、In terms of 3-year investment period, compared with the overall performance of the stock market, you hope your investment:",
+      "ans": [
+        "a. More than 30% growth over the stock market.",
+        "b. 10-30% growth over the stock market.",
+        "c. Keep pace with the growth of the stock market.",
+        "d. Slightly lag behind the growth of the stock market.",
+        "e. It doesn't matter."
+      ]
+    },
+    {
+      "title": "9、Currently there is a 2 million investment project, but there is 50% chance of making 1 million profit and 50% chance of losing 0.5 million. Would you make this investment?",
+      "ans": [
+        "a. Of course",
+        "b. Likely",
+        "c. Maybe",
+        "d. Probably not",
+        "e. It doesn't matter"
+      ]
+    },
+    {
+      "title": "10、How much do you know about the crypto currency market?",
+      "ans": ["a. Very familiar", "b. General", "c. Not familiar"]
+    },
+    {
+      "title": "11、According to your past investment experience, when a considerable amount of capital is allocated to high-risk crypto currencies or other high-risk investment items, you usually：",
+      "ans": [
+        "a. Feel more relieved and pay little attention",
+        "b. Pay attention but not anxious",
+        "c. Pay more attention and a little anxious",
+        "d. Pay close attention and be more anxious",
+        "e. Pay very close attention and be very anxious"
+      ]
+    },
+    {
+      "title": " 12、Assuming there are several investment varieties below, you must and only choose one of them for investment, which one would you choose?",
+      "ans": [
+        "a. The annual return rate may be above 30%, and the principal may also lose more than 30%",
+        "b. The annual return rate may be within 20%, and the principal may also lose more than 20%",
+        "c. The annual return rate may be within 10%, and the principal may also lose more than 10%",
+        "d. The principal is guaranteed, and the annual return rate is between 0-8%",
+        "e. Fixed annual return rate of 4%"
+      ]
+    },
+    {
+      "title": "13. Crypto currency contracts and other leveraged trading",
+      "ans": [
+        "a. No knowledge and no experience",
+        "b. Relevant knowledge but no experience",
+        "c. Relevant knowledge and less than 2 years of experience",
+        "d. Relevant knowledge and 2-5 years of experience",
+        "e. Relevant knowledge and more than 5 years of experience"
+      ]
+    },
+    {
+      "title": "14：What is your main sources of income or wealth? (Multiple Choice)",
+      "type": "checkbox",
+      "ans": [
+        "Business Operation",
+        "Individual Business or Property Income (Equity, Rent, etc.)",
+        "Wage Income",
+        "Pension",
+        "One-time Income (Accidental Income, Inheritance Income, etc.)"
+      ]
+    }
+  ],
+  "tip2": "Please pay attention to check your risk tolerance and the matching of the risk when you purchase any investment products. Please be aware that any update of risk tolerance assessment may cause the risk mismatch between your existing products and the updated risk tolerance. ",
+  "tip3": "Tip: We will evaluate your risk report as soon as possible, the result will be notified to you via email or exclusive customer service within 24 hours. Thank you for your cooperation and support, have a nice day! "
+}

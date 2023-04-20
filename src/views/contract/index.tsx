@@ -133,7 +133,7 @@ function Contract({ mock }: any) {
   const [tradeSymbol, setTradeSymbol] = useState(1);
   const [stopPfPrice, setStopPfPrice] = useState<string>();
   const [stopLsPrice, setStopLsPrice] = useState<string>();
-  const [stopPfOrLs, setStopPfOrLs] = useState<any>(1);
+  const [stopPfOrLs, setStopPfOrLs] = useState<any>(0);
   const [periodInfo, setPeriodInfo] = useState<any>([]);
   const [selectPeriod, setSelectPeriod] = useState<any>([]);
 
@@ -189,7 +189,7 @@ function Contract({ mock }: any) {
     const timer: any = setInterval(() => {
       getBalance();
       onGetUserPosition();
-      getData()
+      getData();
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
@@ -764,7 +764,11 @@ function Contract({ mock }: any) {
                     ? toFixed(
                         accMul(
                           Number(lever || 0),
-                          Number(balanceAssets?.availableUsdtBalance || 0)
+                          Number(
+                            (balanceAssets?.availableUsdtBalance < 0
+                              ? 0
+                              : balanceAssets?.availableUsdtBalance) || 0
+                          )
                         ),
                         2
                       )
@@ -772,7 +776,11 @@ function Contract({ mock }: any) {
                         accDiv(
                           accMul(
                             Number(lever || 0),
-                            Number(balanceAssets?.availableUsdtBalance || 0)
+                            Number(
+                              (balanceAssets?.availableUsdtBalance < 0
+                                ? 0
+                                : balanceAssets?.availableUsdtBalance) || 0
+                            )
                           ),
                           Number(coinPrice || headInfo?.close || 0)
                         ),

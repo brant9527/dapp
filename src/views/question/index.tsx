@@ -14,17 +14,22 @@ import { useTranslation } from "react-i18next";
 import Back from "@/components/Back";
 import Confirm from "@/components/Confirm";
 
-import questionList from "./questionLg/tw.json";
+import questionListTw from "./questionLg/tw.json";
+import questionListEn from "./questionLg/en.json";
 import RadioGroup from "./components/RadioGroup";
 import { questionAnswer } from "@/api/common";
 import Toast from "@/components/Toast";
+const language = window.localStorage.getItem("language");
+console.log(language)
 function Ques() {
   const { t } = useTranslation();
 
   const nav = useNavigate();
   const confirmRef = useRef<any>(null);
   const [ansList, setAnsList] = useState<any>([]);
-
+  const [questionList] = useState<any>(
+    language == "en" ? questionListEn : questionListTw
+  );
   const onChange = useCallback(
     (val: any, idx: any) => {
       ansList[idx] = val;
