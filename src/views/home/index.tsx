@@ -5,7 +5,7 @@ import msg from "@/assets/msg.png";
 import chat from "@/assets/chat.png";
 import jy from "@/assets/jy.png";
 import ai from "@/assets/ai.png";
-import xh from "@/assets/xh.png";
+import copyPng from "@/assets/btn-copy.png";
 import xinbi from "@/assets/xinbi.png";
 import mnjy from "@/assets/mnjy.png";
 import jd from "@/assets/hb.png";
@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import MenuList from "@/components/MenuLeft";
 import HomePriceMid from "./Components/HomePriceMid";
 import HomePriceBot from "./Components/HomePriceBot";
+import Tabs from "@/components/Tabs";
 import QuotaCoin from "@/components/QuotaCoin";
 import Banner from "@/components/Banner";
 
@@ -39,8 +40,11 @@ import Wallet from "@/components/Wallet";
 import Confirm from "@/components/Confirm";
 import Toast from "@/components/Toast";
 import AccountBtn from "@/components/AccountBtn";
+import copy from "copy-to-clipboard";
 
 function App() {
+  const { t } = useTranslation();
+
   let themes = window.localStorage.getItem("themes") || "light";
   // 初始化mock值
   window.localStorage.setItem("mock", "0");
@@ -59,7 +63,8 @@ function App() {
   const { connectProvider, changeProvider, account, web3, providerString } =
     useWeb3();
   const confirmRef = useRef<any>(null);
-  const { t } = useTranslation();
+  const cutomerConfirmRef = useRef<any>(null);
+ 
   console.log("home页刷新");
   const onChangeTheme = useCallback(async () => {
     if (themes === "light") {
@@ -443,19 +448,24 @@ function App() {
           })}
         </div>
         {!!userInfo.customerStatus && (
-          <a
-            href={`tg://resolve?domain=${userInfo.customerTelegram}&start=${userInfo.customerTelegramId}`}
+          // <a
+          //   href={`tg://resolve?domain=${userInfo.customerTelegram}&start=${userInfo.customerTelegramId}`}
+          // >
+          <div
+            className="vip"
+            onClick={() => {
+              cutomerConfirmRef.current.open();
+            }}
           >
-            <div className="vip">
-              <div className="vip-head">
-                <img src={userInfo.customerHeadUrl} />
-              </div>
-              <div className="center">
-                <div className="vip-name">{userInfo.customerName}</div>
-                <div className="vip-desc">{t("home.vip-desc")}</div>
-              </div>
+            <div className="vip-head">
+              <img src={userInfo.customerHeadUrl} />
             </div>
-          </a>
+            <div className="center">
+              <div className="vip-name">{userInfo.customerName}</div>
+              <div className="vip-desc">{t("home.vip-desc")}</div>
+            </div>
+          </div>
+          // </a>
         )}
       </div>
       <HomePriceMid hotList={recommendList} />
@@ -470,6 +480,24 @@ function App() {
       <Article></Article>
       <Confirm onConfirm={onConfirm} cancel={true} ref={confirmRef}>
         <div className="confirm-tip">{t("home.customer-tip")}</div>
+      </Confirm>
+      <Confirm cancel={false} ref={cutomerConfirmRef}>
+        <div className="vip-confirm">
+          <div className="vip-confirm-top">
+            Telegram:{" "}
+            <span
+              onClick={() => {
+                copy(userInfo.customerTelegram);
+                Toast.notice(t("common.copy"), {});
+              }}
+            >
+              {userInfo.customerTelegram} <img src={copyPng} />
+            </span>
+          </div>
+          <div className="vip-words">
+            {t("home.vip-confirm", { vip: "VIP" + userInfo.memberLevel })}
+          </div>
+        </div>
       </Confirm>
     </div>
   );

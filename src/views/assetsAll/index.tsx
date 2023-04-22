@@ -13,12 +13,12 @@ import { useTranslation } from "react-i18next";
 
 import Tabs from "@/components/Tabs";
 
-import eth from "@/assets/eth.png";
+import recordPng from "@/assets/record.png";
 import {
   getTotalAssetBalance,
   getFundsAssetBalance,
   getSpotAssetBalance,
-  getTradeTodayIncomeRate,
+  getTradeIncomeRate,
   getTradeAssetBalance,
 } from "@/api/trans";
 import AssetsCoin from "@/components/AssetsCoin";
@@ -131,7 +131,7 @@ function Assets() {
     if (type !== "trade") {
       return false;
     }
-    const { data } = await getTradeTodayIncomeRate();
+    const { data } = await getTradeIncomeRate();
     setIncome(data);
   }, [type]);
 
@@ -151,7 +151,10 @@ function Assets() {
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
           <div className="assets-all-usdt">
-            {toFixed(totalUsdtBalance)} USDT
+            <span>{toFixed(totalUsdtBalance)} USDT</span>
+            <img src={recordPng} onClick={()=>{
+              nav('/transRecord')
+            }}/>
           </div>
 
           <div className="assets-all-about">
@@ -162,8 +165,8 @@ function Assets() {
               <div className="income-title">{t("assets.income-title")}</div>
               <div
                 className={`income-val ${income?.income > 0 ? "s" : "f"}`}
-              >{`${fixPrice(income?.income || 0)} / ${fixPrice(
-                income?.rate || 0
+              >{`${toFixed(income?.income || 0)} USDT / ${toFixed(
+               ( income?.rate || 0)*100
               )}%`}</div>
             </div>
           )}

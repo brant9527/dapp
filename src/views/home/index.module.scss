@@ -115,7 +115,7 @@
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-        
+
         .btn-item {
           width: 25%;
           display: flex;
@@ -183,6 +183,25 @@
       padding: 44px;
       min-height: 600px;
       @include background_color("bgColor1");
+    }
+    .vip-confirm {
+      .vip-confirm-top {
+        font-size: 44px;
+        margin: 20px;
+        text-align: center;
+        @include font_color("fontColor1");
+        img {
+          width: 41px;
+          height: 41px;
+          margin-left: 20px;
+        }
+      }
+      .vip-words{
+        font-size: 36px;
+        text-align: center;
+        @include font_color("fontColor2");
+
+      }
     }
   }
 }

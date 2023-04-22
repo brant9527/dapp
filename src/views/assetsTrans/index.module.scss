@@ -39,6 +39,7 @@
                 flex: 1;
                 .trans-direction {
                   margin-right: 48px;
+                  width: 100px;
                 }
                 .trans-item_center {
                   display: flex;
@@ -49,7 +50,8 @@
                     @include border("bottom");
                   }
                   div {
-                    width: 300px;
+                    width: 400px;
+                    word-break: break-all;
                   }
                   img {
                     width: 21px;

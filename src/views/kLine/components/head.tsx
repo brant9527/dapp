@@ -23,7 +23,8 @@ import {
   accAdd,
 } from "@/utils/public";
 import Io from "@/utils/socket";
-function Head() {
+function Head(props: any) {
+  const { price } = props;
   const { t } = useTranslation();
 
   const nav = useNavigate();
@@ -52,9 +53,9 @@ function Head() {
     <div className={style.root}>
       <div className="head-wrap">
         <div className="head-left">
-          <div className="total-price">{fixPrice(headInfo?.close)}</div>
+          <div className="total-price">{fixPrice(price)}</div>
           <div className="total-usdt">
-            ≈$ {fixPrice(headInfo?.close)}{" "}
+            ≈$ {fixPrice(price)}{" "}
             <span className={`${headInfo?.rate > 0 ? "up" : "down"}`}>
               {toFixed(headInfo?.rate * 100, 2)}%
             </span>

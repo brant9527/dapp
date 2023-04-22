@@ -48,8 +48,9 @@
           font-size: 44px;
           @include font_color("fontColor1");
         }
-        .priceBot {
+        .price-bot {
           font-size: 36px;
+
           @include font_color("fontColor2");
         }
       }

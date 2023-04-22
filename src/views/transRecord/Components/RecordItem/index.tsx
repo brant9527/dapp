@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
+import { formatTime, toFixed } from "@/utils/public";
 
 function RecordItem(props: any) {
   const { item } = props;
@@ -20,16 +21,18 @@ function RecordItem(props: any) {
     <div className={style.root}>
       <div className="record-item">
         <div className="record-item_left">
-          <div className="item-top">{item.coin}</div>
-          <div className="item-b">{item.time}</div>
+          <div className="item-top">{item.asset}</div>
+          <div className="item-b">
+            {formatTime(new Date(item.updateTime).getTime())}
+          </div>
         </div>
         <div className="record-item_right">
-          <div className="item-top">{item.count}</div>
+          <div className="item-top">{toFixed(item.amount, 6)}</div>
           <div className="item-b">
             <span
-              className={["dot", item.status == 1 ? "dot_s" : "dot_f"].join(" ")}
+              className={["dot", !item.status ? "dot_s" : "dot_f"].join(" ")}
             ></span>
-            {item.status == 1 ? t("common.success") : t("common.faild")}
+            {!item.status ? t("common.success") : t("common.faild")}
           </div>
         </div>
       </div>

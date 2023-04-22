@@ -55,10 +55,11 @@
 import CFClient from "./cfws";
 import moment from "moment";
 import { toFixed } from "@/utils/public";
+import { config } from "@/public/config";
 
 const env = process.env.NODE_ENV;
 // const hostname = '' || window.location.hostname;
-let uri = "wss://trust-pro.io/websocket";
+let uri = config.baseUrlWs;
 // if (env !== 'production') {
 //   uri = `ws://${process.env.VUE_APP_BASEURL}:${process.env.VUE_APP_PORT25}/websocket`;
 //   // uri = 'wss://bscdapp.newdex.io/websocket';
@@ -331,12 +332,16 @@ const Io = {
   // Account 订阅推送
   accountBind: function (params: any, callback: any) {
     client.ready(function () {
-      client.request("getAccountPopMessage", params, function (err: any, data: any) {
-        if (err) {
-          return;
+      client.request(
+        "getAccountPopMessage",
+        params,
+        function (err: any, data: any) {
+          if (err) {
+            return;
+          }
+          callback(data);
         }
-        callback(data);
-      });
+      );
       client.subscribe("account.message", params, callback);
     });
   },

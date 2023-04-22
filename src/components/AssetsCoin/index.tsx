@@ -41,7 +41,7 @@ function AssetsCoin(props: any) {
               </div>
               <div className="coin-right">
                 <div>
-                  <div className="coin-count">{toFixed(item.count, 4)}</div>
+                  <div className="coin-count">{fixPrice(item.count)}</div>
                   <div className="coin-usdt">≈{fixPrice(item.usdtBalance)}</div>
                 </div>
                 {spot && (
@@ -54,7 +54,7 @@ function AssetsCoin(props: any) {
                           e.stopPropagation();
                         }}
                       >
-                        {t("exchange.exchange") + " >"}{" "}
+                        {t("exchange.exchange") + " >"}
                       </div>
                     )}
                   </div>

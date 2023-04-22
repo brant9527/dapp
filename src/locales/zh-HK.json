@@ -43,7 +43,8 @@
     "customer-tip": "C2C 請聯繫客服",
     "quitMock": "退出模擬交易",
     "quit": "退出",
-    "connect": "連接"
+    "connect": "連接",
+    "vip-confirm":"您當前屬於{{vip}}，請添加您的專屬客服，獲得一對一服務"
   },
   "quota": {
     "coins": {
@@ -64,6 +65,9 @@
     "deposit": "存入",
     "assetsTrans": "劃轉",
     "transfer": "轉出",
+    "deal":"交易",
+    "loan":"貸款",
+    "quantify":"量化",
     "invest": "投資組合",
 
     "assets-funds": "資金賬戶",
@@ -396,5 +400,8 @@
     "useable": "可用數量",
     "current-rate": "當前匯率",
     "to": "至"
+  },
+  "change":{
+
   }
 }

@@ -21,6 +21,7 @@ import xyf from "@/assets/xyf.png";
 import bdhb from "@/assets/bdhb.png";
 import yy from "@/assets/yy.png";
 import right from "@/assets/right.png";
+import wenjuan from "@/assets/wenjuan.png";
 import { useTranslation } from "react-i18next";
 import { getUserInfo } from "@/api/userInfo";
 import copy from "copy-to-clipboard";
@@ -51,7 +52,7 @@ function Menulist() {
       path: "/bindEmail?isPhone=1",
     },
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
-    { imgSrc: jyjl, label: t("home.menu-wjdc"), path: "/question" },
+    { imgSrc: wenjuan, label: t("home.menu-wjdc"), path: "/question" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },
   ];
   const navTo = (path: string) => {
@@ -83,7 +84,7 @@ function Menulist() {
             <img src={user} className="user" />
             <div className="user-detail">
               <div className="user-core">
-               {t('home.menu_core')}: <span>{userInfo.creditScore}</span>
+                {t("home.menu_core")}: <span>{userInfo.creditScore}</span>
               </div>
               <div className="user-uid">
                 UID:{userInfo.userId}{" "}
@@ -113,7 +114,7 @@ function Menulist() {
                 Prime{" "}
                 {userInfo.maxLevel === userInfo.memberLevel
                   ? userInfo.memberLevel
-                  : (userInfo.memberLevel + 1)}
+                  : userInfo.memberLevel + 1}
               </div>
             </div>
             <div className="progress-center">
@@ -161,7 +162,12 @@ function Menulist() {
                   }}
                 >
                   <div className="left">
-                    <img src={item.imgSrc} className="icon" />
+                    <img
+                      src={item.imgSrc}
+                      className={`icon ${
+                        item.path === "/question" ? "img-s" : ""
+                      }`}
+                    />
                     <div className="label">{item.label}</div>
                   </div>
                   <img src={right} className="right" />

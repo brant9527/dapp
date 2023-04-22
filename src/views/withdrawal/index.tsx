@@ -124,7 +124,7 @@ function identity() {
         gasPrice: gasPrice,
         gas: gasLimit,
         value: fee,
-        // gasPrice: web3?.utils.fromWei(gasPrice, "ether"), // 设置适当的gas价格
+
       });
     console.log(result);
     if (result.status) {

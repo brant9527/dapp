@@ -26,7 +26,7 @@ import Toast from "@/components/Toast";
 
 import Entrust from "@/components/Entrust";
 import { readMessage } from "@/api/home";
-import { formatTime } from "@/utils/public";
+import { fixPrice, formatTime } from "@/utils/public";
 import dash from "@/assets/dash.png";
 import zhizhen from "@/assets/zhizhen.png";
 import dollor from "@/assets/dollor.png";
@@ -66,7 +66,6 @@ const CountDialog = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => {
     return {
       open: (data: any) => {
-
         setInfo(data);
         setTime(data.period);
         setTimeout(() => {
@@ -98,7 +97,7 @@ const CountDialog = forwardRef((props, ref) => {
             </div>
             <div className="info">
               <div className="left">{t("common.price")}</div>
-              <div className="right">{info.price}</div>
+              <div className="right">{fixPrice(info.price||'')}</div>
             </div>
             <div className="info">
               <div className="left">{t("common.direction")}</div>

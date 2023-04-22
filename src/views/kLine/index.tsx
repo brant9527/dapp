@@ -37,6 +37,7 @@ function Kline() {
   const tradeType = search.get("tradeType") || "spot";
 
   const [coin, setCoin] = useState(symbol);
+  const [price, setPrice] = useState<any>(0);
 
   const [isCollect, setIsCollect] = useState(false);
   useEffect(() => {
@@ -61,9 +62,11 @@ function Kline() {
     }
     nav(`/search?returnPath=kLine`);
   };
-  const onChangeMinutes = useCallback((minuteType: any) => {
-    console.log("minuteType=>", "");
+  const onChangeMinutes = useCallback((minuteType: any) => {}, []);
+  const onChangePrice = useCallback((data: any) => {
+    setPrice(data.close);
   }, []);
+
   const navTo = (type: any) => {
     if (mock != "0") {
       return nav(
@@ -118,12 +121,13 @@ function Kline() {
       <div className="kLine-wrap">
         <Back content={title()}></Back>
         <div className="kLine-content">
-          <Head></Head>
+          <Head price={price}></Head>
 
           <div className="tradeView">
             <TradeView
               symbol={symbol}
               onChangeMinutes={onChangeMinutes}
+              onChangePrice={onChangePrice}
             ></TradeView>
           </div>
           <div className="depth-wrap">

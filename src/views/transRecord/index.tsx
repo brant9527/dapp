@@ -18,153 +18,87 @@ import Scroll from "@/components/Scroll";
 import Toast from "@/components/Toast";
 
 import eth from "@/assets/eth.png";
+import { getBalanceChangeRecordPage } from "@/api/common";
+
+let page = {
+  pageNo: 1,
+  pageSize: 20,
+};
 
 function TransRecord() {
+  // 1-充值，2-提现，3-划转，4-交易，5-贷款，6-量化 ,
   const { t } = useTranslation();
-  const nav = useNavigate();
-  const [hasMore, setHashMore] = useState(true);
-  const [type, setType] = useState("all");
-  const onChange = (type: string) => {
-    setType(type);
-  };
 
   const navList = [
     {
-      title: t("record.recordIn"),
-      type: "recordIn",
+      title: t("assets.deposit"),
+      type: "1",
     },
     {
-      title: t("record.recordOut"),
-      type: "recordOut",
+      title: t("assets.transfer"),
+      type: "2",
     },
     {
-      title: t("record.recordChange"),
-      type: "recordChange",
+      title: t("assets.assetsTrans"),
+      type: "3",
+    },
+    {
+      title: t("assets.deal"),
+      type: "4",
+    },
+    {
+      title: t("assets.loan"),
+      type: "5",
+    },
+    {
+      title: t("assets.quantify"),
+      type: "6",
     },
   ];
-
-  const assetsList = [
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-    {
-      state: 1,
-      coin: "BTC",
-      count: 122,
-      time: "2020-12-23",
-    },
-    {
-      state: 0,
-      coin: "BTC",
-      count: 12,
-      time: "2020-12-23",
-    },
-  ];
-  const assetsCoinList = [
-    {
-      logo: eth,
-      asset: "BTC",
-      count: 1,
-      fullName: "Btccoin",
-      usdtBalance: 12,
-    },
-  ];
-
-  const assetsContractCoinList = [
-    {
-      logo: eth,
-
-      asset: "BTC",
-      availableBalance: 0,
-      count: 0,
-      freezeBalance: 0,
-      fullName: "Btccoiin",
-    },
-  ];
-  const onLoadMore = () => {
-    console.log("加载更多", Toast);
-    Toast.notice(t('common.noMore'), {  });
+  const nav = useNavigate();
+  const [hasMore, setHashMore] = useState(true);
+  const [category, setCategory] = useState(navList[0].type);
+  const [assetsList, setAssetsList] = useState([]);
+  const onChange = (type: string) => {
+    setAssetsList(() => []);
+    setCategory(type);
+    page = {
+      pageNo: 1,
+      pageSize: 20,
+    };
   };
+  useEffect(() => {
+    getData();
+  }, [category]);
+
+  const getData = async () => {
+    const { data } = await getBalanceChangeRecordPage({
+      ...page,
+
+      category,
+    });
+    console.log(data);
+    const isEnd = data.currPage >= data.totalPage;
+    data.list && setAssetsList(assetsList.concat(data.list));
+
+    if (isEnd) {
+      setHashMore(false);
+      Toast.notice(t("common.noMore"), {});
+    }
+  };
+  const onLoadMore = () => {
+    ++page.pageNo;
+
+    if (hasMore) {
+      getData();
+    }
+  };
+
   const onRefresh = () => {
     console.log("刷新");
   };
   function title() {
-    return <div className="record-title">{t("record.record")}</div>;
+    return <div className="record-title">{t("record.recordChange")}</div>;
   }
   return (
     <div className={style.root}>

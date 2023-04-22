@@ -12,7 +12,7 @@ const ConfirmDialog = forwardRef(
     const handleConfirm = () => {
       if (!isClose) return false;
 
-      onConfirm();
+      onConfirm && onConfirm();
 
       setShowDialog(false);
     };

@@ -39,6 +39,9 @@ function LendItem(props: any) {
         return t("status.wait");
     }
   };
+  const onCustom = () => {
+    (window as any).Tawk_API.maximize();
+  };
   return (
     <div className={style.root}>
       <div className="order-wrap">
@@ -64,7 +67,7 @@ function LendItem(props: any) {
         </div>
         <div className="order-item">
           <div className="left">{t("lend.interest")}</div>
-          <div className="right rate">{item.totalInterest + " "} %</div>
+          <div className="right rate">{item.totalInterest + " "} USDT</div>
         </div>
         <div className="order-item">
           <div className="left">{t("common.status")}</div>
@@ -72,7 +75,11 @@ function LendItem(props: any) {
             {(item.status == 1 || item.status == 3 || item.status == 4) && (
               <>
                 <span className="status">{status(item)}</span>
-                <span className="btn">{t("btn.repayment")}</span>
+                <span className="btn" onClick={() => {
+                  onCustom()
+                }}>
+                  {t("lend.btn.repayment")}
+                </span>
               </>
             )}
             {item.status == 0 && <span className="status">{status(item)}</span>}

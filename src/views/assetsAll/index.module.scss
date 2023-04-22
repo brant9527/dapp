@@ -22,6 +22,12 @@
                 font-size: 80px;
                 @include font_color("fontColor1");
                 font-weight: bold;
+                display: flex;
+                justify-content: space-between;
+                img{
+                    width: 60px;
+                    height: 72px;
+                }
             }
             .assets-all-about {
                 font-size: 36px;
@@ -148,8 +154,7 @@
                                 line-height: 80px;
                                 margin-bottom: 34px;
                                 font-weight: bold;
-                            @include font_color("fontColor1");
-
+                                @include font_color("fontColor1");
                             }
                             &_bottom {
                                 font-size: 38px;
@@ -166,7 +171,6 @@
                             &_bottom {
                                 font-size: 38px;
                                 @include font_color("fontColor1");
-
                             }
                         }
                     }
@@ -177,7 +181,6 @@
                             font-weight: bold;
                             height: 44px;
                             @include font_color("fontColor1");
-
                         }
                         .coin-cnc-frozen {
                             @include font_color("fontColor2");
@@ -187,7 +190,6 @@
                         .coin-cnc-usdt {
                             font-size: 38px;
                             @include font_color("fontColor1");
-
                         }
                     }
                 }

@@ -26,16 +26,14 @@ export function fixPrice(num: any, pp = 2) {
   if (!num) {
     return toFixed(0, pp);
   }
-  if (result > 1) {
-    return toFixed(num, pp);
-  } else {
-    const str = num.toString();
-    if (!str.match(reg)) {
-      return toFixed(num, pp);
-    }
-    const numCnt = str.match(reg)[1]?.length || 0;
-
-    return toFixed(num, numCnt + pp);
+  if (result > 100) {
+    return toFixed(num, 2);
+  } else if (result < 100 && result > 10) {
+    return toFixed(num, 3);
+  } else if (result < 10 && result > 1) {
+    return toFixed(num, 4);
+  }else {
+    return toFixed(num,5);
   }
 }
 // 科学计数法转数值 - 处理 1e-7 这类精度问题

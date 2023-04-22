@@ -5,15 +5,22 @@
       // padding: 48px 22px 11px;
       display: flex;
       justify-content: flex-start;
+
       @include background_color("bgColor1");
-      overflow-x: auto;
+      overflow: scroll;
+      width: 1040px;
+
+
       .item {
-        margin-right: 38px;
+        // margin-right: 38px;
         font-size: 42px;
         height: 91px;
         line-height: 91px;
         padding: 0 20px;
         text-align: center;
+        flex-basis:auto;
+        flex-shrink: 0;
+        overflow: scroll;
         @include font_color("fontColor2");
 
         &.active {

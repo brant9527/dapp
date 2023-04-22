@@ -44,7 +44,7 @@ const mainIndicators = ["MA", "EMA", "SAR"];
 const subIndicators = ["VOL", "MACD", "KDJ"];
 
 function TradeView(props: any) {
-  const { symbol, onChangeMinutes } = props;
+  const { symbol, onChangeMinutes,onChangePrice } = props;
   const { t } = useTranslation();
 
   /**
@@ -200,9 +200,12 @@ function TradeView(props: any) {
       console.log(data.klines, type);
       if (type == "all") {
         chart.current?.applyNewData(data.klines);
+        onChangePrice(data.klines.pop())
+
       }
       if (type === "one") {
         chart.current?.updateData(data.klines[0]);
+        onChangePrice(data.klines[0])
       }
     });
     chart.current?.loadMore((timestamp: any) => {

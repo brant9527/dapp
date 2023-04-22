@@ -18,7 +18,7 @@ import usdtPng from "@/assets/usdt.svg";
 import change from "@/assets/change.png";
 import copy from "copy-to-clipboard";
 import { getUserCurrProductAmount, applyBuy } from "@/api/ai";
-import { getTradeAssetBalance } from "@/api/trans";
+import { getFundsAssetBalance } from "@/api/trans";
 import Toast from "@/components/Toast";
 import { toFixed } from "@/utils/public";
 
@@ -58,7 +58,7 @@ function aiApply() {
       id,
     });
 
-    const { code: codeTrade, data: dataTrade } = await getTradeAssetBalance();
+    const { code: codeTrade, data: dataTrade } = await getFundsAssetBalance();
     if (codeTrade == 0) {
       setCoinRestUseCount(toFixed(Number(limitMaxAmount) - data, "2"));
       setAvailableUsdtBalance(dataTrade.availableUsdtBalance);

@@ -5,6 +5,7 @@ import NodeGlobalsPolyfillPlugin from "@esbuild-plugins/node-globals-polyfill";
 import visualizer from "rollup-plugin-visualizer";
 import reactRefresh from "@vitejs/plugin-react-refresh";
 import importToCDN, { autoComplete } from "vite-plugin-cdn-import";
+import viteCompression from "vite-plugin-compression"
 
 const path = require("path");
 const postCssPxToRem = require("postcss-pxtorem");
@@ -27,43 +28,48 @@ export default defineConfig({
   base: "./",
   plugins: [
     react(),
+    viteCompression({
+      threshold: 10240, // the unit is Bytes
+    }),
     // importToCDN({
     //   modules: [
-        // {
-        //   name: "web3",
-        //   var: "Web3",
-        //   path: `https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js`,
-        // },
-        // {
-        //   name: "react",
-        //   var: "React",
-        //   path: "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
-        // },
-        // {
-        //   name: "react-dom",
-        //   var: "ReactDOM",
-        //   path: `https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js`,
-        // },
-        // {
-        //   name: "swiper",
-        //   var: "swiper",
-        //   path: "https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.js",
-        // },
-        // autoComplete("react"),
-        // autoComplete("react-dom"),
-        // autoComplete("lodash"),
-        // autoComplete("axios"),
+    //     autoComplete('react'),
+    //     autoComplete('react-dom')
+    //     // {
+    //     //   name: "web3",
+    //     //   var: "Web3",
+    //     //   path: `https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js`,
+    //     // },
+    //     // {
+    //     //   name: "react",
+    //     //   var: "React",
+    //     //   path: "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
+    //     // },
+    //     // {
+    //     //   name: "react-dom",
+    //     //   var: "ReactDOM",
+    //     //   path: `https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js`,
+    //     // },
+    //     // {
+    //     //   name: "swiper",
+    //     //   var: "swiper",
+    //     //   path: "https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.js",
+    //     // },
+    //     // autoComplete("react"),
+    //     // autoComplete("react-dom"),
+    //     // autoComplete("lodash"),
+    //     // autoComplete("axios"),
 
-        // {
-        //   name: "lodash",
-        //   var: "_",
-        //   path: "https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js",
-        // },
-        // {
-        //   name: "@walletconnect/web3-provider",
-        //   var: "WalletConnectProvider",
-        //   path: "https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.6.7/dist/index.min.js",
-        // },
+    //     // {
+    //     //   name: "lodash",
+    //     //   var: "_",
+    //     //   path: "https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js",
+    //     // },
+    //     // {
+    //     //   name: "@walletconnect/web3-provider",
+    //     //   var: "WalletConnectProvider",
+    //     //   path: "https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.6.7/dist/index.min.js",
+    //     // },
     //   ],
     // }),
     // reactRefresh(),

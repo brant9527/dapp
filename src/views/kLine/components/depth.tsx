@@ -127,7 +127,6 @@ function Depth() {
               {orderList.map((item: any, idx: any) => {
                 return (
                   <div className="deal-item_wrap" key={item.timestamp}>
-                    
                     <div className="left">
                       {formatTime(item.timestamp, "HH:mm:ss")}
                     </div>
@@ -136,7 +135,7 @@ function Depth() {
                         item.direction === 1 ? "buy" : "sell"
                       }`}
                     >
-                      {item.price}
+                      {fixPrice(item.price)}
                     </div>
                     <div className="right">{item.volume}</div>
                   </div>
@@ -198,7 +197,9 @@ function Depth() {
             <div className="item-info">
               <div
                 className="introduce"
-                dangerouslySetInnerHTML={{ __html: decodeURI(coinInfo?.content) }}
+                dangerouslySetInnerHTML={{
+                  __html: decodeURI(coinInfo?.content),
+                }}
               ></div>
             </div>
           </div>

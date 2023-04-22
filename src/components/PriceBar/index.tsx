@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./index.module.scss";
 
 import { useTranslation } from "react-i18next";
+import { fixPrice } from "@/utils/public";
 
 function Quotation(props: any) {
   const { data = [], type = "buy", direction = "right" } = props;
@@ -36,11 +37,11 @@ function Quotation(props: any) {
                   <div className={type === "sell" ? "down" : "up"}>
                     {item.qty}
                   </div>
-                  <div className="price-bar_right">{item.price}</div>
+                  <div className="price-bar_right">{fixPrice(item.price)}</div>
                 </>
               ) : (
                 <>
-                  <div className="price-bar_right">{item.price}</div>
+                  <div className="price-bar_right">{fixPrice(item.price)}</div>
 
                   <div className={type === "sell" ? "down" : "up"}>
                     {item.qty}

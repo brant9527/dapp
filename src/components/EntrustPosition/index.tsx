@@ -155,21 +155,21 @@ function Entrust(props: any) {
                       {t("contract.long-price")}(USDT)
                     </div>
                     <div className="info-bottom">
-                      {toFixed(item.avgCostPrice)}
+                      {fixPrice(item.avgCostPrice)}
                     </div>
                   </div>
                   <div className="info-part">
                     <div className="info-top">
                       {t("contract.mark-price")}(USDT)
                     </div>
-                    <div className="info-bottom">{toFixed(item.currPrice)}</div>
+                    <div className="info-bottom">{fixPrice(item.currPrice)}</div>
                   </div>
                   <div className="info-part text-right">
                     <div className="info-top">
                       {t("contract.force-close")}(USDT)
                     </div>
                     <div className="info-bottom">
-                      {item.forcePrice > 0 ? toFixed(item.forcePrice) : "--"}
+                      {item.forcePrice > 0 ? fixPrice(item.forcePrice) : "--"}
                     </div>
                   </div>
                 </div>

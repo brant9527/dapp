@@ -50,6 +50,9 @@
                 .right {
                     display: flex;
                     @include font_color("fontColor1");
+                    div{
+                        margin-left: 10px;
+                    }
                 }
             }
             .btn-next {

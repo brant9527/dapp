@@ -137,7 +137,7 @@ function Contract({ mock }: any) {
   const [periodInfo, setPeriodInfo] = useState<any>([]);
   const [selectPeriod, setSelectPeriod] = useState<any>([]);
 
-  const [lever, setLever] = useState(100);
+  const [lever, setLever] = useState(localStorage.getItem("lever") || 100);
   const priceRef = useRef<any>(null);
   const accountRef = useRef<any>(null);
   const usdtRef = useRef<any>(null);
@@ -163,12 +163,16 @@ function Contract({ mock }: any) {
     setTransType(type);
     setPercent(-1);
     setCoinPrice("");
+    priceRef.current.setVal("");
+
     console.log("設置交易類型", type);
   }, []);
   const subData = useCallback(async () => {
     Io.subscribeSymbolDepth(symbol, (data: any) => {
       console.log(data);
-      // data.ask?.reverse()
+      data.asks.length = 7;
+      data.asks.reverse();
+
       setDepthInfo(data);
     });
   }, []);
@@ -358,6 +362,7 @@ function Contract({ mock }: any) {
         setCoinAccount("");
         setCoinPrice("");
         setUseUsdt("");
+        priceRef.current.setVal("");
         usdtRef?.current.setVal("");
         accountRef?.current.setVal("");
       }
@@ -385,6 +390,7 @@ function Contract({ mock }: any) {
   }, []);
   const onChangeSlideNum = useCallback((val: any) => {
     setLever(val);
+    localStorage.setItem("lever", val);
   }, []);
   const onSelectPeroid = (item: any) => {
     setSelectPeriod(item);
@@ -394,7 +400,9 @@ function Contract({ mock }: any) {
       return Toast.notice(t("common.params-check"), { duration: 2000 });
     }
     // 沒有餘額或者大於資產不允許交易
-
+    if (transType === "limit" && !coinPrice) {
+      return Toast.notice(t("common.params-check"), { duration: 2000 });
+    }
     if (
       !Number(promiseMoney) ||
       Number(promiseMoney) > balanceAssets?.availableUsdtBalance
@@ -476,8 +484,11 @@ function Contract({ mock }: any) {
       setPercent(-1);
       setCoinAccount("");
       setUseUsdt("");
+      setCoinPrice("");
       usdtRef?.current.setVal("");
       accountRef?.current.setVal("");
+      priceRef.current.setVal("");
+
       Toast.notice(t("common.success"), { duration: 2000 });
       if (tradeType === "delivery")
         countRef.current.open({
@@ -600,9 +611,11 @@ function Contract({ mock }: any) {
                 ></PriceBar>
               </div>
               <div className="price-part">
-                <div className="price-top up">{fixPrice(headInfo?.close)}</div>
+                <div className="price-top up">
+                  {fixPrice(depthInfo.bids && depthInfo.bids[0]?.price)}
+                </div>
                 <div className="price-usdt">
-                  {"≈$" + fixPrice(headInfo?.close)}
+                  {"≈$" + fixPrice(depthInfo.bids && depthInfo?.bids[0]?.price)}
                 </div>
               </div>
               <div className="price-buy">
@@ -792,7 +805,9 @@ function Contract({ mock }: any) {
               <div className="max-u">
                 <div className="max-left">{t("contract.promise-money")}</div>
 
-                <div className="max-right">{toFixed(promiseMoney)} USDT</div>
+                <div className="max-right">
+                  {Number(promiseMoney) > 0 ? toFixed(promiseMoney) : 0} USDT
+                </div>
               </div>
               <div
                 className={"btn-option btn-option__" + type}

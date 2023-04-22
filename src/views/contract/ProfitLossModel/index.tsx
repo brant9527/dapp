@@ -27,7 +27,7 @@ import Toast from "@/components/Toast";
 
 import Entrust from "@/components/Entrust";
 import { readMessage } from "@/api/home";
-import { formatTime, toFixed } from "@/utils/public";
+import { fixPrice, formatTime, toFixed } from "@/utils/public";
 
 import Model from "@/components/Model";
 import SlideNum from "@/components/SlideNum";
@@ -116,12 +116,12 @@ const ProfitLossModel = forwardRef(
             <div className="info">
               <div className="info-left"> {t("contract.long-price")}(USDT)</div>
               <div className={"info-right "}>
-                {toFixed(info.avgCostPrice, 4)}
+                {fixPrice(info.avgCostPrice, 4)}
               </div>
             </div>
             <div className="info">
               <div className="info-left">{t("contract.mark-price")}(USDT)</div>
-              <div className={"info-right "}>{toFixed(info.currPrice, 4)}</div>
+              <div className={"info-right "}>{fixPrice(info.currPrice, 4)}</div>
             </div>
             <div className="input-part">
               <div className="ipt-left">

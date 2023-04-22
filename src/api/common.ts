@@ -25,3 +25,6 @@ export const getImageCode = (data?: any) => {
 export const getEmailCode = (data: any) => {
   return axios.post("/api/common/getEmailCode", data);
 };
+export const getBalanceChangeRecordPage = (data: any) => {
+  return axios.post("/api/user/assetBalance/getBalanceChangeRecordPage", data);
+};

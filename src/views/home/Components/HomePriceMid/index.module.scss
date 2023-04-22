@@ -5,11 +5,17 @@
       padding: 35px 22px 11px;
       display: flex;
       justify-content: space-between;
-      height: 224px;
-      @include background_color("bgColor1");
 
+      @include background_color("bgColor1");
+      overflow: scroll;
+      width: 1081px;
+      height: 224px;
       .item-wrap {
         margin: 10px;
+
+        flex-basis: 344px;
+        flex-shrink: 0;
+        overflow: scroll;
         .top {
           display: flex;
           font-size: 34px;

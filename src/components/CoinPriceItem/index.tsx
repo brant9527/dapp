@@ -8,7 +8,7 @@ import backImg from "@/assets/left.png";
 import { useTranslation } from "react-i18next";
 import up from "@/assets/up.png";
 import down from "@/assets/down.png";
-import { toFixed } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 
 function CoinPriceItem(props: any) {
   const { logo, close, rate, symbol, turnover, volume } = props;
@@ -33,8 +33,8 @@ function CoinPriceItem(props: any) {
           </div>
         </div>
         <div className="coinPricePst ">
-          <div className="priceTop">{close}</div>
-          <div className="priceBot">≈${close}</div>
+          <div className="priceTop">{fixPrice( close)}</div>
+          <div className="price-bot">≈${fixPrice(close)}</div>
         </div>
         <div className="coinStatePst ">
           <div

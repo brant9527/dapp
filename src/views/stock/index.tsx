@@ -114,7 +114,8 @@ function Stock() {
   const subData = useCallback(async () => {
     Io.subscribeSymbolDepth(symbol, (data: any) => {
       console.log(data);
-      // data.ask?.reverse()
+      data.asks.length = 5;
+      data.asks.reverse();
       setDepthInfo(data);
     });
   }, []);
@@ -404,16 +405,18 @@ function Stock() {
                 ></PriceBar>
               </div>
               <div className="price-part">
-                <div className="price-top up">{fixPrice(headInfo?.close)}</div>
+                <div className="price-top up">
+                  {fixPrice(depthInfo.bids && depthInfo.bids[0]?.price)}
+                </div>
                 <div className="price-usdt">
-                  {"≈$" + fixPrice(headInfo?.close)}
+                  {"≈$" + fixPrice(depthInfo.bids && depthInfo.bids[0].price)}
                 </div>
               </div>
               <div className="price-buy">
                 <PriceBar
                   direction="right"
                   type="buy"
-                  data={depthInfo.bids}
+                  data={depthInfo?.bids}
                 ></PriceBar>
               </div>
             </div>

@@ -4,8 +4,9 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Toast from "@/components/Toast";
 import { useNavigate } from "react-router-dom";
+import { config } from "@/public/config";
 const http = axios.create({
-  baseURL: "https://trust-pro.io/", // 从.env变量中读取的后台url地址
+  baseURL: config.baseUrl, // 从.env变量中读取的后台url地址
   timeout: 30000, // 超时时长5分钟,
 });
 const device = getDevice();
@@ -61,7 +62,7 @@ http.interceptors.request.use(
 
     const account = window.localStorage.getItem("account");
     const wallet = window.localStorage.getItem("web3-provider");
-    const language = window.localStorage.getItem("i18nextLng") || "en";
+    const language = window.localStorage.getItem("language") || "en";
     const mock = window.localStorage.getItem("mock");
 
     if (account) {

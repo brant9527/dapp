@@ -14,7 +14,7 @@
       .menu-content {
         position: absolute;
         width: calc(100vw - 80px);
-        height:calc(100vh - 80px - env(safe-area-inset-bottom));
+        height: calc(100vh - 80px - env(safe-area-inset-bottom));
         left: 0;
         z-index: 11;
         padding: 40px;
@@ -83,6 +83,7 @@
             width: 70px;
             height: 59px;
           }
+         
         }
         .progress {
           width: 920px;
@@ -144,6 +145,11 @@
               font-size: 44px;
               margin-left: 40px;
               @include font_color("fontColor1");
+            }
+            .img-s {
+              width: 60px;
+              height: 60px;
+              padding-left: 20px;
             }
           }
           .right {

@@ -23,7 +23,7 @@ import copy from "copy-to-clipboard";
 import Toast from "@/components/Toast";
 function Invite() {
   const { t } = useTranslation();
-  const [url, setUrl] = useState(location.origin + "/home?inviteCode=");
+  const [url, setUrl] = useState(location.origin + "/?inviteCode=");
 
   const nav = useNavigate();
 

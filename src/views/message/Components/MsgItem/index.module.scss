@@ -9,7 +9,6 @@
                 padding: 64px 45px;
                 @include border("bottom");
                 text-align: justify;
-
                 word-break: break-all;
                 .left {
                     position: relative;
@@ -41,6 +40,7 @@
                     }
                     .content {
                         width: 863px;
+                        max-height: 150px;
 
                         font-size: 36px;
 

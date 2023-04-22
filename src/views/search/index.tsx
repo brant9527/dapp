@@ -20,7 +20,7 @@ import QuotaCoin from "@/components/QuotaCoin";
 import { searchPair } from "@/api/common";
 import _ from "lodash";
 import { collectAdd, collectDelete, getCollectList } from "@/api/userInfo";
-import { toFixed } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 
 function Search() {
   const { t } = useTranslation();
@@ -118,7 +118,9 @@ function Search() {
                       </div>
                       <div className="coin-right">
                         <div className="coin-price_part">
-                          <div className="coin-price">{item.price}</div>
+                          <div className="coin-price">
+                            {fixPrice(item.price, 4)}
+                          </div>
                           <div
                             className={`coin-rate ${
                               item.riseFallRate > 0 ? "up" : "down"
@@ -176,7 +178,7 @@ function Search() {
                       </div>
                       <div className="coin-right">
                         <div className="coin-price_part">
-                          <div className="coin-price">{item.price}</div>
+                          <div className="coin-price">{fixPrice(item.price,4)}</div>
                           <div
                             className={`coin-rate ${
                               item.riseFallRate > 0 ? "up" : "down"
@@ -217,7 +219,7 @@ function Search() {
                       className="coin-item"
                       key={cIdx + 1}
                       onClick={() => {
-                        const mock = window.localStorage.getItem("mock")||'';
+                        const mock = window.localStorage.getItem("mock") || "";
                         if (mock === "1") {
                           return nav(
                             `/mockTrade?symbol=${item.symbol}&tradeType=swap`
@@ -236,7 +238,7 @@ function Search() {
                       </div>
                       <div className="coin-right">
                         <div className="coin-price_part">
-                          <div className="coin-price">{item.price}</div>
+                          <div className="coin-price">{fixPrice(item.price)}</div>
                           <div
                             className={`coin-rate ${
                               item.riseFallRate > 0 ? "up" : "down"
