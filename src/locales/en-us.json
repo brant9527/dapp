@@ -70,8 +70,8 @@
     "quantify":"Quantify",
     "invest": "Investment Portfolio",
 
-    "assets-funds": "Funds Account",
-    "assets-contract": "Futures Account",
+    "assets-funds": "Funds ",
+    "assets-contract": "Futures ",
     "assets-lever": "Wallet Account",
     "useable": "Available",
     "frozen": "Frozen",
@@ -103,7 +103,7 @@
     "recharge": "Deposit",
     "tip1": "Only support deposit {{coin}} to this address",
     "tip2": "Do not support deposit other coins, please check carefully",
-    "address": "ETH Deposit Address",
+    "address": "{{chain}} Deposit Address",
     "chain": "Mainnet"
   },
   "lg": {

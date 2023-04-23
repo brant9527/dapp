@@ -103,7 +103,7 @@
     "recharge": "存入",
     "tip1": "僅支持該地址存入{{coin}}",
     "tip2": "不支持存入其他幣種，請核對",
-    "address": "ETH 存入地址",
+    "address": "{{chain}} 存入地址",
     "chain": "主网"
   },
   "lg": {

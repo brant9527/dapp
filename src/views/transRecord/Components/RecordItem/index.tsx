@@ -16,12 +16,35 @@ function RecordItem(props: any) {
   const { item } = props;
   const { t } = useTranslation();
   const nav = useNavigate();
+  const status = (status: any) => {
+    let str = "(";
 
+    switch (status) {
+      case "spot":
+        str += t("assets.assets-stock");
+        break;
+      case "funds":
+        str += t("assets.assets-funds");
+        break;
+
+      case "trade":
+        str += t("assets.assets-contract");
+        break;
+
+      default:
+        str = "";
+        break;
+    }
+    str && (str += ")");
+    return str;
+  };
   return (
     <div className={style.root}>
       <div className="record-item">
         <div className="record-item_left">
-          <div className="item-top">{item.asset}</div>
+          <div className="item-top">
+            {`${item.asset}`} <span className="account-type">{status(item.accountType)}</span>
+          </div>
           <div className="item-b">
             {formatTime(new Date(item.updateTime).getTime())}
           </div>

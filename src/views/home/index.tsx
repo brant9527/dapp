@@ -40,6 +40,7 @@ import Wallet from "@/components/Wallet";
 import Confirm from "@/components/Confirm";
 import Toast from "@/components/Toast";
 import AccountBtn from "@/components/AccountBtn";
+import NoticeSwipe from './Components/NoticeSwipe'
 import copy from "copy-to-clipboard";
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
   window.localStorage.setItem("mock", "0");
   const [bannerList, setBannerList] = useState([]);
   const [unReadMsg, setUnReadMsg] = useState(0);
-  const [noticeList, setNoticeList] = useState<Array<any>>([{}]);
+
   const [coinType, setCoinType] = useState("getHotList");
 
   const [hotList, setHotList] = useState<Array<any>>([]);
@@ -77,7 +78,6 @@ function App() {
   }, []);
   useEffect(() => {
     getBanner();
-    getNoticeListHandle();
     getData();
   }, [account]);
   useEffect(() => {
@@ -227,10 +227,7 @@ function App() {
     }
     return () => clearInterval(timer);
   }, [account]);
-  const getNoticeListHandle = useCallback(async () => {
-    const { data } = await getNoticeList();
-    setNoticeList(data);
-  }, []);
+
 
   const navigate = useNavigate();
   const openMenu = () => {
@@ -416,18 +413,18 @@ function App() {
         <div className="home-banner">
           <Banner bannerList={bannerList}></Banner>
         </div>
-
-        <div
+        <NoticeSwipe></NoticeSwipe>
+        {/* <div
           className="home-msg"
           onClick={() => {
             navigate("/notice");
           }}
         >
           <div className="msg">
-            <img src={msgNotify} alt="" />
+            <img src={msgNotify}  />
           </div>
           <div className="msg-notify">{noticeList[0]?.title}</div>
-        </div>
+        </div> */}
         <div className="home-btns">
           {btnList.map((item, i) => {
             return (

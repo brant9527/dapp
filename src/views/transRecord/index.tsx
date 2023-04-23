@@ -62,6 +62,7 @@ function TransRecord() {
   const onChange = (type: string) => {
     setAssetsList(() => []);
     setCategory(type);
+    setHashMore(true);
     page = {
       pageNo: 1,
       pageSize: 20,

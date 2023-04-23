@@ -10,6 +10,11 @@
                     font-size: 46px;
                     font-weight: 600;
                     @include font_color("fontColor1");
+                    .account-type {
+                        margin-left: 20px;
+                        @include font_color("fontColor2");
+                        font-size: 32px;
+                    }
                 }
                 .item-b {
                     font-size: 38px;

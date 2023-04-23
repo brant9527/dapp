@@ -102,7 +102,7 @@ function myAddress() {
               </div>
               <div className="tip2">{t("address.tip2")}</div>
             </div>
-            <div className="address-text">{t("address.address")}</div>
+            <div className="address-text">{t("address.address",{chain:current.chain})}</div>
             <div
               className="address-part"
               onClick={() => {

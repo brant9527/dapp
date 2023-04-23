@@ -40,16 +40,16 @@ function Assets() {
       type: "all",
     },
     {
-      title: t("assets.trade"),
-      type: "trade",
+      title: t("assets.assets-stock"),
+      type: "spot",
     },
     {
       title: t("assets.funds"),
       type: "funds",
     },
     {
-      title: t("assets.assets-stock"),
-      type: "spot",
+      title: t("assets.trade"),
+      type: "trade",
     },
   ];
   const tabsList = [
@@ -72,17 +72,21 @@ function Assets() {
   const assetsAllInit = [
     {
       title: t("assets.assets-stock"),
-
+      type: "spot",
       btcBalance: 0,
       usdtBalance: 0,
     },
     {
       title: t("assets.assets-funds"),
+      type: "funds",
+
       btcBalance: 0,
       usdtBalance: 0,
     },
     {
       title: t("assets.assets-contract"),
+      type: "trade",
+
       btcBalance: 0,
       usdtBalance: 0,
     },
@@ -112,13 +116,15 @@ function Assets() {
     setTotalBtcBalance(data.totalBtcBalance);
     setTotalUsdtBalance(data.totalUsdtBalance);
     if (type === "all") {
-      setAssetsList(
-        data.detailList.map((item: any, idx: number) => {
-          assetsList[idx].btcBalance = item.btcBalance;
-          assetsList[idx].usdtBalance = item.usdtBalance;
-          return assetsList[idx];
-        })
-      );
+      data.detailList.map((item: any, idx: number) => {
+        assetsList.forEach((cItem) => {
+          if (cItem.type === item.accountType) {
+            cItem.btcBalance = item.btcBalance;
+            cItem.usdtBalance = item.usdtBalance;
+          }
+        });
+      });
+      setAssetsList(assetsList);
     } else if (type === "trade") {
       setAssetsCoinList(data.detailList);
     } else if (type === "funds") {
@@ -152,9 +158,12 @@ function Assets() {
           <div className="assets-all">{t("assets.allAssessment")}</div>
           <div className="assets-all-usdt">
             <span>{toFixed(totalUsdtBalance)} USDT</span>
-            <img src={recordPng} onClick={()=>{
-              nav('/transRecord')
-            }}/>
+            <img
+              src={recordPng}
+              onClick={() => {
+                nav("/transRecord");
+              }}
+            />
           </div>
 
           <div className="assets-all-about">
@@ -166,7 +175,7 @@ function Assets() {
               <div
                 className={`income-val ${income?.income > 0 ? "s" : "f"}`}
               >{`${toFixed(income?.income || 0)} USDT / ${toFixed(
-               ( income?.rate || 0)*100
+                (income?.rate || 0) * 100
               )}%`}</div>
             </div>
           )}

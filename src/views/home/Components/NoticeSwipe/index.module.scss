@@ -1,0 +1,35 @@
+.root {
+  :global {
+    .home-msg {
+      display: flex;
+      padding-top: 28px;
+      font-size: 36px;
+      margin: 0 44px;
+      height: 73px;
+      overflow: hidden;
+      .msg {
+        width: 73px;
+        height: 73px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+
+        img {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      .msg-notify {
+        width: 900px;
+        overflow: hidden;
+        line-height: 73px;
+        white-space: nowrap;
+        height: 73px;
+        text-overflow: ellipsis;
+        @include font_color("fontColor1");
+      }
+    }
+  }
+}

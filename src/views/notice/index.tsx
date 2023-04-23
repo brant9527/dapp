@@ -39,12 +39,12 @@ function Message() {
     const { data } = await getNoticeList();
 
     setAssetsList(data);
-    const isEnd = data.currPage >= data.totalPage;
+    // const isEnd = data.currPage >= data.totalPage;
+    setHashMore(false);
+    Toast.notice(t("common.noMore"), {});
 
-    if (isEnd) {
-      setHashMore(false);
-      Toast.notice(t("common.noMore"), {});
-    }
+    // if (isEnd) {
+    // }
   };
   const onLoadMore = () => {
     console.log("加载更多", Toast);
