@@ -3,7 +3,7 @@ export const openContractOrder = (data: any) => {
   return axios.post("/api/swap/trade/openOrder", data);
 };
 export const openDeliverytOrder = (data: any) => {
-  return axios.post("/api/delivery/trade/openOrder", data);
+  return axios.post("/api/futures/trade/openOrder", data);
 };
 
 export const cancelContractOrder = (data: any) => {
@@ -20,7 +20,7 @@ export const setStopProfitOrLoss = (data: any) => {
   return axios.post("/api/swap/trade/setStopProfitOrLoss", data);
 };
 export const getDeliveryPeriodList = () => {
-  return axios.post("/api/delivery/trade/getDeliveryPeriodList");
+  return axios.post("/api/futures/trade/getDeliveryPeriodList");
 };
 export const getUserPosition = () => {
   return axios.post("/api/user/position/getUserPosition");

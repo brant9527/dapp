@@ -576,7 +576,7 @@ function Contract({ mock }: any) {
                   configList={marginModeList}
                 ></TradeSelect>
               </div>
-              <div
+             {tradeType === "swap"&& <div
                 className="lever"
                 onClick={() => {
                   modelRef.current.open();
@@ -584,7 +584,7 @@ function Contract({ mock }: any) {
               >
                 <div className="trade-name">{lever}x</div>
                 <img src={arrow} className="trade-img" />
-              </div>
+              </div>}
             </div>
             <div className="delivery-days">
               <div></div>
