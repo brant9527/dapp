@@ -122,7 +122,8 @@ function Stock() {
   useEffect(() => {
     subData();
     console.log("订阅数据");
-    return () => Io.cfwsUnsubscribe("depth." + symbol);
+    return () => {Io.cfwsUnsubscribe("depth." + symbol)
+    Io.cfwsUnsubscribe("market." + symbol)};
   }, [subData]);
   useEffect(() => {
     getData();

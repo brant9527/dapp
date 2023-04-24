@@ -179,7 +179,10 @@ function Contract({ mock }: any) {
   useEffect(() => {
     subData();
     console.log("订阅数据");
-    return () => Io.cfwsUnsubscribe("depth." + symbol);
+    return () => {
+      Io.cfwsUnsubscribe("depth." + symbol);
+      Io.cfwsUnsubscribe("market." + symbol);
+    };
   }, [subData]);
   useEffect(() => {
     getData();
@@ -576,15 +579,17 @@ function Contract({ mock }: any) {
                   configList={marginModeList}
                 ></TradeSelect>
               </div>
-             {tradeType === "swap"&& <div
-                className="lever"
-                onClick={() => {
-                  modelRef.current.open();
-                }}
-              >
-                <div className="trade-name">{lever}x</div>
-                <img src={arrow} className="trade-img" />
-              </div>}
+              {tradeType === "swap" && (
+                <div
+                  className="lever"
+                  onClick={() => {
+                    modelRef.current.open();
+                  }}
+                >
+                  <div className="trade-name">{lever}x</div>
+                  <img src={arrow} className="trade-img" />
+                </div>
+              )}
             </div>
             <div className="delivery-days">
               <div></div>
