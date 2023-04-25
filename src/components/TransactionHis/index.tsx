@@ -62,7 +62,7 @@ function TransactionHis(props: any) {
                           ? t("tabs.spot")
                           : t("tabs.delivery")}
                       </span>
-                      {item.lever && (
+                      {item.lever && item.tradeType === "swap" && (
                         <span className="trade-type">{item.lever}x</span>
                       )}
                     </div>
@@ -83,12 +83,14 @@ function TransactionHis(props: any) {
                     <div className="price">{t("common.price")}(USDT)</div>
                     <div className="price">{fixPrice(item.price)}</div>
                   </div>
-                  <div className="item-wrap">
-                    <div className="price">{`${t(
-                      "trade.deal-amount"
-                    )}(${item.symbol.replace("USDT", "")})`}</div>
-                    <div className="price">{fixPrice(item.count)}</div>
-                  </div>
+                  {item.tradeType === "swap" && (
+                    <div className="item-wrap">
+                      <div className="price">{`${t(
+                        "trade.deal-amount"
+                      )}(${item.symbol.replace("USDT", "")})`}</div>
+                      <div className="price">{fixPrice(item.count)}</div>
+                    </div>
+                  )}
                   <div className="item-wrap">
                     <div className="count">
                       {t("trade.fee")}({item.feeAsset})
@@ -97,7 +99,11 @@ function TransactionHis(props: any) {
                   </div>
                   <div className="item-wrap">
                     <div className="count">{t("trade.amount")}</div>
-                    <div className="count">{toFixed(item.amount, 2)}</div>
+                    <div className="count">{fixPrice(item.amount)}</div>
+                  </div>
+                  <div className="item-wrap">
+                    <div className="count">{t("trade.PNL")}</div>
+                    <div className="count">{fixPrice(item.finalPnl)}</div>
                   </div>
                 </div>
               </div>

@@ -79,7 +79,7 @@ function EntrustHis(props: any) {
                           ? t("tabs.spot")
                           : t("tabs.delivery")}
                       </span>
-                      {item.lever && (
+                      {item.lever && item.tradeType !== "delivery" && (
                         <span className="trade-type">{item.lever}x</span>
                       )}
                     </div>

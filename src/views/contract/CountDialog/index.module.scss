@@ -71,6 +71,9 @@
                     text-align: center;
                     background-color: $inputBg;
                     @include font_color("fontColor2");
+                    &.btn-active {
+                        @include font_color("fontColor1");
+                    }
                 }
             }
         }

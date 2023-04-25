@@ -156,6 +156,9 @@
               &.active {
                 @include font_color("fontColor1");
               }
+              &.single-item {
+                flex: 1;
+              }
             }
           }
           .profit-loss {
@@ -186,17 +189,20 @@
               }
             }
           }
-          .max-u {
-            display: flex;
-            justify-content: space-between;
-            font-size: 36px;
-            line-height: 60px;
+          .max-u_wrap {
+            height: 120px;
+            .max-u {
+              display: flex;
+              justify-content: space-between;
+              font-size: 36px;
+              line-height: 60px;
 
-            .max-left {
-              @include font_color("fontColor2");
-            }
-            .max-right {
-              @include font_color("fontColor1");
+              .max-left {
+                @include font_color("fontColor2");
+              }
+              .max-right {
+                @include font_color("fontColor1");
+              }
             }
           }
           .peroid-wrap {

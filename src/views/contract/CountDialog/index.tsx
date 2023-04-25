@@ -55,7 +55,7 @@ const CountDialog = forwardRef((props, ref) => {
 
         if (!timeTemp || timeTemp <= 0) {
           clearInterval(timerTemp);
-          return setShowDialog(false);
+          // return setShowDialog(false);
         }
       }, 1000);
       setTimer(timerTemp);
@@ -97,7 +97,7 @@ const CountDialog = forwardRef((props, ref) => {
             </div>
             <div className="info">
               <div className="left">{t("common.price")}</div>
-              <div className="right">{fixPrice(info.price||'')}</div>
+              <div className="right">{fixPrice(info.price || "")}</div>
             </div>
             <div className="info">
               <div className="left">{t("common.direction")}</div>
@@ -112,9 +112,11 @@ const CountDialog = forwardRef((props, ref) => {
               <div className="right">{time} s</div>
             </div>
             <div
-              className="btn"
+              className={`btn ${time <= 0 ? "btn-active" : ""}`}
               onClick={() => {
-                handleConfirm();
+                if (time <= 0) {
+                  handleConfirm();
+                }
               }}
             >
               {t("common.close")}

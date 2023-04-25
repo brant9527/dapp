@@ -130,7 +130,7 @@ function Contract({ mock }: any) {
   const [calcType, setCalcType] = useState(1);
   const [userInfo, setUserInfo] = useState<any>({});
   // const [tradeType, setContractType] = useState("delivery");
-  const [tradeSymbol, setTradeSymbol] = useState(1);
+  const [tradeSymbol, setTradeSymbol] = useState(2);
   const [stopPfPrice, setStopPfPrice] = useState<string>();
   const [stopLsPrice, setStopLsPrice] = useState<string>();
   const [stopPfOrLs, setStopPfOrLs] = useState<any>(0);
@@ -206,6 +206,27 @@ function Contract({ mock }: any) {
       setHeadInfo(data[0]);
     });
   };
+  const maxCount = useMemo(() => {
+    return toFixed(
+      accDiv(
+        accMul(
+          Number(tradeType === "swap" ? lever || 0 : 1),
+          Number(balanceAssets?.availableUsdtBalance || 0)
+        ),
+        Number(coinPrice || headInfo?.close || 0)
+      ),
+      4
+    );
+  }, [lever, balanceAssets, coinPrice, headInfo, tradeType]);
+  const maxUsdt = useMemo(() => {
+    return toFixed(
+      accMul(
+        Number(tradeType === "swap" ? lever || 0 : 1),
+        Number(balanceAssets?.availableUsdtBalance || 0)
+      ),
+      2
+    );
+  }, [lever, balanceAssets, tradeType]);
   // 获取当前委托
   const getData = async () => {
     const { data } = await getDelegationPage({
@@ -310,7 +331,7 @@ function Contract({ mock }: any) {
         setCoinAccount("");
       }
     },
-    [balanceAssets, coinPrice, headInfo, calcType, type]
+    [balanceAssets, coinPrice, headInfo, calcType, type, maxUsdt, maxCount]
   );
   // 输入要使用的usdt
   const onInputUsdt = useCallback(
@@ -343,9 +364,23 @@ function Contract({ mock }: any) {
   const onChangeTab = useCallback((val: any) => {
     setTabVal(val);
   }, []);
-  const onChangeContractType = useCallback((val: any) => {
-    setTradeType(val);
-  }, []);
+  const onChangeContractType = useCallback(
+    (val: any) => {
+      if (tradeType === val) {
+        return false;
+      }
+      setTradeType(val);
+      setPercent(-1);
+      setUseUsdt("");
+      setCoinAccount("");
+      usdtRef?.current.setVal("");
+      accountRef?.current.setVal("");
+      if (val == "delivery") {
+        setTradeSymbol(2);
+      }
+    },
+    [tradeType]
+  );
 
   const onCancel = useCallback(
     async (params: any) => {
@@ -462,20 +497,14 @@ function Contract({ mock }: any) {
         return Toast.notice(t("common.need-period"), { duration: 2000 });
       }
       params = {
-        algoPrice: transType === "limit" ? coinPrice : "",
         algoTime: new Date().getTime(),
 
         period: selectPeriod.period,
-        algoType: "market",
-        amount: toFixed(amountTemp, 4),
 
-        calcType: 1,
+        amount: toFixed(useUsdt, 4),
+
         side: type === "buy" ? "long" : "short",
         symbol,
-        stopPfOrLs: 0,
-        tradeType,
-        lever,
-        marginMode,
       };
       method = openDeliverytOrder;
     }
@@ -531,27 +560,6 @@ function Contract({ mock }: any) {
     profitLossRef.current.open(item);
   };
 
-  const maxCount = useMemo(() => {
-    return toFixed(
-      accDiv(
-        accMul(
-          Number(lever || 0),
-          Number(balanceAssets?.availableUsdtBalance || 0)
-        ),
-        Number(coinPrice || headInfo?.close || 0)
-      ),
-      4
-    );
-  }, [lever, balanceAssets, coinPrice, headInfo]);
-  const maxUsdt = useMemo(() => {
-    return toFixed(
-      accMul(
-        Number(lever || 0),
-        Number(balanceAssets?.availableUsdtBalance || 0)
-      ),
-      2
-    );
-  }, [lever, balanceAssets]);
   const promiseMoney = useMemo(() => {
     return accDiv(Number(useUsdt), Number(lever || 0));
   }, [lever, useUsdt]);
@@ -668,16 +676,22 @@ function Contract({ mock }: any) {
                 ></CusInput>
               </div>
               <div className="symbol-select">
+                {tradeType === "swap" && (
+                  <div
+                    className={`symbol-item ${
+                      tradeSymbol === 1 ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setTradeSymbol(1);
+                    }}
+                  >
+                    {coin}
+                  </div>
+                )}
                 <div
-                  className={`symbol-item ${tradeSymbol === 1 ? "active" : ""}`}
-                  onClick={() => {
-                    setTradeSymbol(1);
-                  }}
-                >
-                  {coin}
-                </div>
-                <div
-                  className={`symbol-item ${tradeSymbol === 2 ? "active" : ""}`}
+                  className={`symbol-item ${
+                    tradeSymbol === 2 ? "active" : ""
+                  } ${tradeType !== "swap" ? "single-item" : ""} `}
                   onClick={() => {
                     setTradeSymbol(2);
                   }}
@@ -774,45 +788,55 @@ function Contract({ mock }: any) {
                   })}
                 </div>
               )}
-              <div className="max-u">
-                <div className="max-left">{t("contract.max")}</div>
+              <div className="max-u_wrap">
+                {tradeType === "swap" && (
+                  <>
+                    <div className="max-u">
+                      <div className="max-left">{t("contract.max")}</div>
 
-                <div className="max-right">
-                  {tradeSymbol == 2
-                    ? toFixed(
-                        accMul(
-                          Number(lever || 0),
-                          Number(
-                            (balanceAssets?.availableUsdtBalance < 0
-                              ? 0
-                              : balanceAssets?.availableUsdtBalance) || 0
-                          )
-                        ),
-                        2
-                      )
-                    : toFixed(
-                        accDiv(
-                          accMul(
-                            Number(lever || 0),
-                            Number(
-                              (balanceAssets?.availableUsdtBalance < 0
-                                ? 0
-                                : balanceAssets?.availableUsdtBalance) || 0
+                      <div className="max-right">
+                        {tradeSymbol == 2
+                          ? toFixed(
+                              accMul(
+                                Number(lever || 0),
+                                Number(
+                                  (balanceAssets?.availableUsdtBalance < 0
+                                    ? 0
+                                    : balanceAssets?.availableUsdtBalance) || 0
+                                )
+                              ),
+                              2
                             )
-                          ),
-                          Number(coinPrice || headInfo?.close || 0)
-                        ),
-                        2
-                      )}{" "}
-                  {tradeSymbol == 2 ? "USDT" : coin}
-                </div>
-              </div>
-              <div className="max-u">
-                <div className="max-left">{t("contract.promise-money")}</div>
+                          : toFixed(
+                              accDiv(
+                                accMul(
+                                  Number(lever || 0),
+                                  Number(
+                                    (balanceAssets?.availableUsdtBalance < 0
+                                      ? 0
+                                      : balanceAssets?.availableUsdtBalance) ||
+                                      0
+                                  )
+                                ),
+                                Number(coinPrice || headInfo?.close || 0)
+                              ),
+                              2
+                            )}{" "}
+                        {tradeSymbol == 2 ? "USDT" : coin}
+                      </div>
+                    </div>
+                    <div className="max-u">
+                      <div className="max-left">
+                        {t("contract.promise-money")}
+                      </div>
 
-                <div className="max-right">
-                  {Number(promiseMoney) > 0 ? toFixed(promiseMoney) : 0} USDT
-                </div>
+                      <div className="max-right">
+                        {Number(promiseMoney) > 0 ? toFixed(promiseMoney) : 0}{" "}
+                        USDT
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               <div
                 className={"btn-option btn-option__" + type}

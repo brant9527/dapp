@@ -317,7 +317,7 @@
     "new-deal": "最新成交",
     "deal-all": "完全成交",
     "deal-part": "部分成交",
-    "amount": "總量",
+    "amount": "總金額(USDT)",
     "fee": "手續費",
     "deal-amount": "成交數量",
     "coin-detail": "幣種詳情",
@@ -326,7 +326,8 @@
     "circulationCnt": "流通數量",
     "publishCnt": "總量",
     "publishTime": "發行日期",
-    "introduce": "簡介"
+    "introduce": "簡介",
+    "PNL":"已实现盈亏（USDT）"
   },
   "invite": {
     "title": "邀請返傭",

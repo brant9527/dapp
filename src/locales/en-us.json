@@ -317,7 +317,7 @@
     "new-deal": "Trades",
     "deal-all": "Filled",
     "deal-part": "Partially Completed",
-    "amount": "Total Amount",
+    "amount": "Amount(USDT)",
     "fee": "Fee",
     "deal-amount": "Transaction Amount",
     "coin-detail": "Info",
@@ -326,7 +326,9 @@
     "circulationCnt": "Circulation Supply",
     "publishCnt": "Max Supply",
     "publishTime": "Issue Date",
-    "introduce": "Introduction"
+    "introduce": "Introduction",
+    "PNL":"Realized PNL（USDT）"
+
   },
   "invite": {
     "title": "Invite Rebate",
