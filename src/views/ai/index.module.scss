@@ -11,6 +11,17 @@
                 font-size: 50px;
                 @include font_color("fontColor2");
             }
+            .ai-help {
+                font-size: 50px;
+
+                line-height: 60px;
+                width: 60px;
+                border-radius: 50%;
+                text-align: center;
+                border: 1px solid $boder;
+                @include font_color("fontColor2");
+
+            }
 
             .ai-content {
                 @include background_color("bgColor1");
@@ -85,7 +96,6 @@
                                 font-size: 44px;
                                 width: 300px;
                                 overflow: hidden;
-                                
                             }
                         }
                         .product-title {
@@ -109,7 +119,7 @@
                 .high-apy {
                     padding: 62px 54px;
                     border: 1px solid $boder;
-                    margin-top: 44px;
+                    margin: 44px 0;
                     border-radius: 20px;
                     .apy-top {
                         display: flex;
@@ -127,6 +137,7 @@
                             width: 66px;
                             height: 66px;
                             margin-right: 20px;
+                            border-radius: 50%;
                         }
                     }
 
@@ -134,7 +145,7 @@
                         display: flex;
                         align-items: center;
                     }
-                    .right-margin{
+                    .right-margin {
                         margin-right: 20px;
                     }
                     .bold {

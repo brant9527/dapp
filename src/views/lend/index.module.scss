@@ -11,8 +11,17 @@
                 font-size: 50px;
                 @include font_color("fontColor1");
             }
+            
             .lend-content {
                 padding: 50px 46px;
+                overflow: scroll;
+
+                height: calc(100vh - 250px - env(safe-area-inset-bottom));
+                .balance {
+                    font-size: 50px;
+                    display: flex;
+                    justify-content: space-between;
+                }
             }
             .lend-label {
                 font-size: 42px;
@@ -39,7 +48,11 @@
                 background-color: $blue;
                 text-align: center;
                 border-radius: 20px;
-                margin: 120px 60px;
+                margin: 60px 60px;
+                &.no-active {
+                    @include background_color("bgColor2");
+                    @include font_color("fontColor1");
+                }
             }
             .lend-USDT {
                 padding-right: 40px;
@@ -64,10 +77,15 @@
                     height: 33px;
                 }
             }
-            .lend-risk_tip{
+            .lend-risk_tip {
+                margin: 40px 0;
                 font-size: 38px;
                 @include font_color("fontColor1");
-
+                display: flex;
+                align-items: center;
+                input {
+                    margin-right: 20px;
+                }
             }
         }
     }

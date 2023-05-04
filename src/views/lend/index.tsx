@@ -21,6 +21,8 @@ import Upload from "@/components/Upload/index";
 import Toast from "@/components/Toast";
 import { applyLoan } from "@/api/lend";
 import right from "@/assets/right.png";
+import { getTotalAssetBalance } from "@/api/trans";
+import { toFixed } from "@/utils/public";
 // import { term } from "@/utils/config";
 
 function lend() {
@@ -29,7 +31,8 @@ function lend() {
   const nav = useNavigate();
 
   const [amount, setAmount] = useState<string>("");
-
+  const [usdtBalance, setUsdtBalance] = useState<any>("");
+  const [checked, setChecked] = useState(false);
   const [search, setsearch] = useSearchParams();
   const id = search.get("id");
   const period = search.get("period");
@@ -46,13 +49,16 @@ function lend() {
     // account,tradeType   json格式
     //   tradeType包含：delivery-交割，swap-永续，spot-现货
     console.log("請求數據");
-    // const data: any = await getUserInfo();
-    // console.log(data);
-    // if (data) {
-    //   // setUserInfo(data?.data);
-    // }
+    const { data, code }: any = await getTotalAssetBalance();
+    console.log(data);
+    if (code === 0) {
+      setUsdtBalance(data.totalUsdtBalance);
+    }
   };
   const onSubmit = async () => {
+    if (!checked) {
+      return "";
+    }
     if (!amount) {
       return Toast.notice(t("lend.tip-amount"), {});
     }
@@ -80,6 +86,7 @@ function lend() {
   function title() {
     return <div className="lend-title">{t("lend.lend")}</div>;
   }
+ 
   function USDT() {
     return <div className="lend-USDT">USDT</div>;
   }
@@ -101,8 +108,12 @@ function lend() {
   return (
     <div className={style.root}>
       <div className="lend-wrap">
-        <Back content={title()}></Back>
+        <Back content={title()} ></Back>
         <div className="lend-content">
+          <div className="balance">
+            <div>{t("lend.total-assets")}</div>
+            <div>{toFixed(usdtBalance) + " USDT"}</div>
+          </div>
           <div className="lend-label">{t("lend.amount")}</div>
           <CusInput
             alignLeft
@@ -133,10 +144,22 @@ function lend() {
               <div className="right">{t("lend.repayment-type")}</div>
             </div>
           </div>
-          <div className="lend-label">{t("lend.risk-level")}</div>
-          <div className="lend-risk_tip">{t("lend.risk-tip")}</div>
+          {/* <div className="lend-label">{t("lend.risk-level")}</div> */}
+          <div className="lend-risk_tip">
+            <input
+              type="checkbox"
+              value="1"
+              onChange={(event) => {
+                console.log(event.target.checked);
+                setChecked(event.target.checked);
+              }}
+            />
+           <span onClick={()=>{
+            nav('/helpDetail?id=2')
+           }}>{t("lend.risk-tip")}</span> 
+          </div>
           <div
-            className="btn-next"
+            className={`btn-next ${checked ? "" : "no-active"}`}
             onClick={() => {
               onSubmit();
             }}

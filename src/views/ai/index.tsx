@@ -60,11 +60,15 @@ function Ai() {
   function title() {
     return <div className="ai-title">{t("home.btns.ai")}</div>;
   }
-
+  function help() {
+    return <div className="ai-help" onClick={()=>{
+      nav('/helpNext?id=9')
+    }}>?</div>;
+  }
   return (
     <div className={style.root}>
       <div className="ai-wrap">
-        <Back content={title()}></Back>
+        <Back content={title()} right={help()}></Back>
         <div className="ai-content">
           <div
             className="ai-order-nav"
@@ -98,7 +102,7 @@ function Ai() {
                       <div className="new-user">{item.title}</div>
                     </div>
                   </div>
-                  <div className="product-title">APY</div>
+                  <div className="product-title">{t('ai.daily-income')}</div>
                   <div className="product-info">
                     {item.minDayIncome}~{item.maxDayIncome}%
                   </div>
@@ -132,7 +136,7 @@ function Ai() {
                       <div className="bold right-margin">
                         {item.minDayIncome}%-{item.maxDayIncome}%
                       </div>
-                      <div className="normol"> APY</div>
+                      <div className="normol"> {t('ai.daily-income')}</div>
                     </div>
                   </div>
                   <div className="apy-bottom">

@@ -11,7 +11,17 @@
                 font-size: 50px;
                 @include font_color("fontColor2");
             }
+            .lend-help {
+                font-size: 50px;
 
+                line-height: 60px;
+                width: 60px;
+                border-radius: 50%;
+                text-align: center;
+                border: 1px solid $boder;
+                @include font_color("fontColor2");
+
+            }
             .ai-content {
                 @include background_color("bgColor1");
                 height: calc(100vh - 150px - env(safe-area-inset-bottom));

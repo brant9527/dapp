@@ -19,7 +19,7 @@
     "menu-yy": "Language",
     "btns": {
       "jy": "Transaction",
-      "ai": "AI Quantification",
+      "ai": "Earn",
       "xh": "Spot",
       "xb": "New Crypto",
       "mnjy": "Mock Trading",
@@ -65,9 +65,9 @@
     "deposit": "Deposit",
     "assetsTrans": "Transfer",
     "transfer": "Withdraw",
-    "deal":"Deal",
-    "loan":"Loan",
-    "quantify":"Quantify",
+    "deal": "Deal",
+    "loan": "Loan",
+    "quantify": "Quantify",
     "invest": "Investment Portfolio",
 
     "assets-funds": "Funds ",
@@ -119,7 +119,7 @@
     "entrust": "Open Orders",
     "entrust-his": "Orders History",
     "trade-his": "Trade History",
-    "hold-his":"Position History",
+    "hold-his": "Position History",
 
     "hold": "Open Orders",
     "assets": "Assets",
@@ -203,8 +203,8 @@
   },
   "ai": {
     "orders": "Orders",
-    "suggest": "Recommendation",
-    "high.income": "Higher returns",
+    "suggest": "Simple Earn",
+    "high.income": "AI Quantification",
     "new.user": "New User Gifts",
     "term": "Term",
     "limit": "Limit",
@@ -215,7 +215,8 @@
     "total-income": "Total Income",
     "apply-amount": "Subscription Amount",
     "doing": "Doing",
-    "over": "Over"
+    "over": "Over",
+    "daily-income": "Daily Return"
   },
   "loan": {
     "loan": "Loan"
@@ -234,12 +235,13 @@
     "bank-detail": "Bank Details",
     "documents": "Documents",
     "risk-level": "Risk Level",
-    "risk-tip": "When TVL reaches 80%, or the BTC/USDT price reaches 0, your collateral will be sold to repay the debt",
+    "risk-tip": "I have read and agree (Terms of Service for Regular Loan Service)",
     "protocol": "I have read and agreed to the Coin Service Agreement",
     "pledge-amount": "Pledge Amount",
     "lend-amount": "Loan Amount",
     "btn.repayment": "Repayment",
-    "tip-amount": "Please enter the quantity"
+    "tip-amount": "Please enter the quantity",
+    "total-assets": "Total Assets"
   },
   "entrust": {
     "cancel-all": "Cancel all",
@@ -331,8 +333,7 @@
     "publishCnt": "Max Supply",
     "publishTime": "Issue Date",
     "introduce": "Introduction",
-    "PNL":"Realized PNL（USDT）"
-
+    "PNL": "Realized PNL（USDT）"
   },
   "invite": {
     "title": "Invite Rebate",
@@ -407,7 +408,7 @@
     "current-rate": "Current Rate",
     "to": "To"
   },
-  "hold":{
+  "hold": {
     "close-time": "closed",
     "open-price": "Entry Price",
     "close-price": "Avg.Close Price",

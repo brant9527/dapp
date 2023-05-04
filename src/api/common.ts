@@ -28,3 +28,6 @@ export const getEmailCode = (data: any) => {
 export const getBalanceChangeRecordPage = (data: any) => {
   return axios.post("/api/user/assetBalance/getBalanceChangeRecordPage", data);
 };
+export const getHelpById = (data: any) => {
+  return axios.post("/api/common/getHelpById", data);
+};

@@ -19,7 +19,7 @@
     "menu-yy": "語言",
     "btns": {
       "jy": "交易",
-      "ai": "AI量化",
+      "ai": "理財",
       "xh": "現貨",
       "xb": "新幣",
       "mnjy": "模擬交易",
@@ -201,10 +201,10 @@
   },
   "ai": {
     "orders": "進行中的訂單",
-    "suggest": "推薦",
-    "high.income": "高收益",
+    "suggest": "餘幣寶",
+    "high.income": "AI量化",
     "new.user": "新手專享好禮",
-    "term": "期限",
+    "term": "週期",
     "limit": "限購",
     "fee": "手續費",
     "amount": "總量",
@@ -213,7 +213,8 @@
     "total-income": "總收入",
     "apply-amount": "申購數量",
     "doing": "進行中",
-    "over": "已結束"
+    "over": "已結束",
+    "daily-income": "日收益"
   },
   "loan": {
     "loan": "貸幣"
@@ -221,7 +222,7 @@
   "lend": {
     "lend": "借貸",
     "amount": "貨幣金額",
-    "lend-term": "借幣期限",
+    "lend-term": "借幣週期",
     "period": "週期（天）",
     "interest": "利息",
     "interest-day": "日利息",
@@ -232,12 +233,13 @@
     "bank-detail": "銀行明細",
     "documents": "證件",
     "risk-level": "風險等級",
-    "risk-tip": "當TVL到達80%，或BTC/USDT價格到達0，您的抵押物將被 出售用於還債",
+    "risk-tip": "本人已閱讀并偶同意（定期借幣服務條款）",
     "protocol": "我已阅读并同意coin服务协议",
     "pledge-amount": "質押金額",
     "lend-amount": "借幣金額",
     "btn.repayment": "還款",
-    "tip-amount": "請輸入數量"
+    "tip-amount": "請輸入數量",
+    "total-assets": "賬戶總資產"
   },
   "entrust": {
     "cancel-all": "撤銷全部",

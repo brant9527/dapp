@@ -47,7 +47,17 @@ function Banner(props: any) {
               return (
                 <div key={index + 1}>
                   <SwiperSlide key={index + 1}>
-                    <img src={item} className="banner" />
+                    <img
+                      src={item.imageUrl}
+                      className="banner"
+                      onClick={() => {
+                        if (item.directUrl.indexOf("http") > -1) {
+                          window.location.href = item.directUrl;
+                        } else {
+                          item.directUrl && nav(item.directUrl);
+                        }
+                      }}
+                    />
                   </SwiperSlide>
                 </div>
               );

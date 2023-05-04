@@ -184,7 +184,7 @@ function App() {
   }, []);
   const getBanner = useCallback(async () => {
     const { data } = await getBannerList();
-    setBannerList(data.map((item: any) => item.imageUrl));
+    setBannerList(data.map((item: any) => item));
   }, []);
   const getMsgUnRead = useCallback(async () => {
     const { data } = await getUnReadMessageCnt();
