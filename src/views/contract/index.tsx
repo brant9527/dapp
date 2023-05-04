@@ -176,6 +176,13 @@ function Contract({ mock }: any) {
       setDepthInfo(data);
     });
   }, []);
+  const currentPrice = useMemo(() => {
+    console.log(depthInfo?.asks);
+    return toFixed(
+      depthInfo?.asks && depthInfo?.asks[depthInfo?.asks?.length - 1].price,
+      4
+    );
+  }, [depthInfo]);
   useEffect(() => {
     subData();
     console.log("订阅数据");
@@ -213,11 +220,12 @@ function Contract({ mock }: any) {
           Number(tradeType === "swap" ? lever || 0 : 1),
           Number(balanceAssets?.availableUsdtBalance || 0)
         ),
-        Number(coinPrice || headInfo?.close || 0)
+        Number(coinPrice || currentPrice || 0)
       ),
       4
     );
   }, [lever, balanceAssets, coinPrice, headInfo, tradeType]);
+
   const maxUsdt = useMemo(() => {
     return toFixed(
       accMul(
@@ -278,7 +286,7 @@ function Contract({ mock }: any) {
         setCoinAccount("");
         return;
       }
-      const usdtVal = accMul(coinPrice || headInfo?.close, val);
+      const usdtVal = accMul(coinPrice || currentPrice, val);
 
       setUseUsdt(usdtVal);
       setCoinAccount(val);
@@ -300,7 +308,7 @@ function Contract({ mock }: any) {
           // 修改为余额倍数最大值
           const tempUsdt = toFixed(accMul(val, maxUsdt), 4);
           const tempAccount = toFixed(
-            accDiv(tempUsdt, coinPrice || headInfo?.close),
+            accDiv(tempUsdt, coinPrice || currentPrice),
             4
           );
           console.log("设置全部约", tempUsdt, tempAccount);
@@ -317,7 +325,7 @@ function Contract({ mock }: any) {
 
           const tempAssetsBalance = toFixed(accMul(val, maxCount), 4);
           const tempUseUsdt = toFixed(
-            accMul(tempAssetsBalance, coinPrice || headInfo?.close),
+            accMul(tempAssetsBalance, coinPrice || currentPrice),
             2
           );
           console.log("设置可用数量", tempAssetsBalance);
@@ -345,7 +353,7 @@ function Contract({ mock }: any) {
         setCoinAccount("");
         return;
       }
-      const accountTemp = toFixed(accDiv(val, coinPrice || headInfo?.close), 4);
+      const accountTemp = toFixed(accDiv(val, coinPrice || currentPrice), 4);
 
       setCoinAccount(accountTemp);
 
@@ -465,7 +473,7 @@ function Contract({ mock }: any) {
       );
       //
       amountTemp = accMul(
-        Number(accDiv(maxPromiseMoney, coinPrice || headInfo?.close)),
+        Number(accDiv(maxPromiseMoney, coinPrice || currentPrice)),
         lever
       );
     } else {
@@ -509,7 +517,7 @@ function Contract({ mock }: any) {
       method = openDeliverytOrder;
     }
 
-    const { code } = await method(params);
+    const { code, data } = await method(params);
     if (code == 0) {
       getData();
       getBalance();
@@ -528,8 +536,10 @@ function Contract({ mock }: any) {
             type === "buy" ? t("contract.do-more") : t("contract.do-short"),
           symbol,
           period: selectPeriod.period,
-          price: headInfo.close,
+          price: data.avgCostPrice,
           count: useUsdt,
+          amount: data.amount,
+          id: data.id,
         });
     }
   };
@@ -666,7 +676,7 @@ function Contract({ mock }: any) {
                   ref={priceRef}
                   placeholder={
                     transType === "market"
-                      ? headInfo?.close
+                      ? currentPrice
                       : t("common.input-price")
                   }
                   onInput={onInputPrice}
@@ -818,7 +828,7 @@ function Contract({ mock }: any) {
                                       0
                                   )
                                 ),
-                                Number(coinPrice || headInfo?.close || 0)
+                                Number(coinPrice || currentPrice || 0)
                               ),
                               2
                             )}{" "}

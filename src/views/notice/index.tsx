@@ -41,7 +41,7 @@ function Message() {
     setAssetsList(data);
     // const isEnd = data.currPage >= data.totalPage;
     setHashMore(false);
-    Toast.notice(t("common.noMore"), {});
+    // Toast.notice(t("common.noMore"), {});
 
     // if (isEnd) {
     // }

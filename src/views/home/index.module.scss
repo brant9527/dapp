@@ -1,8 +1,8 @@
 .root {
   :global {
     .home-wrap {
-      padding: 0 0 44px 0;
-      @include background_color("bgColor1");
+      padding: 0 0 0 0;
+      // @include background_color("bgColor1");
 
       .home-top {
         display: flex;
@@ -74,18 +74,21 @@
         }
       }
       .home-banner {
-        padding: 0 44px 0 44px;
+        padding: 0 20px 0 20px;
+        @include background_color("bgColor1");
 
         img {
           width: 100%;
         }
       }
-     
+
       .home-btns {
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
+        @include background_color("bgColor1");
 
+        margin: 20px 0;
         .btn-item {
           width: 25%;
           display: flex;
@@ -95,6 +98,9 @@
           img {
             width: 100px;
             height: 100px;
+            border-radius: 50%;
+
+            background-color: #c9d1d3;
           }
           .btn-label {
             font-size: 36px;
@@ -153,6 +159,11 @@
       padding: 44px;
       min-height: 600px;
       @include background_color("bgColor1");
+      .quota-more{
+        text-align: right;
+        font-size: 48px;
+        color: $blue;
+      }
     }
     .vip-confirm {
       .vip-confirm-top {
@@ -166,11 +177,10 @@
           margin-left: 20px;
         }
       }
-      .vip-words{
+      .vip-words {
         font-size: 36px;
         text-align: center;
         @include font_color("fontColor2");
-
       }
     }
   }

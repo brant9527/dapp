@@ -3,6 +3,7 @@
     .article {
       position: relative;
       @include background_color("bgColor1");
+      margin-top: 20px;
       padding: 40px;
       .article-item {
         position: relative;

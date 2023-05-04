@@ -83,7 +83,8 @@ function Ques() {
       <div className="question-wrap">
         <Back content={title()}></Back>
         <div className="question-content">
-          <div className="tip">{questionList.tip}</div>
+          <div className="first">{questionList.tip}</div>
+          <div className="tip">{questionList.tip1}</div>
 
           {questionList.qList.map((item: any, idx: any) => {
             return (

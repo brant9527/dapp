@@ -101,10 +101,12 @@ function TransactionHis(props: any) {
                     <div className="count">{t("trade.amount")}</div>
                     <div className="count">{fixPrice(item.amount)}</div>
                   </div>
-                  <div className="item-wrap">
-                    <div className="count">{t("trade.PNL")}</div>
-                    <div className="count">{fixPrice(item.finalPnl)}</div>
-                  </div>
+                  {[3,4].indexOf(item.direction) > -1 && (
+                    <div className="item-wrap">
+                      <div className="count">{t("trade.PNL")}</div>
+                      <div className="count">{fixPrice(item.finalPnl)}</div>
+                    </div>
+                  )}
                 </div>
               </div>
             );

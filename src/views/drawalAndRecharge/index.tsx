@@ -86,7 +86,7 @@ function TransRecord() {
     }
     if (isEnd) {
       setHashMore(false);
-      Toast.notice(t("common.noMore"), {});
+      // Toast.notice(t("common.noMore"), {});
     }
   };
   const onLoadMore = () => {

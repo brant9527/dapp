@@ -25,4 +25,10 @@ export const getDeliveryPeriodList = () => {
 export const getUserPosition = () => {
   return axios.post("/api/user/position/getUserPosition");
 };
+export const getUserHistoryPosition = (data: any) => {
+  return axios.post("/api/user/position/getUserHistoryPosition",data);
+};
+export const getUserPositionById = (data: any) => {
+  return axios.post("/api/user/position/getUserPositionById",data);
+};
 

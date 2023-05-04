@@ -119,6 +119,8 @@
     "entrust": "Open Orders",
     "entrust-his": "Orders History",
     "trade-his": "Trade History",
+    "hold-his":"Position History",
+
     "hold": "Open Orders",
     "assets": "Assets",
     "swap": "Perpetual",
@@ -177,6 +179,8 @@
     "about-us": "About platform",
     "customer": "Contact exclusive customer service",
     "more": "More",
+    "getMore": "View More",
+
     "fold": "Fold",
     "trust-tip": "Please download Trust wallet first",
     "trust-tip1": "This website is based on Ethernet smart contract operation, please use Trust wallet browser to access",
@@ -402,5 +406,13 @@
     "useable": "Useable Amount",
     "current-rate": "Current Rate",
     "to": "To"
+  },
+  "hold":{
+    "close-time": "closed",
+    "open-price": "Entry Price",
+    "close-price": "Avg.Close Price",
+    "close-PNL": "closeing PNL",
+    "max-position": "Max Open Interest",
+    "closed-position": "Closed Vol."
   }
 }

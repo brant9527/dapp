@@ -67,6 +67,7 @@ import MockTrade from "./views/mockTrade";
 import Exchange from "./views/exchange";
 
 import ConfirmMsg from "./components/ConfirmMsg";
+import Welcome from "./components/Welcome";
 
 import Wallet from "@/components/Wallet/index";
 import i18in from ".././react-i18next-config";
@@ -88,6 +89,7 @@ function App() {
     <div className="app-bg">
       {/* <Wallet open={noAccount}/> */}
       <ConfirmMsg></ConfirmMsg>
+      <Welcome></Welcome>
       <Routes>
         <Route path="/" element={<Index />}>
           <Route path="/" element={<Home />}></Route>

@@ -40,7 +40,7 @@ import Wallet from "@/components/Wallet";
 import Confirm from "@/components/Confirm";
 import Toast from "@/components/Toast";
 import AccountBtn from "@/components/AccountBtn";
-import NoticeSwipe from './Components/NoticeSwipe'
+import NoticeSwipe from "./Components/NoticeSwipe";
 import copy from "copy-to-clipboard";
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
     useWeb3();
   const confirmRef = useRef<any>(null);
   const cutomerConfirmRef = useRef<any>(null);
- 
+
   console.log("home页刷新");
   const onChangeTheme = useCallback(async () => {
     if (themes === "light") {
@@ -128,7 +128,24 @@ function App() {
     // console.log("raiseListTemp=>", raiseListTemp);
     // console.log("downListTemp=>", downListTemp);
     // console.log("newPairListTemp=>", newPairListTemp);
-
+    if(hotListTemp.length>6){
+      hotListTemp.length = 6
+    }
+    if(recommendListTemp.length>6){
+      recommendListTemp.length = 6
+    }
+    if(raiseListTemp.length>6){
+      raiseListTemp.length = 6
+    }
+    if(downListTemp.length>6){
+      downListTemp.length = 6
+    }
+    if(newPairListTemp.length>6){
+      newPairListTemp.length = 6
+    }
+    if(dataOptional.length>6){
+      dataOptional.length = 6
+    }
     setHotList(hotListTemp);
     setRecommendList(recommendListTemp);
     setRaiseList(raiseListTemp.filter((item: any) => item.rate > 0));
@@ -227,7 +244,6 @@ function App() {
     }
     return () => clearInterval(timer);
   }, [account]);
-
 
   const navigate = useNavigate();
   const openMenu = () => {
@@ -473,6 +489,10 @@ function App() {
           coinType={coinType}
           coinList={selectCoinlist(coinType)}
         ></QuotaCoin>
+        <div className="quota-more" onClick={()=>{
+                navigate("/quotation");
+          
+        }}>{t("common.getMore")+' >'}</div>
       </div>
       <Article></Article>
       <Confirm onConfirm={onConfirm} cancel={true} ref={confirmRef}>

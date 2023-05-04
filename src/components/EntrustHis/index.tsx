@@ -79,7 +79,7 @@ function EntrustHis(props: any) {
                           ? t("tabs.spot")
                           : t("tabs.delivery")}
                       </span>
-                      {item.lever && item.tradeType !== "delivery" && (
+                      {item.lever>0 && item.tradeType === "swap" && (
                         <span className="trade-type">{item.lever}x</span>
                       )}
                     </div>
@@ -111,9 +111,13 @@ function EntrustHis(props: any) {
                   <div className="item-wrap">
                     <div className="count">{t("common.count")}</div>
                     <div className="count">
-                      {toFixed(item.realCount, 2) +
+                      {item.tradeType === "swap"
+                        ? toFixed(item.realCount, 2) +
+                          " / " +
+                          toFixed(item.count, 2)
+                        : toFixed(item.amount, 2) +
                         " / " +
-                        toFixed(item.count, 2)}
+                        toFixed(item.amount, 2)}
                     </div>
                   </div>
                   <div className="item-wrap">

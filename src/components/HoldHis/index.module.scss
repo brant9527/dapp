@@ -1,0 +1,109 @@
+.root {
+  :global {
+    .holdHis-wrap {
+      position: relative;
+      margin-top: 30px;
+      .btn-cancel {
+        height: 70px;
+        line-height: 70px;
+        border-radius: 10px;
+        min-width: 100px;
+        padding: 0 34px;
+        font-size: 34px;
+        text-align: center;
+        @include background_color("bgColor2");
+        @include font_color("fontColor1");
+      }
+      .holdHis-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        .part-left {
+        }
+        .part-right {
+        }
+      }
+      .holdHis-info {
+        &_item {
+          position: relative;
+          display: flex;
+
+          padding: 46px 0;
+          @include border("bottom");
+          .content {
+            flex: 1;
+
+            .item-wrap {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin: 20px 0;
+              .trade-type {
+                font-size: 36px;
+                margin-left: 5px;
+                @include font_color("fontColor2");
+              }
+              .status {
+                font-size: 38px;
+                padding-right: 20px;
+                line-height: 60px;
+                &.s {
+                  color: $up;
+                }
+                &.f {
+                  color: $down;
+                }
+              }
+              .trade-status {
+                padding: 16px 20px;
+                border-radius: 10px;
+                font-size: 32px;
+                &.s {
+                  color: $up;
+                  background-color: $priceUpBg;
+                }
+                &.f {
+                  color: $down;
+                  background-color: $priceDownBg;
+                }
+              }
+              .symbol {
+                font-size: 48px;
+              }
+              .time {
+                font-size: 38px;
+                @include font_color("fontColor2");
+              }
+            }
+
+            .count {
+              font-size: 36px;
+              span {
+                font-size: 38px;
+                padding-right: 35px;
+                @include font_color("fontColor2");
+              }
+            }
+            .price {
+              font-size: 36px;
+              span {
+                font-size: 38px;
+                padding-right: 35px;
+
+                @include font_color("fontColor2");
+              }
+            }
+          }
+          .cancel-sigle {
+            position: absolute;
+            bottom: 40px;
+
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}

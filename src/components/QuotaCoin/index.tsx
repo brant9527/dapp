@@ -23,6 +23,7 @@ function Quotation(props: any) {
 
   return (
     <div className={style.root}>
+      <div className="table-wrap">
       <div className="tableCoinsPst">
         <div className="coinTypePst title">{t("quota.coins.name")}</div>
         <div className="coinPricePst title">{t("quota.coins.price")}</div>
@@ -31,6 +32,7 @@ function Quotation(props: any) {
       {coinList.map((item: any, idx: any) => {
         return <CoinPriceItem {...item} key={idx}></CoinPriceItem>;
       })}
+      </div>
     </div>
   );
 }

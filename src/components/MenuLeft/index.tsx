@@ -75,7 +75,6 @@ function Menulist() {
   return (
     <div className={style.root}>
       <div className="menu-wrap">
-        <div className="mask"></div>
         <div className="menu-content">
           <div className="menu-back">
             <img src={back} onClick={() => close()} />

@@ -27,6 +27,9 @@ import {
 import Entrust from "@/components/Entrust";
 import EntrustHis from "@/components/EntrustHis";
 import TransactionHis from "@/components/TransactionHis";
+import HoldHis from "@/components/HoldHis";
+
+import { getUserHistoryPosition } from "@/api/contract";
 
 const page = {
   pageNo: 1,
@@ -34,22 +37,6 @@ const page = {
 };
 function TransRecord() {
   const { t } = useTranslation();
-
-  const nav = useNavigate();
-  const [search, setsearch] = useSearchParams();
-  const tradeType = search.get("tradeType") || "spot";
-  const [hasMore, setHashMore] = useState(true);
-  const [type, setType] = useState("1");
-  const [entrustList, setEntrustList] = useState<any>([]);
-  const [isEnd, setIsEnd] = useState(false);
-
-  const onChange = useCallback((val: string) => {
-    setType(val);
-    setHashMore(true);
-    setEntrustList([]);
-    page.pageNo = 1;
-  }, []);
-
   const navList = [
     {
       title: t("tabs.entrust"),
@@ -60,13 +47,35 @@ function TransRecord() {
       type: "2",
     },
     {
+      title: t("tabs.hold-his"),
+      type: "holdRecord",
+    },
+    {
       title: t("tabs.trade-his"),
       type: "dealRecord",
     },
   ];
+  const nav = useNavigate();
+  const [search, setsearch] = useSearchParams();
+  const tradeType = search.get("tradeType") || "spot";
+  const [hasMore, setHashMore] = useState(true);
+  const [type, setType] = useState("1");
+  const [entrustList, setEntrustList] = useState<any>([]);
+  const [isEnd, setIsEnd] = useState(false);
+  const [list, setList] = useState<any>(navList);
+  const onChange = useCallback((val: string) => {
+    setType(val);
+    setHashMore(true);
+    setEntrustList([]);
+    page.pageNo = 1;
+  }, []);
 
   useEffect(() => {
     getData();
+    if (tradeType === "spot") {
+      navList.length = 3;
+      setList(navList);
+    }
   }, [type]);
   const onCancel = useCallback(async (params: any) => {
     console.log("取消參數", params);
@@ -85,16 +94,14 @@ function TransRecord() {
   }, []);
   const getData = async () => {
     let isEnd;
-    if (type != "dealRecord") {
-      const { data } = await getDelegationPage({
+    if (type === "holdRecord") {
+      const { data } = await getUserHistoryPosition({
         ...page,
-        status: type,
-        tradeType,
       });
-      console.log(data);
-      isEnd = data.currPage >= data.totalPage;
+
       data.list && setEntrustList(entrustList.concat(data.list));
-    } else {
+      isEnd = data.currPage >= data.totalPage;
+    } else if (type == "dealRecord") {
       const { data } = await getDealRecordPage({
         ...page,
         status: 2,
@@ -103,10 +110,19 @@ function TransRecord() {
       console.log(data);
       data.list && setEntrustList(entrustList.concat(data.list));
       isEnd = data.currPage >= data.totalPage;
+    } else {
+      const { data } = await getDelegationPage({
+        ...page,
+        status: type,
+        tradeType,
+      });
+      console.log(data);
+      isEnd = data.currPage >= data.totalPage;
+      data.list && setEntrustList(entrustList.concat(data.list));
     }
     if (isEnd) {
       setHashMore(false);
-      Toast.notice(t("common.noMore"), {});
+      // Toast.notice(t("common.noMore"), {});
     }
   };
   const onLoadMore = () => {
@@ -132,7 +148,7 @@ function TransRecord() {
       <div className="trade-wrap">
         <Back content={title()}></Back>
         <div className="trade-nav_border">
-          <Tabs onChange={onChange} tabs={navList} />
+          <Tabs onChange={onChange} tabs={list} />
         </div>
         <div className="trade-content">
           <Scroll
@@ -158,11 +174,13 @@ function TransRecord() {
                   ></EntrustHis>
                 }
               </div>
-            ) : (
+            ) : type === "dealRecord" ? (
               <TransactionHis
                 list={entrustList}
                 tradeType={tradeType}
               ></TransactionHis>
+            ) : (
+              <HoldHis list={entrustList} tradeType={tradeType}></HoldHis>
             )}
           </Scroll>
         </div>

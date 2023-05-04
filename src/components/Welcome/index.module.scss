@@ -1,0 +1,19 @@
+.root {
+    :global {
+        .welcome-gif {
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            @include background_color("bgColor1");
+            overflow: hidden;
+            img {
+                width: 100vw;
+            height: 100vh;
+                object-fit: contain;
+            }
+        }
+    }
+}

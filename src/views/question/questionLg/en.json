@@ -1,5 +1,6 @@
 {
-  "tip": "Dear Investor: This questionnaire is intended to help investors understand their own risk tolerance and protect their legitimate rights and interests. Please fill out the questionnaire honestly, accurately, and completely. If there is any fraud, concealment or other false statement resulting in the investigation results not matching the actual situation, the company shall not be liable. Investors should purchase investment products that are compatible with their risk preferences. If the risk level of the selected investment product is higher than its risk tolerance, we will do asset verification to ensure that you have enough risk resistance. (Please check the following content carefully and submit it to us. Thank you.)",
+  "tip": "Dear Investor: ",
+  "tip1": "This questionnaire is intended to help investors understand their own risk tolerance and protect their legitimate rights and interests. Please fill out the questionnaire honestly, accurately, and completely. If there is any fraud, concealment or other false statement resulting in the investigation results not matching the actual situation, the company shall not be liable. Investors should purchase investment products that are compatible with their risk preferences. If the risk level of the selected investment product is higher than its risk tolerance, we will do asset verification to ensure that you have enough risk resistance. (Please check the following content carefully and submit it to us. Thank you.)",
   "qList": [
     {
       "title": "1、What is your current age group：",
