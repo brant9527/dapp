@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import style from "./index.module.scss";
 import {
@@ -18,7 +18,7 @@ import QuotaCoin from "@/components/QuotaCoin";
 import Io from "@/utils/socket";
 import _ from "lodash";
 import { accSub } from "@/utils/public";
-
+import { isEqual } from "lodash";
 function Quotation() {
   const { t } = useTranslation();
   window.localStorage.setItem("mock", "0");
@@ -52,12 +52,21 @@ function Quotation() {
   });
   index = index === -1 ? 0 : index;
   const [coinType, setCoinType] = useState(tabs[index].type);
-  const [hotList, setHotList] = useState<Array<any>>([]);
-  const [recommendList, setRecommendList] = useState<Array<any>>([]);
-  const [raiseList, setRaiseList] = useState<Array<any>>([]);
-  const [downList, setDownList] = useState<Array<any>>([]);
-  const [newPairList, setNewPairList] = useState<Array<any>>([]);
-  const [optional, setOptional] = useState<Array<any>>([]);
+  const [allList, setAllList] = useState<any>({
+    hotList: [],
+    recommendList: [],
+    raiseList: [],
+    downList: [],
+    newPairList: [],
+    optional: [],
+  });
+  const [wsList, setWsList] = useState<any>([]);
+  // const [hotList, setHotList] = useState<Array<any>>([]);
+  // const [recommendList, setRecommendList] = useState<Array<any>>([]);
+  // const [raiseList, setRaiseList] = useState<Array<any>>([]);
+  // const [downList, setDownList] = useState<Array<any>>([]);
+  // const [newPairList, setNewPairList] = useState<Array<any>>([]);
+  // const [optional, setOptional] = useState<Array<any>>([]);
 
   const nav = useNavigate();
   const onChange = (type: string) => {
@@ -70,10 +79,9 @@ function Quotation() {
   }, []);
   useEffect(() => {
     subData();
-    console.log(hotList, recommendList, raiseList, downList, newPairList);
 
     return () => cancelSubData();
-  }, [hotList, recommendList, raiseList, downList, newPairList, optional]);
+  }, []);
 
   const getData = async () => {
     const data: any = await Io.getMarketList();
@@ -87,7 +95,6 @@ function Quotation() {
 
     const raiseListTemp = _.cloneDeep(data);
     const downListTemp = _.cloneDeep(data);
-
     data.map((item: any) => {
       if (item.hot) {
         hotListTemp.push(item);
@@ -106,87 +113,104 @@ function Quotation() {
     downListTemp.sort(function (obj1: any, obj2: any) {
       return accSub(obj1.rate, obj2.rate);
     });
-    console.log("hotListTemp=>", hotListTemp);
-    console.log("recommendListTemp=>", recommendListTemp);
-    console.log("raiseListTemp=>", raiseListTemp);
-    console.log("downListTemp=>", downListTemp);
-    console.log("newPairListTemp=>", newPairListTemp);
-    console.log("newPairListTemp=>", newPairListTemp);
+    // console.log("hotListTemp=>", hotListTemp);
+    // console.log("recommendListTemp=>", recommendListTemp);
+    // console.log("raiseListTemp=>", raiseListTemp);
+    // console.log("downListTemp=>", downListTemp);
+    // console.log("newPairListTemp=>", newPairListTemp);
+    // console.log("newPairListTemp=>", newPairListTemp);
+    const temp = {
+      hotList: hotListTemp,
+      recommendList: recommendListTemp,
+      raiseList: raiseListTemp.filter((item: any) => item.rate > 0),
+      downList: downListTemp.filter((item: any) => item.rate < 0),
+      newPairList: newPairListTemp,
+      optional: dataOptional,
+    };
+    console.log(temp);
 
-    setHotList(hotListTemp);
-    setRecommendList(recommendListTemp);
-    setRaiseList(raiseListTemp.filter((item: any) => item.rate > 0));
-    setDownList(downListTemp.filter((item: any) => item.rate < 0));
-    setNewPairList(newPairListTemp);
-    setOptional(dataOptional);
+    setAllList(temp);
   };
+  const filterList = useMemo(() => {
+    
+    const hotListTemp = _.cloneDeep(allList.hotList);
+    const recommendListTemp = _.cloneDeep(allList.recommendList);
+    const newPairListTemp = _.cloneDeep(allList.newPairList);
 
+    const raiseListTemp = _.cloneDeep(allList.raiseList);
+    const downListTemp = _.cloneDeep(allList.downList);
+    const optionalTemp = _.cloneDeep(allList.optional);
+    console.log("wsList=>", wsList);
+    wsList.map((item: any) => {
+      const hotListTempIndex = hotListTemp.findIndex((cItem: any) => {
+        return item.symbol === cItem.symbol;
+      });
+      const recommendListTempIndex = recommendListTemp.findIndex(
+        (cItem: any) => {
+          return item.symbol === cItem.symbol;
+        }
+      );
+      const newPairListTempIndex = newPairListTemp.findIndex((cItem: any) => {
+        return item.symbol === cItem.symbol;
+      });
+      const raiseListTempIndex = raiseListTemp.findIndex((cItem: any) => {
+        return item.symbol === cItem.symbol;
+      });
+
+      const downListTempIndex = downListTemp.findIndex((cItem: any) => {
+        return item.symbol === cItem.symbol;
+      });
+      const optionalTempIndex = optionalTemp.findIndex((cItem: any) => {
+        return item.symbol === cItem.symbol;
+      });
+
+      console.log(
+        "hotIndex=>",
+        hotListTempIndex,
+        raiseListTempIndex,
+        recommendListTempIndex,
+        newPairListTempIndex,
+        downListTempIndex,
+        optionalTempIndex
+      );
+      if (hotListTempIndex > -1) {
+        hotListTemp.splice(hotListTempIndex, 1, item);
+      }
+      if (raiseListTempIndex > -1) {
+        raiseListTemp.splice(raiseListTempIndex, 1, item);
+      }
+      if (recommendListTempIndex > -1) {
+        recommendListTemp.splice(recommendListTempIndex, 1, item);
+      }
+      if (newPairListTempIndex > -1) {
+        newPairListTemp.splice(newPairListTempIndex, 1, item);
+      }
+      if (downListTempIndex > -1) {
+        downListTemp.splice(downListTempIndex, 1, item);
+      }
+      if (optionalTempIndex > -1) {
+        optionalTemp.splice(optionalTempIndex, 1, item);
+      }
+    });
+    const temp = {
+      hotList: hotListTemp || [],
+      recommendList: recommendListTemp || [],
+      raiseList: raiseListTemp || [],
+      downList: downListTemp || [],
+      newPairList: newPairListTemp || [],
+      optional: optionalTemp || [],
+    };
+    console.log(isEqual(temp,allList));
+    if (isEqual(temp,allList)) {
+      return allList
+    }
+    setAllList(temp);
+    
+    return temp;
+  }, [wsList, allList]);
   const subData = async () => {
     Io.subscribeMarket((data: any) => {
-      const hotListTemp = _.cloneDeep(hotList);
-      const recommendListTemp = _.cloneDeep(recommendList);
-      const newPairListTemp = _.cloneDeep(newPairList);
-
-      const raiseListTemp = _.cloneDeep(raiseList);
-      const downListTemp = _.cloneDeep(downList);
-      const optionalTemp = _.cloneDeep(optional);
-      data.map((item: any) => {
-        console.log("查看temp值=>>>>", hotList);
-
-        const hotListTempIndex = hotListTemp.findIndex((cItem) => {
-          return item.symbol === cItem.symbol;
-        });
-        const recommendListTempIndex = recommendListTemp.findIndex((cItem) => {
-          return item.symbol === cItem.symbol;
-        });
-        const newPairListTempIndex = newPairListTemp.findIndex((cItem) => {
-          return item.symbol === cItem.symbol;
-        });
-        const raiseListTempIndex = raiseListTemp.findIndex((cItem) => {
-          return item.symbol === cItem.symbol;
-        });
-
-        const downListTempIndex = downListTemp.findIndex((cItem) => {
-          return item.symbol === cItem.symbol;
-        });
-        const optionalTempIndex = optionalTemp.findIndex((cItem) => {
-          return item.symbol === cItem.symbol;
-        });
-
-        console.log(
-          "hotIndex=>",
-          hotListTempIndex,
-          raiseListTempIndex,
-          recommendListTempIndex,
-          newPairListTempIndex,
-          downListTempIndex,
-          optionalTempIndex
-        );
-        if (hotListTempIndex > -1) {
-          hotListTemp.splice(hotListTempIndex, 1, item);
-        }
-        if (raiseListTempIndex > -1) {
-          raiseListTemp.splice(raiseListTempIndex, 1, item);
-        }
-        if (recommendListTempIndex > -1) {
-          recommendListTemp.splice(recommendListTempIndex, 1, item);
-        }
-        if (newPairListTempIndex > -1) {
-          newPairListTemp.splice(newPairListTempIndex, 1, item);
-        }
-        if (downListTempIndex > -1) {
-          downListTemp.splice(downListTempIndex, 1, item);
-        }
-        if (optionalTempIndex > -1) {
-          optionalTemp.splice(optionalTempIndex, 1, item);
-        }
-      });
-      setHotList(hotListTemp);
-      setRecommendList(recommendListTemp);
-      setRaiseList(raiseListTemp);
-      setDownList(downListTemp);
-      setNewPairList(newPairListTemp);
-      setOptional(optionalTemp);
+      setWsList(data);
     });
     console.log("开启订阅");
   };
@@ -198,18 +222,20 @@ function Quotation() {
   const selectCoinlist = (type: string) => {
     switch (type) {
       case "getHotList":
-        return hotList;
+        return filterList.hotList;
       case "getRiseSymbolList":
-        return raiseList;
+        return filterList.raiseList;
       case "getNew":
-        return newPairList;
+        return filterList.newPairList;
       case "optional":
-        return optional;
+        return filterList.optional;
       case "getFallSymbolList":
-        return downList;
+        return filterList.downList;
+      case "recommend":
+        return filterList.recommendList;
 
       default:
-        return hotList;
+        return filterList.hotList;
     }
   };
   return (
