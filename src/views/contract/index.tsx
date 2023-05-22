@@ -171,6 +171,7 @@ function Contract({ mock }: any) {
     Io.subscribeSymbolDepth(symbol, (data: any) => {
       console.log(data);
       data.asks.length = 7;
+      data.bids.length = 7;
       data.asks.reverse();
 
       setDepthInfo(data);
@@ -792,21 +793,26 @@ function Contract({ mock }: any) {
                           onSelectPeroid(item);
                         }}
                       >
-                        {item.period + " s"}
+                        <span className="peroid-left">
+                          {item.period + " s"}
+                        </span>
+                        <span className="peroid-right">
+                          {item.profitRate * 100}%
+                        </span>
                       </div>
                     );
                   })}
                 </div>
               )}
-              <div className="max-u_wrap">
-                {tradeType === "swap" && (
+              {tradeType === "swap" && (
+                <div className="max-u_wrap">
                   <>
                     <div className="max-u">
                       <div className="max-left">{t("contract.max")}</div>
 
                       <div className="max-right">
                         {tradeSymbol == 2
-                          ? toFixed(
+                          ? fixPrice(
                               accMul(
                                 Number(lever || 0),
                                 Number(
@@ -817,7 +823,7 @@ function Contract({ mock }: any) {
                               ),
                               2
                             )
-                          : toFixed(
+                          : fixPrice(
                               accDiv(
                                 accMul(
                                   Number(lever || 0),
@@ -841,13 +847,14 @@ function Contract({ mock }: any) {
                       </div>
 
                       <div className="max-right">
-                        {Number(promiseMoney) > 0 ? toFixed(promiseMoney) : 0}{" "}
+                        {Number(promiseMoney) > 0 ? fixPrice(promiseMoney) : 0}{" "}
                         USDT
                       </div>
                     </div>
                   </>
-                )}
-              </div>
+                </div>
+              )}
+
               <div
                 className={"btn-option btn-option__" + type}
                 onClick={() => {

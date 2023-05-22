@@ -14,7 +14,7 @@ import right from "@/assets/right.png";
 import change from "@/assets/change.png";
 import usdtSVg from "@/assets/usdt.svg";
 import bigNumber from "bignumber.js";
-import { toNonExponential } from "@/utils/public";
+import { fixPrice, toNonExponential } from "@/utils/public";
 
 import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
@@ -26,7 +26,6 @@ import {
   getSpotAssetBalance,
   assetShift,
 } from "@/api/trans";
-
 
 function Trans() {
   const { t } = useTranslation();
@@ -60,8 +59,8 @@ function Trans() {
   const [currentSelect, setCurrentSelect] = useState("from");
 
   const [coin, setCoin] = useState("USDT");
-  const [coinUseCount, setCoinUseCount] = useState(0);
-  const [coinFrozenCount, setCoinFrozenCount] = useState(0);
+  const [coinUseCount, setCoinUseCount] = useState("");
+  const [coinFrozenCount, setCoinFrozenCount] = useState("");
   const [amount, setAmount] = useState<any>(0);
   const [contractAddress, setContractAddress] = useState();
 
@@ -75,8 +74,8 @@ function Trans() {
       method = getSpotAssetBalance;
     }
     const { data } = await method();
-    setCoinUseCount(data.availableUsdtBalance || 0);
-    setCoinFrozenCount(data.freezeUsdtBalance || 0);
+    setCoinUseCount(data.availableUsdtBalance || "0");
+    setCoinFrozenCount(data.freezeUsdtBalance || "0");
   };
 
   const onOpen = () => {
@@ -101,9 +100,6 @@ function Trans() {
     },
     [currentSelect]
   );
-
- 
-  
 
   // 只要from有變，就得去獲取數據
   useEffect(() => {
@@ -207,15 +203,13 @@ function Trans() {
             <div className="coin-state">
               <div className="left">{t("trans.useable")}</div>
               <div className="right">
-                {coinUseCount}
-                {coin}
+                {fixPrice(coinUseCount)} {coin}
               </div>
             </div>
             <div className="coin-state">
               <div className="left"> {t("trans.frozen")}</div>
               <div className="right">
-                {coinFrozenCount}
-                {coin}
+                {fixPrice(coinFrozenCount)} {coin}
               </div>
             </div>
             <div

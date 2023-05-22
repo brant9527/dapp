@@ -12,9 +12,18 @@ export const readMessage = (data: any) => {
 export const getBannerList = () => {
   return axios.post("/api/common/getBannerList");
 };
-export const getHelpType = (data?:any) => {
-  return axios.post("/api/common/getHelpType",data);
+export const getHelpType = (data?: any) => {
+  return axios.post("/api/common/getHelpType", data);
 };
 export const getHelpList = (data: any) => {
   return axios.post("/api/common/getHelpList", data);
+};
+export const getUserBankList = () => {
+  return axios.post("/api/user/base/getUserBankList");
+};
+export const bindBank = (data: any) => {
+  return axios.post("/api/user/base/bindBank", data);
+};
+export const deleteBank = (data: any) => {
+  return axios.post("/api/user/base/deleteBank", data);
 };

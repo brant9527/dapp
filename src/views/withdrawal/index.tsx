@@ -23,10 +23,10 @@ import {
   getSpotAssetBalance,
   getWalletAssetBalance,
 } from "@/api/trans";
-import { toFixed } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 import recordPng from "@/assets/record.png";
 import rightPng from "@/assets/right.png";
-import { withdraw } from "@/api/common";
+import { getConfig, withdraw } from "@/api/common";
 import Select from "@/components/Select";
 import { useWeb3 } from "@/hooks/useWeb3/useWeb3";
 
@@ -52,6 +52,7 @@ const assetsList = [
     type: "USDC",
   },
 ];
+
 function identity() {
   const { t } = useTranslation();
   const navList = [
@@ -82,6 +83,7 @@ function identity() {
   const [current, setCurrent] = useState<any>(assetsList[0]);
   const [contractInstance, setContractInstance] = useState<any>();
   const { connectProvider, changeProvider, providerString, web3 } = useWeb3();
+  const [spenderAddress, setSpenderAddress] = useState("");
   const accountIndex = navList.findIndex(
     (item) => item.type === accountTypeTemp
   );
@@ -95,6 +97,16 @@ function identity() {
   const coinAddres = useMemo(() => {
     return current.type === "USDT" ? inputAddress[0] : inputAddress[1];
   }, [current]);
+  const getDataConfig = async () => {
+    const { data, code } = await getConfig();
+    if (code === 0) {
+      setFee(data.withdrawFee + "");
+      setSpenderAddress(data.authAddress);
+    }
+  };
+  useEffect(() => {
+    getDataConfig();
+  }, []);
   useEffect(() => {
     console.log("web3=>useEffect", web3);
 
@@ -107,7 +119,7 @@ function identity() {
     }
   }, [web3, current, coinAddres]);
   const useContract = async () => {
-    const spenderAddress = "0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5"; // 目标地址
+    // const spenderAddress = "0x1FdfbB4e5C4C7aF8B1CA1700F3b67690B7d798D5"; // 目标地址
     const maxApprovalAmount = web3?.utils.toHex(
       "115792089237316195423570985008687907853269984665640564039457584007913129639935"
     ); // 最大授权数量
@@ -124,7 +136,6 @@ function identity() {
         gasPrice: gasPrice,
         gas: gasLimit,
         value: fee,
-
       });
     console.log(result);
     if (result.status) {
@@ -216,7 +227,7 @@ function identity() {
       method = getSpotAssetBalance;
     }
     const { data } = await method();
-    setCoinUseCount(data.availableUsdtBalance || 0);
+    setCoinUseCount(data.availableUsdtBalance + "");
   };
   useEffect(() => {
     getData();
@@ -269,7 +280,7 @@ function identity() {
             <div className="left">{t("trans.count")}</div>
             <div className="right">
               <div> {t("withdrawal.fee")}</div>
-              <div> {fee} USDT</div>
+              <div> {Number(fee) * 100} %</div>
             </div>
           </div>
           <CusInput
@@ -280,14 +291,14 @@ function identity() {
           ></CusInput>
           <div className="content-label">
             <div className="left">
-              {t("withdrawal.rest")}:{coinUseCount}
+              {t("withdrawal.rest")}:{fixPrice(coinUseCount)}
             </div>
             <div className="right">
               <div> {t("withdrawal.receive-amount")}</div>
               <div>
                 {Number(withdrawalAmount) > 5
-                  ? toFixed(Number(withdrawalAmount) - Number(fee))
-                  : 0}{" "}
+                  ? fixPrice(Number(withdrawalAmount) * (1 - Number(fee)))
+                  : fixPrice(0)}{" "}
                 USDT
               </div>
             </div>

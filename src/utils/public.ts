@@ -23,17 +23,17 @@ export function toFixed(number: any, pp: any = 2) {
 }
 export function fixPrice(num: any, pp = 2) {
   const result = Number(num);
-  if (!num) {
+  if (!num || num === "0") {
     return toFixed(0, pp);
   }
   if (result > 100) {
-    return toFixed(num, 2);
+    return numeral(num).format("0,0.00");
   } else if (result < 100 && result > 10) {
-    return toFixed(num, 3);
+    return numeral(num).format("0,0.000");
   } else if (result < 10 && result > 1) {
-    return toFixed(num, 4);
-  }else {
-    return toFixed(num,5);
+    return numeral(num).format("0,0.0000");
+  } else {
+    return numeral(num).format("0,0.00000");
   }
 }
 // 科学计数法转数值 - 处理 1e-7 这类精度问题

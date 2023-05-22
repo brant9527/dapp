@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import style from "./index.module.scss";
 import socket from "@/utils/socket";
-import { toFixed } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 import pricedown from "@/assets/pricedown.png";
 import priceup from "@/assets/priceup.png";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const HomePriceMid = (props: any) => {
                 </div>
               </div>
               <div className={`center ${item.rate > 0 ? "up" : "down"}`}>
-                {item.close}
+                {fixPrice(item.close)}
               </div>
               <div className="bottom">
                 <img src={item.rate > 0 ? priceup : pricedown} />

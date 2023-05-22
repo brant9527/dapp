@@ -52,7 +52,7 @@ const CountDialog = forwardRef((props, ref) => {
     };
   }, [timer]);
   const startCount = useCallback(
-    (count: number,id:any) => {
+    (count: number, id: any) => {
       let timeTemp: number = count;
       const timerTemp = setInterval(() => {
         setTime(--timeTemp);
@@ -68,7 +68,7 @@ const CountDialog = forwardRef((props, ref) => {
     },
     [info, id]
   );
-  const getData = async (id:any) => {
+  const getData = async (id: any) => {
     const { data } = await getUserPositionById({ id });
     setPnl(data);
   };
@@ -77,9 +77,9 @@ const CountDialog = forwardRef((props, ref) => {
       open: (data: any) => {
         setInfo(data);
         setTime(data.period);
-        setId(()=>data.id);
+        setId(() => data.id);
         setTimeout(() => {
-          startCount(data.period,data.id);
+          startCount(data.period, data.id);
         }, 0);
         setShowDialog(true);
       },
@@ -115,9 +115,9 @@ const CountDialog = forwardRef((props, ref) => {
             </div>
             <div className="info">
               <div className="left">{t("common.count")}</div>
-              <div className="right">{info.count}USDT</div>
+              <div className="right">{fixPrice(info.count)}USDT</div>
             </div>
-            
+
             <div className="info">
               <div className="left">{t("contract.delivery-time")}</div>
               <div className="right">{time} s</div>
@@ -125,20 +125,17 @@ const CountDialog = forwardRef((props, ref) => {
             {pnl.finalPnl && (
               <div className="info">
                 <div className="left">{t("trade.PNL")}</div>
-                <div className="right">{pnl.finalPnl}USDT</div>
+                <div className="right">{fixPrice(pnl.finalPnl)}USDT</div>
               </div>
             )}
             <div
               className={`btn ${time <= 0 ? "btn-active" : ""}`}
               onClick={() => {
-                if (time <= 0) {
-                  handleConfirm();
-                }
+                handleConfirm();
               }}
             >
               {t("common.close")}
             </div>
-
           </div>
         </div>
       )}

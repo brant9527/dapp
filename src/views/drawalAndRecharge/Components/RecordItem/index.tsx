@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import rightPng from "@/assets/right.png";
 import { useTranslation } from "react-i18next";
-import { formatTime } from "@/utils/public";
+import { fixPrice, formatTime } from "@/utils/public";
 
 function RecordItem(props: any) {
   const { item, type = "recharge", onSelect } = props;
@@ -32,7 +32,7 @@ function RecordItem(props: any) {
             </div>
           </div>
           <div className="record-item_right">
-            <div className="item-top">{item.count}</div>
+            <div className="item-top">{fixPrice(item.count)}</div>
             <div className="item-b">
               {type === "withdrawl" && (
                 <span

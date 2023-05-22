@@ -210,17 +210,43 @@
             flex-wrap: wrap;
             justify-content: space-between;
             .peroid-item {
-              width: 170px;
-              line-height: 76px;
-              background-color: $inputBg;
+              width: 260px;
+              line-height: 86px;
+
               margin-bottom: 30px;
-              font-size: 30px;
-              text-align: center;
-              @include font_color("fontColor2");
+              font-size: 46px;
+
+              display: flex;
+              @include font_color("fontColor1");
+              @include background_color("bgColor2");
               border-radius: 10px;
+              overflow: hidden;
+              .peroid-left {
+                flex: 1;
+                text-align: center;
+              }
+              .peroid-right {
+                width: 100px;
+                font-size: 38px;
+                background-color: $boder;
+                @include font_color("fontColor2");
+
+                color: $fontBlack;
+                text-align: center;
+              }
 
               &.active {
                 background-color: $blue;
+              }
+              &.active .peroid-right{
+                background-color: $blue;
+                color: $fontWhite;
+
+
+                
+              }
+              
+              &.active span {
                 color: $fontWhite;
               }
             }

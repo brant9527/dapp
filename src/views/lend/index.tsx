@@ -155,7 +155,7 @@ function lend() {
               }}
             />
            <span onClick={()=>{
-            nav('/helpDetail?id=2')
+            nav('/helpDetail?id=13')
            }}>{t("lend.risk-tip")}</span> 
           </div>
           <div

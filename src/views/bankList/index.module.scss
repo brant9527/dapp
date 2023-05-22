@@ -1,0 +1,58 @@
+.root {
+  :global {
+    .bankList-wrap {
+      height: 100vh;
+      width: 100%;
+
+      @include background_color("bgColor1");
+      @include font_color("fontColor1");
+
+      overflow-y: scroll;
+      .bank-title {
+        text-align: center;
+        font-size: 50px;
+        @include font_color("fontColor1");
+      }
+      .record {
+        width: 40px;
+        height: 48px;
+      }
+      .bankList-content {
+        padding: 0 40px;
+        height: calc(100vh - 360px - env(safe-area-inset-bottom));
+        overflow: auto;
+
+        .card-wrap {
+          margin: 40px;
+          padding: 40px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 42px;
+          background-color: $blue;
+          color: $fontWhite;
+          border-radius: 20px;
+          .card-left {
+            flex: 1;
+          }
+          .card-right {
+            width: 100px;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+      .btn {
+        margin: 40px auto;
+        width: 1036px;
+        border-radius: 20px;
+        font-size: 50px;
+        height: 130px;
+        line-height: 130px;
+        color: $fontWhite;
+        font-weight: 600;
+        background-color: $blue;
+        text-align: center;
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import Back from "@/components/Back";
 import Toast from "@/components/Toast";
 import { onTradeBuySell } from "@/api/trade";
-import { toFixed } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 import Io from "@/utils/socket";
 
 function Exchange() {
@@ -23,7 +23,6 @@ function Exchange() {
   const [search, setsearch] = useSearchParams();
   const symbol = search.get("asset");
   const maxAcount = search.get("count") || 0;
-
 
   const [coin, setCoin] = useState("USDT");
 
@@ -120,8 +119,8 @@ function Exchange() {
             <div className="coin-state">
               <div className="left">{t("exchange.current-rate")}</div>
               <div className="right">
-                {symbol}≈{info.close}
-                {coin}
+                {symbol}≈{fixPrice(info.close)}
+                {(coin)}
               </div>
             </div>
             <div

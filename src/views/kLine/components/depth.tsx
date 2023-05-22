@@ -163,19 +163,19 @@ function Depth() {
               <div className="left ">
                 <span>{t("trade.market")}</span>
               </div>
-              <div className="right"> {coinInfo.marketValue}</div>
+              <div className="right"> {fixPrice(coinInfo.marketValue)}</div>
             </div>
             <div className="item-info">
               <div className="left ">
                 <span>{t("trade.circulationCnt")}</span>
               </div>
-              <div className="right"> {coinInfo.circulationCnt}</div>
+              <div className="right"> {fixPrice(coinInfo.circulationCnt)}</div>
             </div>
             <div className="item-info">
               <div className="left ">
                 <span>{t("trade.publishCnt")}</span>
               </div>
-              <div className="right"> {coinInfo.publishCnt}</div>
+              <div className="right"> {fixPrice(coinInfo.publishCnt)}</div>
             </div>
             <div className="item-info">
               <div className="left ">

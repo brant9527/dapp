@@ -6,10 +6,9 @@
       flex: 1;
       display: flex;
 
-
       height: 120px;
       line-height: 120px;
-
+      border-radius: 10px;
       @include font_color("fontColor1");
       @include background_color("bgColor2");
       font-size: 44px;
@@ -36,8 +35,7 @@
           // height: 120px;
           font-size: 44px;
           text-align: center;
-        @include font_color("fontColor1");
-
+          @include font_color("fontColor1");
         }
         &.align-left {
           input {

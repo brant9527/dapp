@@ -7,11 +7,12 @@
             top: 0;
             width: 100vw;
             height: 100vh;
-            @include background_color("bgColor1");
+            background: #fff;
+
             overflow: hidden;
             img {
                 width: 100vw;
-            height: 100vh;
+                height: 100vh;
                 object-fit: contain;
             }
         }

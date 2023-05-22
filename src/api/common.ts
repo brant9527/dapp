@@ -31,3 +31,6 @@ export const getBalanceChangeRecordPage = (data: any) => {
 export const getHelpById = (data: any) => {
   return axios.post("/api/common/getHelpById", data);
 };
+export const getConfig = () => {
+  return axios.post("/api/sys/config/getConfig");
+};

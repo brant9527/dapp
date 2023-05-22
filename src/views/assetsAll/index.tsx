@@ -157,7 +157,7 @@ function Assets() {
         <div className="content-center">
           <div className="assets-all">{t("assets.allAssessment")}</div>
           <div className="assets-all-usdt">
-            <span>{toFixed(totalUsdtBalance)} USDT</span>
+            <span>{fixPrice(totalUsdtBalance)} USDT</span>
             <img
               src={recordPng}
               onClick={() => {
@@ -205,7 +205,7 @@ function Assets() {
                     <div className="assets-item" key={idx}>
                       <div className="assets-left">{item.title}</div>
                       <div className="assets-right">
-                        {toFixed(item.usdtBalance)} USDT
+                        {fixPrice(item.usdtBalance)} USDT
                       </div>
                     </div>
                   );
@@ -241,20 +241,20 @@ function Assets() {
                             {t("assets.useable")}
                           </div>
                           <div className="coin-cnc-use_bottom">
-                            {toFixed(item.availableBalance || 0, 4)}
+                            {fixPrice(item.availableBalance || 0, 4)}
                           </div>
                         </div>
                       </div>
                       <div className="coin-cnc-right">
                         <div className="coin-cnc-count">
-                          {toFixed(item.count || 0, 4)}
+                          {fixPrice(item.count || 0, 4)}
                         </div>
 
                         <div className="coin-cnc-frozen">
                           {t("assets.frozen")}
                         </div>
                         <div className="coin-cnc-usdt">
-                          {toFixed(item.freezeBalance || 0, 4)}
+                          {fixPrice(item.freezeBalance || 0, 4)}
                         </div>
                       </div>
                     </div>

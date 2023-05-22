@@ -37,7 +37,6 @@ function Ai() {
   const [type, setType] = useState("1");
   const [progressList, setProgressList] = useState<any>([]);
   const [productList, setProductList] = useState<any>([]);
-
   useEffect(() => {
     getData();
   }, []);
@@ -57,14 +56,23 @@ function Ai() {
     return <div className="ai-title">{t("lend.lend")}</div>;
   }
   function help() {
-    return <div className="lend-help" onClick={()=>{
-      nav('/helpNext?id=8')
-    }}>?</div>;
+    return (
+      <div
+        className="lend-help"
+        onClick={() => {
+          nav("/helpNext?id=8");
+        }}
+      >
+        ?
+      </div>
+    );
   }
   return (
     <div className={style.root}>
       <div className="ai-wrap">
         <Back content={title()} right={help()}></Back>
+        <div>
+        </div>
         <div className="ai-content">
           <div className="ai-order-nav" onClick={() => nav("/lendOrderList")}>
             <div className="order">{t("ai.orders")}</div>

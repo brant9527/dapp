@@ -20,11 +20,22 @@ import Toast from "@/components/Toast";
 import Entrust from "@/components/Entrust";
 import { readMessage } from "@/api/home";
 import { formatTime } from "@/utils/public";
+import { getHelpById } from "@/api/common";
 
 function MessageDetail() {
   const { t } = useTranslation();
-  const helpDetail = JSON.parse(window.localStorage.getItem("usDetail") || "{}");
-
+  const [helpDetail, setInfo] = useState<any>({});
+  const [search, setsearch] = useSearchParams();
+  const id = search.get("id") || "";
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    const { data, code } = await getHelpById({ id });
+    if (code == 0) {
+      setInfo(data);
+    }
+  };
   return (
     <div className={style.root}>
       <div className="notice-wrap">
@@ -37,7 +48,7 @@ function MessageDetail() {
           </div>
           <div
             className="title"
-            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail?.content) }}
+            dangerouslySetInnerHTML={{ __html: decodeURI(helpDetail?.content||'') }}
           ></div>
         </div>
       </div>

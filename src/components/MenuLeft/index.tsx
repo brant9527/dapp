@@ -22,11 +22,15 @@ import bdhb from "@/assets/bdhb.png";
 import yy from "@/assets/yy.png";
 import right from "@/assets/right.png";
 import wenjuan from "@/assets/wenjuan.png";
+import zichan from "@/assets/zichan1.png";
+
 import { useTranslation } from "react-i18next";
 import { getUserInfo } from "@/api/userInfo";
 import copy from "copy-to-clipboard";
 import Toast from "@/components/Toast";
 import { accMul, toFixed } from "@/utils/public";
+import chat from "@/assets/chat.png";
+import theme from "@/assets/yueliang.png";
 
 interface stateType {
   openState: boolean;
@@ -40,6 +44,8 @@ const stateProps: stateType = {
 };
 
 function Menulist() {
+  let themes = window.localStorage.getItem("themes") || "light";
+
   const { t } = useTranslation();
   const certified = window.localStorage.getItem("certified");
   const list = [
@@ -54,6 +60,7 @@ function Menulist() {
     { imgSrc: xyf, label: t("home.menu-xyf"), path: "/creditCore" },
     { imgSrc: wenjuan, label: t("home.menu-wjdc"), path: "/question" },
     { imgSrc: yy, label: t("home.menu-yy"), path: "/language" },
+    { imgSrc: zichan, label: t("home.menu-yh"), path: "/bankList" },
   ];
   const navTo = (path: string) => {
     return stateProps.navigate(path);
@@ -72,12 +79,31 @@ function Menulist() {
       setUserInfo(data?.data);
     }
   };
+  const onChangeTheme = useCallback(async () => {
+    if (themes === "light") {
+      themes = "dark";
+    } else {
+      themes = "light";
+    }
+    window.localStorage.setItem("themes", themes);
+    window.document.documentElement.setAttribute("data-theme", themes); // 给根节点设置data-theme属性，切换主题色就是修改data-theme的值
+  }, []);
   return (
     <div className={style.root}>
       <div className="menu-wrap">
         <div className="menu-content">
           <div className="menu-back">
             <img src={back} onClick={() => close()} />
+            <div className="menu-top-right">
+              <img src={theme} className="theme" onClick={onChangeTheme} />
+              <img
+                src={chat}
+                className="chat"
+                onClick={() => {
+                  (window as any).Tawk_API.maximize();
+                }}
+              />
+            </div>
           </div>
           <div className="user-info">
             <img src={user} className="user" />
@@ -164,7 +190,8 @@ function Menulist() {
                     <img
                       src={item.imgSrc}
                       className={`icon ${
-                        item.path === "/question" ? "img-s" : ""
+                        (item.path === "/question" ? "img-s " : "") +
+                        (item.path === "/bankList" ? " img-s" : "")
                       }`}
                     />
                     <div className="label">{item.label}</div>

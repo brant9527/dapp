@@ -63,7 +63,7 @@ function TransRecord() {
                       "usDetail",
                       JSON.stringify(item)
                     );
-                    nav("/usDetail");
+                    nav("/usDetail?id="+item.id);
                   }}
                 >
                   <div> {item.title}</div>

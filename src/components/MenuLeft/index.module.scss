@@ -79,24 +79,42 @@
         }
         .menu-back {
           padding-bottom: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 101px;
+
           img {
-            width: 70px;
-            height: 59px;
+            width: 56px;
+            height: 46px;
           }
-         
+          .menu-top-right {
+            display: flex;
+            align-items: center;
+            .theme {
+              width: 49px;
+              height: 52px;
+              margin: 0 50px;
+            }
+            .chat {
+              width: 51px;
+              height: 54px;
+            }
+          }
         }
         .progress {
           width: 920px;
           height: 160px;
           padding: 55px 55px;
-          background-color: #f2f5fc;
+          background-color: rgb(252, 213, 53);
+
           border-radius: 40px;
           margin-bottom: 60px;
           .progress-top {
             display: flex;
             font-size: 44px;
             justify-content: space-between;
-            @include font_color("fontColor2");
+            color: $fontBlack;
 
             .left {
             }
@@ -120,8 +138,8 @@
             display: flex;
             font-size: 36px;
             justify-content: space-between;
-
-            @include font_color("fontColor2");
+            color: $fontBlack;
+            // @include font_color("fontColor2");
 
             span {
               color: $blue;
@@ -147,6 +165,11 @@
               @include font_color("fontColor1");
             }
             .img-s {
+              width: 60px;
+              height: 60px;
+              padding-left: 20px;
+            }
+            .img-band {
               width: 60px;
               height: 60px;
               padding-left: 20px;

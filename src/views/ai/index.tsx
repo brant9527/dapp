@@ -25,9 +25,16 @@ import {
 } from "@/api/trade";
 import Entrust from "@/components/Entrust";
 import { getProgressList, getProductList } from "@/api/ai";
+import { fixPrice } from "@/utils/public";
 
 function Ai() {
+  const language = window.localStorage.getItem("language");
+
   const { t } = useTranslation();
+  const enSrc =
+    "https://s3.us-east-1.amazonaws.com/trade.res/trade.res/202305/4d9db8f4008f46e18ff7296da7745ab5.png";
+  const zhSrc =
+    "https://s3.us-east-1.amazonaws.com/trade.res/trade.res/202305/88403472592c45c6b427c44e6b9fcecb.png";
 
   const nav = useNavigate();
   const [money, setMoney] = useState(0);
@@ -49,8 +56,6 @@ function Ai() {
     setProductList(product.data);
   };
 
-
-
   const navTo = (item: any) => {
     nav(
       "/aiApply" +
@@ -61,15 +66,25 @@ function Ai() {
     return <div className="ai-title">{t("home.btns.ai")}</div>;
   }
   function help() {
-    return <div className="ai-help" onClick={()=>{
-      nav('/helpNext?id=9')
-    }}>?</div>;
+    return (
+      <div
+        className="ai-help"
+        onClick={() => {
+          nav("/helpNext?id=9");
+        }}
+      >
+        ?
+      </div>
+    );
   }
   return (
     <div className={style.root}>
       <div className="ai-wrap">
         <Back content={title()} right={help()}></Back>
+
         <div className="ai-content">
+          <img className="banner" src={language === "en" ? enSrc : zhSrc} />
+
           <div
             className="ai-order-nav"
             onClick={() => {
@@ -80,7 +95,7 @@ function Ai() {
             <img src={right} />
           </div>
           <div className="money">
-            <span>{money}</span> USDT
+            <span>{fixPrice(money)}</span> USDT
           </div>
           <div className="suggest">{t("ai.suggest")}</div>
           <div className="suggest-product">
@@ -102,7 +117,7 @@ function Ai() {
                       <div className="new-user">{item.title}</div>
                     </div>
                   </div>
-                  <div className="product-title">{t('ai.daily-income')}</div>
+                  <div className="product-title">{t("ai.daily-income")}</div>
                   <div className="product-info">
                     {item.minDayIncome}~{item.maxDayIncome}%
                   </div>
@@ -136,7 +151,7 @@ function Ai() {
                       <div className="bold right-margin">
                         {item.minDayIncome}%-{item.maxDayIncome}%
                       </div>
-                      <div className="normol"> {t('ai.daily-income')}</div>
+                      <div className="normol"> {t("ai.daily-income")}</div>
                     </div>
                   </div>
                   <div className="apy-bottom">

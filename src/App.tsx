@@ -65,6 +65,8 @@ import UsDetail from "./views/usDetail";
 
 import MockTrade from "./views/mockTrade";
 import Exchange from "./views/exchange";
+import BankList from "./views/bankList";
+import BankDetail from "./views/bankDetail";
 
 import ConfirmMsg from "./components/ConfirmMsg";
 import Welcome from "./components/Welcome";
@@ -137,7 +139,9 @@ function App() {
         <Route path="/helpDetail" element={<HelpDetail />} />
         <Route path="/usNext" element={<UsNext />} />
         <Route path="/usDetail" element={<UsDetail />} />
-
+        <Route path="/bankList" element={<BankList />} />
+        <Route path="/bankDetail" element={<BankDetail />} />
+        
         <Route path="/withdrawlDetail" element={<WithdrawlDetail />} />
         <Route path="/exchange" element={<Exchange />} />
 

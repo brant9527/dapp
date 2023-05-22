@@ -16,13 +16,13 @@ function CoinPriceItem(props: any) {
 
   return (
     <div className={style.root}>
-      <div className="tableCoinsPst" onClick={() => {
-            nav("/contract?symbol=" + symbol);
-          }}>
-        <div
-          className="coinTypePst"
-          
-        >
+      <div
+        className="tableCoinsPst"
+        onClick={() => {
+          nav("/contract?symbol=" + symbol);
+        }}
+      >
+        <div className="coinTypePst">
           {logo && <img src={logo} />}
           <div className="right">
             <div className="top">
@@ -33,7 +33,7 @@ function CoinPriceItem(props: any) {
           </div>
         </div>
         <div className="coinPricePst ">
-          <div className="priceTop">{fixPrice( close)}</div>
+          <div className="priceTop">{fixPrice(close)}</div>
           <div className="price-bot">≈${fixPrice(close)}</div>
         </div>
         <div className="coinStatePst ">
@@ -43,7 +43,9 @@ function CoinPriceItem(props: any) {
             )}
           >
             {/* <img src={Number(rate) > 0 ? up : down} /> */}
-            <div className="raise">{toFixed(Number(rate) * 100, 2)}%</div>
+            <div className="raise">
+              {(rate > 0 ? "+" : "" )+ toFixed(Number(rate) * 100, 2)}%
+            </div>
           </div>
         </div>
       </div>

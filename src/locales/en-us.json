@@ -17,6 +17,8 @@
     "menu-wjdc": "Questionnaire",
     "menu-bzzx": "Help Center",
     "menu-yy": "Language",
+    "menu-yh": "Bank account",
+
     "btns": {
       "jy": "Transaction",
       "ai": "Earn",
@@ -415,5 +417,25 @@
     "close-PNL": "closeing PNL",
     "max-position": "Max Open Interest",
     "closed-position": "Closed Vol."
+  },
+  "bank": {
+    "receive-type": "Payment",
+    "card": "Bank Card",
+    "add": "Add",
+    "name": "Name",
+    "address": "Residential address",
+    "bank-name": "Bank name",
+    "bank-account": "Bank account number",
+    "bank-address": "Bank address",
+    "company-address": "Company address",
+    "bank-code": "Routing number",
+    "legal-currency": "Currency",
+    "save": "Save",
+    "USD": "USD",
+    "EUR": "EUR",
+    "JPY": "JPY",
+    "GBP": "GBP",
+    "AUD": "AUD",
+    "delete": "Delete"
   }
 }

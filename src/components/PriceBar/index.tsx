@@ -15,7 +15,9 @@ function Quotation(props: any) {
   let total = 0;
   // price: '28592.4', qty: '8.953'
   data.map((item: any) => {
-    return (total += Number(item.qty));
+    if (Number(item.qty) > total) {
+      total = Number(item.qty);
+    }
   });
 
   return (

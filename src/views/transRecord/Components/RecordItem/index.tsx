@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
-import { formatTime, toFixed } from "@/utils/public";
+import { fixPrice, formatTime, toFixed } from "@/utils/public";
 
 function RecordItem(props: any) {
   const { item } = props;
@@ -50,7 +50,7 @@ function RecordItem(props: any) {
           </div>
         </div>
         <div className="record-item_right">
-          <div className="item-top">{toFixed(item.amount, 6)}</div>
+          <div className="item-top">{fixPrice(item.amount, 6)}</div>
           <div className="item-b">
             <span
               className={["dot", !item.status ? "dot_s" : "dot_f"].join(" ")}

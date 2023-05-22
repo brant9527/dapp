@@ -31,7 +31,9 @@ function BindEmail() {
   const [userInfo, setUserInfo] = useState<any>({});
   const [imgsrc, setImgsrc] = useState<any>("");
   const [code, setCode] = useState<any>("");
-  const [imgCode, setImgCode] = useState<any>({});
+  const [imgCode, setImgCode] = useState<any>("");
+  const [countTime, setCountTime] = useState<any>(60);
+  const [clickFlag, setClickFalg] = useState(false);
   const phoneRef = useRef<any>(null);
   const emailRef = useRef<any>(null);
   const confirmRef = useRef<any>(null);
@@ -72,6 +74,9 @@ function BindEmail() {
 
   const onSubmit = async () => {
     if (isPhone) {
+      if(!code){
+        return false
+      }
       const data: any = await bindEmail({
         email: userInfo.email,
         code: code,
@@ -88,7 +93,24 @@ function BindEmail() {
       }
     }
   };
+  const startCount = useCallback(() => {
+    let num = 60;
+    const timer = setInterval(() => {
+      num = --num;
+      if (num === 0) {
+        setClickFalg(false);
+        clearInterval(timer);
+        setCountTime(60);
+        return;
+      }
+      console.log(num);
+      setCountTime(() => num);
+    }, 1000);
+  }, []);
   const onConfirm = async () => {
+    if (!imgCode) {
+      return;
+    }
     const params = {
       captcha: imgCode,
       captchaId: imgsrc.captchaId,
@@ -134,12 +156,16 @@ function BindEmail() {
                 append={
                   <div
                     onClick={() => {
-                      confirmRef?.current.open();
-                      onGetImageCode();
+                      if (countTime === 60 && !clickFlag) {
+                        confirmRef?.current.open();
+                        onGetImageCode();
+                        startCount();
+                        setClickFalg(true);
+                      }
                     }}
                     className="btn-get"
                   >
-                    {t("common.get-code")}
+                    {clickFlag ? countTime + "s" : t("common.get-code")}
                   </div>
                 }
               ></CusInput>

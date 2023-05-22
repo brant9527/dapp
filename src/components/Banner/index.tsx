@@ -10,6 +10,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import { Autoplay, Pagination } from "swiper";
+// import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
 // Import Swiper styles
 import "swiper/css";
 import style from "./index.module.scss";
@@ -39,9 +42,14 @@ function Banner(props: any) {
             slidesPerView={1}
             autoplay={{
               delay: 3000,
-              disableOnInteraction: false,
+              disableOnInteraction: true,
             }}
+            navigation={true}
             loop={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
           >
             {bannerList.map((item: any, index: any) => {
               return (

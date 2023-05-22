@@ -20,7 +20,7 @@ import copy from "copy-to-clipboard";
 import { getUserCurrProductAmount, applyBuy } from "@/api/ai";
 import { getFundsAssetBalance } from "@/api/trans";
 import Toast from "@/components/Toast";
-import { toFixed } from "@/utils/public";
+import { fixPrice, toFixed } from "@/utils/public";
 
 function aiApply() {
   const { t } = useTranslation();
@@ -60,7 +60,7 @@ function aiApply() {
 
     const { code: codeTrade, data: dataTrade } = await getFundsAssetBalance();
     if (codeTrade == 0) {
-      setCoinRestUseCount(toFixed(Number(limitMaxAmount) - data, "2"));
+      setCoinRestUseCount(fixPrice(Number(limitMaxAmount) - data));
       setAvailableUsdtBalance(dataTrade.availableUsdtBalance);
     }
   };
@@ -101,7 +101,9 @@ function aiApply() {
           </div>
           <div className="coin-state">
             <div className="left">{t("ai.limit") + " "}(USDT)</div>
-            <div className="right">{limitMinAmount + "-" + limitMaxAmount}</div>
+            <div className="right">
+              {fixPrice(limitMinAmount) + "-" + fixPrice(limitMaxAmount)}
+            </div>
           </div>
           <div className="border"></div>
           <div className="count-tip">{t("trans.count")}</div>
@@ -132,14 +134,14 @@ function aiApply() {
             <div className="left">
               {t("trans.useable") + " "}({coin})
             </div>
-            <div className="right">{toFixed(availableUsdtBalance, 2)}</div>
+            <div className="right">{fixPrice(availableUsdtBalance, 2)}</div>
           </div>
           <div className="coin-state">
             <div className="left">
               {" "}
               {t("ai.rest") + " "}({coin})
             </div>
-            <div className="right">{toFixed(coinRestUseCount, 2)}</div>
+            <div className="right">{fixPrice(coinRestUseCount, 2)}</div>
           </div>
           <div
             className="btn"

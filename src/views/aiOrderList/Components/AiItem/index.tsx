@@ -11,7 +11,7 @@ import {
 import usdtPng from "@/assets/usdt.svg";
 
 import { useTranslation } from "react-i18next";
-import { formatTime } from "@/utils/public";
+import { fixPrice, formatTime } from "@/utils/public";
 
 function AiItem(props: any) {
   const { item } = props;
@@ -36,7 +36,7 @@ function AiItem(props: any) {
       <div className="order-wrap">
         <div className="order-item">
           <div className="left">{t("ai.apply-amount")}</div>
-          <div className="right">{item.amount + " USDT"}</div>
+          <div className="right">{fixPrice(item.amount) + " USDT"}</div>
         </div>
         <div className="order-item">
           <div className="left">{t("lend.period")}</div>
@@ -56,7 +56,7 @@ function AiItem(props: any) {
         </div>
         <div className="order-item">
           <div className="left">{t("ai.total-income")}</div>
-          <div className="right rate">{item.totalIncome + " "} </div>
+          <div className="right rate">{fixPrice(item.totalIncome)} </div>
         </div>
         <div className="order-item">
           <div className="left">{t("common.status")}</div>
